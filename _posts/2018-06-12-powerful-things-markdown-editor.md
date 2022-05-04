@@ -33,7 +33,7 @@ There are two types of code elements which can be inserted in Markdown, the firs
 ```html
 <li class="ml-1 mr-1">
   <a target="_blank" href="#">
-    <i class="fab fa-twitter"></i>
+    <i class="fa fa-twitter"></i>
   </a>
 </li>
 ```
