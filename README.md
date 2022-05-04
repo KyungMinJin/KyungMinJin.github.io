@@ -1,49 +1,22 @@
-# Vonge
+# Mediumish - Jekyll Theme
 
-Vonge is a Personal portfolio/blog site template for Jekyll. Browse through a [live demo](https://jazzed-kale.cloudvent.net/).
-Increase the web presence of your brand with this configurable theme.
+[Live Demo](https://wowthemesnet.github.io/mediumish-theme-jekyll/) &nbsp; | &nbsp; [Download](https://github.com/wowthemesnet/mediumish-theme-jekyll/archive/master.zip) &nbsp; | &nbsp; [Documentation](https://bootstrapstarter.com/template-mediumish-bootstrap-jekyll/) &nbsp; | &nbsp; [Buy me a coffee](https://www.wowthemes.net/donate/)
 
-![Vonge template screenshot](_screenshot.png)
+![mediumish](assets/images/mediumish-jekyll-template.png)
 
-Vonge was made by [CloudCannon](http://cloudcannon.com/), the JAMStack Cloud CMS.
-The component library is built and maintained for use with [Bookshop](https://github.com/cloudcannon/bookshop/)
+### Copyright
 
-Find more templates, themes and step-by-step Jekyll tutorials at [CloudCannon Community](https://cloudcannon.com/community/).
+Copyright (C) 2019 Kyung-Min Jin, https://www.wowthemes.net
 
-[![Deploy to CloudCannon](https://buttons.cloudcannon.com/deploy.svg)](https://app.cloudcannon.com/register#sites/connect/github/CloudCannon/vonge-jekyll-bookshop-template)
+**Mediumish for Jekyll** is designed and developed by [Kyung-Min Jin](https://www.wowthemes.net) and it is _free_ under MIT license.
 
-## Features
+<a href="https://www.wowthemes.net/donate/" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>
 
-* Component library for website building
-* Fully configurable Website
-* Pre-built pages
-* Pre-styled components
-* Blog
-* Category pages
-* Testimonials
-* Portfolio
-* Live editing with [CloudCannon](http://cloudcannon.com/)
-* Optimised for editing in [CloudCannon](http://cloudcannon.com/)
-* Search engine optimisation
+### Contribute
 
-## Develop
+1. [Fork the repo](https://github.com/wowthemesnet/mediumish-theme-jekyll).
+2. Clone a copy of your fork on your local
+3. Create a branch off of master and give it a meaningful name (e.g. my-new-mediumish-feature).
+4. Make necessary changes, commit, push and open a pull request on GitHub.
 
-Vonge was built with [Jekyll](http://jekyllrb.com/) version 4.2.0, but should support newer versions as well.
-
-Install the dependencies for Bookshop:
-
-~~~bash
-$ npm install
-~~~
-
-Install the Jekyll dependencies with [Bundler](http://bundler.io/):
-
-~~~bash
-$ npm run install-jekyll
-~~~
-
-Run the website:
-
-~~~bash
-$ npm start
-~~~
+Thank you!
