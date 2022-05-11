@@ -1,7 +1,7 @@
 # Site
 name: "Kyung-Min Jin"
 title: "Kyung-Min Jin"
-description: "CV"
+description: "Hi, I'm Kyung-Min Jin. See my CV!"
 logo: "assets/images/logo.png"
 favicon: "assets/images/logo.png"
 baseurl: ""
@@ -18,9 +18,9 @@ authors:
     display_name: Kyung-Min Jin
     gravatar: e56154546cf4be74e393c62d1ae9f9d4
     email: km_jin@korea.ac.kr
-    web: https://www.wowthemes.net
-    twitter: https://twitter.com/wowthemesnet
-    description: "Author of Mediumish, a Bootstrap Medium styled template available for WordPress, HTML, Ghost and Jekyll. You are currently previewing Jekyll template demo."
+    web: https://www.github.com/KyungMinJin
+    twitter: https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/
+    description: "Master Degree, Dept. of Artificial Intelligence, Korea University, Seoul."
 
 # Plugins
 plugins:
@@ -58,6 +58,6 @@ adsense-data-ad-client: "ca-pub-3412143450191416"
 adsense-data-ad-slot: "1363087678"
 
 # Lazy Images ("enabled" or "disabled")
-lazyimages: "enabled"
+lazyimages: "disabled"
 
 exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
