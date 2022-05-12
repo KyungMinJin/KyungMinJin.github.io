@@ -1,7 +1,7 @@
 # Site
 name: "Kyung-Min Jin"
 title: "Kyung-Min Jin"
-description: "Hi, I'm Kyung-Min Jin. See my CV!"
+description: "Hi, I'm Kyung-Min Jin. See my <a href="KyungMinJin.github.io/CV.pdf" target="_blank">CV</a>!"
 logo: "assets/images/logo.png"
 favicon: "assets/images/logo.png"
 baseurl: ""
