@@ -8,7 +8,7 @@ comments: true
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+<p>I am Kyung-Min Jin, a master's student in the graduate school of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
 
 <!-- <p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p> -->
 <!-- <h4>Documentation</h4>
@@ -28,7 +28,7 @@ comments: true
 
 <p>Thank you! Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
 
-<a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary">Linkedin <i class="fa fa-linkedin-square"></i></a> <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-white">Documentation CV</a>
+<a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary">Linkedin <i class="fa fa-linkedin-square"></i></a> <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark">Documentation CV</a>
 
 </div>
 </div>

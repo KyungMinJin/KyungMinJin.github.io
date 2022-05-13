@@ -8,7 +8,7 @@ var documents = [{
     "id": 1,
     "url": "http://localhost:4000/about",
     "title": "CV",
-    "body": "This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github. Social Media and CVThank you! Visit my Github Profile Kyung-Min Jin . Linkedin Documentation CV"
+    "body": "I am Kyung-Min Jin, a master's student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021. Social Media and CVThank you! Visit my Github Profile Kyung-Min Jin . Linkedin Documentation CV"
     }, {
     "id": 2,
     "url": "http://localhost:4000/categories",
