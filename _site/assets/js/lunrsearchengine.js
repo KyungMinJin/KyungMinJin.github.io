@@ -1,34 +1,34 @@
 
 var documents = [{
     "id": 0,
-    "url": "http://localhost:4000/about/404.html",
+    "url": "http://localhost:4000/404.html",
     "title": "404",
     "body": "404 Page does not exist!Please use the search bar at the top or visit our homepage! "
     }, {
     "id": 1,
-    "url": "http://localhost:4000/about/about",
+    "url": "http://localhost:4000/about",
     "title": "CV",
     "body": "I am Kyung-Min Jin, a master's student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021. Social Media and CVThank you! Visit my Github Profile Kyung-Min Jin . Linkedin Documentation CV"
     }, {
     "id": 2,
-    "url": "http://localhost:4000/about/categories",
+    "url": "http://localhost:4000/categories",
     "title": "Categories",
     "body": ""
     }, {
     "id": 3,
-    "url": "http://localhost:4000/about/",
+    "url": "http://localhost:4000/",
     "title": "Home",
-    "body": "      Featured:                                                                                                                                                                                                           Inception Movie                                                 1 2 3 4 5                                              :               Review products, books, movies, restaurant and anything you like on your Jekyll blog with Mediumish! JSON-LD ready for review property. :                                                                                                                                                                                                       11 Jan 2018                                                                                                                      All Stories:             "
+    "body": "      Featured:                                                                                                       About Me                          1 2 3 4 5                       :                I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof. . .        :                                                                                        Kyung-Min Jin                  13 May 2022                                                                             All Stories:             "
     }, {
     "id": 4,
-    "url": "http://localhost:4000/about/robots.txt",
+    "url": "http://localhost:4000/robots.txt",
     "title": "",
     "body": "      Sitemap: {{ “sitemap. xml”   absolute_url }}   "
     }, {
     "id": 5,
-    "url": "http://localhost:4000/about/customer-service/",
-    "title": "Inception Movie",
-    "body": "2018/01/11 - Review products, books, movies, restaurant and anything you like on your Jekyll blog with Mediumish! JSON-LD ready for review property. How to use?: It’s actually really simple! Add the rating in your YAML front matter. It also supports halfs: 12345678910---layout: posttitle:  Inception Movie author: Kyung-Min Jincategories: [Jekyll, tutorial]tags: [red, yellow]image: assets/images/11. jpgdescription:  My review of Inception movie. Actors, directing and more.  rating: 4. 5---"
+    "url": "http://localhost:4000/about-me/",
+    "title": "About Me",
+    "body": "2022/05/13 - I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021. "
     }];
 
 var idx = lunr(function () {

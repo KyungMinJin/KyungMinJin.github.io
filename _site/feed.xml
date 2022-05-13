@@ -3,54 +3,26 @@
   <channel>
     <title>Kyung-Min Jin</title>
     <description>Hi, I'm Kyung-Min Jin. See about page (CV)!</description>
-    <link>http://localhost:4000/about/</link>
-    <atom:link href="http://localhost:4000/about/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 13 May 2022 11:39:24 +0900</pubDate>
-    <lastBuildDate>Fri, 13 May 2022 11:39:24 +0900</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Fri, 13 May 2022 14:01:25 +0900</pubDate>
+    <lastBuildDate>Fri, 13 May 2022 14:01:25 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>Inception Movie</title>
-        <description>&lt;p&gt;Review products, books, movies, restaurant and anything you like on your Jekyll blog with Mediumish! JSON-LD ready for review property.&lt;/p&gt;
-
-&lt;h4 id=&quot;how-to-use&quot;&gt;How to use?&lt;/h4&gt;
-
-&lt;p&gt;It’s actually really simple! Add the rating in your YAML front matter. It also supports halfs:&lt;/p&gt;
-
-&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;---
-layout: post
-title: &quot;Inception Movie&quot;
-author: Kyung-Min Jin
-categories: [Jekyll, tutorial]
-tags: [red, yellow]
-image: assets/images/11.jpg
-description: &quot;My review of Inception movie. Actors, directing and more.&quot;
-rating: 4.5
----
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+        <title>About Me</title>
+        <description>&lt;p&gt;I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University &lt;a target=&quot;_blank&quot; href=&quot;http://pr.korea.ac.kr/&quot;&gt;(PRML Lab)&lt;/a&gt;, where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 11 Jan 2018 00:00:00 +0900</pubDate>
-        <link>http://localhost:4000/about/customer-service/</link>
-        <guid isPermaLink="true">http://localhost:4000/about/customer-service/</guid>
+        <pubDate>Fri, 13 May 2022 00:00:00 +0900</pubDate>
+        <link>http://localhost:4000/about-me/</link>
+        <guid isPermaLink="true">http://localhost:4000/about-me/</guid>
         
         <category>red</category>
         
         <category>yellow</category>
         
         
-        <category>Jekyll</category>
-        
-        <category>tutorial</category>
+        <category>Introduce</category>
         
       </item>
     
