@@ -12,22 +12,42 @@
     <title>Home | Kyung-Min Jin</title>
 
     <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Home | Kyung-Min Jin</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="Home" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Hi, I’m Kyung-Min Jin. See about page (CV)!" />
-<meta property="og:description" content="Hi, I’m Kyung-Min Jin. See about page (CV)!" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
-<meta property="og:site_name" content="Kyung-Min Jin" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Home" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Hi, I’m Kyung-Min Jin. See about page (CV)!","headline":"Home","name":"Kyung-Min Jin","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"}},"url":"http://localhost:4000/"}</script>
-<!-- End Jekyll SEO tag -->
-
+    <title>Home | Kyung-Min Jin</title>
+    <meta name="generator" content="Jekyll v4.2.2" />
+    <meta property="og:title" content="Home" />
+    <meta property="og:locale" content="en_US" />
+    <meta
+      name="description"
+      content="Hi, I’m Kyung-Min Jin. See about page (CV)!"
+    />
+    <meta
+      property="og:description"
+      content="Hi, I’m Kyung-Min Jin. See about page (CV)!"
+    />
+    <link rel="canonical" href="http://localhost:4000/" />
+    <meta property="og:url" content="http://localhost:4000/" />
+    <meta property="og:site_name" content="Kyung-Min Jin" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="twitter:title" content="Home" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "description": "Hi, I’m Kyung-Min Jin. See about page (CV)!",
+        "headline": "Home",
+        "name": "Kyung-Min Jin",
+        "publisher": {
+          "@type": "Organization",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "http://localhost:4000/assets/images/logo.png"
+          }
+        },
+        "url": "http://localhost:4000/"
+      }
+    </script>
+    <!-- End Jekyll SEO tag -->
 
     <link
       rel="stylesheet"
@@ -42,7 +62,6 @@
     <script src="/assets/js/jquery.min.js"></script>
   </head>
 
-   
   <body class="layout-default">
     <!-- defer loading of font and font awesome -->
     <noscript id="deferred-styles">
@@ -85,9 +104,8 @@
           <!-- Begin Menu -->
 
           <ul class="navbar-nav ml-auto">
-            
             <li class="nav-item active">
-              <a class="nav-link" href="/index.html">Blog</a>
+              <a class="nav-link" href="https://donologue.tistory.com">Blog</a>
             </li>
 
             <li class="nav-item">
@@ -114,25 +132,46 @@
 
             <script src="/assets/js/lunr.js"></script>
 
+            <style>
+              .lunrsearchresult .title {
+                color: #d9230f;
+              }
+              .lunrsearchresult .url {
+                color: silver;
+              }
+              .lunrsearchresult a {
+                display: block;
+                color: #777;
+              }
+              .lunrsearchresult a:hover,
+              .lunrsearchresult a:focus {
+                text-decoration: none;
+              }
+              .lunrsearchresult a:hover .title {
+                text-decoration: underline;
+              }
+            </style>
 
-<style>
-    .lunrsearchresult .title {color: #d9230f;}
-    .lunrsearchresult .url {color: silver;}
-    .lunrsearchresult a {display: block; color: #777;}
-    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
-    .lunrsearchresult a:hover .title {text-decoration: underline;}
-</style>
+            <form
+              class="bd-search"
+              onSubmit="return lunr_search(document.getElementById('lunrsearch').value);"
+            >
+              <input
+                type="text"
+                class="form-control text-small launch-modal-search"
+                id="lunrsearch"
+                name="q"
+                maxlength="255"
+                value=""
+                placeholder="Type and enter..."
+              />
+            </form>
 
+            <div id="lunrsearchresults">
+              <ul></ul>
+            </div>
 
-<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
-</form>
-
-<div id="lunrsearchresults">
-    <ul></ul>
-</div>
-
-<script src="/assets/js/lunrsearchengine.js"></script>
+            <script src="/assets/js/lunrsearchengine.js"></script>
           </ul>
 
           <!-- End Menu -->
@@ -154,150 +193,126 @@
         <!-- Content
 ================================================== -->
         <div class="main-content">
-
-<!-- Featured
+          <!-- Featured
 ================================================== -->
-<section class="featured-posts">
-    <div class="section-title">
-        <h2><span>Featured</span></h2>
-    </div>
-    <div class="row">
+          <section class="featured-posts">
+            <div class="section-title">
+              <h2><span>Featured</span></h2>
+            </div>
+            <div class="row">
+              <!-- begin post -->
 
-    
+              <div class="col-md-6 mb-30px">
+                <div class="listfeaturedtag h-100">
+                  <div class="row h-100">
+                    <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
+                      <div class="h-100">
+                        <div class="wrapthumbnail">
+                          <a href="/about-me/">
+                            <img
+                              class="featured-box-img-cover"
+                              src="/assets/images/10.jpg"
+                            />
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-7">
+                      <div class="h-100 card-group">
+                        <div class="card">
+                          <div class="card-body">
+                            <h2 class="card-title">
+                              <a class="text-dark" href="/about-me/"
+                                >About Me</a
+                              >
 
-        
+                              <div class="mb-2 mt-2 font-weight-normal">
+                                <div class="rating-holder">
+                                  <div
+                                    class="c-rating c-rating--regular"
+                                    data-rating-value="4.5"
+                                  >
+                                    <button>1</button>
+                                    <button>2</button>
+                                    <button>3</button>
+                                    <button>4</button>
+                                    <button>5</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </h2>
 
-            <!-- begin post -->
+                            <h4 class="card-text">
+                              I am Kyung-Min Jin, a master’s student in the
+                              graduate school of Artificial Intelligence at
+                              Korea University (PRML Lab), where I am advised by
+                              Prof...
+                            </h4>
+                          </div>
+                          <div class="card-footer b-0 bg-white mt-auto">
+                            <div class="wrapfooter">
+                              <span class="meta-footer-thumb">
+                                <img
+                                  class="author-thumb"
+                                  src="/assets/images/gravatar.png"
+                                  alt="Kyung-Min Jin"
+                                />
+                              </span>
+                              <span class="author-meta">
+                                <span class="post-name"
+                                  ><a
+                                    target="_blank"
+                                    href="https://www.github.com/KyungMinJin"
+                                    >Kyung-Min Jin</a
+                                  ></span
+                                ><br />
 
-<div class="col-md-6 mb-30px">
-  <div class="listfeaturedtag h-100">
-    <div class="row h-100">
-      <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
-        <div class="h-100">
-          <div class="wrapthumbnail">
-            <a href="/about-me/">
-              
-              <img class="featured-box-img-cover" src="/assets/images/10.jpg"> 
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-12 col-lg-7">
-        <div class="h-100 card-group">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">
-                <a class="text-dark" href="/about-me/"
-                  >About Me</a
-                >
-                
-                <div class="mb-2 mt-2 font-weight-normal">
-                  <div class="rating-holder">
-<div class="c-rating c-rating--regular" data-rating-value="4.5">
-  <button>1</button>
-  <button>2</button>
-  <button>3</button>
-  <button>4</button>
-  <button>5</button>
-</div>
-</div>
+                                <span class="post-date">13 May 2022</span>
+                              </span>
+                              <span class="post-read-more"
+                                ><a href="//about-me/" title="Read Story"
+                                  ><svg
+                                    class="svgIcon-use"
+                                    width="25"
+                                    height="25"
+                                    viewbox="0 0 25 25"
+                                  >
+                                    <path
+                                      d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
+                                      fill-rule="evenodd"
+                                    ></path></svg></a
+                              ></span>
+                              <div class="clearfix"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-              </h2>
-
-              <h4 class="card-text">
-                I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof...
-              </h4>
-            </div>
-            <div class="card-footer b-0 bg-white mt-auto">
-              <div class="wrapfooter">
-                
-                <span class="meta-footer-thumb">
-                  
-                  <img
-                    class="author-thumb"
-                    src="/assets/images/gravatar.png"
-                    alt="Kyung-Min Jin"
-                  />
-                  
-                </span>
-                <span class="author-meta">
-                  <span class="post-name"
-                    ><a target="_blank" href="https://www.github.com/KyungMinJin"
-                      >Kyung-Min Jin</a
-                    ></span
-                  ><br />
-                  
-                  <span class="post-date"
-                    >13 May 2022</span
-                  >
-                </span>
-                <span class="post-read-more"
-                  ><a
-                    href="//about-me/"
-                    title="Read Story"
-                    ><svg
-                      class="svgIcon-use"
-                      width="25"
-                      height="25"
-                      viewbox="0 0 25 25"
-                    >
-                      <path
-                        d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
-                        fill-rule="evenodd"
-                      ></path></svg></a
-                ></span>
-                <div class="clearfix"></div>
               </div>
+              <!-- end post -->
             </div>
+          </section>
+
+          <!-- Posts Index
+================================================== -->
+          <section class="recent-posts">
+            <div class="section-title">
+              <h2><span>All Stories</span></h2>
+            </div>
+
+            <div class="row listrecent"></div>
+          </section>
+
+          <!-- Pagination
+================================================== -->
+          <div class="bottompagination">
+            <div class="pointerup"><i class="fa fa-caret-up"></i></div>
+            <span class="navigation" role="navigation"> </span>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- end post -->
 
-
-        
-
-    
-
-    </div>
-</section>
-
-
-
-<!-- Posts Index
-================================================== -->
-<section class="recent-posts">
-
-    <div class="section-title">
-
-        <h2><span>All Stories</span></h2>
-
-    </div>
-
-    <div class="row listrecent">
-
-        
-
-    </div>
-
-</section>
-
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    
-</span>
-</div>
-
-</div>
-
-        
         <!-- Bottom Alert Bar
 ================================================== -->
         <!-- <div class="alertbar">
@@ -338,7 +353,6 @@
             </form>
           </div>
         </div> -->
-        
       </div>
 
       <!-- Categories Jumbotron
@@ -405,10 +419,6 @@
 
     <script src="/assets/js/mediumish.js"></script>
 
-    
-
     <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
-
-    
   </body>
 </html>
