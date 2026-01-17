@@ -8,7 +8,19 @@ comments: true
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<p>I am Kyung-Min Jin, a master's student in the graduate school of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
+<p># Introduction Abstract
+
+I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.Seong-Hwan Lee.
+
+**Building multimodal intelligence from visual perception to embodied reasoning.**
+
+"My research began in the computer vision domain, where I designed novel pose estimation frameworks that combine transformer-based architectures with convolutional neural networks. This work achieved state-of-the-art performance across multiple benchmarks and led to publications in international conferences and peer-reviewed journals, including WACV.
+
+After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge devices, focusing on efficiency and robustness in real-world environments. As my research interests expanded, I transitioned toward multimodal learning, contributing to the development of large-scale Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement learning–based policy optimization methods such as GRPO and DPO.
+
+More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively. 
+
+For more detailed information about my background and experience, please refer to my <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>.</p>
 
 <!-- <p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p> -->
 <!-- <h4>Documentation</h4>
