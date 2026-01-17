@@ -28,7 +28,12 @@ var documents = [{
     "id": 5,
     "url": "http://localhost:4000/about-me/",
     "title": "About Me",
-    "body": "2022/05/13 - I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021. "
+    "body": "2022/05/13 - </b>Building multimodal intelligence from visual perception to embodied reasoning.</b>\n"+
+"My research began in the computer vision domain, where I designed novel pose estimation frameworks that combine transformer-based architectures with convolutional neural networks. This work achieved state-of-the-art performance across multiple benchmarks and led to publications in international conferences and peer-reviewed journals, including WACV.\n"+
+"\n"+
+"After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge devices, focusing on efficiency and robustness in real-world environments. As my research interests expanded, I transitioned toward multimodal learning, contributing to the development of large-scale Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement learning–based policy optimization methods such as GRPO and DPO.\n"+
+"\n"+
+"More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively. "
     }];
 
 var idx = lunr(function () {
