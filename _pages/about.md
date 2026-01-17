@@ -5,10 +5,11 @@ permalink: /about
 comments: true
 ---
 
+<h1>Introduction Abstract</h1>
+
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<h1>Introduction Abstract</h1>
 <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.Seong-Hwan Lee.
 
 <p><b>Building multimodal intelligence from visual perception to embodied reasoning.</b></p>
