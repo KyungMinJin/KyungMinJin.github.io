@@ -5,7 +5,7 @@ permalink: /about
 comments: true
 ---
 
-<h1>Introduction Abstract</h1>
+<h1>Introduction</h1>
 
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
