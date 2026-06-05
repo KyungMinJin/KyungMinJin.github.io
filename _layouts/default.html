@@ -95,34 +95,32 @@
           <!-- Begin Menu -->
 
           <ul class="navbar-nav ml-auto">
-            {% if page.url == "/" %}
-            <li class="nav-item active">{% else %}</li>
+            <li class="nav-item {% if page.url == '/' or page.url == '/index.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/">Home</a>
+            </li>
 
-            <li class="nav-item">
-              {% endif %}
-              <a class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            <li class="nav-item {% if page.url == '/about' or page.url == '/about.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/about">About (CV)</a>
+            </li>
+
+            <li class="nav-item {% if page.url == '/publications' or page.url == '/publications.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/publications">Publications</a>
+            </li>
+
+            <li class="nav-item {% if page.url == '/projects' or page.url == '/projects.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/projects">Projects</a>
+            </li>
+
+            <li class="nav-item {% if page.url == '/notes' or page.url == '/notes.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/notes">Notes</a>
+            </li>
+
+            <li class="nav-item {% if page.url == '/contact' or page.url == '/contact.html' %}active{% endif %}">
+              <a class="nav-link" href="{{ site.baseurl }}/contact">Contact</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="{{ site.baseurl }}/about">About</a>
-            </li>
-
-            <li class="nav-item">
-              <a
-                target="_blank"
-                class="nav-link"
-                href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/"
-                ><i class="fa fa-linkedin-square"></i> Linkedin
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a
-                target="_blank"
-                class="nav-link"
-                href="https://github.com/KyungMinJin"
-                ><i class="fa fa-github-square"></i> Github
-              </a>
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog <i class="fa fa-external-link" style="font-size:11px;"></i></a>
             </li>
 
             {% include search-lunr.html %}
