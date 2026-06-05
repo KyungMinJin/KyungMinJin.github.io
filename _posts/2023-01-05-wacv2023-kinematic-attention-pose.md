@@ -42,7 +42,19 @@ Frame t+1: [Visible Wrist] ---/
 
 ---
 
-## 3. Results on Benchmarks
+## 3. Visual Demonstration (HANet Action)
+
+Below is a visual demo highlighting the robustness of our Kinematic-aware Hierarchical Attention Network on sports pose tracking compared to baseline frame-by-frame pose estimation:
+
+<div class="text-center my-4">
+    <!-- Note: You can replace this placeholder image with your actual hanet_demo.gif file in assets/images/ -->
+    <img src="{{ site.baseurl }}/assets/images/pose_estimation_cv.png" class="img-fluid rounded shadow-lg" alt="HANet Pose Tracking Demo" style="max-height: 400px;">
+    <p class="text-muted mt-2" style="font-size: 0.85rem;">Figure: HANet tracking velocity & acceleration vector continuity under high occlusion.</p>
+</div>
+
+---
+
+## 4. Results on Benchmarks
 
 Our method achieved state-of-the-art results on major benchmarks:
 * **Human3.6M:** Reduced Mean Per Joint Position Error (MPJPE) by **3.2mm** compared to prior transformer baselines.

@@ -45,3 +45,42 @@ comments: true
 </div>
 </div>
 </div>
+
+<hr class="my-5">
+
+<!-- Academic Services & Open Source -->
+<div class="row">
+    <!-- Academic Services -->
+    <div class="col-md-6 mb-4">
+        <h4 class="font-weight-bold mb-3"><i class="fa fa-graduation-cap text-success"></i> Academic Services</h4>
+        <ul class="pl-3 text-muted" style="line-height: 1.8;">
+            <li><strong>Reviewer:</strong> NeurIPS (2026)</li>
+            <li><strong>Reviewer:</strong> BMVC (2026)</li>
+            <li><strong>Reviewer:</strong> ECCV (2026)</li>
+            <li><strong>Reviewer:</strong> CVPR (2024 - 2026)</li>
+            <li><strong>Reviewer:</strong> ICCV (2025)</li>
+        </ul>
+    </div>
+
+    <!-- Open Source & Tutorials -->
+    <div class="col-md-6 mb-4">
+        <h4 class="font-weight-bold mb-3"><i class="fa fa-code text-primary"></i> Open-Source & Tutorials</h4>
+        <ul class="pl-3 text-muted" style="line-height: 1.8;">
+            <li><strong>HANet (WACV 2023):</strong> PyTorch implementation of Kinematic-aware Hierarchical Attention Network [<a href="https://github.com/KyungMinJin/HANet" target="_blank">Repository</a>]</li>
+            <li><strong>OTPose (SMC 2022):</strong> Occlusion-Aware Transformer for video pose estimation [<a href="https://github.com/KyungMinJin" target="_blank">Repository</a>]</li>
+            <li><strong>Online Course Instructor:</strong> 2D Pose Estimation Tutorial Course (Inflearn, Mar. 2023)</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Call for Collaboration -->
+<div class="row mt-3 mb-5">
+    <div class="col-md-12">
+        <div class="card bg-light border-0 p-4 rounded shadow-sm">
+            <h4 class="font-weight-bold text-dark mb-2"><i class="fa fa-comments text-info"></i> Call for Collaboration</h4>
+            <p class="text-muted mb-0" style="line-height: 1.7;">
+                I am highly open to research collaborations, joint paper submissions, and discussions on <strong>Multimodal Large Language Models (VLAs/VLMs)</strong>, <strong>Embodied AI / Robotics reasoning</strong>, and <strong>RL policy optimization (GRPO/DPO)</strong>. If you are interested in working together, please contact me via <a href="mailto:km.jin0507@gmail.com">km.jin0507@gmail.com</a> or reach out through my <a href="/contact">Contact Page</a>!
+            </p>
+        </div>
+    </div>
+</div>

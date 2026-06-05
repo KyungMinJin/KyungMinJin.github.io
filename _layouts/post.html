@@ -121,12 +121,22 @@ post_class: post-template
             <!-- End Tags -->
 
             <!-- Prev/Next -->
-            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            <div class="row PageNavigation font-weight-bold mt-5">
             {% if page.previous.url %}
-            <a class="prev d-block col-md-6" href="{{ site.baseurl }}/{{page.previous.url}}"> &laquo; {{page.previous.title}}</a>
+            <div class="col-12 mb-3">
+              <a class="prev d-block p-3 border rounded text-dark text-decoration-none shadow-sm" href="{{ site.baseurl }}{{page.previous.url}}">
+                <small class="d-block text-success text-uppercase mb-1">&laquo; Previous Story</small>
+                {{page.previous.title}}
+              </a>
+            </div>
             {% endif %}
             {% if page.next.url %}
-            <a class="next d-block col-md-6 text-lg-right" href="{{ site.baseurl }}/{{page.next.url}}">{{page.next.title}} &raquo; </a>
+            <div class="col-12 mb-3">
+              <a class="next d-block p-3 border rounded text-dark text-decoration-none shadow-sm" href="{{ site.baseurl }}{{page.next.url}}">
+                <small class="d-block text-success text-uppercase mb-1">Next Story &raquo;</small>
+                {{page.next.title}}
+              </a>
+            </div>
             {% endif %}
             <div class="clearfix"></div>
             </div>

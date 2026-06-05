@@ -24,6 +24,17 @@
     <link href="{{ site.baseurl }}/assets/css/main.css" rel="stylesheet" />
 
     <script src="{{ site.baseurl }}/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
   </head>
 
   {% if jekyll.environment == 'production' %}

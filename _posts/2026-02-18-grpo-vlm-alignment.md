@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "GRPO: Group Relative Policy Optimization for Efficient VLM Alignment"
+title: "Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs"
 author: Kyung-Min Jin
 categories: [Machine-Learning]
 tags: [Reinforcement-Learning, VLM, Alignment]
@@ -11,7 +11,7 @@ hidden: false
 rating: 4.9
 ---
 
-# GRPO: Group Relative Policy Optimization for Efficient VLM Alignment
+# Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
 
 Aligning Vision-Language Models (VLMs) using Reinforcement Learning has traditionally relied on PPO (Proximal Policy Optimization). However, PPO requires a secondary **critic (value) network** that is often as large as the actor network itself. This severely constrains the batch size and increases GPU memory requirements during training.
 
