@@ -906,3 +906,21 @@ iframe {
   opacity: 0;
   transition: opacity 0.25s;
 }
+
+/* Custom Premium UI Additions */
+.card {
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Clean styling for BibTeX accordion toggle */
+details pre {
+  margin-top: 10px;
+  background: #fdfdfd !important;
+  border: 1px solid #eaeaea !important;
+  font-size: 0.85rem;
+}
