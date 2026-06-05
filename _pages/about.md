@@ -40,10 +40,174 @@ comments: true
 
 <p>Thank you! Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
 
-<a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary mr-2 mb-2">Linkedin <i class="fa fa-linkedin-square"></i></a> <a target="_blank" href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" class="btn btn-info mr-2 mb-2">Google Scholar <i class="fa fa-graduation-cap"></i></a> <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark mb-2">Documentation CV <i class="fa fa-file-pdf-o"></i></a>
+<a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary mr-2 mb-2">Linkedin <i class="fa fa-linkedin-square"></i></a> 
+<a target="_blank" href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" class="btn btn-info mr-2 mb-2">Google Scholar <i class="fa fa-graduation-cap"></i></a> 
+<a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark mb-2">Documentation CV <i class="fa fa-file-pdf-o"></i></a>
+
+<!-- Google Scholar Metrics & Citation Graph -->
+<div class="card border shadow-sm p-3 mt-4 bg-white">
+    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+        <i class="fa fa-graduation-cap text-info"></i> Google Scholar Metrics
+    </h6>
+    <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
+        <thead>
+            <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
+                <th>Metric</th>
+                <th class="text-right">All</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-dark py-1">Citations</td>
+                <td class="text-right font-weight-bold py-1">94</td>
+            </tr>
+            <tr>
+                <td class="text-dark py-1">h-index</td>
+                <td class="text-right font-weight-bold py-1">5</td>
+            </tr>
+            <tr>
+                <td class="text-dark py-1">i10-index</td>
+                <td class="text-right font-weight-bold py-1">4</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <!-- Annual Citation Trend (Scholar bar graph style) -->
+    <div class="scholar-graph-container mt-2">
+        <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">Citations per year</div>
+        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 80px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
+            <!-- 2021 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 3%;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
+                <span class="scholar-year d-block mt-1 text-muted">21</span>
+            </div>
+            <!-- 2022 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 11%;" data-tooltip="2022: 4 citations" title="2022: 4 citations"></div>
+                <span class="scholar-year d-block mt-1 text-muted">22</span>
+            </div>
+            <!-- 2023 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 100%;" data-tooltip="2023: 36 citations" title="2023: 36 citations"></div>
+                <span class="scholar-year d-block mt-1 text-muted">23</span>
+            </div>
+            <!-- 2024 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 50%;" data-tooltip="2024: 18 citations" title="2024: 18 citations"></div>
+                <span class="scholar-year d-block mt-1 text-muted">24</span>
+            </div>
+            <!-- 2025 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 69%;" data-tooltip="2025: 25 citations" title="2025: 25 citations"></div>
+                <span class="scholar-year d-block mt-1 text-muted">25</span>
+            </div>
+            <!-- 2026 -->
+            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                <div class="scholar-bar" style="height: 28%;" data-tooltip="2026: 10 citations" title="2026: 10 citations"></div>
+                <span class="scholar-year d-block mt-1 text-muted">26</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div>
 </div>
+</div>
+
+<!-- Career Timeline -->
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-12">
+        <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> Work & Education Timeline</h3>
+        <div class="timeline-container pl-3">
+            
+            <!-- Timeline Item 1 -->
+            <div class="timeline-item d-flex">
+                <div class="timeline-left">
+                    <div class="timeline-logo-circle lg-logo">LG</div>
+                    <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-right pl-4 pb-4">
+                    <h5 class="font-weight-bold text-dark mb-1">Advanced Robotics Lab</h5>
+                    <h6 class="text-secondary font-weight-normal mb-2">
+                        LG Electronics | Researcher (선임연구원) 
+                        <span class="badge badge-light border text-secondary ml-2">2026.01 - Present</span>
+                    </h6>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
+                        Focusing on robotic perception, natural language-based object understanding, and Embodied AI reasoning. Connecting Vision-Language-Action (VLA) foundation models with physical robotic actions.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="timeline-item d-flex">
+                <div class="timeline-left">
+                    <div class="timeline-logo-circle lg-logo">LG</div>
+                    <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-right pl-4 pb-4">
+                    <h5 class="font-weight-bold text-dark mb-1">AI Lab</h5>
+                    <h6 class="text-secondary font-weight-normal mb-2">
+                        LG Electronics | Researcher (연구원) 
+                        <span class="badge badge-light border text-secondary ml-2">2023.01 - 2025.12</span>
+                    </h6>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
+                        Researched multimodal representation factorization strategies (SAMIF) and reinforcement learning-based online policy optimization (GRPO/DPO) to align Large Multimodal Models. Successfully compiled and deployed body/hand tracking networks on consumer TV edge NPUs.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="timeline-item d-flex">
+                <div class="timeline-left">
+                    <div class="timeline-logo-circle ku-logo">KU</div>
+                    <div class="timeline-line"></div>
+                </div>
+                <div class="timeline-right pl-4 pb-4">
+                    <h5 class="font-weight-bold text-dark mb-1">M.S. in Artificial Intelligence</h5>
+                    <h6 class="text-secondary font-weight-normal mb-2">
+                        Korea University | PRML Lab (Advised by Prof. Seong-Hwan Lee)
+                        <span class="badge badge-light border text-secondary ml-2">2021.03 - 2023.02</span>
+                    </h6>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
+                        Specialized in video-based human pose estimation, spatial-temporal attention transformers, and mutual learning. Published first-author papers at WACV (Oral) and Neural Networks.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="timeline-item d-flex">
+                <div class="timeline-left">
+                    <div class="timeline-logo-circle ku-logo">KU</div>
+                </div>
+                <div class="timeline-right pl-4 pb-2">
+                    <h5 class="font-weight-bold text-dark mb-1">B.S. in Computer Science & Engineering / Artificial Intelligence</h5>
+                    <h6 class="text-secondary font-weight-normal mb-2">
+                        Korea University
+                        <span class="badge badge-light border text-secondary ml-2">2017.03 - 2021.02</span>
+                    </h6>
+                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
+                        Earned dual bachelor degrees in CSE and AI. Graduated with honors.
+                    </p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- Interactive PDF CV Viewer -->
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="font-weight-bold mb-3"><i class="fa fa-file-pdf-o text-danger"></i> Interactive Curriculum Vitae</h4>
+        <p class="text-muted mb-3">You can view and navigate the detailed Curriculum Vitae directly in the browser, or click <a href="{{ site.baseurl }}/CV.pdf" target="_blank">here</a> to open it in a new tab.</p>
+        <div class="embed-responsive shadow-sm border rounded" style="height: 650px; background: #f8f9fa;">
+            <iframe class="embed-responsive-item" src="{{ site.baseurl }}/CV.pdf" allowfullscreen></iframe>
+        </div>
+    </div>
 </div>
 
 <hr class="my-5">
@@ -84,3 +248,97 @@ comments: true
         </div>
     </div>
 </div>
+
+<style>
+/* Scholar Citation Graph */
+.scholar-bar-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: flex-end;
+}
+.scholar-bar {
+  width: 100%;
+  border-radius: 2px 2px 0 0;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  background-color: #4a777a !important; /* Premium Scholar teal */
+  position: relative;
+}
+.scholar-bar:hover {
+  background-color: #0b57d0 !important; /* Google Blue on active */
+}
+.scholar-bar::after {
+  content: attr(title);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.scholar-bar:hover::after {
+  opacity: 1;
+}
+.scholar-year {
+  font-size: 0.65rem;
+  font-weight: bold;
+}
+
+/* LinkedIn-style Timeline */
+.timeline-container {
+  border-left: 2px solid #e9ecef;
+  margin-left: 20px;
+}
+.timeline-item {
+  position: relative;
+  margin-bottom: 0px;
+}
+.timeline-left {
+  position: absolute;
+  left: -21px; /* Center circle on line */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.timeline-logo-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 2;
+  border: 2px solid white;
+}
+.lg-logo {
+  background: #a50034; /* LG Red */
+}
+.ku-logo {
+  background: #8b0029; /* Korea University Crimson */
+}
+.timeline-line {
+  width: 2px;
+  background: #e9ecef;
+  flex-grow: 1;
+}
+.timeline-right {
+  width: 100%;
+}
+</style>
+

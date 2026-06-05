@@ -339,6 +339,59 @@ span.post-read-more a:hover {
   line-height: 1.65;
   color: #333;
 }
+.article-post h1 {
+  font-size: 1.65rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111;
+}
+.article-post h2 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-top: 1.8rem;
+  margin-bottom: 0.9rem;
+  color: #222;
+}
+.article-post h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+.article-post h4 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-top: 1.4rem;
+  margin-bottom: 0.7rem;
+  color: #444;
+}
+.article-post h5 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-top: 1.2rem;
+  margin-bottom: 0.6rem;
+  color: #555;
+}
+.article-post h6 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+/* Make LaTeX equations responsive and scrollable on overflow */
+.mjx-container, .MathJax, .MathJax_Display, .MathJax_CHTML, math {
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+}
+.MathJax_Display {
+  padding: 12px 0;
+}
+
 
 blockquote {
   border-left: 4px solid #00ab6b;

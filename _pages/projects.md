@@ -17,14 +17,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-primary mr-2">Robotics / Embodied AI</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> LG Electronics, Advanced Robotics Lab</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2026.01 - Present</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-primary">Robotics / Embodied AI</span>
-                            <small class="text-muted">2026.01 - Present</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">Natural Language-Based Object Understanding for Robots</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">LG Electronics, Advanced Robotics Lab</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">Natural Language-Based Object Understanding for Robots</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Building robot perception systems that ground natural language in visual environments to enable intuitive human-robot interaction and reasoning.
                         </p>
@@ -45,7 +49,7 @@ comments: true
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/robotics_perception_kg.png" alt="Robotics Knowledge Graph" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/robotics_perception_kg.png" alt="Robotics Knowledge Graph" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -56,14 +60,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-success mr-2">Multimodal Learning</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> LG Electronics, AI Lab</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2023.07 - 2025.12</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-success">Multimodal Learning</span>
-                            <small class="text-muted">2023.07 - 2025.12</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">SAMIF: Semantic-Aware Mutual Information Factorized Learning</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">LG Electronics, AI Lab</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">SAMIF: Semantic-Aware Mutual Information Factorized Learning</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Researched cross-modality shared and unique information factorization strategies to improve semantic segmentation across aligned data modalities.
                         </p>
@@ -84,7 +92,7 @@ comments: true
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/multimodal_samif.png" alt="SAMIF Architecture" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/multimodal_samif.png" alt="SAMIF Architecture" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -95,14 +103,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-danger mr-2">LLM / VLM</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> LG Electronics, AI Lab</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2024 - 2025</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-danger">LLM / VLM</span>
-                            <small class="text-muted">LG Electronics</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">Small Multimodal LLM & Audio Tower Training</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">LG Electronics, AI Lab</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">Small Multimodal LLM & Audio Tower Training</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Developed small-scale multimodal language models featuring audio/vision towers and optimized using advanced policy training.
                         </p>
@@ -124,7 +136,7 @@ comments: true
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/grpo_vlm_alignment.png" alt="GRPO VLM Alignment" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/grpo_vlm_alignment.png" alt="GRPO VLM Alignment" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -135,14 +147,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-info mr-2">Reinforcement Learning</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-users"></i> LG Electronics & Toronto AI Lab</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">Joint Research</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-info">Reinforcement Learning</span>
-                            <small class="text-muted">Joint Research</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">Fast-Reasoning Modality-Aware Policy Optimization</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">LG Electronics & Toronto AI Lab</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">Fast-Reasoning Modality-Aware Policy Optimization</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Collaborated on online policy optimization methods that apply modality-aware weighting in Group Relative Policy Optimization (GRPO).
                         </p>
@@ -162,7 +178,7 @@ comments: true
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/qat_pose_estimation.png" alt="Modality-Aware weighting" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/qat_pose_estimation.png" alt="Modality-Aware weighting" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -173,14 +189,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-warning mr-2">Computer Vision</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-graduation-cap"></i> Korea University & LG Electronics</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">Research & Deployed</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-warning">Computer Vision</span>
-                            <small class="text-muted">Research & Deployed</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">Optimized Body & Hand Pose Estimation</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">Korea University & LG Electronics</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">Optimized Body & Hand Pose Estimation</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Developed state-of-the-art pose estimation algorithms and optimized them for edge-device integration.
                         </p>
@@ -198,11 +218,12 @@ comments: true
                         </div>
                         <div class="mt-3">
                             <a href="{{ site.baseurl }}/posts/hanet/" class="btn btn-sm btn-outline-primary mr-2"><i class="fa fa-book"></i> Read HANet Paper Summary</a>
+                            <a href="{{ site.baseurl }}/posts/snpe-setup-guide/" class="btn btn-sm btn-outline-success mr-2"><i class="fa fa-cogs"></i> View SNPE Deployment Guide</a>
                             <a href="https://github.com/KyungMinJin/HANet" target="_blank" class="btn btn-sm btn-outline-dark"><i class="fa fa-github"></i> GitHub Code</a>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/jhmdb.gif" alt="Pose Estimation Tracking" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/pw3d_smpl.gif" alt="3D SMPL Pose Estimation Tracking" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
@@ -213,14 +234,18 @@ comments: true
     <div class="col-md-12 mb-4">
         <div class="card shadow-sm border overflow-hidden">
             <div class="card-body">
+                <!-- Card Header (Full Width) -->
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-secondary mr-2">Embedded AI</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> Voice Caddie</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2020.05 - 2020.11</small>
+                </div>
+                <!-- Card Content (Split Columns) -->
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-md-7">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge badge-secondary">Embedded AI</span>
-                            <small class="text-muted">2020.05 - 2020.11</small>
-                        </div>
-                        <h5 class="card-title font-weight-bold text-dark mb-1">Golf Pose Estimation & Action Localization</h5>
-                        <h6 class="card-subtitle mb-3 text-secondary">Voice Caddie</h6>
+                        <h5 class="card-title font-weight-bold text-dark mb-2">Golf Pose Estimation & Action Localization</h5>
                         <p class="card-text text-muted" style="font-size: 0.95rem; line-height: 1.6;">
                             Developed and optimized golf swing pose estimation models and temporal action localization algorithms for portable smart devices.
                         </p>
@@ -239,11 +264,12 @@ comments: true
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-5 mt-3 mt-md-0 text-center">
-                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/pose_estimation_cv.png" alt="Golf Pose Estimation" style="max-height: 200px; width: 100%; object-fit: cover;">
+                        <img class="img-fluid rounded shadow-sm border" src="{{ site.baseurl }}/assets/images/pose_estimation_cv.png" alt="Golf Pose Estimation" style="height: 180px; width: 100%; object-fit: cover;">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
