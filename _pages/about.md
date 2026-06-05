@@ -5,16 +5,11 @@ permalink: /about
 comments: true
 ---
 
-<h1>
-    <span class="lang-en">Introduction</span>
-    <span class="lang-ko">소개</span>
-</h1>
-
-<div class="row justify-content-between">
+<div class="row justify-content-center">
 <div class="col-md-8 pr-md-5">
 
 <div class="lang-en">
-    <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
+    <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
     
     <p><b>Building multimodal intelligence from visual perception to embodied reasoning.</b></p>
     
@@ -42,11 +37,13 @@ comments: true
 </div>
 
 </div> <!-- col-md-8 끝 -->
+</div> <!-- row 끝 (소개 Row) -->
 
-<div class="col-md-4 sticky-sidebar">
+<div class="row mt-5 pt-4 border-top justify-content-center">
+<div class="col-md-6 mb-4">
 
 <!-- Google Scholar Metrics & Citation Graph -->
-<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white">
+<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white h-100">
     <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
         <i class="fa fa-graduation-cap text-info"></i>
         <span class="lang-en">Google Scholar Metrics</span>
@@ -118,9 +115,13 @@ comments: true
     </div>
 </div>
 
+</div>
+
+<div class="col-md-6 mb-4 text-center">
+
 <!-- Visitor Analytics Widget -->
-<div class="card border shadow-sm p-3 pt-2 pb-2 mt-3 bg-white text-center">
-    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white h-100 d-flex flex-column justify-content-between">
+    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
         <i class="fa fa-globe text-secondary"></i>
         <span class="lang-en">Visitor Map</span>
         <span class="lang-ko">방문자 분포 지도</span>
@@ -128,8 +129,8 @@ comments: true
     <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
         <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
     </div>
-    <div class="mt-2">
-        <img src="https://hitscounter.dev/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
+    <div class="mt-3">
+        <img src="https://komarev.com/ghpvc/?username=KyungMinJin&color=4a777a&style=flat-square&label=Total+Visits" alt="Total Visits" style="border-radius: 4px;"/>
     </div>
 </div>
 

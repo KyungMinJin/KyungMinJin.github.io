@@ -171,9 +171,6 @@
 
     <div class="site-content">
       <div class="container">
-        <!-- Site Title
-================================================== -->
-        
 
         <!-- Content
 ================================================== -->
@@ -181,113 +178,116 @@
 
 <!-- Style & Script -->
 <style>
-.category-filter-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-}
-.category-filter-chips .chip {
-  padding: 8px 20px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #495057;
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 50px;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-}
-.category-filter-chips .chip:hover {
-  background: #e9ecef;
-  color: #212529;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-}
-.category-filter-chips .chip.active {
-  background: #2b2b2b;
-  color: #fff;
-  border-color: #2b2b2b;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-.post-card-item {
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 1;
-  transform: scale(1);
-}
+    .category-filter-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .category-filter-chips .chip {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #495057;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 50px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .category-filter-chips .chip:hover {
+        background: #e9ecef;
+        color: #212529;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .category-filter-chips .chip.active {
+        background: #2b2b2b;
+        color: #fff;
+        border-color: #2b2b2b;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .post-card-item {
+        transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        opacity: 1;
+        transform: scale(1);
+    }
 </style>
 
 <script>
-// Category Filtering Script
-function initCategoryFilter() {
-  const chips = document.querySelectorAll(".category-filter-chips .chip");
-  const postItems = document.querySelectorAll(".post-card-item");
-  if (!chips.length) return;
+    // Category Filtering Script
+    function initCategoryFilter() {
+        const chips = document.querySelectorAll(".category-filter-chips .chip");
+        const postItems = document.querySelectorAll(".post-card-item");
+        if (!chips.length) return;
 
-  chips.forEach(chip => {
-    chip.addEventListener("click", function() {
-      chips.forEach(c => c.classList.remove("active"));
-      this.classList.add("active");
+        chips.forEach(chip => {
+            chip.addEventListener("click", function () {
+                chips.forEach(c => c.classList.remove("active"));
+                this.classList.add("active");
 
-      const filterValue = this.getAttribute("data-filter").toLowerCase();
+                const filterValue = this.getAttribute("data-filter").toLowerCase();
 
-      postItems.forEach(item => {
-        const rawCategories = item.getAttribute("data-categories") || "";
-        const categories = rawCategories.split(",").map(c => c.trim().toLowerCase().replace(/\s+/g, '-'));
-        
-        const matches = filterValue === "all" || 
-                        categories.includes(filterValue) || 
+                postItems.forEach(item => {
+                    const rawCategories = item.getAttribute("data-categories") || "";
+                    const categories = rawCategories.split(",").map(c => c.trim().toLowerCase().replace(/\s+/g, '-'));
+
+                    const matches = filterValue === "all" ||
+                        categories.includes(filterValue) ||
                         categories.some(cat => cat.replace(/-/g, '') === filterValue.replace(/-/g, ''));
-        
-        if (matches) {
-          item.style.display = ""; 
-          setTimeout(() => {
-            item.style.opacity = "1";
-            item.style.transform = "scale(1)";
-          }, 10);
-        } else {
-          item.style.opacity = "0";
-          item.style.transform = "scale(0.95)";
-          item.style.display = "none";
-        }
-      });
-    });
-  });
-}
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initCategoryFilter);
-} else {
-  initCategoryFilter();
-}
+                    if (matches) {
+                        item.style.display = "";
+                        setTimeout(() => {
+                            item.style.opacity = "1";
+                            item.style.transform = "scale(1)";
+                        }, 10);
+                    } else {
+                        item.style.opacity = "0";
+                        item.style.transform = "scale(0.95)";
+                        item.style.display = "none";
+                    }
+                });
+            });
+        });
+    }
 
-// Email Copy to Clipboard Script
-function copyEmailToClipboard() {
-    const email = "km.jin0507@gmail.com";
-    navigator.clipboard.writeText(email).then(() => {
-        const btnText = document.getElementById("copyBtnText");
-        const origText = btnText.innerHTML;
-        btnText.innerHTML = "Copied!";
-        
-        const toast = document.getElementById("copyAlert");
-        toast.style.display = "block";
-        
-        setTimeout(() => {
-            btnText.innerHTML = origText;
-        }, 1500);
-        
-        setTimeout(() => {
-            toast.style.display = "none";
-        }, 2500);
-    }).catch(err => {
-        console.error("Failed to copy text: ", err);
-    });
-}
-</script>
-</div>
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCategoryFilter);
+    } else {
+        initCategoryFilter();
+    }
+
+    // Email Copy to Clipboard Script
+    function copyEmailToClipboard() {
+        const email = "km.jin0507@gmail.com";
+        navigator.clipboard.writeText(email).then(() => {
+            const btnText = document.getElementById("copyBtnText");
+            const origText = btnText.innerHTML;
+            btnText.innerHTML = "Copied!";
+
+            const toast = document.getElementById("copyAlert");
+            toast.style.display = "block";
+
+            setTimeout(() => {
+                btnText.innerHTML = origText;
+            }, 1500);
+
+            setTimeout(() => {
+                toast.style.display = "none";
+            }, 2500);
+        }).catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+    }
+</script></div>
 
         
         <!-- Bottom Alert Bar

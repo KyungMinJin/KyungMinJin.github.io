@@ -1,565 +1,509 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script>
+      (function () {
+        var savedLang = localStorage.getItem("pref-lang");
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith("ko") ? "ko" : "en";
+        }
+        document.documentElement.className += " lang-mode-" + savedLang;
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <script>
-    (function () {
-      var savedLang = localStorage.getItem("pref-lang");
-      if (!savedLang) {
-        var userLang = navigator.language || navigator.userLanguage;
-        savedLang = userLang.startsWith("ko") ? "ko" : "en";
-      }
-      document.documentElement.className += " lang-mode-" + savedLang;
-    })();
-  </script>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="/assets/images/logo.png" />
 
-  <link rel="icon" href="/assets/images/logo.png" />
+    <title>Cross-Modality Shared & Unique Information Factorization (SAMIF) | Kyung-Min Jin</title>
 
-  <title>Cross-Modality Shared & Unique Information Factorization (SAMIF) | Kyung-Min Jin</title>
-
-  <!-- Begin Jekyll SEO tag v2.8.0 -->
-  <title>Cross-Modality Shared &amp; Unique Information Factorization (SAMIF) | Kyung-Min Jin</title>
-  <meta name="generator" content="Jekyll v4.2.2" />
-  <meta property="og:title" content="Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)" />
-  <meta name="author" content="Kyung-Min Jin" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="description"
-    content="A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation." />
-  <meta property="og:description"
-    content="A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation." />
-  <meta property="og:site_name" content="Kyung-Min Jin" />
-  <meta property="og:image" content="/assets/images/multimodal_samif.png" />
-  <meta property="og:type" content="article" />
-  <meta property="article:published_time" content="2025-11-15T00:00:00-06:00" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="/assets/images/multimodal_samif.png" />
-  <meta property="twitter:title" content="Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)" />
-  <script type="application/ld+json">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Cross-Modality Shared &amp; Unique Information Factorization (SAMIF) | Kyung-Min Jin</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)" />
+<meta name="author" content="Kyung-Min Jin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation." />
+<meta property="og:description" content="A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation." />
+<meta property="og:site_name" content="Kyung-Min Jin" />
+<meta property="og:image" content="/assets/images/multimodal_samif.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-11-15T00:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/multimodal_samif.png" />
+<meta property="twitter:title" content="Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)" />
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyung-Min Jin"},"dateModified":"2025-11-15T00:00:00-06:00","datePublished":"2025-11-15T00:00:00-06:00","description":"A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation.","headline":"Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)","image":"/assets/images/multimodal_samif.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/samif/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"Kyung-Min Jin"},"url":"/posts/samif/"}</script>
-  <!-- End Jekyll SEO tag -->
+<!-- End Jekyll SEO tag -->
 
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
 
-  <link href="/assets/css/screen.css" rel="stylesheet" />
+    <link href="/assets/css/screen.css" rel="stylesheet" />
 
-  <link href="/assets/css/main.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
 
-  <script src="/assets/js/jquery.min.js"></script>
-  <!-- MathJax for LaTeX Rendering -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-</head>
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  </head>
 
+   
+  <body class="layout-post">
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+      <link
+        href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="/font-awesome-4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+      />
+    </noscript>
 
-<body class="layout-post">
-  <!-- defer loading of font and font awesome -->
-  <noscript id="deferred-styles">
-    <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
-  </noscript>
-
-  <!-- Begin Menu Navigation
+    <!-- Begin Menu Navigation
 ================================================== -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
-    <div class="container pr-0">
-      <!-- Begin Logo -->
-      <a class="navbar-brand text-dark font-weight-bold" href="/">
-        Kyung-Min Jin
-      </a>
-      <!-- End Logo -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down"
+    >
+      <div class="container pr-0">
+        <!-- Begin Logo -->
+        <a class="navbar-brand text-dark font-weight-bold" href="/">
+          Kyung-Min Jin
+        </a>
+        <!-- End Logo -->
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMediumish"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarMediumish">
-        <!-- Begin Menu -->
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+          <!-- Begin Menu -->
 
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item ">
-            <a class="nav-link" href="/">Home</a>
-          </li>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/about">About (CV)</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/about">About (CV)</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/publications">Publications</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/publications">Publications</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/projects">Projects</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects">Projects</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
 
-          <li class="nav-item">
-            <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
-          </li>
+            <li class="nav-item">
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
-              <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown"
-              style="border-radius: 8px;">
-              <a class="dropdown-item font-weight-bold" href="#"
-                onclick="changeLanguage('en'); return false;">English</a>
-              <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
-            </div>
-          </li>
-
-          <script src="/assets/js/lunr.js"></script>
-
-
-          <style>
-            .lunrsearchresult .title {
-              color: #d9230f;
-            }
-
-            .lunrsearchresult .url {
-              color: silver;
-            }
-
-            .lunrsearchresult a {
-              display: block;
-              color: #777;
-            }
-
-            .lunrsearchresult a:hover,
-            .lunrsearchresult a:focus {
-              text-decoration: none;
-            }
-
-            .lunrsearchresult a:hover .title {
-              text-decoration: underline;
-            }
-          </style>
-
-
-          <form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-            <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q"
-              maxlength="255" value="" placeholder="Type and enter..." />
-          </form>
-
-          <div id="lunrsearchresults">
-            <ul></ul>
-          </div>
-
-          <script src="/assets/js/lunrsearchengine.js"></script>
-        </ul>
-
-        <!-- End Menu -->
-      </div>
-    </div>
-  </nav>
-  <!-- End Navigation
-================================================== -->
-
-  <div class="site-content">
-    <div class="container">
-      <!-- Site Title
-================================================== -->
-
-
-      <!-- Content
-================================================== -->
-      <div class="main-content"><!-- Begin Article
-================================================== -->
-        <div class="container">
-          <div class="row justify-content-center position-relative">
-
-            <!-- Post Share (Floating on Left) -->
-            <div class="post-share-sidebar">
-              <div class="share sticky-top sticky-top-offset">
-                <p>Share</p>
-                <ul>
-                  <li class="ml-1 mr-1">
-                    <a target="_blank"
-                      href="https://twitter.com/intent/tweet?text=Cross-Modality Shared & Unique Information Factorization (SAMIF)&url=/posts/samif/"
-                      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                  </li>
-
-                  <li class="ml-1 mr-1">
-                    <a target="_blank" href="https://facebook.com/sharer.php?u=/posts/samif/"
-                      onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
-                      <i class="fa fa-facebook-f"></i>
-                    </a>
-                  </li>
-
-                  <li class="ml-1 mr-1">
-                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/samif/"
-                      onclick="window.open(this.href, 'width=550,height=435');return false;">
-                      <i class="fa fa-linkedin-square"></i>
-                    </a>
-                  </li>
-                </ul>
-
-                <div class="sep"></div>
-                <ul>
-                  <li>
-                    <a class="small smoothscroll" href="#disqus_thread"></a>
-                  </li>
-                </ul>
-
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown" style="border-radius: 8px;">
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
               </div>
+            </li>
 
-            </div>
-
-            <!-- Post -->
+            <script src="/assets/js/lunr.js"></script>
 
 
-            <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
-              <div class="mainheading">
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+          </ul>
+
+          <!-- End Menu -->
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+      <div class="container">
+
+        <!-- Content
+================================================== -->
+        <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row justify-content-center position-relative">
+
+        <!-- Post Share (Floating on Left) -->
+        <div class="post-share-sidebar">
+            <div class="share sticky-top sticky-top-offset">
+  <p>Share</p>
+  <ul>
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=Cross-Modality Shared & Unique Information Factorization (SAMIF)&url=/posts/samif/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
+      >
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://facebook.com/sharer.php?u=/posts/samif/"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-facebook-f"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/samif/"
+        onclick="window.open(this.href, 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </li>
+  </ul>
+  
+  <div class="sep"></div>
+  <ul>
+    <li>
+      <a class="small smoothscroll" href="#disqus_thread"></a>
+    </li>
+  </ul>
+  
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
+            <div class="mainheading">
 
                 <!-- Author Box -->
-
+                
                 <div class="row post-top-meta">
-                  <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-
-                    <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
-
-                  </div>
-                  <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                    <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a
-                      target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/"
-                      class="btn follow">Follow</a>
-                    <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea
-                      University, Seoul. Check About Page for more information!</span>
-                  </div>
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn follow">Follow</a>
+                        <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea University, Seoul. Check About Page for more information!</span>
+                    </div>
                 </div>
-
+                
 
                 <!-- Post Title -->
                 <h1 class="posttitle">Cross-Modality Shared & Unique Information Factorization (SAMIF)</h1>
 
-              </div>
+            </div>
 
-              <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
 
-              <!-- End Adsense -->
+            <!-- Post Featured Image -->
+            
 
-              <!-- Post Featured Image -->
+            
+            <img class="featured-image img-fluid" src="/assets/images/multimodal_samif.png" alt="Cross-Modality Shared & Unique Information Factorization (SAMIF)">
+            
 
+            
+            <!-- End Featured Image -->
 
-
-              <img class="featured-image img-fluid" src="/assets/images/multimodal_samif.png"
-                alt="Cross-Modality Shared & Unique Information Factorization (SAMIF)">
-
-
-
-              <!-- End Featured Image -->
-
-              <!-- Post Content -->
-              <div class="article-post">
+            <!-- Post Content -->
+            <div class="article-post">
                 <!-- Toc if any -->
-
+                
                 <!-- End Toc -->
                 <div class="lang-ko">
-                  <h1 id="samif">교차 모달리티 공유 및 고유 정보 분리 학습 (SAMIF)</h1>
+  <h1 id="samif">교차 모달리티 공유 및 고유 정보 분리 학습 (SAMIF)</h1>
 
-                  <p>멀티모달 학습(예: RGB 이미지와 깊이 맵, 열화상 이미지 또는 오디오 로그 결합)의 목적은 다양한 센서에서 제공되는 상호 보완적인 정보를 활용하는 것입니다. 그러나 단순한
-                    융합 방식(예: 단순 연결(concatenation) 또는 더하기)은 서로 다른 모달리티가 <strong>공유 정보</strong>(중복)와 <strong>고유
-                      정보</strong>(상호 보완)를 동시에 포함하고 있다는 사실을 무시하기 때문에 최적의 성능을 내지 못하는 경우가 많습니다.</p>
+  <p>멀티모달 학습(예: RGB 이미지와 깊이 맵, 열화상 이미지 또는 오디오 로그 결합)의 목적은 다양한 센서에서 제공되는 상호 보완적인 정보를 활용하는 것입니다. 그러나 단순한 융합 방식(예: 단순 연결(concatenation) 또는 더하기)은 서로 다른 모달리티가 <strong>공유 정보</strong>(중복)와 <strong>고유 정보</strong>(상호 보완)를 동시에 포함하고 있다는 사실을 무시하기 때문에 최적의 성능을 내지 못하는 경우가 많습니다.</p>
 
-                  <p>본 포스트에서는 이러한 모달리티 표현을 분리하여 멀티모달 시맨틱 세그멘테이션 성능을 높이도록 설계된 <strong>시맨틱 인지 상호 정보 분리 학습(Semantic-Aware
-                      Mutual Information Factorized Learning, SAMIF)</strong> 프레임워크를 소개합니다.</p>
+  <p>본 포스트에서는 이러한 모달리티 표현을 분리하여 멀티모달 시맨틱 세그멘테이션 성능을 높이도록 설계된 <strong>시맨틱 인지 상호 정보 분리 학습(Semantic-Aware Mutual Information Factorized Learning, SAMIF)</strong> 프레임워크를 소개합니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="representation-factorization">1. 모달리티 표현의 인수분해 (Representation Factorization)</h2>
+  <h2 id="representation-factorization">1. 모달리티 표현의 인수분해 (Representation Factorization)</h2>
 
-                  <p>SAMIF는 각 모달리티 $M_i$의 표현을 두 개의 서로 다른 잠재 공간(latent spaces)으로 분해합니다:</p>
-                  <ol>
-                    <li><strong>공유 표현 ($S$):</strong> 모든 입력 모달리티에 공통적으로 포함된 정보 (예: RGB 이미지와 깊이 맵 모두에서 뚜렷이 드러나는 물체의 경계선).
-                    </li>
-                    <li><strong>고유 표현 ($U_i$):</strong> 해당 모달리티 $M_i$에만 독립적으로 존재하는 정보 (예: 열화상 이미지의 온도 패턴, 또는 RGB 이미지의
-                      고주파 텍스처 디테일).</li>
-                  </ol>
+  <p>SAMIF는 각 모달리티 $M_i$의 표현을 두 개의 서로 다른 잠재 공간(latent spaces)으로 분해합니다:</p>
+  <ol>
+    <li><strong>공유 표현 ($S$):</strong> 모든 입력 모달리티에 공통적으로 포함된 정보 (예: RGB 이미지와 깊이 맵 모두에서 뚜렷이 드러나는 물체의 경계선).</li>
+    <li><strong>고유 표현 ($U_i$):</strong> 해당 모달리티 $M_i$에만 독립적으로 존재하는 정보 (예: 열화상 이미지의 온도 패턴, 또는 RGB 이미지의 고주파 텍스처 디테일).</li>
+  </ol>
 
-                  \[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
+\[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
 
-                  <hr />
+  <hr />
 
-                  <h2 id="mutual-information---">2. 상호 정보량(Mutual Information) 최소화 및 최대화</h2>
+  <h2 id="mutual-information---">2. 상호 정보량(Mutual Information) 최소화 및 최대화</h2>
 
-                  <p>이러한 분리를 유도하기 위해, PyTorch 학습 루프 내에 <strong>상호 정보량(Mutual Information, MI)</strong> 제약 조건을 설정합니다:</p>
+  <p>이러한 분리를 유도하기 위해, PyTorch 학습 루프 내에 <strong>상호 정보량(Mutual Information, MI)</strong> 제약 조건을 설정합니다:</p>
 
-                  <ul>
-                    <li>
-                      <p><strong>공유 표현과 고유 표현 간의 MI 최소화:</strong> 고유 표현이 공유 표현의 정보를 포함하지 않도록 강제합니다:</p>
+  <ul>
+    <li>
+      <p><strong>공유 표현과 고유 표현 간의 MI 최소화:</strong> 고유 표현이 공유 표현의 정보를 포함하지 않도록 강제합니다:</p>
 
-                      \[\min \mathcal{I}(S; U_i)\]
-                    </li>
-                    <li>
-                      <p><strong>각 모달리티별 공유 표현 간의 MI 최대화:</strong> 서로 다른 모달리티에서 추출된 공유 표현들이 서로 정렬(align)되도록 유도합니다:</p>
+\[\min \mathcal{I}(S; U_i)\]
+    </li>
+    <li>
+      <p><strong>각 모달리티별 공유 표현 간의 MI 최대화:</strong> 서로 다른 모달리티에서 추출된 공유 표현들이 서로 정렬(align)되도록 유도합니다:</p>
 
-                      \[\max \mathcal{I}(S_1; S_2)\]
-                    </li>
-                  </ul>
+\[\max \mathcal{I}(S_1; S_2)\]
+    </li>
+  </ul>
 
-                  <p>이 제약 조건들은 중간 feature 맵 단계에서 MINE과 같은 신경망 기반 상호 정보량 추정기나 대비 학습 손실 함수(InfoNCE Contrastive Loss)를 사용해
-                    구현됩니다.</p>
+  <p>이 제약 조건들은 중간 feature 맵 단계에서 MINE과 같은 신경망 기반 상호 정보량 추정기나 대비 학습 손실 함수(InfoNCE Contrastive Loss)를 사용해 구현됩니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="cross-attention---">3. 교차 어텐션(Cross-Attention) 기반 feature 융합</h2>
+  <h2 id="cross-attention--feature-">3. 교차 어텐션(Cross-Attention) 기반 feature 융합</h2>
 
-                  <p>분리된 feature들은 멀티헤드 <strong>교차 어텐션(cross-attention)</strong> 매커니즘을 통해 최종 융합됩니다:</p>
+  <p>분리된 feature들은 멀티헤드 <strong>교차 어텐션(cross-attention)</strong> 매커니즘을 통해 최종 융합됩니다:</p>
 
-                  <div class="language-plaintext highlighter-rouge">
-                    <div class="highlight">
-                      <pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre>
-                      </td>
-                      <td class="rouge-code">
-                        <pre>[공유 feature S] ----------------\
+</pre></td><td class="rouge-code"><pre>[공유 feature S] ----------------\
                                +---&gt; [교차 어텐션 융합] ---&gt; [세그멘테이션 디코더]
 [모달리티별 고유 feature U_i] ----/
-</pre>
-                      </td>
-                      </tr>
-                      </tbody>
-                      </table></code></pre>
-                    </div>
-                  </div>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
 
-                  <p>이를 통해 네트워크는 공유 정보가 부족할 때에만 고유 feature에 동적으로 집중할 수 있게 되며, 일부 센서가 오작동하는 상황(예: 카메라 화면이 어두워져 열화상 센서의 고유
-                    특징이
-                    우선적으로 사용되는 경우)에서도 강건한 세그멘테이션 결과를 도출해 냅니다.</p>
+  <p>이를 통해 네트워크는 공유 정보가 부족할 때에만 고유 feature에 동적으로 집중할 수 있게 되며, 일부 센서가 오작동하는 상황(예: 카메라 화면이 어두워져 열화상 센서의 고유 feature이 우선적으로 사용되는 경우)에서도 강건한 세그멘테이션 결과를 도출해 냅니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h3 id="section">실험적 결과</h3>
+  <h3 id="section">실험적 결과</h3>
 
-                  <p>표준 멀티모달 벤치마크 데이터셋에서 SAMIF 프레임워크는 다음 성과를 보여주었습니다:</p>
-                  <ul>
-                    <li>평균 Intersection over Union (mIoU)에서 <strong>2~3% 수준의 성능 향상</strong>.</li>
-                    <li>센서 신호 유실을 모사한 실험 환경에서 매우 뛰어난 강건성 입증 (단순 융합 베이스라인 대비 최대 15% 높은 mIoU 기록).</li>
-                    <li>최종적으로 ONNX 포맷으로 변환되어 엣지 디바이스 내 Qualcomm Neural Processing SDK 환경에 성공적으로 배포 완료.</li>
-                  </ul>
-                </div>
+  <p>표준 멀티모달 벤치마크 데이터셋에서 SAMIF 프레임워크는 다음 성과를 보여주었습니다:</p>
+  <ul>
+    <li>평균 Intersection over Union (mIoU)에서 <strong>2~3% 수준의 성능 향상</strong>.</li>
+    <li>센서 신호 유실을 모사한 실험 환경에서 매우 뛰어난 강건성 입증 (단순 융합 베이스라인 대비 최대 15% 높은 mIoU 기록).</li>
+    <li>최종적으로 ONNX 포맷으로 변환되어 엣지 디바이스 내 Qualcomm Neural Processing SDK 환경에 성공적으로 배포 완료.</li>
+  </ul>
+</div>
 
-                <div class="lang-en">
-                  <h1 id="cross-modality-shared--unique-information-factorization-samif">Cross-Modality Shared &amp;
-                    Unique Information Factorization (SAMIF)</h1>
+<div class="lang-en">
+  <h1 id="cross-modality-shared--unique-information-factorization-samif">Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)</h1>
 
-                  <p>In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs),
-                    the goal is to leverage complementary information from different sensors. However, simple fusion
-                    methods (like concatenation or addition) often fail because they ignore the fact that different
-                    modalities contain both <strong>shared</strong> (redundant) and <strong>unique</strong>
-                    (complementary) information.</p>
+  <p>In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs), the goal is to leverage complementary information from different sensors. However, simple fusion methods (like concatenation or addition) often fail because they ignore the fact that different modalities contain both <strong>shared</strong> (redundant) and <strong>unique</strong> (complementary) information.</p>
 
-                  <p>In this post, we introduce <strong>Semantic-Aware Mutual Information Factorized Learning
-                      (SAMIF)</strong>, a framework designed to factorize modality representations and improve
-                    multimodal semantic segmentation.</p>
+  <p>In this post, we introduce <strong>Semantic-Aware Mutual Information Factorized Learning (SAMIF)</strong>, a framework designed to factorize modality representations and improve multimodal semantic segmentation.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="modality-representation-factorization">1. Modality Representation Factorization</h2>
+  <h2 id="modality-representation-factorization">1. Modality Representation Factorization</h2>
 
-                  <p>SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:</p>
-                  <ol>
-                    <li><strong>Shared Representation ($S$):</strong> Features containing information that is common
-                      across all input modalities (e.g., object boundaries visible in both RGB and depth maps).</li>
-                    <li><strong>Unique Representation ($U_i$):</strong> Features containing information exclusive to
-                      modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in
-                      RGB).</li>
-                  </ol>
+  <p>SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:</p>
+  <ol>
+    <li><strong>Shared Representation ($S$):</strong> Features containing information that is common across all input modalities (e.g., object boundaries visible in both RGB and depth maps).</li>
+    <li><strong>Unique Representation ($U_i$):</strong> Features containing information exclusive to modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in RGB).</li>
+  </ol>
 
-                  \[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
+\[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
 
-                  <hr />
+  <hr />
 
-                  <h2 id="mutual-information-minimization--maximization">2. Mutual Information Minimization &amp;
-                    Maximization</h2>
+  <h2 id="mutual-information-minimization--maximization">2. Mutual Information Minimization &amp; Maximization</h2>
 
-                  <p>To enforce this factorization, we utilize <strong>Mutual Information (MI)</strong> constraints
-                    during PyTorch training:</p>
+  <p>To enforce this factorization, we utilize <strong>Mutual Information (MI)</strong> constraints during PyTorch training:</p>
 
-                  <ul>
-                    <li>
-                      <p><strong>Minimizing MI between Shared and Unique:</strong> We want the unique representations to
-                        contain no information about the shared features:</p>
+  <ul>
+    <li>
+      <p><strong>Minimizing MI between Shared and Unique:</strong> We want the unique representations to contain no information about the shared features:</p>
 
-                      \[\min \mathcal{I}(S; U_i)\]
-                    </li>
-                    <li>
-                      <p><strong>Maximizing MI between Shared Representations:</strong> We want the shared
-                        representations from different modalities to align:</p>
+\[\min \mathcal{I}(S; U_i)\]
+    </li>
+    <li>
+      <p><strong>Maximizing MI between Shared Representations:</strong> We want the shared representations from different modalities to align:</p>
 
-                      \[\max \mathcal{I}(S_1; S_2)\]
-                    </li>
-                  </ul>
+\[\max \mathcal{I}(S_1; S_2)\]
+    </li>
+  </ul>
 
-                  <p>We implement these constraints using neural mutual information estimators (like MINE) or
-                    contrastive losses (InfoNCE) on the intermediate feature maps.</p>
+  <p>We implement these constraints using neural mutual information estimators (like MINE) or contrastive losses (InfoNCE) on the intermediate feature maps.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="cross-attention-fusion">3. Cross-Attention Fusion</h2>
+  <h2 id="cross-attention-fusion">3. Cross-Attention Fusion</h2>
 
-                  <p>Once factorized, the features are fused using a multi-head <strong>cross-attention</strong>
-                    mechanism:</p>
+  <p>Once factorized, the features are fused using a multi-head <strong>cross-attention</strong> mechanism:</p>
 
-                  <div class="language-plaintext highlighter-rouge">
-                    <div class="highlight">
-                      <pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
-</pre>
-                      </td>
-                      <td class="rouge-code">
-                        <pre>[Shared Features S] -------\
+</pre></td><td class="rouge-code"><pre>[Shared Features S] -------\
                             +---&gt; [Cross-Attention Fusion] ---&gt; [Segmentation Decoder]
 [Unique Features U_i] -----/
-</pre>
-                      </td>
-                      </tr>
-                      </tbody>
-                      </table></code></pre>
-                    </div>
-                  </div>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
 
-                  <p>This ensures the network dynamically attends to unique features only when the shared features are
-                    insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera
-                    conditions where thermal unique features take precedence).</p>
+  <p>This ensures the network dynamically attends to unique features only when the shared features are insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera conditions where thermal unique features take precedence).</p>
 
-                  <hr />
+  <hr />
 
-                  <h3 id="experimental-results">Experimental Results</h3>
+  <h3 id="experimental-results">Experimental Results</h3>
 
-                  <p>On standard multimodal benchmarks, SAMIF achieved:</p>
-                  <ul>
-                    <li><strong>2-3% improvement</strong> in mean Intersection over Union (mIoU).</li>
-                    <li>Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to
-                      vanilla fusion baselines).</li>
-                    <li>Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.
-                    </li>
-                  </ul>
-                </div>
-
-              </div>
-
-              <!-- Rating -->
-
-              <div class="rating mb-4 d-flex align-items-center">
-                <strong class="mr-1">Rating:</strong>
-                <div class="rating-holder">
-                  <div class="c-rating c-rating--regular" data-rating-value="4.8">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                  </div>
-                </div>
-              </div>
-
-
-              <!-- Post Date -->
-              <p>
-                <small>
-                  <span class="post-date"><time class="post-date" datetime="2025-11-15">15 Nov 2025</time></span>
-
-                </small>
-              </p>
-
-              <!-- Post Categories -->
-              <div class="after-post-cats">
-                <ul class="tags mb-4">
-
-
-                  <li>
-                    <a class="smoothscroll" href="/categories#Machine-Learning">Machine-Learning</a>
-                  </li>
-
-                </ul>
-              </div>
-              <!-- End Categories -->
-
-              <!-- Post Tags -->
-              <div class="after-post-tags">
-                <ul class="tags">
-
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Cross-Attention">#Cross-Attention</a>
-                  </li>
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Multimodal">#Multimodal</a>
-                  </li>
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Semantic-Segmentation">#Semantic-Segmentation</a>
-                  </li>
-
-                </ul>
-              </div>
-              <!-- End Tags -->
-
-              <!-- Prev/Next -->
-              <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
-                <div class="col-6 text-left">
-
-                  <a class="prev text-dark text-decoration-none" href="/posts/edge-deployment/">
-                    <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo;
-                      Previous</small>
-                    <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Deploying Pose
-                      Estimation and Keypoint Regression Models to Edge NPUs</span>
-                  </a>
-
-                </div>
-                <div class="col-6 text-right">
-
-                  <a class="next text-dark text-decoration-none" href="/posts/grpo/">
-                    <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next
-                      &raquo;</small>
-                    <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Modality-Aware
-                      Policy Optimization (GRPO) in Multimodal LLMs</span>
-                  </a>
-
-                </div>
-              </div>
+  <p>On standard multimodal benchmarks, SAMIF achieved:</p>
+  <ul>
+    <li><strong>2-3% improvement</strong> in mean Intersection over Union (mIoU).</li>
+    <li>Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to vanilla fusion baselines).</li>
+    <li>Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.</li>
+  </ul>
+</div>
 
             </div>
-            <!-- End Post -->
 
-          </div>
+            <!-- Rating -->
+            
+            <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="4.8">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+            </div>
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2025-11-15">15 Nov 2025</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Machine-Learning">Machine-Learning</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Cross-Attention">#Cross-Attention</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Multimodal">#Multimodal</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Semantic-Segmentation">#Semantic-Segmentation</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+                <div class="col-6 text-left">
+                    
+                    <a class="prev text-dark text-decoration-none" href="/posts/edge-deployment/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo; Previous</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs</span>
+                    </a>
+                    
+                </div>
+                <div class="col-6 text-right">
+                    
+                    <a class="next text-dark text-decoration-none" href="/posts/grpo/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</span>
+                    </a>
+                    
+                </div>
+            </div>
+
         </div>
-        <!-- End Article
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
 ================================================== -->
 
-        <!-- Begin Comments
+<!-- Begin Comments
 ================================================== -->
 
-        <div class="container">
-          <div id="comments" class="row justify-content-center mb-5">
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
             <div class="col-md-8">
-              <!-- <section class="disqus">
+                <!-- <section class="disqus">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = ''; 
@@ -573,21 +517,27 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </section> -->
-              <script src="https://utteranc.es/client.js" repo="KyungMinJin/KyungMinJin.github.io" issue-term="og:title"
-                theme="github-light" crossorigin="anonymous" async></script>
+<script
+  src="https://utteranc.es/client.js"
+  repo="KyungMinJin/KyungMinJin.github.io"
+  issue-term="og:title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
 
             </div>
-          </div>
         </div>
+    </div>
 
-        <!--End Comments
+<!--End Comments
 ================================================== -->
 
-        <!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
 https://search.google.com/structured-data/testing-tool/u/0/
 ================================================== -->
 
-        <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Review",
@@ -607,12 +557,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
   }
 }
 </script>
-      </div>
+</div>
 
-
-      <!-- Bottom Alert Bar
+        
+        <!-- Bottom Alert Bar
 ================================================== -->
-      <!-- <div class="alertbar">
+        <!-- <div class="alertbar">
           <div class="container text-center">
             <span
               ><img
@@ -650,12 +600,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
             </form>
           </div>
         </div> -->
+        
+      </div>
 
-    </div>
-
-    <!-- Categories Jumbotron
+      <!-- Categories Jumbotron
 ================================================== -->
-    <!-- <div class="jumbotron fortags">
+      <!-- <div class="jumbotron fortags">
         <div class="d-md-flex h-100">
           <div class="col-md-4 transpdark align-self-center text-center h-100">
             <div
@@ -696,65 +646,74 @@ https://search.google.com/structured-data/testing-tool/u/0/
         </div>
       </div> -->
 
-    <!-- Begin Footer
+      <!-- Begin Footer
 ================================================== -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 text-center text-lg-left">
-            Copyright © 2026 Kyung-Min Jin
-          </div>
-          <div class="col-md-6 col-sm-6 text-center text-lg-right">
-            <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/"></a>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+              Copyright © 2026 Kyung-Min Jin
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+              <a
+                target="_blank"
+                href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
+              ></a>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
-    <!-- End Footer
+      </footer>
+      <!-- End Footer
 ================================================== -->
-  </div>
-  <!-- /.site-content -->
+    </div>
+    <!-- /.site-content -->
 
-  <!-- Scripts
+    <!-- Scripts
 ================================================== -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="/assets/js/mediumish.js"></script>
+    <script src="/assets/js/mediumish.js"></script>
 
+    
 
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-  <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script
+      id="dsq-count-scr"
+      src="//.disqus.com/count.js"
+    ></script>
+    
 
-
-  <script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
-
-
-  <script>
-    function changeLanguage(lang) {
-      document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
-      document.documentElement.classList.add('lang-mode-' + lang);
-      localStorage.setItem('pref-lang', lang);
-      var labels = document.querySelectorAll('#currentLangLabel');
-      labels.forEach(function (label) {
-        label.textContent = lang === 'ko' ? '한국어' : 'English';
-      });
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-      var savedLang = localStorage.getItem('pref-lang');
-      if (!savedLang) {
-        var userLang = navigator.language || navigator.userLanguage;
-        savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+    <script>
+      function changeLanguage(lang) {
+        document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
+        document.documentElement.classList.add('lang-mode-' + lang);
+        localStorage.setItem('pref-lang', lang);
+        var labels = document.querySelectorAll('#currentLangLabel');
+        labels.forEach(function(label) {
+          label.textContent = lang === 'ko' ? '한국어' : 'English';
+        });
       }
-      changeLanguage(savedLang);
-    });
-  </script>
-</body>
-
+      document.addEventListener("DOMContentLoaded", function() {
+        var savedLang = localStorage.getItem('pref-lang');
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+        }
+        changeLanguage(savedLang);
+      });
+    </script>
+  </body>
 </html>

@@ -5,8 +5,8 @@
     <description>Hi, I&apos;m Kyung-Min Jin. See &lt;a href=&apos;/about&apos;&gt;about page (CV)&lt;/a&gt;!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Jun 2026 02:58:11 -0500</pubDate>
-    <lastBuildDate>Fri, 05 Jun 2026 02:58:11 -0500</lastBuildDate>
+    <pubDate>Fri, 05 Jun 2026 03:28:47 -0500</pubDate>
+    <lastBuildDate>Fri, 05 Jun 2026 03:28:47 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -755,7 +755,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
 
   &lt;hr /&gt;
 
-  &lt;h2 id=&quot;cross-attention---&quot;&gt;3. 교차 어텐션(Cross-Attention) 기반 feature 융합&lt;/h2&gt;
+  &lt;h2 id=&quot;cross-attention--feature-&quot;&gt;3. 교차 어텐션(Cross-Attention) 기반 feature 융합&lt;/h2&gt;
 
   &lt;p&gt;분리된 feature들은 멀티헤드 &lt;strong&gt;교차 어텐션(cross-attention)&lt;/strong&gt; 매커니즘을 통해 최종 융합됩니다:&lt;/p&gt;
 
@@ -1115,7 +1115,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
       <item>
         <title>[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation</title>
         <description>&lt;div class=&quot;lang-ko&quot;&gt;
-  &lt;h1 id=&quot;wacv-2023-oral---------&quot;&gt;[WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크&lt;/h1&gt;
+  &lt;h1 id=&quot;wacv-2023-oral-----kinematic-aware---&quot;&gt;[WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크&lt;/h1&gt;
 
   &lt;p&gt;비디오 기반 3차원 인체 포즈 추정에서, 프레임 간 &lt;strong&gt;시간적 및 Kinematic 일관성(temporal and kinematic consistency)&lt;/strong&gt;을 유지하는 것은 매우 까다로운 과제입니다. 기존의 프레임별 포즈 추정기들은 물리적인 골격 관절 구조나 해부학적 한계를 명시적으로 모델링하지 않기 때문에, 예측값의 미세한 흔들림(jittering), 관절 뒤바뀜 오류(joint swap errors), 급격한 움직임이나 가려짐(occlusion) 상태에서의 추정 실패 등을 빈번히 겪게 됩니다.&lt;/p&gt;
 
@@ -1140,7 +1140,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
 
   &lt;hr /&gt;
 
-  &lt;h2 id=&quot;section&quot;&gt;2. Kinematic feature 기반 동적 시공간 어텐션&lt;/h2&gt;
+  &lt;h2 id=&quot;kinematic-feature----&quot;&gt;2. Kinematic feature 기반 동적 시공간 어텐션&lt;/h2&gt;
 
   &lt;p&gt;트랜스포머 모델의 표준 셀프 어텐션 매커니즘은 인체 골격 구조를 고려하지 않고 모든 키포인트를 동등하게 취급합니다. 반면, HANet은 &lt;strong&gt;Kinematic 관절 구조(kinematic joints)&lt;/strong&gt;에 따라 어텐션을 계층적으로 세분화하여 연산합니다.&lt;/p&gt;
 
@@ -1149,7 +1149,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     &lt;li&gt;&lt;strong&gt;전역 어텐션 (Global Attention):&lt;/strong&gt; 양손의 협동 동작과 같이 거리가 먼 관절 간의 장기 의존성(long-range dependencies)을 포착합니다.&lt;/li&gt;
   &lt;/ul&gt;
 
-  &lt;h3 id=&quot;kinematic-feature-formulation&quot;&gt;Kinematic feature 공식화 (Kinematic Feature Formulation)&lt;/h3&gt;
+  &lt;h3 id=&quot;kinematic-feature--kinematic-feature-formulation&quot;&gt;Kinematic feature 공식화 (Kinematic Feature Formulation)&lt;/h3&gt;
   &lt;p&gt;물리적 운동 법칙을 신경망에 주입하기 위해, 시계열 좌표 정보를 바탕으로 키포인트의 동적 운동 feature을 계산합니다. $t$ 프레임에서 특정 관절의 $d$차원 좌표(2D 또는 3D)를 $p_t \in \mathbb{R}^d$라 정의할 때, 다음과 같이 속도와 가속도를 유도합니다:&lt;/p&gt;
 
   &lt;ul&gt;
@@ -1165,7 +1165,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
 
   &lt;p&gt;이러한 Kinematic feature들은 최초의 관절 임베딩과 결합(concatenation)되어, 급격한 움직임이나 심한 가려짐 상황에서도 물리적인 궤적을 외삽(extrapolate)함으로써 부드럽고 안정적인 추정을 가능하게 만듭니다.&lt;/p&gt;
 
-  &lt;h3 id=&quot;section-1&quot;&gt;계층적 어텐션 스케일링&lt;/h3&gt;
+  &lt;h3 id=&quot;section&quot;&gt;계층적 어텐션 스케일링&lt;/h3&gt;
   &lt;p&gt;쿼리 $Q$, 키 $K$, 밸류 $V$가 주어졌을 때, 어텐션 맵은 아래 공식으로 계산됩니다:
 \(\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V\)&lt;/p&gt;
 
@@ -1221,7 +1221,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
 
 \[\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{pose}} + \lambda_{\text{mutual}} \mathcal{L}_{\text{mutual}}(\pi_{\theta_{\text{in}}}, \pi_{\theta_{\text{out}}})\]
 
-  &lt;h3 id=&quot;section-2&quot;&gt;정량적 성능 비교&lt;/h3&gt;
+  &lt;h3 id=&quot;section-1&quot;&gt;정량적 성능 비교&lt;/h3&gt;
 
   &lt;p&gt;제안하는 방법론은 주요 벤치마크 데이터셋에서 최고 성능(SOTA)을 달성했습니다:&lt;/p&gt;
 
@@ -1269,7 +1269,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
 
   &lt;hr /&gt;
 
-  &lt;h3 id=&quot;section-3&quot;&gt;주요 링크 및 자료&lt;/h3&gt;
+  &lt;h3 id=&quot;section-2&quot;&gt;주요 링크 및 자료&lt;/h3&gt;
   &lt;ul&gt;
     &lt;li&gt;&lt;strong&gt;논문:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html&quot;&gt;CVF Open Access Paper&lt;/a&gt;&lt;/li&gt;
     &lt;li&gt;&lt;strong&gt;코드:&lt;/strong&gt; &lt;a href=&quot;https://github.com/KyungMinJin/HANet&quot;&gt;GitHub Repository (KyungMinJin/HANet)&lt;/a&gt;&lt;/li&gt;
@@ -1311,7 +1311,7 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     &lt;li&gt;&lt;strong&gt;Global Attention:&lt;/strong&gt; Captures long-range dependencies (e.g., left hand to right hand coordinating during an action).&lt;/li&gt;
   &lt;/ul&gt;
 
-  &lt;h3 id=&quot;kinematic-feature-formulation-1&quot;&gt;Kinematic Feature Formulation&lt;/h3&gt;
+  &lt;h3 id=&quot;kinematic-feature-formulation&quot;&gt;Kinematic Feature Formulation&lt;/h3&gt;
   &lt;p&gt;To enforce the physical laws of motion, we compute keypoint motion features based on sequential coordinates. Let $p_t \in \mathbb{R}^d$ be the $d$-dimensional coordinate (2D or 3D) of a body joint at frame $t$. We define the kinematic features as follows:&lt;/p&gt;
 
   &lt;ul&gt;

@@ -1,560 +1,502 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script>
+      (function () {
+        var savedLang = localStorage.getItem("pref-lang");
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith("ko") ? "ko" : "en";
+        }
+        document.documentElement.className += " lang-mode-" + savedLang;
+      })();
+    </script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <script>
-    (function () {
-      var savedLang = localStorage.getItem("pref-lang");
-      if (!savedLang) {
-        var userLang = navigator.language || navigator.userLanguage;
-        savedLang = userLang.startsWith("ko") ? "ko" : "en";
-      }
-      document.documentElement.className += " lang-mode-" + savedLang;
-    })();
-  </script>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="icon" href="/assets/images/logo.png" />
 
-  <link rel="icon" href="/assets/images/logo.png" />
+    <title>Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs | Kyung-Min Jin</title>
 
-  <title>Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs | Kyung-Min Jin</title>
-
-  <!-- Begin Jekyll SEO tag v2.8.0 -->
-  <title>Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs | Kyung-Min Jin</title>
-  <meta name="generator" content="Jekyll v4.2.2" />
-  <meta property="og:title" content="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" />
-  <meta name="author" content="Kyung-Min Jin" />
-  <meta property="og:locale" content="en_US" />
-  <meta name="description"
-    content="Analyzing the math and efficiency gains of Group Relative Policy Optimization (GRPO) with modality-aware weighting for aligning vision-language models." />
-  <meta property="og:description"
-    content="Analyzing the math and efficiency gains of Group Relative Policy Optimization (GRPO) with modality-aware weighting for aligning vision-language models." />
-  <meta property="og:site_name" content="Kyung-Min Jin" />
-  <meta property="og:image" content="/assets/images/grpo_vlm_alignment.png" />
-  <meta property="og:type" content="article" />
-  <meta property="article:published_time" content="2026-02-18T00:00:00-06:00" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta property="twitter:image" content="/assets/images/grpo_vlm_alignment.png" />
-  <meta property="twitter:title" content="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" />
-  <script type="application/ld+json">
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs | Kyung-Min Jin</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" />
+<meta name="author" content="Kyung-Min Jin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Analyzing the math and efficiency gains of Group Relative Policy Optimization (GRPO) with modality-aware weighting for aligning vision-language models." />
+<meta property="og:description" content="Analyzing the math and efficiency gains of Group Relative Policy Optimization (GRPO) with modality-aware weighting for aligning vision-language models." />
+<meta property="og:site_name" content="Kyung-Min Jin" />
+<meta property="og:image" content="/assets/images/grpo_vlm_alignment.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-02-18T00:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/grpo_vlm_alignment.png" />
+<meta property="twitter:title" content="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" />
+<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyung-Min Jin"},"dateModified":"2026-02-18T00:00:00-06:00","datePublished":"2026-02-18T00:00:00-06:00","description":"Analyzing the math and efficiency gains of Group Relative Policy Optimization (GRPO) with modality-aware weighting for aligning vision-language models.","headline":"Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs","image":"/assets/images/grpo_vlm_alignment.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/grpo/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"Kyung-Min Jin"},"url":"/posts/grpo/"}</script>
-  <!-- End Jekyll SEO tag -->
+<!-- End Jekyll SEO tag -->
 
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
 
-  <link href="/assets/css/screen.css" rel="stylesheet" />
+    <link href="/assets/css/screen.css" rel="stylesheet" />
 
-  <link href="/assets/css/main.css" rel="stylesheet" />
+    <link href="/assets/css/main.css" rel="stylesheet" />
 
-  <script src="/assets/js/jquery.min.js"></script>
-  <!-- MathJax for LaTeX Rendering -->
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
-      }
-    };
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-</head>
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  </head>
 
+   
+  <body class="layout-post">
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+      <link
+        href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="/font-awesome-4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+      />
+    </noscript>
 
-<body class="layout-post">
-  <!-- defer loading of font and font awesome -->
-  <noscript id="deferred-styles">
-    <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
-  </noscript>
-
-  <!-- Begin Menu Navigation
+    <!-- Begin Menu Navigation
 ================================================== -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
-    <div class="container pr-0">
-      <!-- Begin Logo -->
-      <a class="navbar-brand text-dark font-weight-bold" href="/">
-        Kyung-Min Jin
-      </a>
-      <!-- End Logo -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down"
+    >
+      <div class="container pr-0">
+        <!-- Begin Logo -->
+        <a class="navbar-brand text-dark font-weight-bold" href="/">
+          Kyung-Min Jin
+        </a>
+        <!-- End Logo -->
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMediumish"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-      <div class="collapse navbar-collapse" id="navbarMediumish">
-        <!-- Begin Menu -->
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+          <!-- Begin Menu -->
 
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item ">
-            <a class="nav-link" href="/">Home</a>
-          </li>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/about">About (CV)</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/about">About (CV)</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/publications">Publications</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/publications">Publications</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/projects">Projects</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects">Projects</a>
+            </li>
 
-          <li class="nav-item ">
-            <a class="nav-link" href="/contact">Contact</a>
-          </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
 
-          <li class="nav-item">
-            <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
-          </li>
+            <li class="nav-item">
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
-              <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown"
-              style="border-radius: 8px;">
-              <a class="dropdown-item font-weight-bold" href="#"
-                onclick="changeLanguage('en'); return false;">English</a>
-              <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
-            </div>
-          </li>
-
-          <script src="/assets/js/lunr.js"></script>
-
-
-          <style>
-            .lunrsearchresult .title {
-              color: #d9230f;
-            }
-
-            .lunrsearchresult .url {
-              color: silver;
-            }
-
-            .lunrsearchresult a {
-              display: block;
-              color: #777;
-            }
-
-            .lunrsearchresult a:hover,
-            .lunrsearchresult a:focus {
-              text-decoration: none;
-            }
-
-            .lunrsearchresult a:hover .title {
-              text-decoration: underline;
-            }
-          </style>
-
-
-          <form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-            <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q"
-              maxlength="255" value="" placeholder="Type and enter..." />
-          </form>
-
-          <div id="lunrsearchresults">
-            <ul></ul>
-          </div>
-
-          <script src="/assets/js/lunrsearchengine.js"></script>
-        </ul>
-
-        <!-- End Menu -->
-      </div>
-    </div>
-  </nav>
-  <!-- End Navigation
-================================================== -->
-
-  <div class="site-content">
-    <div class="container">
-      <!-- Site Title
-================================================== -->
-
-
-      <!-- Content
-================================================== -->
-      <div class="main-content"><!-- Begin Article
-================================================== -->
-        <div class="container">
-          <div class="row justify-content-center position-relative">
-
-            <!-- Post Share (Floating on Left) -->
-            <div class="post-share-sidebar">
-              <div class="share sticky-top sticky-top-offset">
-                <p>Share</p>
-                <ul>
-                  <li class="ml-1 mr-1">
-                    <a target="_blank"
-                      href="https://twitter.com/intent/tweet?text=Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs&url=/posts/grpo/"
-                      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
-                      <i class="fa fa-twitter"></i>
-                    </a>
-                  </li>
-
-                  <li class="ml-1 mr-1">
-                    <a target="_blank" href="https://facebook.com/sharer.php?u=/posts/grpo/"
-                      onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
-                      <i class="fa fa-facebook-f"></i>
-                    </a>
-                  </li>
-
-                  <li class="ml-1 mr-1">
-                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/grpo/"
-                      onclick="window.open(this.href, 'width=550,height=435');return false;">
-                      <i class="fa fa-linkedin-square"></i>
-                    </a>
-                  </li>
-                </ul>
-
-                <div class="sep"></div>
-                <ul>
-                  <li>
-                    <a class="small smoothscroll" href="#disqus_thread"></a>
-                  </li>
-                </ul>
-
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown" style="border-radius: 8px;">
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
               </div>
+            </li>
 
-            </div>
-
-            <!-- Post -->
+            <script src="/assets/js/lunr.js"></script>
 
 
-            <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
-              <div class="mainheading">
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+          </ul>
+
+          <!-- End Menu -->
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+      <div class="container">
+
+        <!-- Content
+================================================== -->
+        <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row justify-content-center position-relative">
+
+        <!-- Post Share (Floating on Left) -->
+        <div class="post-share-sidebar">
+            <div class="share sticky-top sticky-top-offset">
+  <p>Share</p>
+  <ul>
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs&url=/posts/grpo/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
+      >
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://facebook.com/sharer.php?u=/posts/grpo/"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-facebook-f"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/grpo/"
+        onclick="window.open(this.href, 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </li>
+  </ul>
+  
+  <div class="sep"></div>
+  <ul>
+    <li>
+      <a class="small smoothscroll" href="#disqus_thread"></a>
+    </li>
+  </ul>
+  
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
+            <div class="mainheading">
 
                 <!-- Author Box -->
-
+                
                 <div class="row post-top-meta">
-                  <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-
-                    <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
-
-                  </div>
-                  <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                    <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a
-                      target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/"
-                      class="btn follow">Follow</a>
-                    <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea
-                      University, Seoul. Check About Page for more information!</span>
-                  </div>
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn follow">Follow</a>
+                        <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea University, Seoul. Check About Page for more information!</span>
+                    </div>
                 </div>
-
+                
 
                 <!-- Post Title -->
                 <h1 class="posttitle">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</h1>
 
-              </div>
+            </div>
 
-              <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
 
-              <!-- End Adsense -->
+            <!-- Post Featured Image -->
+            
 
-              <!-- Post Featured Image -->
+            
+            <img class="featured-image img-fluid" src="/assets/images/grpo_vlm_alignment.png" alt="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs">
+            
 
+            
+            <!-- End Featured Image -->
 
-
-              <img class="featured-image img-fluid" src="/assets/images/grpo_vlm_alignment.png"
-                alt="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs">
-
-
-
-              <!-- End Featured Image -->
-
-              <!-- Post Content -->
-              <div class="article-post">
+            <!-- Post Content -->
+            <div class="article-post">
                 <!-- Toc if any -->
-
+                
                 <!-- End Toc -->
                 <div class="lang-ko">
-                  <h1 id="llm-----grpo">멀티모달 LLM에서의 모달리티 인지 정책 최적화 (GRPO)</h1>
+  <h1 id="llm-----grpo">멀티모달 LLM에서의 모달리티 인지 정책 최적화 (GRPO)</h1>
 
-                  <p>강화학습을 통한 멀티모달 모델(VLM) 정렬(Alignment) 연구는 전통적으로 PPO(Proximal Policy Optimization) 알고리즘에 의존해 왔습니다. 하지만
-                    PPO는 액터(Actor) 모델과 크기가 거의 동일한 <strong>크리틱(Critic, Value) 네트워크</strong>를 동시에 유지해야 합니다. 이는 대형 모델 학습 시
-                    그래픽 메모리 제한으로 인해 배치 사이즈(batch size)를 크게 제약하는 병목 현상을 초래합니다.</p>
+  <p>강화학습을 통한 멀티모달 모델(VLM) 정렬(Alignment) 연구는 전통적으로 PPO(Proximal Policy Optimization) 알고리즘에 의존해 왔습니다. 하지만 PPO는 액터(Actor) 모델과 크기가 거의 동일한 <strong>크리틱(Critic, Value) 네트워크</strong>를 동시에 유지해야 합니다. 이는 대형 모델 학습 시 그래픽 메모리 제한으로 인해 배치 사이즈(batch size)를 크게 제약하는 병목 현상을 초래합니다.</p>
 
-                  <p>DeepSeek에 의해 제안되고 최신 추론 모델 정렬에 널리 활용되고 있는 <strong>GRPO(Group Relative Policy
-                      Optimization)</strong>는 그룹 상대적 보상(group-relative rewards)을 활용함으로써 크리틱 네트워크를 완전히 제거합니다. 본 포스트에서는
-                    GRPO의 수학적 공식화, 멀티모달 환경에서의 모달리티 인지 동적 가중치 기법, 그리고 학습 효율성을 분석합니다.</p>
+  <p>DeepSeek에 의해 제안되고 최신 추론 모델 정렬에 널리 활용되고 있는 <strong>GRPO(Group Relative Policy Optimization)</strong>는 그룹 상대적 보상(group-relative rewards)을 활용함으로써 크리틱 네트워크를 완전히 제거합니다. 본 포스트에서는 GRPO의 수학적 공식화, 멀티모달 환경에서의 모달리티 인지 동적 가중치 기법, 그리고 학습 효율성을 분석합니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="advantage-">1. 크리틱 네트워크 없이 Advantage 계산하기</h2>
+  <h2 id="advantage-">1. 크리틱 네트워크 없이 Advantage 계산하기</h2>
 
-                  <p>GRPO는 상태 가치 $V(s)$를 예측하는 크리틱 네트워크를 학습시키는 대신, 단일 질문(Prompt) $q$에 대해 현재 정책 모델로부터 $N$개의 대답 ${o_1, o_2,
-                    \dots, o_N}$을 무작위 샘플링합니다.</p>
+  <p>GRPO는 상태 가치 $V(s)$를 예측하는 크리틱 네트워크를 학습시키는 대신, 단일 질문(Prompt) $q$에 대해 현재 정책 모델로부터 $N$개의 대답 ${o_1, o_2, \dots, o_N}$을 무작위 샘플링합니다.</p>
 
-                  <p>이후 샘플링된 그룹 내 보상값들의 평균과 표준편차를 기준으로 개별 대답 $o_i$의 상대적 우위(Advantage) $A_i$를 도출합니다:</p>
+  <p>이후 샘플링된 그룹 내 보상값들의 평균과 표준편차를 기준으로 개별 대답 $o_i$의 상대적 우위(Advantage) $A_i$를 도출합니다:</p>
 
-                  \[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
+\[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
 
-                  <p>여기서 $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$ 입니다. 이렇게 계산된 상대적 Advantage는 PPO의 목적 함수(objective
-                    function) 내의 절대 가치 베이스라인을 직접 대체하게 됩니다:</p>
+  <p>여기서 $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$ 입니다. 이렇게 계산된 상대적 Advantage는 PPO의 목적 함수(objective function) 내의 절대 가치 베이스라인을 직접 대체하게 됩니다:</p>
 
-                  \[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left(
-                  \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i,
-                  \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon,
-                  1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
+\[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
 
-                  <p>이 방식은 크리틱 모델을 완전히 제거하여 학습을 대폭 단순화하고, GPU 메모리 요구량을 약 <strong>30-40%</strong> 감소시켜 동일 하드웨어 대비 배치 크기를
-                    크게 늘릴 수 있습니다.</p>
+  <p>이 방식은 크리틱 모델을 완전히 제거하여 학습을 대폭 단순화하고, GPU 메모리 요구량을 약 <strong>30-40%</strong> 감소시켜 동일 하드웨어 대비 배치 크기를 크게 늘릴 수 있습니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="modality-aware-online-weighting">2. 모달리티 인지 동적 가중치 (Modality-Aware Online Weighting)</h2>
+  <h2 id="modality-aware-online-weighting">2. 모달리티 인지 동적 가중치 (Modality-Aware Online Weighting)</h2>
 
-                  <p>텍스트, 이미지, 오디오 등이 결합된 멀티모달 환경에서 모델은 텍스트 추론은 뛰어나지만 시각적 세부 사항 인식에는 약한 모습을 보이는 등 모달리티별로 불균성한 학습 결과를 낼 수
-                    있습니다. 특정 모달리티에만 지나치게 최적화되는 경우 다른 모달리티 성능이 오히려 하락할 우려가 있습니다.</p>
+  <p>텍스트, 이미지, 오디오 등이 결합된 멀티모달 환경에서 모델은 텍스트 추론은 뛰어나지만 시각적 세부 사항 인식에는 약한 모습을 보이는 등 모달리티별로 불균성한 학습 결과를 낼 수 있습니다. 특정 모달리티에만 지나치게 최적화되는 경우 다른 모달리티 성능이 오히려 하락할 우려가 있습니다.</p>
 
-                  <p>이를 방지하기 위해 <strong>모달리티 인지 동적 가중치(modality-aware online weighting)</strong> 기법을 도입합니다. 최종 보상 함수를
-                    모달리티별 구성 요소로 분해합니다:</p>
+  <p>이를 방지하기 위해 <strong>모달리티 인지 동적 가중치(modality-aware online weighting)</strong> 기법을 도입합니다. 최종 보상 함수를 모달리티별 구성 요소로 분해합니다:</p>
 
-                  \[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} +
-                  w_{\text{audio}} R_{\text{audio}}\]
+\[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} + w_{\text{audio}} R_{\text{audio}}\]
 
-                  <p>학습 루프 중 각 모달리티의 이동 평균 보상 실적에 따라 가중치 $w_m$을 동적으로 업데이트하여, 특정 도메인에 편향된 오버피팅을 방지합니다. 가중치 갱신 공식은 다음과
-                    같습니다:</p>
+  <p>학습 루프 중 각 모달리티의 이동 평균 보상 실적에 따라 가중치 $w_m$을 동적으로 업데이트하여, 특정 도메인에 편향된 오버피팅을 방지합니다. 가중치 갱신 공식은 다음과 같습니다:</p>
 
-                  \[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} -
-                  \mu_m\right)\]
+\[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} - \mu_m\right)\]
 
-                  <p>여기서 $\alpha$는 모멘텀 하이퍼파라미터이며, $\mu_m$은 모달리티 $m$의 베이스라인 평균 성능 수준입니다.</p>
+  <p>여기서 $\alpha$는 모멘텀 하이퍼파라미터이며, $\mu_m$은 모달리티 $m$의 베이스라인 평균 성능 수준입니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="hallucination-">3. 고속 추론 및 할루시네이션(Hallucination) 억제</h2>
+  <h2 id="hallucination-">3. 고속 추론 및 할루시네이션(Hallucination) 억제</h2>
 
-                  <p>강화학습을 통한 정렬 과정에서 자주 관측되는 부작용 중 하나는 <strong>생각 과정(Chain-of-Thought, CoT)에서의
-                      환각(Hallucination)</strong> 현상입니다. 단계적 추론을 하도록 유도했을 때, 입력 이미지에 없는 시각적 feature들을 임의로 지어내는 현상이 나타납니다.
-                  </p>
+  <p>강화학습을 통한 정렬 과정에서 자주 관측되는 부작용 중 하나는 <strong>생각 과정(Chain-of-Thought, CoT)에서의 환각(Hallucination)</strong> 현상입니다. 단계적 추론을 하도록 유도했을 때, 입력 이미지에 없는 시각적 feature들을 임의로 지어내는 현상이 나타납니다.</p>
 
-                  <p>이 문제를 방지하기 위해 추론 경로상에서 환각 오류를 검출하는 보조 분류기(auxiliary classifier)를 활용하며, 이를 GRPO 보상 루프에 패널티 요인으로 차감
-                    반영합니다:</p>
+  <p>이 문제를 방지하기 위해 추론 경로상에서 환각 오류를 검출하는 보조 분류기(auxiliary classifier)를 활용하며, 이를 GRPO 보상 루프에 패널티 요인으로 차감 반영합니다:</p>
 
-                  \[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
+\[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
 
-                  <p>이러한 패널티 모델 적용을 통해 비합리적인 논리 전개를 차단함으로써 사실적 정확도(factual accuracy)를 최대 <strong>20.7%</strong> 향상시킬 수
-                    있었습니다.</p>
+  <p>이러한 패널티 모델 적용을 통해 비합리적인 논리 전개를 차단함으로써 사실적 정확도(factual accuracy)를 최대 <strong>20.7%</strong> 향상시킬 수 있었습니다.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="section">4. 구현 가이드라인</h2>
+  <h2 id="section">4. 구현 가이드라인</h2>
 
-                  <p><strong>veRL</strong>이나 <strong>TRL</strong> 등의 강화학습 프레임워크 상에 GRPO VLM 정렬 알고리즘을 구축할 때의 유의사항입니다:</p>
-                  <ul>
-                    <li><strong>그룹 크기 ($N$):</strong> 통상적으로 그룹 크기 $N$은 $4 \sim 8$ 사이를 유지합니다. $4$보다 작으면 Advantage 추정 오차가
-                      지나치게 커지며, $8$보다 크면 매 스텝 샘플링 비용이 지나치게 증가합니다.</li>
-                    <li><strong>보상 설계 (Reward Mixing):</strong> 바운딩 박스 내의 좌표 비교 등 규칙 기반(Rule-based) 보상과 시각적 일관성을 측정하는 모델
-                      기반(Model-based) 보상을 함께 믹스하여 사용하는 것이 좋습니다.</li>
-                  </ul>
-                </div>
+  <p><strong>veRL</strong>이나 <strong>TRL</strong> 등의 강화학습 프레임워크 상에 GRPO VLM 정렬 알고리즘을 구축할 때의 유의사항입니다:</p>
+  <ul>
+    <li><strong>그룹 크기 ($N$):</strong> 통상적으로 그룹 크기 $N$은 $4 \sim 8$ 사이를 유지합니다. $4$보다 작으면 Advantage 추정 오차가 지나치게 커지며, $8$보다 크면 매 스텝 샘플링 비용이 지나치게 증가합니다.</li>
+    <li><strong>보상 설계 (Reward Mixing):</strong> 바운딩 박스 내의 좌표 비교 등 규칙 기반(Rule-based) 보상과 시각적 일관성을 측정하는 모델 기반(Model-based) 보상을 함께 믹스하여 사용하는 것이 좋습니다.</li>
+  </ul>
+</div>
 
-                <div class="lang-en">
-                  <h1 id="modality-aware-policy-optimization-grpo-in-multimodal-llms">Modality-Aware Policy Optimization
-                    (GRPO) in Multimodal LLMs</h1>
+<div class="lang-en">
+  <h1 id="modality-aware-policy-optimization-grpo-in-multimodal-llms">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</h1>
 
-                  <p>Aligning Vision-Language Models (VLMs) using Reinforcement Learning has traditionally relied on PPO
-                    (Proximal Policy Optimization). However, PPO requires a secondary <strong>critic (value)
-                      network</strong> that is often as large as the actor network itself. This severely constrains the
-                    batch size and increases GPU memory requirements during training.</p>
+  <p>Aligning Vision-Language Models (VLMs) using Reinforcement Learning has traditionally relied on PPO (Proximal Policy Optimization). However, PPO requires a secondary <strong>critic (value) network</strong> that is often as large as the actor network itself. This severely constrains the batch size and increases GPU memory requirements during training.</p>
 
-                  <p><strong>Group Relative Policy Optimization (GRPO)</strong>, introduced by DeepSeek and popular in
-                    modern reasoning models, eliminates the critic network by using group-relative rewards. In this
-                    post, we explore its mathematical formulation, modality-aware online weighting, and deployment
-                    benefits for VLM alignment.</p>
+  <p><strong>Group Relative Policy Optimization (GRPO)</strong>, introduced by DeepSeek and popular in modern reasoning models, eliminates the critic network by using group-relative rewards. In this post, we explore its mathematical formulation, modality-aware online weighting, and deployment benefits for VLM alignment.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="how-grpo-eliminates-the-critic-network">1. How GRPO Eliminates the Critic Network</h2>
+  <h2 id="how-grpo-eliminates-the-critic-network">1. How GRPO Eliminates the Critic Network</h2>
 
-                  <p>Instead of training a critic network to estimate the baseline value $V(s)$, GRPO samples a group of
-                    $N$ outputs ${o_1, o_2, \dots, o_N}$ for a single input prompt $q$ using the reference policy.</p>
+  <p>Instead of training a critic network to estimate the baseline value $V(s)$, GRPO samples a group of $N$ outputs ${o_1, o_2, \dots, o_N}$ for a single input prompt $q$ using the reference policy.</p>
 
-                  <p>The advantage $A_i$ of each output $o_i$ is computed by normalizing the rewards within the sampled
-                    group:</p>
+  <p>The advantage $A_i$ of each output $o_i$ is computed by normalizing the rewards within the sampled group:</p>
 
-                  \[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
+\[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
 
-                  <p>Where $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$. This relative advantage replaces the absolute
-                    value baseline in the PPO objective:</p>
+  <p>Where $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$. This relative advantage replaces the absolute value baseline in the PPO objective:</p>
 
-                  \[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left(
-                  \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i,
-                  \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon,
-                  1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
+\[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
 
-                  <p>This relative comparison model simplifies training, reducing GPU memory footprint by roughly
-                    <strong>30-40%</strong> and allowing for larger batch sizes.</p>
+  <p>This relative comparison model simplifies training, reducing GPU memory footprint by roughly <strong>30-40%</strong> and allowing for larger batch sizes.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="modality-aware-online-weighting-1">2. Modality-Aware Online Weighting</h2>
+  <h2 id="modality-aware-online-weighting-1">2. Modality-Aware Online Weighting</h2>
 
-                  <p>In multimodal environments (e.g., combining text, image, and audio inputs), a model might perform
-                    exceptionally well on textual reasoning but fail at grounding physical or visual details.
-                    Over-optimization in a single modality can lead to degradation in others.</p>
+  <p>In multimodal environments (e.g., combining text, image, and audio inputs), a model might perform exceptionally well on textual reasoning but fail at grounding physical or visual details. Over-optimization in a single modality can lead to degradation in others.</p>
 
-                  <p>To resolve this, we apply <strong>modality-aware online weighting</strong>. The reward function is
-                    decomposed into modal components:</p>
+  <p>To resolve this, we apply <strong>modality-aware online weighting</strong>. The reward function is decomposed into modal components:</p>
 
-                  \[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} +
-                  w_{\text{audio}} R_{\text{audio}}\]
+\[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} + w_{\text{audio}} R_{\text{audio}}\]
 
-                  <p>By dynamically updating the weights $w_m$ based on the moving average of group performance on each
-                    modality, we prevent the model from over-optimizing for one modality at the expense of others. The
-                    weight updates are formulated as:</p>
+  <p>By dynamically updating the weights $w_m$ based on the moving average of group performance on each modality, we prevent the model from over-optimizing for one modality at the expense of others. The weight updates are formulated as:</p>
 
-                  \[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} -
-                  \mu_m\right)\]
+\[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} - \mu_m\right)\]
 
-                  <p>where $\alpha$ is a momentum hyperparameter and $\mu_m$ is the baseline average performance for
-                    modality $m$.</p>
+  <p>where $\alpha$ is a momentum hyperparameter and $\mu_m$ is the baseline average performance for modality $m$.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="fast-reasoning--hallucination-prevention">3. Fast Reasoning &amp; Hallucination Prevention
-                  </h2>
+  <h2 id="fast-reasoning--hallucination-prevention">3. Fast Reasoning &amp; Hallucination Prevention</h2>
 
-                  <p>A common failure mode of MLLMs under RL alignment is <strong>hallucination in chain-of-thought
-                      (CoT)</strong>. When the model is encouraged to think step-by-step, it sometimes hallucinates
-                    visual details that are not present in the input image.</p>
+  <p>A common failure mode of MLLMs under RL alignment is <strong>hallucination in chain-of-thought (CoT)</strong>. When the model is encouraged to think step-by-step, it sometimes hallucinates visual details that are not present in the input image.</p>
 
-                  <p>To mitigate this, we train a auxiliary classifier that predicts missed or hallucinated cases in the
-                    reasoning path. The prediction score is fed back into the GRPO reward loop as a penalty factor:</p>
+  <p>To mitigate this, we train a auxiliary classifier that predicts missed or hallucinated cases in the reasoning path. The prediction score is fed back into the GRPO reward loop as a penalty factor:</p>
 
-                  \[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
+\[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
 
-                  <p>This penalty successfully boosts factual accuracy by up to <strong>20.7%</strong>, suppressing
-                    incorrect logical paths during search.</p>
+  <p>This penalty successfully boosts factual accuracy by up to <strong>20.7%</strong>, suppressing incorrect logical paths during search.</p>
 
-                  <hr />
+  <hr />
 
-                  <h2 id="implementation-notes">4. Implementation Notes</h2>
+  <h2 id="implementation-notes">4. Implementation Notes</h2>
 
-                  <p>When deploying GRPO for VLM alignment on frameworks like <strong>veRL</strong> or
-                    <strong>TRL</strong>:</p>
-                  <ul>
-                    <li><strong>Group Size ($N$):</strong> Keep group size $N$ between $4$ and $8$. A smaller group size
-                      degrades advantage estimation quality, while larger group sizes increase sampling overhead.</li>
-                    <li><strong>Reward Mixing:</strong> Use a mix of rule-based reward functions (e.g., matching
-                      coordinates in a bounding box) and model-based reward functions (e.g., visual coherence score) to
-                      build a robust reward loop.</li>
-                  </ul>
-                </div>
+  <p>When deploying GRPO for VLM alignment on frameworks like <strong>veRL</strong> or <strong>TRL</strong>:</p>
+  <ul>
+    <li><strong>Group Size ($N$):</strong> Keep group size $N$ between $4$ and $8$. A smaller group size degrades advantage estimation quality, while larger group sizes increase sampling overhead.</li>
+    <li><strong>Reward Mixing:</strong> Use a mix of rule-based reward functions (e.g., matching coordinates in a bounding box) and model-based reward functions (e.g., visual coherence score) to build a robust reward loop.</li>
+  </ul>
+</div>
 
-
-              </div>
-
-              <!-- Rating -->
-
-              <div class="rating mb-4 d-flex align-items-center">
-                <strong class="mr-1">Rating:</strong>
-                <div class="rating-holder">
-                  <div class="c-rating c-rating--regular" data-rating-value="4.9">
-                    <button>1</button>
-                    <button>2</button>
-                    <button>3</button>
-                    <button>4</button>
-                    <button>5</button>
-                  </div>
-                </div>
-              </div>
-
-
-              <!-- Post Date -->
-              <p>
-                <small>
-                  <span class="post-date"><time class="post-date" datetime="2026-02-18">18 Feb 2026</time></span>
-
-                </small>
-              </p>
-
-              <!-- Post Categories -->
-              <div class="after-post-cats">
-                <ul class="tags mb-4">
-
-
-                  <li>
-                    <a class="smoothscroll" href="/categories#Machine-Learning">Machine-Learning</a>
-                  </li>
-
-                </ul>
-              </div>
-              <!-- End Categories -->
-
-              <!-- Post Tags -->
-              <div class="after-post-tags">
-                <ul class="tags">
-
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Alignment">#Alignment</a>
-                  </li>
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Deep-Learning">#Deep-Learning</a>
-                  </li>
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#Reinforcement-Learning">#Reinforcement-Learning</a>
-                  </li>
-
-                  <li>
-                    <a class="smoothscroll" href="/tags#VLM">#VLM</a>
-                  </li>
-
-                </ul>
-              </div>
-              <!-- End Tags -->
-
-              <!-- Prev/Next -->
-              <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
-                <div class="col-6 text-left">
-
-                  <a class="prev text-dark text-decoration-none" href="/posts/samif/">
-                    <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo;
-                      Previous</small>
-                    <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Cross-Modality
-                      Shared & Unique Information Factorization (SAMIF)</span>
-                  </a>
-
-                </div>
-                <div class="col-6 text-right">
-
-                  <a class="next text-dark text-decoration-none" href="/posts/robotics-kg/">
-                    <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next
-                      &raquo;</small>
-                    <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Robotic
-                      Perception & Natural Language Object Grounding via Knowledge Graphs</span>
-                  </a>
-
-                </div>
-              </div>
 
             </div>
-            <!-- End Post -->
 
-          </div>
+            <!-- Rating -->
+            
+            <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="4.9">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+            </div>
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2026-02-18">18 Feb 2026</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Machine-Learning">Machine-Learning</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Alignment">#Alignment</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Deep-Learning">#Deep-Learning</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Reinforcement-Learning">#Reinforcement-Learning</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#VLM">#VLM</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+                <div class="col-6 text-left">
+                    
+                    <a class="prev text-dark text-decoration-none" href="/posts/samif/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo; Previous</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Cross-Modality Shared & Unique Information Factorization (SAMIF)</span>
+                    </a>
+                    
+                </div>
+                <div class="col-6 text-right">
+                    
+                    <a class="next text-dark text-decoration-none" href="/posts/robotics-kg/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Robotic Perception & Natural Language Object Grounding via Knowledge Graphs</span>
+                    </a>
+                    
+                </div>
+            </div>
+
         </div>
-        <!-- End Article
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
 ================================================== -->
 
-        <!-- Begin Comments
+<!-- Begin Comments
 ================================================== -->
 
-        <div class="container">
-          <div id="comments" class="row justify-content-center mb-5">
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
             <div class="col-md-8">
-              <!-- <section class="disqus">
+                <!-- <section class="disqus">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = ''; 
@@ -568,21 +510,27 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </section> -->
-              <script src="https://utteranc.es/client.js" repo="KyungMinJin/KyungMinJin.github.io" issue-term="og:title"
-                theme="github-light" crossorigin="anonymous" async></script>
+<script
+  src="https://utteranc.es/client.js"
+  repo="KyungMinJin/KyungMinJin.github.io"
+  issue-term="og:title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
 
             </div>
-          </div>
         </div>
+    </div>
 
-        <!--End Comments
+<!--End Comments
 ================================================== -->
 
-        <!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
 https://search.google.com/structured-data/testing-tool/u/0/
 ================================================== -->
 
-        <script type="application/ld+json">
+<script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Review",
@@ -602,12 +550,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
   }
 }
 </script>
-      </div>
+</div>
 
-
-      <!-- Bottom Alert Bar
+        
+        <!-- Bottom Alert Bar
 ================================================== -->
-      <!-- <div class="alertbar">
+        <!-- <div class="alertbar">
           <div class="container text-center">
             <span
               ><img
@@ -645,12 +593,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
             </form>
           </div>
         </div> -->
+        
+      </div>
 
-    </div>
-
-    <!-- Categories Jumbotron
+      <!-- Categories Jumbotron
 ================================================== -->
-    <!-- <div class="jumbotron fortags">
+      <!-- <div class="jumbotron fortags">
         <div class="d-md-flex h-100">
           <div class="col-md-4 transpdark align-self-center text-center h-100">
             <div
@@ -691,65 +639,74 @@ https://search.google.com/structured-data/testing-tool/u/0/
         </div>
       </div> -->
 
-    <!-- Begin Footer
+      <!-- Begin Footer
 ================================================== -->
-    <footer class="footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6 col-sm-6 text-center text-lg-left">
-            Copyright © 2026 Kyung-Min Jin
-          </div>
-          <div class="col-md-6 col-sm-6 text-center text-lg-right">
-            <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/"></a>
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+              Copyright © 2026 Kyung-Min Jin
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+              <a
+                target="_blank"
+                href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
+              ></a>
+            </div>
           </div>
         </div>
-      </div>
-    </footer>
-    <!-- End Footer
+      </footer>
+      <!-- End Footer
 ================================================== -->
-  </div>
-  <!-- /.site-content -->
+    </div>
+    <!-- /.site-content -->
 
-  <!-- Scripts
+    <!-- Scripts
 ================================================== -->
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-    crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-    crossorigin="anonymous"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
 
-  <script src="/assets/js/mediumish.js"></script>
+    <script src="/assets/js/mediumish.js"></script>
 
+    
 
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-  <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+    
+    <script
+      id="dsq-count-scr"
+      src="//.disqus.com/count.js"
+    ></script>
+    
 
-
-  <script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
-
-
-  <script>
-    function changeLanguage(lang) {
-      document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
-      document.documentElement.classList.add('lang-mode-' + lang);
-      localStorage.setItem('pref-lang', lang);
-      var labels = document.querySelectorAll('#currentLangLabel');
-      labels.forEach(function (label) {
-        label.textContent = lang === 'ko' ? '한국어' : 'English';
-      });
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-      var savedLang = localStorage.getItem('pref-lang');
-      if (!savedLang) {
-        var userLang = navigator.language || navigator.userLanguage;
-        savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+    <script>
+      function changeLanguage(lang) {
+        document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
+        document.documentElement.classList.add('lang-mode-' + lang);
+        localStorage.setItem('pref-lang', lang);
+        var labels = document.querySelectorAll('#currentLangLabel');
+        labels.forEach(function(label) {
+          label.textContent = lang === 'ko' ? '한국어' : 'English';
+        });
       }
-      changeLanguage(savedLang);
-    });
-  </script>
-</body>
-
+      document.addEventListener("DOMContentLoaded", function() {
+        var savedLang = localStorage.getItem('pref-lang');
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+        }
+        changeLanguage(savedLang);
+      });
+    </script>
+  </body>
 </html>
