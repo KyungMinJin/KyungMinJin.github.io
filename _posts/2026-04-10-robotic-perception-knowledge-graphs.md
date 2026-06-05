@@ -6,6 +6,7 @@ categories: [Robotics]
 tags: [Embodied-AI, Knowledge-Graph, RAG]
 image: assets/images/robotics_perception_kg.png
 description: "Exploring how robots can bridge visual perception and language understanding using structured Knowledge Graphs and Retrieval-Augmented Generation."
+permalink: /posts/robotics-kg/
 featured: true
 hidden: false
 rating: 5.0

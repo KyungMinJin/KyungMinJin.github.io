@@ -66,29 +66,39 @@ title: Home
 .category-filter-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  justify-content: center;
 }
 .category-filter-chips .chip {
-  padding: 6px 16px;
+  padding: 8px 20px;
   font-size: 0.85rem;
-  font-weight: 500;
-  color: #666;
-  background: #f5f5f5;
-  border: 1px solid #e0e0e0;
-  border-radius: 30px;
+  font-weight: 600;
+  color: #495057;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 50px;
   cursor: pointer;
   outline: none;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
 }
 .category-filter-chips .chip:hover {
-  background: #eaeaea;
-  color: #333;
+  background: #e9ecef;
+  color: #212529;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 .category-filter-chips .chip.active {
-  background: #00ab6b;
+  background: #2b2b2b;
   color: #fff;
-  border-color: #00ab6b;
-  box-shadow: 0 2px 4px rgba(0, 171, 107, 0.2);
+  border-color: #2b2b2b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.post-card-item {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: scale(1);
 }
 </style>
 
@@ -107,10 +117,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
       postItems.forEach(item => {
         const categories = item.getAttribute("data-categories").split(",");
+        
         if (filterValue === "all" || categories.includes(filterValue)) {
           item.style.display = "flex";
+          // Force layout reflow before opacity change to trigger transition
+          void item.offsetHeight;
+          item.style.opacity = "1";
+          item.style.transform = "scale(1)";
         } else {
-          item.style.display = "none";
+          item.style.opacity = "0";
+          item.style.transform = "scale(0.95)";
+          // Set display none after opacity animation finishes
+          setTimeout(() => {
+            if (item.style.opacity === "0") {
+              item.style.display = "none";
+            }
+          }, 300);
         }
       });
     });

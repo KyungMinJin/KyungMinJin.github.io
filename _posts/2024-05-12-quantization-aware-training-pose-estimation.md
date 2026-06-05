@@ -6,6 +6,7 @@ categories: [Computer-Vision]
 tags: [Quantization, Edge-AI, Pose-Estimation]
 image: assets/images/qat_pose_estimation.png
 description: "How to use Quantization-Aware Training (QAT) to preserve keypoint accuracy when deploying pose estimation models to low-power edge hardware."
+permalink: /posts/qat/
 featured: false
 hidden: false
 rating: 4.7
