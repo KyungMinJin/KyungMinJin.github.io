@@ -35,7 +35,7 @@ comments: false
                     <span class="mr-3 text-info"><i class="fa fa-graduation-cap fa-lg"></i></span>
                     <div>
                         <strong class="d-block text-dark">Academic Scholar</strong>
-                        <a href="https://scholar.google.com" target="_blank" class="text-secondary">Google Scholar Profile</a>
+                        <a href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en" target="_blank" class="text-secondary">Google Scholar Profile</a>
                     </div>
                 </div>
             </div>
