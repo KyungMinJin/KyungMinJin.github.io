@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation"
-title_ko: "[WACV 2023 Oral] 비디오 포즈 추정을 위한 운동학 인지 계층적 어텐션 네트워크"
+title_ko: "[WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크"
 author: Kyung-Min Jin
 categories: [Computer-Vision]
 tags: [WACV, Pose-Estimation, Attention, Deep-Learning]
@@ -15,17 +15,17 @@ rating: 5.0
 ---
 
 <div class="lang-ko" markdown="1">
-# [WACV 2023 Oral] 비디오 포즈 추정을 위한 운동학 인지 계층적 어텐션 네트워크
+# [WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크
 
-비디오 기반 3차원 인체 포즈 추정에서, 프레임 간 **시간적 및 운동학적 일관성(temporal and kinematic consistency)**을 유지하는 것은 매우 까다로운 과제입니다. 기존의 프레임별 포즈 추정기들은 물리적인 골격 관절 구조나 해부학적 한계를 명시적으로 모델링하지 않기 때문에, 예측값의 미세한 흔들림(jittering), 관절 뒤바뀜 오류(joint swap errors), 급격한 움직임이나 가려짐(occlusion) 상태에서의 추정 실패 등을 빈번히 겪게 됩니다.
+비디오 기반 3차원 인체 포즈 추정에서, 프레임 간 **시간적 및 Kinematic 일관성(temporal and kinematic consistency)**을 유지하는 것은 매우 까다로운 과제입니다. 기존의 프레임별 포즈 추정기들은 물리적인 골격 관절 구조나 해부학적 한계를 명시적으로 모델링하지 않기 때문에, 예측값의 미세한 흔들림(jittering), 관절 뒤바뀜 오류(joint swap errors), 급격한 움직임이나 가려짐(occlusion) 상태에서의 추정 실패 등을 빈번히 겪게 됩니다.
 
-본 논문(WACV 2023 구두 발표 선정작)에서는 물리적 운동 법칙을 바탕으로 관절 간의 관계와 시간적 연속성을 인코딩하여 이러한 한계를 극복하는 **운동학 인지 계층적 어텐션 네트워크(Kinematic-aware Hierarchical Attention Network, KHAN / HANet)**를 제안합니다.
+본 논문(WACV 2023 구두 발표 선정작)에서는 물리적 운동 법칙을 바탕으로 관절 간의 관계와 시간적 연속성을 인코딩하여 이러한 한계를 극복하는 **Kinematic-aware 계층적 어텐션 네트워크(Kinematic-aware Hierarchical Attention Network, KHAN / HANet)**를 제안합니다.
 
 ---
 
 ## 1. 모델 아키텍처 (HANet)
 
-다음은 운동학 인지 계층적 어텐션 네트워크의 전체 아키텍처입니다. 입력 프레임들로부터 공간적 키포인트 특징을 추출한 뒤, 인체 골격 구조를 따라 시간적 문맥을 전파합니다.
+다음은 Kinematic-aware 계층적 어텐션 네트워크의 전체 아키텍처입니다. 입력 프레임들로부터 공간적 키포인트 feature을 추출한 뒤, 인체 골격 구조를 따라 시간적 문맥을 전파합니다.
 
 <div class="text-center my-4">
     <img src="{{ site.baseurl }}/assets/images/HANet.png" class="img-fluid rounded shadow-lg border" alt="HANet 모델 아키텍처" style="max-height: 500px; width: 100%; object-fit: contain;">
@@ -34,19 +34,19 @@ rating: 5.0
 
 네트워크는 다음과 같은 두 가지 핵심 요소로 구성됩니다:
 1. **계층적 어텐션 인코더 (Hierarchical Attention Encoder):** 서로 다른 해상도 레이어로부터 멀티스케일 시공간 어텐션을 계산합니다.
-2. **운동학 인지 특징 파이프라인 (Kinematic-aware Feature Pipeline):** 키포인트 예측을 유도하기 위해 속도(velocity)와 가속도(acceleration)를 명시적으로 모델링합니다.
+2. **Kinematic-aware feature 파이프라인 (Kinematic-aware Feature Pipeline):** 키포인트 예측을 유도하기 위해 속도(velocity)와 가속도(acceleration)를 명시적으로 모델링합니다.
 
 ---
 
-## 2. 운동학적 특징 기반 동적 시공간 어텐션
+## 2. Kinematic feature 기반 동적 시공간 어텐션
 
-트랜스포머 모델의 표준 셀프 어텐션 매커니즘은 인체 골격 구조를 고려하지 않고 모든 키포인트를 동등하게 취급합니다. 반면, HANet은 **운동학적 관절 구조(kinematic joints)**에 따라 어텐션을 계층적으로 세분화하여 연산합니다.
+트랜스포머 모델의 표준 셀프 어텐션 매커니즘은 인체 골격 구조를 고려하지 않고 모든 키포인트를 동등하게 취급합니다. 반면, HANet은 **Kinematic 관절 구조(kinematic joints)**에 따라 어텐션을 계층적으로 세분화하여 연산합니다.
 
 * **국소 어텐션 (Local Attention):** 뼈대(bone)로 직접 연결된 인접 관절 사이(예: 손목과 팔꿈치, 팔꿈치와 어깨)에서 어텐션을 계산합니다.
 * **전역 어텐션 (Global Attention):** 양손의 협동 동작과 같이 거리가 먼 관절 간의 장기 의존성(long-range dependencies)을 포착합니다.
 
-### 운동학적 특징 공식화 (Kinematic Feature Formulation)
-물리적 운동 법칙을 신경망에 주입하기 위해, 시계열 좌표 정보를 바탕으로 키포인트의 동적 운동 특징을 계산합니다. $t$ 프레임에서 특정 관절의 $d$차원 좌표(2D 또는 3D)를 $p_t \in \mathbb{R}^d$라 정의할 때, 다음과 같이 속도와 가속도를 유도합니다:
+### Kinematic feature 공식화 (Kinematic Feature Formulation)
+물리적 운동 법칙을 신경망에 주입하기 위해, 시계열 좌표 정보를 바탕으로 키포인트의 동적 운동 feature을 계산합니다. $t$ 프레임에서 특정 관절의 $d$차원 좌표(2D 또는 3D)를 $p_t \in \mathbb{R}^d$라 정의할 때, 다음과 같이 속도와 가속도를 유도합니다:
 
 * **속도 ($v_t$):**
   $$v_t = p_t - p_{t-1}$$
@@ -54,15 +54,15 @@ rating: 5.0
 * **가속도 ($a_t$):**
   $$a_t = v_t - v_{t-1} = p_t - 2p_{t-1} + p_{t-2}$$
 
-이러한 운동학적 특징들은 최초의 관절 임베딩과 결합(concatenation)되어, 급격한 움직임이나 심한 가려짐 상황에서도 물리적인 궤적을 외삽(extrapolate)함으로써 부드럽고 안정적인 추정을 가능하게 만듭니다.
+이러한 Kinematic feature들은 최초의 관절 임베딩과 결합(concatenation)되어, 급격한 움직임이나 심한 가려짐 상황에서도 물리적인 궤적을 외삽(extrapolate)함으로써 부드럽고 안정적인 추정을 가능하게 만듭니다.
 
 ### 계층적 어텐션 스케일링
 쿼리 $Q$, 키 $K$, 밸류 $V$가 주어졌을 때, 어텐션 맵은 아래 공식으로 계산됩니다:
 $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
 
-희소한(sparse) 지도 신호 하에서 학습이 불안정해지는 것을 방지하기 위해, 계층적 인코더는 모든 레이어 $l \in \{1, \dots, L\}$의 멀티스케일 특징 맵을 결합합니다:
+희소한(sparse) 지도 신호 하에서 학습이 불안정해지는 것을 방지하기 위해, 계층적 인코더는 모든 레이어 $l \in \{1, \dots, L\}$의 멀티스케일 feature 맵을 결합합니다:
 $$F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}$$
-여기서 $F^{(l)}$는 레이어 $l$에서의 어텐션 특징을 의미하며, $w_l$은 학습 가능한 스케일링 가중치입니다.
+여기서 $F^{(l)}$는 레이어 $l$에서의 어텐션 feature을 의미하며, $w_l$은 학습 가능한 스케일링 가중치입니다.
 
 ---
 

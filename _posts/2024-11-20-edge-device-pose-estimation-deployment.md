@@ -25,8 +25,8 @@ rating: 4.8
 
 ## 1. 키포인트 회귀 태스크의 지연 시간 병목 현상
 
-단순한 순방향 연산만 수행하는 이미지 분류 네트워크와 달리, 포즈 추정 모델은 다음과 같은 특징을 가집니다:
-* **고해상도 특징 맵(High-Resolution Feature Maps):** HRNet이나 UNet 계열의 아키텍처는 고해상도 표현을 유지하므로, 메모리 대역폭(Memory Bandwidth) 소모가 심합니다.
+단순한 순방향 연산만 수행하는 이미지 분류 네트워크와 달리, 포즈 추정 모델은 다음과 같은 feature을 가집니다:
+* **고해상도 feature 맵(High-Resolution Feature Maps):** HRNet이나 UNet 계열의 아키텍처는 고해상도 표현을 유지하므로, 메모리 대역폭(Memory Bandwidth) 소모가 심합니다.
 * **시공간 어텐션(Spatio-Temporal Attention):** 트랜스포머의 핵심인 셀프 어텐션은 $O(T^2)$의 시간 복잡도를 가져, 전용 트랜스포머 가속 코어가 부족한 모바일/TV 하드웨어에서 큰 성능 병목을 유발합니다.
 
 ---

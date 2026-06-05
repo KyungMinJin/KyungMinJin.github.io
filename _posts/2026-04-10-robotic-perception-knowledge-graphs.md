@@ -63,7 +63,7 @@ OWL-ViT나 Grounding DINO와 같은 최신 오픈 보카블러리(Open-Vocabular
 ---
 
 ## 4. 핵심 요약
-구조화된 지식 그래프와 비주얼-언어 모델(VLM)의 통합은 체화된 인공지능(Embodied AI) 에이전트가 현실 세계에 대한 인지 지도를 그릴 수 있게 해줍니다. 이 접근법은 기초적인 시각 인지 모델과 고차원 기호적 추론(Symbolic Reasoning) 모델 사이의 간극을 훌륭히 연결해 줍니다.
+구조화된 지식 그래프와 비주얼-언어 모델(VLM)의 통합은 Embodied 인공지능(Embodied AI) 에이전트가 현실 세계에 대한 인지 지도를 그릴 수 있게 해줍니다. 이 접근법은 기초적인 시각 인지 모델과 고차원 기호적 추론(Symbolic Reasoning) 모델 사이의 간극을 훌륭히 연결해 줍니다.
 </div>
 
 <div class="lang-en" markdown="1">

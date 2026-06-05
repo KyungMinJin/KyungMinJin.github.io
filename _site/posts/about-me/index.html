@@ -1,395 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script>
-      (function () {
-        var savedLang = localStorage.getItem("pref-lang");
-        if (!savedLang) {
-          var userLang = navigator.language || navigator.userLanguage;
-          savedLang = userLang.startsWith("ko") ? "ko" : "en";
-        }
-        document.documentElement.className += " lang-mode-" + savedLang;
-      })();
-    </script>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <link rel="icon" href="/assets/images/logo.png" />
+<head>
+  <script>
+    (function () {
+      var savedLang = localStorage.getItem("pref-lang");
+      if (!savedLang) {
+        var userLang = navigator.language || navigator.userLanguage;
+        savedLang = userLang.startsWith("ko") ? "ko" : "en";
+      }
+      document.documentElement.className += " lang-mode-" + savedLang;
+    })();
+  </script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>About Me | Kyung-Min Jin</title>
+  <link rel="icon" href="/assets/images/logo.png" />
 
-    <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>About Me | Kyung-Min Jin</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="About Me" />
-<meta name="author" content="Kyung-Min Jin" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Kyung-Min Jin is a researcher at LG Electronics advanced robotics lab, studying multimodal intelligence and Embodied AI after graduating from Korea University PRML Lab." />
-<meta property="og:description" content="Kyung-Min Jin is a researcher at LG Electronics advanced robotics lab, studying multimodal intelligence and Embodied AI after graduating from Korea University PRML Lab." />
-<meta property="og:site_name" content="Kyung-Min Jin" />
-<meta property="og:image" content="/assets/images/pose_estimation_cv.png" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-05-13T00:00:00-05:00" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/assets/images/pose_estimation_cv.png" />
-<meta property="twitter:title" content="About Me" />
-<script type="application/ld+json">
+  <title>About Me | Kyung-Min Jin</title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+  <title>About Me | Kyung-Min Jin</title>
+  <meta name="generator" content="Jekyll v4.2.2" />
+  <meta property="og:title" content="About Me" />
+  <meta name="author" content="Kyung-Min Jin" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="description"
+    content="Kyung-Min Jin is a researcher at LG Electronics advanced robotics lab, studying multimodal intelligence and Embodied AI after graduating from Korea University PRML Lab." />
+  <meta property="og:description"
+    content="Kyung-Min Jin is a researcher at LG Electronics advanced robotics lab, studying multimodal intelligence and Embodied AI after graduating from Korea University PRML Lab." />
+  <meta property="og:site_name" content="Kyung-Min Jin" />
+  <meta property="og:image" content="/assets/images/pose_estimation_cv.png" />
+  <meta property="og:type" content="article" />
+  <meta property="article:published_time" content="2022-05-13T00:00:00-05:00" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="twitter:image" content="/assets/images/pose_estimation_cv.png" />
+  <meta property="twitter:title" content="About Me" />
+  <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyung-Min Jin"},"dateModified":"2022-05-13T00:00:00-05:00","datePublished":"2022-05-13T00:00:00-05:00","description":"Kyung-Min Jin is a researcher at LG Electronics advanced robotics lab, studying multimodal intelligence and Embodied AI after graduating from Korea University PRML Lab.","headline":"About Me","image":"/assets/images/pose_estimation_cv.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/about-me/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"Kyung-Min Jin"},"url":"/posts/about-me/"}</script>
-<!-- End Jekyll SEO tag -->
+  <!-- End Jekyll SEO tag -->
 
 
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-      crossorigin="anonymous"
-    />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    crossorigin="anonymous" />
 
-    <link href="/assets/css/screen.css" rel="stylesheet" />
+  <link href="/assets/css/screen.css" rel="stylesheet" />
 
-    <link href="/assets/css/main.css" rel="stylesheet" />
+  <link href="/assets/css/main.css" rel="stylesheet" />
 
-    <script src="/assets/js/jquery.min.js"></script>
-    <!-- MathJax for LaTeX Rendering -->
-    <script>
-      window.MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']],
-          displayMath: [['$$', '$$'], ['\\[', '\\]']],
-          processEscapes: true
-        }
-      };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
-  </head>
+  <script src="/assets/js/jquery.min.js"></script>
+  <!-- MathJax for LaTeX Rendering -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+</head>
 
-   
-  <body class="layout-post">
-    <!-- defer loading of font and font awesome -->
-    <noscript id="deferred-styles">
-      <link
-        href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
-        rel="stylesheet"
-      />
-      <link
-        rel="stylesheet"
-        href="/font-awesome-4.7.0/css/font-awesome.min.css"
-        crossorigin="anonymous"
-      />
-    </noscript>
 
-    <!-- Begin Menu Navigation
+<body class="layout-post">
+  <!-- defer loading of font and font awesome -->
+  <noscript id="deferred-styles">
+    <link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="/font-awesome-4.7.0/css/font-awesome.min.css" crossorigin="anonymous" />
+  </noscript>
+
+  <!-- Begin Menu Navigation
 ================================================== -->
-    <nav
-      class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down"
-    >
-      <div class="container pr-0">
-        <!-- Begin Logo -->
-        <a class="navbar-brand text-dark font-weight-bold" href="/">
-          Kyung-Min Jin
-        </a>
-        <!-- End Logo -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+      <!-- Begin Logo -->
+      <a class="navbar-brand text-dark font-weight-bold" href="/">
+        Kyung-Min Jin
+      </a>
+      <!-- End Logo -->
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarMediumish"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <div class="collapse navbar-collapse" id="navbarMediumish">
-          <!-- Begin Menu -->
+      <div class="collapse navbar-collapse" id="navbarMediumish">
+        <!-- Begin Menu -->
 
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="/">Home</a>
-            </li>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" href="/">Home</a>
+          </li>
 
-            <li class="nav-item ">
-              <a class="nav-link" href="/about">About (CV)</a>
-            </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/about">About (CV)</a>
+          </li>
 
-            <li class="nav-item ">
-              <a class="nav-link" href="/publications">Publications</a>
-            </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/publications">Publications</a>
+          </li>
 
-            <li class="nav-item ">
-              <a class="nav-link" href="/projects">Projects</a>
-            </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/projects">Projects</a>
+          </li>
 
-            <li class="nav-item ">
-              <a class="nav-link" href="/contact">Contact</a>
-            </li>
+          <li class="nav-item ">
+            <a class="nav-link" href="/contact">Contact</a>
+          </li>
 
-            <li class="nav-item">
-              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
-            </li>
+          <li class="nav-item">
+            <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+          </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
-                <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown" style="border-radius: 8px;">
-                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
-                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
-              </div>
-            </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+              <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown"
+              style="border-radius: 8px;">
+              <a class="dropdown-item font-weight-bold" href="#"
+                onclick="changeLanguage('en'); return false;">English</a>
+              <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
+            </div>
+          </li>
 
-            <script src="/assets/js/lunr.js"></script>
+          <script src="/assets/js/lunr.js"></script>
 
 
-<style>
-    .lunrsearchresult .title {color: #d9230f;}
-    .lunrsearchresult .url {color: silver;}
-    .lunrsearchresult a {display: block; color: #777;}
-    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
-    .lunrsearchresult a:hover .title {text-decoration: underline;}
-</style>
+          <style>
+            .lunrsearchresult .title {
+              color: #d9230f;
+            }
+
+            .lunrsearchresult .url {
+              color: silver;
+            }
+
+            .lunrsearchresult a {
+              display: block;
+              color: #777;
+            }
+
+            .lunrsearchresult a:hover,
+            .lunrsearchresult a:focus {
+              text-decoration: none;
+            }
+
+            .lunrsearchresult a:hover .title {
+              text-decoration: underline;
+            }
+          </style>
 
 
-<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
-    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
-</form>
+          <form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+            <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q"
+              maxlength="255" value="" placeholder="Type and enter..." />
+          </form>
 
-<div id="lunrsearchresults">
-    <ul></ul>
-</div>
+          <div id="lunrsearchresults">
+            <ul></ul>
+          </div>
 
-<script src="/assets/js/lunrsearchengine.js"></script>
-          </ul>
+          <script src="/assets/js/lunrsearchengine.js"></script>
+        </ul>
 
-          <!-- End Menu -->
-        </div>
+        <!-- End Menu -->
       </div>
-    </nav>
-    <!-- End Navigation
+    </div>
+  </nav>
+  <!-- End Navigation
 ================================================== -->
 
-    <div class="site-content">
-      <div class="container">
-        <!-- Site Title
+  <div class="site-content">
+    <div class="container">
+      <!-- Site Title
 ================================================== -->
-        
 
-        <!-- Content
+
+      <!-- Content
 ================================================== -->
-        <div class="main-content"><!-- Begin Article
+      <div class="main-content"><!-- Begin Article
 ================================================== -->
-<div class="container">
-    <div class="row justify-content-center position-relative">
+        <div class="container">
+          <div class="row justify-content-center position-relative">
 
-        <!-- Post Share (Floating on Left) -->
-        <div class="post-share-sidebar">
-            <div class="share sticky-top sticky-top-offset">
-  <p>Share</p>
-  <ul>
-    <li class="ml-1 mr-1">
-      <a
-        target="_blank"
-        href="https://twitter.com/intent/tweet?text=About Me&url=/posts/about-me/"
-        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
-      >
-        <i class="fa fa-twitter"></i>
-      </a>
-    </li>
+            <!-- Post Share (Floating on Left) -->
+            <div class="post-share-sidebar">
+              <div class="share sticky-top sticky-top-offset">
+                <p>Share</p>
+                <ul>
+                  <li class="ml-1 mr-1">
+                    <a target="_blank" href="https://twitter.com/intent/tweet?text=About Me&url=/posts/about-me/"
+                      onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                  </li>
 
-    <li class="ml-1 mr-1">
-      <a
-        target="_blank"
-        href="https://facebook.com/sharer.php?u=/posts/about-me/"
-        onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;"
-      >
-        <i class="fa fa-facebook-f"></i>
-      </a>
-    </li>
+                  <li class="ml-1 mr-1">
+                    <a target="_blank" href="https://facebook.com/sharer.php?u=/posts/about-me/"
+                      onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                      <i class="fa fa-facebook-f"></i>
+                    </a>
+                  </li>
 
-    <li class="ml-1 mr-1">
-      <a
-        target="_blank"
-        href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/about-me/"
-        onclick="window.open(this.href, 'width=550,height=435');return false;"
-      >
-        <i class="fa fa-linkedin-square"></i>
-      </a>
-    </li>
-  </ul>
-  
-  <div class="sep"></div>
-  <ul>
-    <li>
-      <a class="small smoothscroll" href="#disqus_thread"></a>
-    </li>
-  </ul>
-  
-</div>
+                  <li class="ml-1 mr-1">
+                    <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/about-me/"
+                      onclick="window.open(this.href, 'width=550,height=435');return false;">
+                      <i class="fa fa-linkedin-square"></i>
+                    </a>
+                  </li>
+                </ul>
 
-        </div>
+                <div class="sep"></div>
+                <ul>
+                  <li>
+                    <a class="small smoothscroll" href="#disqus_thread"></a>
+                  </li>
+                </ul>
 
-        <!-- Post -->
-        
+              </div>
 
-        <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
-            <div class="mainheading">
+            </div>
+
+            <!-- Post -->
+
+
+            <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
+              <div class="mainheading">
 
                 <!-- Author Box -->
-                
+
                 <div class="row post-top-meta">
-                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
-                        
-                        <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
-                        
-                    </div>
-                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                        <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn follow">Follow</a>
-                        <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea University, Seoul. Check About Page for more information!</span>
-                    </div>
+                  <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+
+                    <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
+
+                  </div>
+                  <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                    <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a
+                      target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/"
+                      class="btn follow">Follow</a>
+                    <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea
+                      University, Seoul. Check About Page for more information!</span>
+                  </div>
                 </div>
-                
+
 
                 <!-- Post Title -->
                 <h1 class="posttitle">About Me</h1>
 
-            </div>
+              </div>
 
-            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
-            
-            <!-- End Adsense -->
+              <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
 
-            <!-- Post Featured Image -->
-            
+              <!-- End Adsense -->
 
-            
-            <img class="featured-image img-fluid" src="/assets/images/pose_estimation_cv.png" alt="About Me">
-            
+              <!-- Post Featured Image -->
 
-            
-            <!-- End Featured Image -->
 
-            <!-- Post Content -->
-            <div class="article-post">
+
+              <img class="featured-image img-fluid" src="/assets/images/pose_estimation_cv.png" alt="About Me">
+
+
+
+              <!-- End Featured Image -->
+
+              <!-- Post Content -->
+              <div class="article-post">
                 <!-- Toc if any -->
-                
+
                 <!-- End Toc -->
                 <div class="lang-ko">
-  <h1 id="section">자기소개</h1>
+                  <h1 id="section">자기소개</h1>
 
-  <p>저는 고려대학교 인공지능대학원 <a target="_blank" href="http://pr.korea.ac.kr/">PRML 연구실</a>에서 이성환 교수님의 지도 아래 석사 과정을 마친 진경민입니다. 대학원 진학 이전에는 고려대학교에서 컴퓨터공학과와 인공지능을 전공하여 2021년에 학사 학위를 취득했습니다.</p>
+                  <p>저는 고려대학교 인공지능대학원 <a target="_blank" href="http://pr.korea.ac.kr/">PRML 연구실</a>에서 이성환 교수님의 지도 아래 석사
+                    과정을 마친 진경민입니다. 대학원 진학 이전에는 고려대학교에서 컴퓨터공학과와 인공지능을 전공하여 2021년에 학사 학위를 취득했습니다.</p>
 
-  <p><strong>시각 지각에서 시작해 체화된 추론으로 확장되는 멀티모달 지능을 연구합니다.</strong></p>
+                  <p><strong>시각 지각에서 시작해 Embodied 추론으로 확장되는 멀티모달 지능을 연구합니다.</strong></p>
 
-  <p>저의 연구는 컴퓨터 비전 분야에서 시작되었으며, 트랜스포머 아키텍처와 합성곱 신경망을 결합한 새로운 포즈 추정 프레임워크를 제안해 다수의 벤치마크에서 최고 수준의 성능을 달성했습니다. 이러한 연구 성과를 바탕으로 WACV를 포함한 국제 학회 및 저널에 논문을 발표했습니다.</p>
+                  <p>저의 연구는 컴퓨터 비전 분야에서 시작되었으며, 트랜스포머 아키텍처와 합성곱 신경망을 결합한 새로운 포즈 추정 프레임워크를 제안해 다수의 벤치마크에서 최고 수준의 성능을
+                    달성했습니다. 이러한 연구 성과를 바탕으로 WACV를 포함한 국제 학회 및 저널에 논문을 발표했습니다.</p>
 
-  <p>이후 LG전자에 합류하여 인체 및 손 포즈 추정 모델을 엣지 디바이스 환경에 적용하는 연구를 수행하며, 실제 환경에서의 효율성과 강건성을 중심으로 한 모델 개발에 참여했습니다. 연구 관심사는 점차 확장되어 Vision–Language–Audio 기반의 대규모 멀티모달 모델, cross-modal continual learning, 그리고 GRPO 및 DPO와 같은 강화학습 기반 정책 최적화 기법을 활용한 멀티모달 학습 연구를 진행했습니다.</p>
+                  <p>이후 LG전자에 합류하여 인체 및 손 포즈 추정 모델을 엣지 디바이스 환경에 적용하는 연구를 수행하며, 실제 환경에서의 효율성과 강건성을 중심으로 한 모델 개발에 참여했습니다.
+                    연구 관심사는 점차 확장되어 Vision–Language–Audio 기반의 대규모 멀티모달 모델, cross-modal continual learning, 그리고 GRPO 및
+                    DPO와 같은 강화학습 기반 정책 최적화 기법을 활용한 멀티모달 학습 연구를 진행했습니다.</p>
 
-  <p>최근에는 로봇 선행 연구 조직에서 로봇 인지 및 자연어 기반 객체 이해 기술을 연구하고 있으며, 멀티모달 파운데이션 모델과 체화된 인공지능을 연결해 로봇이 시각 정보를 언어적으로 이해하고 물리적 환경과 효과적으로 상호작용할 수 있도록 하는 것을 목표로 하고 있습니다.</p>
+                  <p>최근에는 로봇 선행 연구 조직에서 로봇 인지 및 자연어 기반 객체 이해 기술을 연구하고 있으며, 멀티모달 파운데이션 모델과 Embodied 인공지능을 연결해 로봇이 시각 정보를
+                    언어적으로 이해하고 물리적 환경과 효과적으로 상호작용할 수 있도록 하는 것을 목표로 하고 있습니다.</p>
 
-  <p>더 자세한 경력은 <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>를 참고해주세요.</p>
-</div>
+                  <p>더 자세한 경력은 <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>를 참고해주세요.</p>
+                </div>
 
-<div class="lang-en">
-  <h1 id="introduction">Introduction</h1>
+                <div class="lang-en">
+                  <h1 id="introduction">Introduction</h1>
 
-  <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
+                  <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence
+                    at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was
+                    advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees
+                    (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
 
-  <p><strong>Building multimodal intelligence from visual perception to embodied reasoning.</strong></p>
+                  <p><strong>Building multimodal intelligence from visual perception to embodied reasoning.</strong></p>
 
-  <p>My research began in the computer vision domain, where I designed novel pose estimation frameworks that combine transformer-based architectures with convolutional neural networks. This work achieved state-of-the-art performance across multiple benchmarks and led to publications in international conferences and peer-reviewed journals, including WACV.</p>
+                  <p>My research began in the computer vision domain, where I designed novel pose estimation frameworks
+                    that combine transformer-based architectures with convolutional neural networks. This work achieved
+                    state-of-the-art performance across multiple benchmarks and led to publications in international
+                    conferences and peer-reviewed journals, including WACV.</p>
 
-  <p>After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge devices, focusing on efficiency and robustness in real-world environments. As my research interests expanded, I transitioned toward multimodal learning, contributing to the development of large-scale Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement learning–based policy optimization methods such as GRPO and DPO.</p>
+                  <p>After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge
+                    devices, focusing on efficiency and robustness in real-world environments. As my research interests
+                    expanded, I transitioned toward multimodal learning, contributing to the development of large-scale
+                    Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement
+                    learning–based policy optimization methods such as GRPO and DPO.</p>
 
-  <p>More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively.</p>
+                  <p>More recently, I have been working within an advanced robotics research team, where my focus is on
+                    robotic perception and natural language–based object understanding. My current research aims to
+                    bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual
+                    perception and interact with the physical world more effectively.</p>
 
-  <p>For more detailed information about my background and experience, please refer to my <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>.</p>
-</div>
+                  <p>For more detailed information about my background and experience, please refer to my <a
+                      target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>.</p>
+                </div>
 
-            </div>
+              </div>
 
-            <!-- Rating -->
-            
-            <div class="rating mb-4 d-flex align-items-center">
-                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
-<div class="c-rating c-rating--regular" data-rating-value="4.9">
-  <button>1</button>
-  <button>2</button>
-  <button>3</button>
-  <button>4</button>
-  <button>5</button>
-</div>
-</div>
-            </div>
-            
+              <!-- Rating -->
 
-            <!-- Post Date -->
-            <p>
-            <small>
-                <span class="post-date"><time class="post-date" datetime="2022-05-13">13 May 2022</time></span>           
-                
+              <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong>
+                <div class="rating-holder">
+                  <div class="c-rating c-rating--regular" data-rating-value="4.9">
+                    <button>1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                  </div>
+                </div>
+              </div>
+
+
+              <!-- Post Date -->
+              <p>
+                <small>
+                  <span class="post-date"><time class="post-date" datetime="2022-05-13">13 May 2022</time></span>
+
                 </small>
-            </p>
+              </p>
 
-            <!-- Post Categories -->
-            <div class="after-post-cats">
+              <!-- Post Categories -->
+              <div class="after-post-cats">
                 <ul class="tags mb-4">
-                    
-                    
-                    <li>
-                        <a class="smoothscroll" href="/categories#Introduce">Introduce</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- End Categories -->
 
-            <!-- Post Tags -->
-            <div class="after-post-tags">
+
+                  <li>
+                    <a class="smoothscroll" href="/categories#Introduce">Introduce</a>
+                  </li>
+
+                </ul>
+              </div>
+              <!-- End Categories -->
+
+              <!-- Post Tags -->
+              <div class="after-post-tags">
                 <ul class="tags">
-                    
-                    
-                    <li>
-                        <a class="smoothscroll" href="/tags#CV">#CV</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <!-- End Tags -->
 
-            <!-- Prev/Next -->
-            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+
+                  <li>
+                    <a class="smoothscroll" href="/tags#CV">#CV</a>
+                  </li>
+
+                </ul>
+              </div>
+              <!-- End Tags -->
+
+              <!-- Prev/Next -->
+              <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
                 <div class="col-6 text-left">
-                    
+
                 </div>
                 <div class="col-6 text-right">
-                    
-                    <a class="next text-dark text-decoration-none" href="/posts/hanet/">
-                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
-                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation</span>
-                    </a>
-                    
+
+                  <a class="next text-dark text-decoration-none" href="/posts/hanet/">
+                    <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next
+                      &raquo;</small>
+                    <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">[WACV 2023
+                      Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation</span>
+                  </a>
+
                 </div>
+              </div>
+
             </div>
+            <!-- End Post -->
 
+          </div>
         </div>
-        <!-- End Post -->
-
-    </div>
-</div>
-<!-- End Article
+        <!-- End Article
 ================================================== -->
 
-<!-- Begin Comments
+        <!-- Begin Comments
 ================================================== -->
 
-    <div class="container">
-        <div id="comments" class="row justify-content-center mb-5">
+        <div class="container">
+          <div id="comments" class="row justify-content-center mb-5">
             <div class="col-md-8">
-                <!-- <section class="disqus">
+              <!-- <section class="disqus">
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = ''; 
@@ -403,27 +421,21 @@
     <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 </section> -->
-<script
-  src="https://utteranc.es/client.js"
-  repo="KyungMinJin/KyungMinJin.github.io"
-  issue-term="og:title"
-  theme="github-light"
-  crossorigin="anonymous"
-  async
-></script>
+              <script src="https://utteranc.es/client.js" repo="KyungMinJin/KyungMinJin.github.io" issue-term="og:title"
+                theme="github-light" crossorigin="anonymous" async></script>
 
             </div>
+          </div>
         </div>
-    </div>
 
-<!--End Comments
+        <!--End Comments
 ================================================== -->
 
-<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+        <!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
 https://search.google.com/structured-data/testing-tool/u/0/
 ================================================== -->
 
-<script type="application/ld+json">
+        <script type="application/ld+json">
 {
   "@context": "http://schema.org/",
   "@type": "Review",
@@ -443,12 +455,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
   }
 }
 </script>
-</div>
+      </div>
 
-        
-        <!-- Bottom Alert Bar
+
+      <!-- Bottom Alert Bar
 ================================================== -->
-        <!-- <div class="alertbar">
+      <!-- <div class="alertbar">
           <div class="container text-center">
             <span
               ><img
@@ -486,12 +498,12 @@ https://search.google.com/structured-data/testing-tool/u/0/
             </form>
           </div>
         </div> -->
-        
-      </div>
 
-      <!-- Categories Jumbotron
+    </div>
+
+    <!-- Categories Jumbotron
 ================================================== -->
-      <!-- <div class="jumbotron fortags">
+    <!-- <div class="jumbotron fortags">
         <div class="d-md-flex h-100">
           <div class="col-md-4 transpdark align-self-center text-center h-100">
             <div
@@ -532,74 +544,65 @@ https://search.google.com/structured-data/testing-tool/u/0/
         </div>
       </div> -->
 
-      <!-- Begin Footer
+    <!-- Begin Footer
 ================================================== -->
-      <footer class="footer">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 text-center text-lg-left">
-              Copyright © 2026 Kyung-Min Jin
-            </div>
-            <div class="col-md-6 col-sm-6 text-center text-lg-right">
-              <a
-                target="_blank"
-                href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
-              ></a>
-            </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 text-center text-lg-left">
+            Copyright © 2026 Kyung-Min Jin
+          </div>
+          <div class="col-md-6 col-sm-6 text-center text-lg-right">
+            <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/"></a>
           </div>
         </div>
-      </footer>
-      <!-- End Footer
+      </div>
+    </footer>
+    <!-- End Footer
 ================================================== -->
-    </div>
-    <!-- /.site-content -->
+  </div>
+  <!-- /.site-content -->
 
-    <!-- Scripts
+  <!-- Scripts
 ================================================== -->
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
 
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-      crossorigin="anonymous"
-    ></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
 
-    <script src="/assets/js/mediumish.js"></script>
+  <script src="/assets/js/mediumish.js"></script>
 
-    
 
-    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-    
-    <script
-      id="dsq-count-scr"
-      src="//.disqus.com/count.js"
-    ></script>
-    
+  <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-    <script>
-      function changeLanguage(lang) {
-        document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
-        document.documentElement.classList.add('lang-mode-' + lang);
-        localStorage.setItem('pref-lang', lang);
-        var labels = document.querySelectorAll('#currentLangLabel');
-        labels.forEach(function(label) {
-          label.textContent = lang === 'ko' ? '한국어' : 'English';
-        });
-      }
-      document.addEventListener("DOMContentLoaded", function() {
-        var savedLang = localStorage.getItem('pref-lang');
-        if (!savedLang) {
-          var userLang = navigator.language || navigator.userLanguage;
-          savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
-        }
-        changeLanguage(savedLang);
+
+  <script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
+
+
+  <script>
+    function changeLanguage(lang) {
+      document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
+      document.documentElement.classList.add('lang-mode-' + lang);
+      localStorage.setItem('pref-lang', lang);
+      var labels = document.querySelectorAll('#currentLangLabel');
+      labels.forEach(function (label) {
+        label.textContent = lang === 'ko' ? '한국어' : 'English';
       });
-    </script>
-  </body>
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+      var savedLang = localStorage.getItem('pref-lang');
+      if (!savedLang) {
+        var userLang = navigator.language || navigator.userLanguage;
+        savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+      }
+      changeLanguage(savedLang);
+    });
+  </script>
+</body>
+
 </html>

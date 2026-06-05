@@ -57,7 +57,7 @@ $$w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_
 
 ## 3. 고속 추론 및 할루시네이션(Hallucination) 억제
 
-강화학습을 통한 정렬 과정에서 자주 관측되는 부작용 중 하나는 **생각 과정(Chain-of-Thought, CoT)에서의 환각(Hallucination)** 현상입니다. 단계적 추론을 하도록 유도했을 때, 입력 이미지에 없는 시각적 특징들을 임의로 지어내는 현상이 나타납니다.
+강화학습을 통한 정렬 과정에서 자주 관측되는 부작용 중 하나는 **생각 과정(Chain-of-Thought, CoT)에서의 환각(Hallucination)** 현상입니다. 단계적 추론을 하도록 유도했을 때, 입력 이미지에 없는 시각적 feature들을 임의로 지어내는 현상이 나타납니다.
 
 이 문제를 방지하기 위해 추론 경로상에서 환각 오류를 검출하는 보조 분류기(auxiliary classifier)를 활용하며, 이를 GRPO 보상 루프에 패널티 요인으로 차감 반영합니다:
 
