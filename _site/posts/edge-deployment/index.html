@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="icon" href="/assets/images/logo.png" />
+
+    <title>Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs | Kyung-Min Jin</title>
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs | Kyung-Min Jin</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs" />
+<meta name="author" content="Kyung-Min Jin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Key challenges and optimization recipes for deploying heavy keypoint regression models onto low-power edge chipsets and smart TVs." />
+<meta property="og:description" content="Key challenges and optimization recipes for deploying heavy keypoint regression models onto low-power edge chipsets and smart TVs." />
+<meta property="og:site_name" content="Kyung-Min Jin" />
+<meta property="og:image" content="/assets/images/pose_estimation_cv.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-11-20T00:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/pose_estimation_cv.png" />
+<meta property="twitter:title" content="Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyung-Min Jin"},"dateModified":"2024-11-20T00:00:00-06:00","datePublished":"2024-11-20T00:00:00-06:00","description":"Key challenges and optimization recipes for deploying heavy keypoint regression models onto low-power edge chipsets and smart TVs.","headline":"Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs","image":"/assets/images/pose_estimation_cv.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/edge-deployment/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"Kyung-Min Jin"},"url":"/posts/edge-deployment/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+
+    <link href="/assets/css/screen.css" rel="stylesheet" />
+
+    <link href="/assets/css/main.css" rel="stylesheet" />
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  </head>
+
+   
+  <body class="layout-post">
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+      <link
+        href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="/font-awesome-4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+      />
+    </noscript>
+
+    <!-- Begin Menu Navigation
+================================================== -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down"
+    >
+      <div class="container pr-0">
+        <!-- Begin Logo -->
+        <a class="navbar-brand text-dark font-weight-bold" href="/">
+          Kyung-Min Jin
+        </a>
+        <!-- End Logo -->
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMediumish"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+          <!-- Begin Menu -->
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/about">About (CV)</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/publications">Publications</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects">Projects</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+
+            <li class="nav-item">
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            </li>
+
+            <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+          </ul>
+
+          <!-- End Menu -->
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+      <div class="container">
+        <!-- Site Title
+================================================== -->
+        
+
+        <!-- Content
+================================================== -->
+        <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row justify-content-center position-relative">
+
+        <!-- Post Share (Floating on Left) -->
+        <div class="post-share-sidebar">
+            <div class="share sticky-top sticky-top-offset">
+  <p>Share</p>
+  <ul>
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs&url=/posts/edge-deployment/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
+      >
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://facebook.com/sharer.php?u=/posts/edge-deployment/"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-facebook-f"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/edge-deployment/"
+        onclick="window.open(this.href, 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </li>
+  </ul>
+  
+  <div class="sep"></div>
+  <ul>
+    <li>
+      <a class="small smoothscroll" href="#disqus_thread"></a>
+    </li>
+  </ul>
+  
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn follow">Follow</a>
+                        <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea University, Seoul. Check About Page for more information!</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/pose_estimation_cv.png" alt="Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <h1 id="deploying-pose-estimation-and-keypoint-regression-models-to-edge-npus">Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs</h1>
+
+<p>While training state-of-the-art pose estimation networks on high-performance GPUs (like NVIDIA H100s) is standard in research, running these models in <strong>real-time on consumer edge NPUs (neural processing units)</strong>—such as smart TV chipsets or mobile processors—introduces steep optimization challenges.</p>
+
+<p>In this post, we discuss practical recipes for exporting, optimizing, and compiling pose estimation models for low-power edge targets.</p>
+
+<hr />
+
+<h2 id="1-latency-bottlenecks-in-keypoint-regression">1. Latency Bottlenecks in Keypoint Regression</h2>
+
+<p>Unlike classification networks that utilize simple feed-forward stacks, pose estimation models often use:</p>
+<ul>
+  <li><strong>High-Resolution Feature Maps:</strong> HRNet or UNet-like architectures maintain high-resolution representations, which are memory-bandwidth heavy.</li>
+  <li><strong>Spatio-Temporal Attention (Transformers):</strong> Core components like self-attention have $O(T^2)$ complexity, leading to latency bottlenecks on hardware lacking specialized transformer cores.</li>
+</ul>
+
+<hr />
+
+<h2 id="2-the-export-pipeline-pytorch-to-onnx-to-qualcomm-sdk">2. The Export Pipeline: PyTorch to ONNX to Qualcomm SDK</h2>
+
+<p>To successfully run a PyTorch model on edge hardware (e.g., LG webOS TV chipsets or Qualcomm Snapdragon platforms):</p>
+
+<ol>
+  <li><strong>Graph Simplification:</strong> Convert raw PyTorch operations into a clean, static ONNX graph. Avoid dynamic loops or dynamic shapes, which are unsupported by edge compilers.</li>
+  <li><strong>ONNX Graph Optimization:</strong> Run tools like <code class="language-plaintext highlighter-rouge">onnx-simplifier</code> to fuse redundant nodes (such as Conv + BatchNorm + ReLU).</li>
+  <li><strong>Hardware Compilation:</strong> Compile the ONNX model to hardware-native runtimes, such as the <strong>Qualcomm Neural Processing SDK</strong> (SNPE) or TensorRT.</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>[PyTorch Model] ---&gt; [onnx-simplifier] ---&gt; [Qualcomm SNPE Compiler] ---&gt; [INT8 DLC Binary]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="3-practical-int8-quantization-strategies">3. Practical INT8 Quantization Strategies</h2>
+
+<p>To achieve sub-30ms latency, we must quantize the model to 8-bit integers (INT8). For pose estimation:</p>
+<ul>
+  <li><strong>Post-Training Quantization (PTQ)</strong> is often insufficient because keypoint heatmaps are highly sensitive to rounding errors, causing joint predictions to jitter or jump.</li>
+  <li><strong>Quantization-Aware Training (QAT)</strong> must be utilized to inject simulated quantization noise into the training loop, ensuring that the model learns to remain robust to lower precision representations.</li>
+</ul>
+
+<hr />
+
+<h3 id="results-in-production">Results in Production</h3>
+
+<p>By combining QAT, model pruning, and graph compilation, we successfully deployed real-time human body pose trackers to smart TVs:</p>
+<ul>
+  <li><strong>Latency:</strong> Reduced from <strong>84ms</strong> (FP32 baseline) to <strong>18ms</strong> (INT8 compiled) on ARM-based NPUs.</li>
+  <li><strong>Accuracy:</strong> Preserved <strong>99.2%</strong> of the original keypoint accuracy (PCKh@0.5).</li>
+</ul>
+
+            </div>
+
+            <!-- Rating -->
+            
+            <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="4.8">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+            </div>
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2024-11-20">20 Nov 2024</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Computer-Vision">Computer-Vision</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Edge-AI">#Edge-AI</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Model-Deployment">#Model-Deployment</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#ONNX">#ONNX</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+                <div class="col-6 text-left">
+                    
+                    <a class="prev text-dark text-decoration-none" href="/posts/qat/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo; Previous</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Quantization-Aware Training (QAT) for Edge Pose Estimation</span>
+                    </a>
+                    
+                </div>
+                <div class="col-6 text-right">
+                    
+                    <a class="next text-dark text-decoration-none" href="/posts/samif/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Cross-Modality Shared & Unique Information Factorization (SAMIF)</span>
+                    </a>
+                    
+                </div>
+            </div>
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = ''; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+<script
+  src="https://utteranc.es/client.js"
+  repo="KyungMinJin/KyungMinJin.github.io"
+  issue-term="og:title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Thing",
+    "name": "Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Kyung-Min Jin"
+  },
+  "datePublished": "2024-11-20",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "4.8",
+    "bestRating": "5"
+  }
+}
+</script>
+</div>
+
+        
+        <!-- Bottom Alert Bar
+================================================== -->
+        <!-- <div class="alertbar">
+          <div class="container text-center">
+            <span
+              ><img
+                src="/assets/images/logo.png"
+                alt="Kyung-Min Jin"
+              />
+              &nbsp; Never miss a <b>story</b> from us, subscribe to our
+              newsletter</span
+            >
+            <form
+              action="https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b"
+              method="post"
+              name="mc-embedded-subscribe-form"
+              class="wj-contact-form validate"
+              target="_blank"
+              novalidate
+            >
+              <div class="mc-field-group">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="EMAIL"
+                  class="required email"
+                  id="mce-EMAIL"
+                  autocomplete="on"
+                  required
+                />
+                <input
+                  type="submit"
+                  value="Subscribe"
+                  name="subscribe"
+                  class="heart"
+                />
+              </div>
+            </form>
+          </div>
+        </div> -->
+        
+      </div>
+
+      <!-- Categories Jumbotron
+================================================== -->
+      <!-- <div class="jumbotron fortags">
+        <div class="d-md-flex h-100">
+          <div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div
+              class="d-md-flex align-items-center justify-content-center h-100"
+            >
+              <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                Explore <span class="d-none d-md-inline">→</span>
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-8 p-5 align-self-center text-center">
+              
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Introduce"
+              >Introduce (1)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Computer-Vision"
+              >Computer-Vision (4)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Machine-Learning"
+              >Machine-Learning (2)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Robotics"
+              >Robotics (1)</a
+            >
+              
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Begin Footer
+================================================== -->
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+              Copyright © 2026 Kyung-Min Jin
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+              <a
+                target="_blank"
+                href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
+              ></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End Footer
+================================================== -->
+    </div>
+    <!-- /.site-content -->
+
+    <!-- Scripts
+================================================== -->
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/assets/js/mediumish.js"></script>
+
+    
+
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    
+    <script
+      id="dsq-count-scr"
+      src="//.disqus.com/count.js"
+    ></script>
+    
+  </body>
+</html>

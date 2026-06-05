@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="icon" href="/assets/images/logo.png" />
+
+    <title>Robotic Perception & Natural Language Object Grounding via Knowledge Graphs | Kyung-Min Jin</title>
+
+    <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs | Kyung-Min Jin</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs" />
+<meta name="author" content="Kyung-Min Jin" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Exploring how robots can bridge visual perception and language understanding using structured Knowledge Graphs and Retrieval-Augmented Generation." />
+<meta property="og:description" content="Exploring how robots can bridge visual perception and language understanding using structured Knowledge Graphs and Retrieval-Augmented Generation." />
+<meta property="og:site_name" content="Kyung-Min Jin" />
+<meta property="og:image" content="/assets/images/robotics_perception_kg.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-04-10T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/assets/images/robotics_perception_kg.png" />
+<meta property="twitter:title" content="Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kyung-Min Jin"},"dateModified":"2026-04-10T00:00:00-05:00","datePublished":"2026-04-10T00:00:00-05:00","description":"Exploring how robots can bridge visual perception and language understanding using structured Knowledge Graphs and Retrieval-Augmented Generation.","headline":"Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs","image":"/assets/images/robotics_perception_kg.png","mainEntityOfPage":{"@type":"WebPage","@id":"/posts/robotics-kg/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"},"name":"Kyung-Min Jin"},"url":"/posts/robotics-kg/"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      crossorigin="anonymous"
+    />
+
+    <link href="/assets/css/screen.css" rel="stylesheet" />
+
+    <link href="/assets/css/main.css" rel="stylesheet" />
+
+    <script src="/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+  </head>
+
+   
+  <body class="layout-post">
+    <!-- defer loading of font and font awesome -->
+    <noscript id="deferred-styles">
+      <link
+        href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="/font-awesome-4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"
+      />
+    </noscript>
+
+    <!-- Begin Menu Navigation
+================================================== -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down"
+    >
+      <div class="container pr-0">
+        <!-- Begin Logo -->
+        <a class="navbar-brand text-dark font-weight-bold" href="/">
+          Kyung-Min Jin
+        </a>
+        <!-- End Logo -->
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarMediumish"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+          <!-- Begin Menu -->
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item ">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/about">About (CV)</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/publications">Publications</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects">Projects</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+
+            <li class="nav-item">
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            </li>
+
+            <script src="/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/assets/js/lunrsearchengine.js"></script>
+          </ul>
+
+          <!-- End Menu -->
+        </div>
+      </div>
+    </nav>
+    <!-- End Navigation
+================================================== -->
+
+    <div class="site-content">
+      <div class="container">
+        <!-- Site Title
+================================================== -->
+        
+
+        <!-- Content
+================================================== -->
+        <div class="main-content"><!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row justify-content-center position-relative">
+
+        <!-- Post Share (Floating on Left) -->
+        <div class="post-share-sidebar">
+            <div class="share sticky-top sticky-top-offset">
+  <p>Share</p>
+  <ul>
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://twitter.com/intent/tweet?text=Robotic Perception & Natural Language Object Grounding via Knowledge Graphs&url=/posts/robotics-kg/"
+        onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
+      >
+        <i class="fa fa-twitter"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://facebook.com/sharer.php?u=/posts/robotics-kg/"
+        onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-facebook-f"></i>
+      </a>
+    </li>
+
+    <li class="ml-1 mr-1">
+      <a
+        target="_blank"
+        href="https://www.linkedin.com/shareArticle?mini=true&url=/posts/robotics-kg/"
+        onclick="window.open(this.href, 'width=550,height=435');return false;"
+      >
+        <i class="fa fa-linkedin-square"></i>
+      </a>
+    </li>
+  </ul>
+  
+  <div class="sep"></div>
+  <ul>
+    <li>
+      <a class="small smoothscroll" href="#disqus_thread"></a>
+    </li>
+  </ul>
+  
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-10 col-lg-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/assets/images/gravatar.png" alt="Kyung-Min Jin">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a><a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn follow">Follow</a>
+                        <span class="author-description">Master Degree, Department of Artificial Intelligence, Korea University, Seoul. Check About Page for more information!</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Robotic Perception & Natural Language Object Grounding via Knowledge Graphs</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid" src="/assets/images/robotics_perception_kg.png" alt="Robotic Perception & Natural Language Object Grounding via Knowledge Graphs">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <h1 id="robotic-perception--natural-language-object-grounding-via-knowledge-graphs">Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs</h1>
+
+<p>For robots to operate effectively in human environments, they must understand natural language commands (e.g., <em>“Bring me the coffee mug next to the laptop”</em>). This task, known as <strong>Language Grounding</strong>, requires mapping words in a sentence to specific objects, spatial relationships, and actions in the physical world.</p>
+
+<p>In this post, we discuss how we can build a robust object-grounding pipeline using a combination of <strong>contextual Knowledge Graphs</strong> and <strong>Vector Databases (Qdrant)</strong>.</p>
+
+<hr />
+
+<h2 id="1-the-challenge-of-spatial-and-temporal-object-grounding">1. The Challenge of Spatial and Temporal Object Grounding</h2>
+
+<p>Modern Open-Vocabulary Object Detectors (like OWL-ViT or Grounding DINO) can detect objects based on text queries. However, they lack:</p>
+<ol>
+  <li><strong>Temporal Persistence:</strong> Knowing if an object is still in the room when it is currently occluded or out of the robot’s field of view.</li>
+  <li><strong>Contextual Association:</strong> Understanding abstract concepts (e.g., <em>“my favorite mug”</em>) which depend on historical interaction context.</li>
+</ol>
+
+<hr />
+
+<h2 id="2-construction-of-a-contextual-knowledge-graph">2. Construction of a Contextual Knowledge Graph</h2>
+
+<p>To address this, we represent the robot’s environment as a dynamic <strong>Knowledge Graph (KG)</strong>:</p>
+
+<ul>
+  <li><strong>Nodes</strong> represent physical entities (e.g., <code class="language-plaintext highlighter-rouge">Mug</code>, <code class="language-plaintext highlighter-rouge">Table</code>, <code class="language-plaintext highlighter-rouge">User</code>), spatial regions (e.g., <code class="language-plaintext highlighter-rouge">Kitchen</code>), or abstract properties (e.g., <code class="language-plaintext highlighter-rouge">Color: Blue</code>).</li>
+  <li><strong>Edges</strong> represent spatial relations (e.g., <code class="language-plaintext highlighter-rouge">on</code>, <code class="language-plaintext highlighter-rouge">next_to</code>), owner relations (<code class="language-plaintext highlighter-rouge">owned_by</code>), or status logs.</li>
+</ul>
+
+<p>As the robot navigates the room, it continuously updates the nodes and edges based on its visual observations.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre>       [Mug: #042] ---(on)---&gt; [Table: #001]
+            |
+      (owned_by)
+            v
+       [User: Kyung-Min]
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h2 id="3-rag-based-hybrid-querying">3. RAG-Based Hybrid Querying</h2>
+
+<p>When the user gives a command, we utilize a <strong>Retrieval-Augmented Generation (RAG)</strong> pipeline to query the environment:</p>
+
+<ol>
+  <li><strong>Vector Search (Qdrant):</strong> We retrieve candidates based on semantic descriptions (e.g., search vector DB for <em>“mug”</em>).</li>
+  <li><strong>Graph Traversal (LlamaIndex):</strong> We filter candidates using graph relationships (e.g., filter for the mug that has the relationship <code class="language-plaintext highlighter-rouge">owned_by: Kyung-Min</code> and <code class="language-plaintext highlighter-rouge">on: Table</code>).</li>
+  <li><strong>LLM Reasoning (LangChain):</strong> An LLM synthesizes the target node information and outputs actionable coordinates for the robot’s manipulation policy.</li>
+</ol>
+
+<p>By combining vector databases with structured graphs, robots can resolve highly ambiguous, context-dependent requests with superior reliability.</p>
+
+<hr />
+
+<h3 id="key-takeaway">Key Takeaway</h3>
+<p>Integrating structured knowledge graphs with vision-language models allows embodied agents to build a cognitive map of the world. This approach bridges the gap between raw visual perception and high-level symbolic reasoning.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+            <div class="rating mb-4 d-flex align-items-center">
+                <strong class="mr-1">Rating:</strong> <div class="rating-holder">
+<div class="c-rating c-rating--regular" data-rating-value="5.0">
+  <button>1</button>
+  <button>2</button>
+  <button>3</button>
+  <button>4</button>
+  <button>5</button>
+</div>
+</div>
+            </div>
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2026-04-10">10 Apr 2026</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/categories#Robotics">Robotics</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Embodied-AI">#Embodied-AI</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#Knowledge-Graph">#Knowledge-Graph</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/tags#RAG">#RAG</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+                <div class="col-6 text-left">
+                    
+                    <a class="prev text-dark text-decoration-none" href="/posts/grpo/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo; Previous</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</span>
+                    </a>
+                    
+                </div>
+                <div class="col-6 text-right">
+                    
+                    <a class="next text-dark text-decoration-none" href="/posts/snpe-setup-guide/">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK</span>
+                    </a>
+                    
+                </div>
+            </div>
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = ''; 
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+<script
+  src="https://utteranc.es/client.js"
+  repo="KyungMinJin/KyungMinJin.github.io"
+  issue-term="og:title"
+  theme="github-light"
+  crossorigin="anonymous"
+  async
+></script>
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Review",
+  "itemReviewed": {
+    "@type": "Thing",
+    "name": "Robotic Perception & Natural Language Object Grounding via Knowledge Graphs"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Kyung-Min Jin"
+  },
+  "datePublished": "2026-04-10",
+  "reviewRating": {
+    "@type": "Rating",
+    "ratingValue": "5.0",
+    "bestRating": "5"
+  }
+}
+</script>
+</div>
+
+        
+        <!-- Bottom Alert Bar
+================================================== -->
+        <!-- <div class="alertbar">
+          <div class="container text-center">
+            <span
+              ><img
+                src="/assets/images/logo.png"
+                alt="Kyung-Min Jin"
+              />
+              &nbsp; Never miss a <b>story</b> from us, subscribe to our
+              newsletter</span
+            >
+            <form
+              action="https://wowthemes.us11.list-manage.com/subscribe/post?u=8aeb20a530e124561927d3bd8&amp;id=8c3d2d214b"
+              method="post"
+              name="mc-embedded-subscribe-form"
+              class="wj-contact-form validate"
+              target="_blank"
+              novalidate
+            >
+              <div class="mc-field-group">
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="EMAIL"
+                  class="required email"
+                  id="mce-EMAIL"
+                  autocomplete="on"
+                  required
+                />
+                <input
+                  type="submit"
+                  value="Subscribe"
+                  name="subscribe"
+                  class="heart"
+                />
+              </div>
+            </form>
+          </div>
+        </div> -->
+        
+      </div>
+
+      <!-- Categories Jumbotron
+================================================== -->
+      <!-- <div class="jumbotron fortags">
+        <div class="d-md-flex h-100">
+          <div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div
+              class="d-md-flex align-items-center justify-content-center h-100"
+            >
+              <h2 class="d-md-block align-self-center py-1 font-weight-light">
+                Explore <span class="d-none d-md-inline">→</span>
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-8 p-5 align-self-center text-center">
+              
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Introduce"
+              >Introduce (1)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Computer-Vision"
+              >Computer-Vision (4)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Machine-Learning"
+              >Machine-Learning (2)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Robotics"
+              >Robotics (1)</a
+            >
+              
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Begin Footer
+================================================== -->
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+              Copyright © 2026 Kyung-Min Jin
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+              <a
+                target="_blank"
+                href="https://www.wowthemes.net/mediumish-free-jekyll-template/"
+              ></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- End Footer
+================================================== -->
+    </div>
+    <!-- /.site-content -->
+
+    <!-- Scripts
+================================================== -->
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/assets/js/mediumish.js"></script>
+
+    
+
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    
+    <script
+      id="dsq-count-scr"
+      src="//.disqus.com/count.js"
+    ></script>
+    
+  </body>
+</html>

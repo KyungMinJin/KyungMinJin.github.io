@@ -18,14 +18,13 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Hi, I’m Kyung-Min Jin. See about page (CV)!" />
 <meta property="og:description" content="Hi, I’m Kyung-Min Jin. See about page (CV)!" />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Kyung-Min Jin" />
 <meta property="og:type" content="website" />
+<link rel="next" href="/page2/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Home" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","description":"Hi, I’m Kyung-Min Jin. See about page (CV)!","headline":"Home","name":"Kyung-Min Jin","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/assets/images/logo.png"}},"url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"WebSite","description":"Hi, I’m Kyung-Min Jin. See about page (CV)!","headline":"Home","name":"Kyung-Min Jin","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/assets/images/logo.png"}},"url":"/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -40,6 +39,17 @@
     <link href="/assets/css/main.css" rel="stylesheet" />
 
     <script src="/assets/js/jquery.min.js"></script>
+    <!-- MathJax for LaTeX Rendering -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
   </head>
 
    
@@ -64,8 +74,8 @@
     >
       <div class="container pr-0">
         <!-- Begin Logo -->
-        <a class="navbar-brand" href="/">
-          <img src="/assets/images/logo.png" alt="Kyung-Min Jin" />
+        <a class="navbar-brand text-dark font-weight-bold" href="/">
+          Kyung-Min Jin
         </a>
         <!-- End Logo -->
 
@@ -85,31 +95,28 @@
           <!-- Begin Menu -->
 
           <ul class="navbar-nav ml-auto">
-            
             <li class="nav-item active">
-              <a class="nav-link" href="https://donologue.tistory.com">Blog</a>
+              <a class="nav-link" href="/">Home</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/about">About (CV)</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/publications">Publications</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/projects">Projects</a>
+            </li>
+
+            <li class="nav-item ">
+              <a class="nav-link" href="/contact">Contact</a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link" href="/about">About</a>
-            </li>
-
-            <li class="nav-item">
-              <a
-                target="_blank"
-                class="nav-link"
-                href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/"
-                ><i class="fa fa-linkedin-square"></i> Linkedin
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a
-                target="_blank"
-                class="nav-link"
-                href="https://github.com/KyungMinJin"
-                ><i class="fa fa-github-square"></i> Github
-              </a>
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
             </li>
 
             <script src="/assets/js/lunr.js"></script>
@@ -146,14 +153,33 @@
       <div class="container">
         <!-- Site Title
 ================================================== -->
+        
         <div class="mainheading">
           <h1 class="sitetitle">Kyung-Min Jin</h1>
-          <p class="lead">Hi, I'm Kyung-Min Jin. See about page (CV)!</p>
+          <p class="lead">Hi, I'm Kyung-Min Jin. See <a href='/about'>about page (CV)</a>!</p>
         </div>
+        
 
         <!-- Content
 ================================================== -->
         <div class="main-content">
+
+<!-- Hero Research Highlight Banner -->
+<div class="card border-0 text-white rounded overflow-hidden shadow-lg mb-5" style="background: linear-gradient(135deg, #1e1e1e 0%, #111 100%);">
+    <div class="row no-gutters align-items-center">
+        <div class="col-md-7 p-4 p-md-5">
+            <span class="badge badge-warning mb-3 px-3 py-2 text-uppercase font-weight-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Research Highlight (WACV 2023 Oral)</span>
+            <h2 class="font-weight-bold text-white mb-3" style="font-size: 1.8rem; line-height: 1.3;">Kinematic-aware Hierarchical Attention Network</h2>
+            <p class="text-light mb-4" style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85;">
+                Solving temporal jitter and joint occlusions in video-based human pose estimation by integrating physical laws of motion (velocity & acceleration) into hierarchical spatio-temporal transformer architectures.
+            </p>
+            <a href="/posts/hanet/" class="btn btn-outline-light font-weight-bold px-4 py-2" style="border-radius: 30px; border-width: 2px;"><i class="fa fa-play-circle mr-1"></i> Read Paper & Code</a>
+        </div>
+        <div class="col-md-5 d-flex align-items-center justify-content-center" style="min-height: 250px; background: #000;">
+            <img class="img-fluid w-100 h-100" src="/assets/images/pw3d_smpl.gif" alt="HANet SMPL Mesh Recovery" style="object-fit: cover; height: 320px !important; opacity: 0.9;">
+        </div>
+    </div>
+</div>
 
 <!-- Featured
 ================================================== -->
@@ -167,91 +193,193 @@
 
         
 
+    
+
+        
+
             <!-- begin post -->
 
-<div class="col-md-6 mb-30px">
-  <div class="listfeaturedtag h-100">
-    <div class="row h-100">
-      <div class="col-12 col-md-12 col-lg-5 pr-lg-0">
-        <div class="h-100">
-          <div class="wrapthumbnail">
-            <a href="/about-me/">
-              
-              <img class="featured-box-img-cover" src="/assets/images/10.jpg"> 
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 col-md-12 col-lg-7">
-        <div class="h-100 card-group">
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">
-                <a class="text-dark" href="/about-me/"
-                  >About Me</a
-                >
-                
-                <div class="mb-2 mt-2 font-weight-normal">
-                  <div class="rating-holder">
-<div class="c-rating c-rating--regular" data-rating-value="4.9">
-  <button>1</button>
-  <button>2</button>
-  <button>3</button>
-  <button>4</button>
-  <button>5</button>
-</div>
-</div>
-                </div>
-                
-              </h2>
+<div class="col-12 mb-4 post-card-item">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #e9ecef !important; background: linear-gradient(to right, #ffffff, #fcfcfc);">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="badge badge-success mr-2 text-uppercase" style="font-size: 0.65rem; font-weight: 700; padding: 3px 6px;">Featured</span>
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Robotics</span>
+             <span class="text-muted" style="font-size: 0.75rem;">10 Apr 2026</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/robotics-kg/">Robotic Perception & Natural Language Object Grounding via Knowledge Graphs</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs
 
-              <h4 class="card-text">
-                I am Kyung-Min Jin, a master’s student in the graduate school of Artificial Intelligence at Korea University (PRML Lab), where I am advised by Prof...
-              </h4>
-            </div>
-            <div class="card-footer b-0 bg-white mt-auto">
-              <div class="wrapfooter">
-                
-                <span class="meta-footer-thumb">
-                  
-                  <img
-                    class="author-thumb"
-                    src="/assets/images/gravatar.png"
-                    alt="Kyung-Min Jin"
-                  />
-                  
-                </span>
-                <span class="author-meta">
-                  <span class="post-name"
-                    ><a target="_blank" href="https://www.github.com/KyungMinJin"
-                      >Kyung-Min Jin</a
-                    ></span
-                  ><br />
-                  
-                  <span class="post-date"
-                    >13 May 2022</span
-                  >
-                </span>
-                <span class="post-read-more"
-                  ><a
-                    href="//about-me/"
-                    title="Read Story"
-                    ><svg
-                      class="svgIcon-use"
-                      width="25"
-                      height="25"
-                      viewbox="0 0 25 25"
-                    >
-                      <path
-                        d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6zm-6.838 9.97L7 19.636V6c0-.55.45-1 1-1h9c.55 0 1 .45 1 1v13.637l-5.162-3.668a.49.49 0 0 0-.676 0z"
-                        fill-rule="evenodd"
-                      ></path></svg></a
-                ></span>
-                <div class="clearfix"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/robotics-kg/">
+             <img class="img-fluid rounded shadow-sm" src="/assets/images/robotics_perception_kg.png" alt="Robotic Perception & Natural Language Object Grounding via Knowledge Graphs" style="width: 110px; height: 110px; object-fit: cover; border: 1px solid #e9ecef;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+
+        
+
+    
+
+        
+
+            <!-- begin post -->
+
+<div class="col-12 mb-4 post-card-item">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #e9ecef !important; background: linear-gradient(to right, #ffffff, #fcfcfc);">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="badge badge-success mr-2 text-uppercase" style="font-size: 0.65rem; font-weight: 700; padding: 3px 6px;">Featured</span>
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-muted" style="font-size: 0.75rem;">18 Feb 2026</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/grpo/">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/grpo/">
+             <img class="img-fluid rounded shadow-sm" src="/assets/images/grpo_vlm_alignment.png" alt="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" style="width: 110px; height: 110px; object-fit: cover; border: 1px solid #e9ecef;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+    
+
+        
+
+            <!-- begin post -->
+
+<div class="col-12 mb-4 post-card-item">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #e9ecef !important; background: linear-gradient(to right, #ffffff, #fcfcfc);">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="badge badge-success mr-2 text-uppercase" style="font-size: 0.65rem; font-weight: 700; padding: 3px 6px;">Featured</span>
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Computer-Vision</span>
+             <span class="text-muted" style="font-size: 0.75rem;">05 Jan 2023</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/hanet/">[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             [WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/hanet/">
+             <img class="img-fluid rounded shadow-sm" src="/assets/images/HANet.png" alt="[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation" style="width: 110px; height: 110px; object-fit: cover; border: 1px solid #e9ecef;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+
+        
+
+    
+
+        
+
+            <!-- begin post -->
+
+<div class="col-12 mb-4 post-card-item">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #e9ecef !important; background: linear-gradient(to right, #ffffff, #fcfcfc);">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="badge badge-success mr-2 text-uppercase" style="font-size: 0.65rem; font-weight: 700; padding: 3px 6px;">Featured</span>
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Introduce</span>
+             <span class="text-muted" style="font-size: 0.75rem;">13 May 2022</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/about-me/">About Me</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             자기소개
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/about-me/">
+             <img class="img-fluid rounded shadow-sm" src="/assets/images/pose_estimation_cv.png" alt="About Me" style="width: 110px; height: 110px; object-fit: cover; border: 1px solid #e9ecef;">
+         </a>
+         
       </div>
     </div>
   </div>
@@ -273,15 +401,254 @@
 <section class="recent-posts">
 
     <div class="section-title">
-
         <h2><span>All Stories</span></h2>
+    </div>
 
+    <!-- Category Filter Chips -->
+    <div class="category-filter-chips mb-4">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="introduce">Introduce</button>
+        <button class="chip" data-filter="robotics">Robotics</button>
+        <button class="chip" data-filter="machine-learning">Machine Learning</button>
+        <button class="chip" data-filter="computer-vision">Computer Vision</button>
     </div>
 
     <div class="row listrecent">
+        
+        <!-- begin post -->
+
+<div class="col-12 mb-3 post-card-item" data-categories="computer-vision">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Computer-Vision</span>
+             <span class="text-muted" style="font-size: 0.75rem;">05 Jun 2026</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/snpe-setup-guide/">Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/snpe-setup-guide/">
+             <img class="img-fluid rounded" src="/assets/images/qat_pose_estimation.png" alt="Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
 
         
+        <!-- begin post -->
 
+<div class="col-12 mb-3 post-card-item" data-categories="robotics">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Robotics</span>
+             <span class="text-muted" style="font-size: 0.75rem;">10 Apr 2026</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/robotics-kg/">Robotic Perception & Natural Language Object Grounding via Knowledge Graphs</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/robotics-kg/">
+             <img class="img-fluid rounded" src="/assets/images/robotics_perception_kg.png" alt="Robotic Perception & Natural Language Object Grounding via Knowledge Graphs" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+        
+        <!-- begin post -->
+
+<div class="col-12 mb-3 post-card-item" data-categories="machine-learning">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-muted" style="font-size: 0.75rem;">18 Feb 2026</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/grpo/">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/grpo/">
+             <img class="img-fluid rounded" src="/assets/images/grpo_vlm_alignment.png" alt="Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+        
+        <!-- begin post -->
+
+<div class="col-12 mb-3 post-card-item" data-categories="machine-learning">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-muted" style="font-size: 0.75rem;">15 Nov 2025</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/samif/">Cross-Modality Shared & Unique Information Factorization (SAMIF)</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/samif/">
+             <img class="img-fluid rounded" src="/assets/images/multimodal_samif.png" alt="Cross-Modality Shared & Unique Information Factorization (SAMIF)" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+        
+        <!-- begin post -->
+
+<div class="col-12 mb-3 post-card-item" data-categories="computer-vision">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Computer-Vision</span>
+             <span class="text-muted" style="font-size: 0.75rem;">20 Nov 2024</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/edge-deployment/">Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/edge-deployment/">
+             <img class="img-fluid rounded" src="/assets/images/pose_estimation_cv.png" alt="Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+        
+        <!-- begin post -->
+
+<div class="col-12 mb-3 post-card-item" data-categories="computer-vision">
+  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+    <div class="row no-gutters align-items-center">
+      <div class="col-8 col-md-9 p-3 p-md-4">
+         <div class="d-flex align-items-center mb-1">
+             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Computer-Vision</span>
+             <span class="text-muted" style="font-size: 0.75rem;">12 May 2024</span>
+         </div>
+         <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/qat/">Quantization-Aware Training (QAT) for Edge Pose Estimation</a>
+         </h3>
+         <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
+             Quantization-Aware Training (QAT) for Edge Pose Estimation
+
+         </p>
+         
+         <div class="d-flex align-items-center mt-2">
+             <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
+             <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
+                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+             </span>
+         </div>
+         
+      </div>
+      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+         
+         <a href="/posts/qat/">
+             <img class="img-fluid rounded" src="/assets/images/qat_pose_estimation.png" alt="Quantization-Aware Training (QAT) for Edge Pose Estimation" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+         </a>
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end post -->
+
+        
     </div>
 
 </section>
@@ -292,9 +659,106 @@
 <div class="pointerup"><i class="fa fa-caret-up"></i></div>
 <span class="navigation" role="navigation">
     
+<div class="pagination">
+  
+    <span>&laquo; Prev</span>
+  
+
+  
+    
+      <span class="ml-1 mr-1">1</span>
+    
+  
+    
+      <a class="ml-1 mr-1" href="/page2/">2</a>
+    
+  
+
+  
+    <a class="ml-1 mr-1" href="/page2/">Next &raquo;</a>
+  
+</div>
+
 </span>
 </div>
 
+<style>
+.category-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.category-filter-chips .chip {
+  padding: 8px 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #495057;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 50px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+.category-filter-chips .chip:hover {
+  background: #e9ecef;
+  color: #212529;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+.category-filter-chips .chip.active {
+  background: #2b2b2b;
+  color: #fff;
+  border-color: #2b2b2b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+.post-card-item {
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
+  transform: scale(1);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const chips = document.querySelectorAll(".category-filter-chips .chip");
+  const postItems = document.querySelectorAll(".post-card-item");
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", function() {
+      // Toggle active state
+      chips.forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+
+      const filterValue = this.getAttribute("data-filter").toLowerCase();
+
+      postItems.forEach(item => {
+        const categories = item.getAttribute("data-categories").split(",");
+        
+        if (filterValue === "all" || categories.includes(filterValue)) {
+          item.style.display = "flex";
+          // Force layout reflow before opacity change to trigger transition
+          void item.offsetHeight;
+          item.style.opacity = "1";
+          item.style.transform = "scale(1)";
+        } else {
+          item.style.opacity = "0";
+          item.style.transform = "scale(0.95)";
+          // Set display none after opacity animation finishes
+          setTimeout(() => {
+            if (item.style.opacity === "0") {
+              item.style.display = "none";
+            }
+          }, 300);
+        }
+      });
+    });
+  });
+});
+</script>
 </div>
 
         
@@ -361,6 +825,24 @@
               href="/categories#Introduce"
               >Introduce (1)</a
             >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Computer-Vision"
+              >Computer-Vision (4)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Machine-Learning"
+              >Machine-Learning (2)</a
+            >
+            
+            <a
+              class="mt-1 mb-1"
+              href="/categories#Robotics"
+              >Robotics (1)</a
+            >
               
           </div>
         </div>
@@ -372,7 +854,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-sm-6 text-center text-lg-left">
-              Copyright © 2023 Kyung-Min Jin
+              Copyright © 2026 Kyung-Min Jin
             </div>
             <div class="col-md-6 col-sm-6 text-center text-lg-right">
               <a
