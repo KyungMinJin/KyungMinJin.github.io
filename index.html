@@ -22,63 +22,501 @@ title: Home
     </div>
 </div>
 
-<!-- Featured
-================================================== -->
-<section class="featured-posts">
-    <div class="section-title">
-        <h2><span>Featured</span></h2>
+<!-- 1. Research Interests (Full Width) -->
+<div class="row mb-5">
+    <div class="col-md-12">
+        <h3 class="font-weight-bold mb-4"><i class="fa fa-lightbulb-o text-warning"></i> Research Interests</h3>
     </div>
-    <div class="row">
-
-    {% for post in site.posts %}
-
-        {% if post.featured == true %}
-
-            {% include featuredbox.html %}
-
-        {% endif %}
-
-    {% endfor %}
-
+    <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card research-card border-0 shadow-sm p-4 h-100">
+            <div class="research-icon-wrapper bg-purple-light mb-3">
+                <span class="research-emoji">🧠</span>
+            </div>
+            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Multimodal Intelligence</h5>
+            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                Aligning vision-language-audio modalities, cross-modal continual learning, and RL policy alignment (GRPO/DPO).
+            </p>
+        </div>
     </div>
-</section>
+    <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card research-card border-0 shadow-sm p-4 h-100">
+            <div class="research-icon-wrapper bg-blue-light mb-3">
+                <span class="research-emoji">👁️</span>
+            </div>
+            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Computer Vision / Pose</h5>
+            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                2D/3D human and hand pose estimation, spatial-temporal attention transformers, and quantized-aware training.
+            </p>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-6 mb-3">
+        <div class="card research-card border-0 shadow-sm p-4 h-100">
+            <div class="research-icon-wrapper bg-green-light mb-3">
+                <span class="research-emoji">🤖</span>
+            </div>
+            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Embodied AI / Robotics</h5>
+            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                Robotic perception, natural language-based object understanding, and bridging VLA models to physical robotic actions.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- 2-Column Content Layout -->
+<div class="row justify-content-between">
+    <!-- Left Column (Main Portfolio Content) -->
+    <div class="col-md-8 pr-md-5">
+        
+        <!-- Latest News -->
+        <div class="card news-card border-0 shadow-sm p-4 mb-5">
+            <h4 class="font-weight-bold text-dark mb-3" style="font-size: 1.15rem;"><i class="fa fa-bullhorn text-warning"></i> Latest News</h4>
+            <div class="news-list">
+                <div class="news-item d-flex align-items-start mb-3 pb-3 border-bottom">
+                    <span class="badge badge-teal mr-3 mt-1">2026.05</span>
+                    <div class="news-content">
+                        <p class="text-dark font-weight-bold mb-1" style="font-size: 0.9rem;">"MAPLE: Modality-Aware Post-training and Learning Ecosystem" arXiv Preprinted</p>
+                        <span class="text-muted" style="font-size: 0.82rem;">Co-authored research proposing modality-aware post-training pipelines.</span>
+                    </div>
+                </div>
+                <div class="news-item d-flex align-items-start mb-3 pb-3 border-bottom">
+                    <span class="badge badge-teal mr-3 mt-1">2026.01</span>
+                    <div class="news-content">
+                        <p class="text-dark font-weight-bold mb-1" style="font-size: 0.9rem;">Transitioned to Advanced Robotics Lab, LG Electronics</p>
+                        <span class="text-muted" style="font-size: 0.82rem;">Focusing on robotic perception, object understanding, and VLA grounding (선임연구원).</span>
+                    </div>
+                </div>
+                <div class="news-item d-flex align-items-start mb-0">
+                    <span class="badge badge-teal mr-3 mt-1">2026</span>
+                    <div class="news-content">
+                        <p class="text-dark font-weight-bold mb-1" style="font-size: 0.9rem;">Serving as Active Reviewer for NeurIPS, BMVC & ECCV</p>
+                        <span class="text-muted" style="font-size: 0.82rem;">Reviewer activities for major machine learning and computer vision venues.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chronological Timeline -->
+        <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> Work & Education Timeline</h3>
+        <div class="linkedin-timeline mb-5">
+            
+            <!-- 1. LG Electronics -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <img src="{{ site.baseurl }}/assets/images/lg_electronics_logo.jpg" alt="LG Electronics" class="timeline-org-logo">
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">LG Electronics</h4>
+                        <p class="timeline-org-duration">Full-time · 3 yrs 4 mos (Mar 2023 - Present)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-connector"></div>
+                    <div class="timeline-role-card">
+                        <div class="timeline-role-node"></div>
+                        <div class="timeline-role-details">
+                            <h5 class="timeline-role-title">Advanced Robotics Lab</h5>
+                            <p class="timeline-role-subtitle">Robot Cognition Solution Task Specialist (선임연구원)</p>
+                            <p class="timeline-role-date">Jan 2026 - Present</p>
+                            <p class="timeline-role-desc">Focusing on robotic perception, natural language-based object understanding, and Embodied AI reasoning. Connecting Vision-Language-Action (VLA) foundation models with physical robotic actions.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-role-card">
+                        <div class="timeline-role-node"></div>
+                        <div class="timeline-role-details">
+                            <h5 class="timeline-role-title">AI Lab</h5>
+                            <p class="timeline-role-subtitle">Multimodal Task Specialist (연구원)</p>
+                            <p class="timeline-role-date">Jul 2023 - Dec 2025</p>
+                            <p class="timeline-role-desc">Researched "Semantic-Aware Mutual Information Factorized Learning (SAMIF)" for multimodal segmentation. Deployed action detection/control models to Qualcomm Neural SDK via ONNX. Designed audio tower and LLM cross modal continual learning pipeline. Researched GRPO/DPO online policy optimization for MLLMs with Toronto AI Lab.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-role-card">
+                        <div class="timeline-role-node"></div>
+                        <div class="timeline-role-details">
+                            <h5 class="timeline-role-title">Cognitive Vision TP</h5>
+                            <p class="timeline-role-subtitle">Cognitive Vision TP Researcher (연구원)</p>
+                            <p class="timeline-role-date">Mar 2023 - Jul 2023</p>
+                            <p class="timeline-role-desc">Optimized body pose estimation models using quantized-aware training for LG TV edge device deployment. Designed RecycleNet for hand mesh synthesis and proposed grouping attention mechanism per finger, achieving state-of-the-art performance in PA-MPJPE.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Klue -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <div class="timeline-org-logo-fallback">
+                        <i class="fa fa-code"></i>
+                    </div>
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">Klue</h4>
+                        <p class="timeline-org-duration">Frontend Developer · 3 yrs 9 mos (Jul 2019 - Mar 2023)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        <div class="timeline-role-details">
+                            <p class="timeline-role-desc">Designed, deployed, and maintained a course evaluation service utilized by university students. Managed state architectures using Redux and MobX, and implemented clean, responsive components in React and TypeScript.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Korea University (M.S.) -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <img src="{{ site.baseurl }}/assets/images/korea logo.jpg" alt="Korea University" class="timeline-org-logo">
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">Korea University (Graduate School)</h4>
+                        <p class="timeline-org-duration">M.S. in Artificial Intelligence · 1 yr 6 mos (Sep 2021 - Feb 2023)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        <div class="timeline-role-details">
+                            <h5 class="timeline-role-title">PRML Lab (Advised by Prof. Seong-Hwan Lee)</h5>
+                            <p class="timeline-role-subtitle">Research Area: Computer Vision & Deep Learning</p>
+                            <p class="timeline-role-desc">Specialized in video-based human pose estimation, spatial-temporal attention transformers, and mutual learning. Published first-author papers at WACV 2023 (Oral) and Neural Networks. Graduated with a perfect GPA of 4.50/4.50.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Da Vinci Co., Ltd. -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <img src="{{ site.baseurl }}/assets/images/davinci_dvnci_logo.jpg" alt="Da Vinci Co., Ltd." class="timeline-org-logo">
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">Da Vinci Co., Ltd.</h4>
+                        <p class="timeline-org-duration">Frontend Developer · 8 mos (Jul 2020 - Feb 2021)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        <div class="timeline-role-details">
+                            <p class="timeline-role-desc">Deployed and maintained interactive map-based applications, link saving helper utilities, and browser extensions. Leveraged modern React, TypeScript, Next.js, and React Native codebases.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Voice Caddie -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <div class="timeline-org-logo-fallback">
+                        <i class="fa fa-cogs"></i>
+                    </div>
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">Voice Caddie</h4>
+                        <p class="timeline-org-duration">AI Assistant Device Developer · 7 mos (May 2020 - Nov 2020)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        <div class="timeline-role-details">
+                            <p class="timeline-role-desc">Developed and deployed golf swing pose estimation models, action localization modules, and specialized video annotation tools. Utilized Python, PyTorch, C++, and OpenCV.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Korea University (B.S.) -->
+            <div class="timeline-org-group">
+                <div class="timeline-org-header">
+                    <img src="{{ site.baseurl }}/assets/images/korea logo.jpg" alt="Korea University" class="timeline-org-logo">
+                    <div class="timeline-org-info">
+                        <h4 class="timeline-org-title">Korea University (Undergraduate)</h4>
+                        <p class="timeline-org-duration">B.S. in Computer Science & CSE / Artificial Intelligence · 5 yrs 5 mos (Mar 2016 - Aug 2021)</p>
+                    </div>
+                </div>
+                <div class="timeline-roles-container">
+                    <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        <div class="timeline-role-details">
+                            <h5 class="timeline-role-title">College of Informatics</h5>
+                            <p class="timeline-role-subtitle">Dual Degrees (Graduated with Honors)</p>
+                            <p class="timeline-role-desc">Completed double majors in Computer Science and Artificial Intelligence. Cumulative GPA of 3.99/4.50 (AI major GPA: 4.17/4.50).</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Tech Stack & Skills -->
+        <h4 class="font-weight-bold mb-3"><i class="fa fa-tags text-danger"></i> Tech Stack & Skills</h4>
+        <div class="skills-container card border-0 shadow-sm p-4 bg-white mb-5">
+            <div class="skill-category mb-3">
+                <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i class="fa fa-code-fork text-primary mr-2"></i> Deep Learning & AI</h6>
+                <div class="d-flex flex-wrap">
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">TensorFlow</span>
+                    <span class="tech-tag">HuggingFace</span>
+                    <span class="tech-tag">veRL</span>
+                    <span class="tech-tag">TRL</span>
+                    <span class="tech-tag">Continual Learning</span>
+                    <span class="tech-tag">GRPO / DPO</span>
+                    <span class="tech-tag">Quantization (QAT)</span>
+                </div>
+            </div>
+            <div class="skill-category mb-3">
+                <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i class="fa fa-gears text-success mr-2"></i> Robotics & LLM / RAG</h6>
+                <div class="d-flex flex-wrap">
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">LlamaIndex</span>
+                    <span class="tech-tag">Qdrant</span>
+                    <span class="tech-tag">ChromaDB</span>
+                    <span class="tech-tag">ONNX</span>
+                    <span class="tech-tag">Qualcomm Neural SDK</span>
+                    <span class="tech-tag">ROS</span>
+                </div>
+            </div>
+            <div class="skill-category mb-3">
+                <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i class="fa fa-code text-info mr-2"></i> Programming Languages</h6>
+                <div class="d-flex flex-wrap">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">JavaScript</span>
+                </div>
+            </div>
+            <div class="skill-category mb-0">
+                <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i class="fa fa-laptop text-warning mr-2"></i> Development Tools & Frontend</h6>
+                <div class="d-flex flex-wrap">
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">React Native</span>
+                    <span class="tech-tag">Next.js</span>
+                    <span class="tech-tag">FastAPI</span>
+                    <span class="tech-tag">Gradio</span>
+                    <span class="tech-tag">Git</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Awards & Honors -->
+        <h3 class="font-weight-bold mb-4"><i class="fa fa-trophy text-warning"></i> Awards & Honors</h3>
+        <div class="row mb-5">
+            <div class="col-md-6 mb-3">
+                <div class="card award-card border-0 shadow-sm p-3 h-100 d-flex flex-row align-items-center">
+                    <div class="award-icon-box bg-gold mr-3">
+                        <i class="fa fa-trophy text-gold-dark"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-weight-bold text-dark mb-1" style="font-size: 0.95rem;">Grand Prize (대상)</h6>
+                        <p class="text-secondary mb-1" style="font-size: 0.85rem;">Miso AI Model Development Challenge</p>
+                        <span class="text-muted" style="font-size: 0.8rem;"><i class="fa fa-calendar mr-1"></i> Dec 2021 · Ministry of Science and ICT</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card award-card border-0 shadow-sm p-3 h-100 d-flex flex-row align-items-center">
+                    <div class="award-icon-box bg-medal mr-3">
+                        <i class="fa fa-graduation-cap text-medal-dark"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-weight-bold text-dark mb-1" style="font-size: 0.95rem;">R&D Scholarships</h6>
+                        <p class="text-secondary mb-1" style="font-size: 0.85rem;">LG Electronics Scholarship Award</p>
+                        <span class="text-muted" style="font-size: 0.8rem;"><i class="fa fa-calendar mr-1"></i> Sep 2022 · LG Electronics</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card award-card border-0 shadow-sm p-3 h-100 d-flex flex-row align-items-center">
+                    <div class="award-icon-box bg-bronze mr-3">
+                        <i class="fa fa-microphone text-bronze-dark"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-weight-bold text-dark mb-1" style="font-size: 0.95rem;">Oral Presentations (WACV, SMC)</h6>
+                        <p class="text-secondary mb-1" style="font-size: 0.85rem;">Invited Oral Presentations at Top Venues</p>
+                        <span class="text-muted" style="font-size: 0.8rem;"><i class="fa fa-calendar mr-1"></i> 2022 - 2023 · WACV 2023, SMC 2022</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card award-card border-0 shadow-sm p-3 h-100 d-flex flex-row align-items-center">
+                    <div class="award-icon-box bg-blue mr-3">
+                        <i class="fa fa-certificate text-blue-dark"></i>
+                    </div>
+                    <div>
+                        <h6 class="font-weight-bold text-dark mb-1" style="font-size: 0.95rem;">Encouragement Prize</h6>
+                        <p class="text-secondary mb-1" style="font-size: 0.85rem;">Smart Campus Dataton</p>
+                        <span class="text-muted" style="font-size: 0.8rem;"><i class="fa fa-calendar mr-1"></i> Jul 2020 · Korea University</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Source & Tutorials -->
+        <h3 class="font-weight-bold mb-4"><i class="fa fa-code text-primary"></i> Open-Source & Tutorials</h3>
+        <div class="card border-0 shadow-sm p-4 bg-white mb-5" style="border-radius: 12px; border: 1px solid #f1f3f5 !important;">
+            <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
+                <li class="mb-2"><strong>HANet (WACV 2023):</strong> PyTorch implementation of Kinematic-aware Hierarchical Attention Network [<a href="https://github.com/KyungMinJin/HANet" target="_blank">Repository</a>]</li>
+                <li class="mb-2"><strong>OTPose (SMC 2022):</strong> Occlusion-Aware Transformer for video pose estimation [<a href="https://github.com/KyungMinJin" target="_blank">Repository</a>]</li>
+                <li><strong>Online Course Instructor:</strong> 2D Pose Estimation Tutorial Course (Inflearn, Mar. 2023)</li>
+            </ul>
+        </div>
+
+        <!-- Posts Index -->
+        <section class="recent-posts">
+            <div class="section-title">
+                <h2><span>All Stories</span></h2>
+            </div>
+
+            <!-- Category Filter Chips -->
+            <div class="category-filter-chips mb-4">
+                <button class="chip active" data-filter="all">All</button>
+                <button class="chip" data-filter="introduce">Introduce</button>
+                <button class="chip" data-filter="robotics">Robotics</button>
+                <button class="chip" data-filter="machine-learning">Machine Learning</button>
+                <button class="chip" data-filter="computer-vision">Computer Vision</button>
+            </div>
+
+            <div class="row listrecent">
+                {% for post in paginator.posts %}
+                {% include postbox.html %}
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- Pagination -->
+        <div class="bottompagination mb-5">
+            <div class="pointerup"><i class="fa fa-caret-up"></i></div>
+            <span class="navigation" role="navigation">
+                {% include pagination.html %}
+            </span>
+        </div>
+
+        <!-- Call for Collaboration (Contact CTA) -->
+        <div class="card collab-card border-0 p-4 rounded shadow-sm">
+            <h4 class="font-weight-bold text-dark mb-2"><i class="fa fa-comments text-info"></i> Call for Collaboration</h4>
+            <p class="text-muted mb-4" style="line-height: 1.7; font-size: 0.95rem;">
+                I am highly open to research collaborations, joint paper submissions, and discussions on <strong>Multimodal Large Language Models (VLAs/VLMs)</strong>, <strong>Embodied AI / Robotics reasoning</strong>, and <strong>RL policy optimization (GRPO/DPO)</strong>. If you are interested in working together, please contact me through my social channels!
+            </p>
+            <div class="d-flex flex-wrap">
+                <button id="copyEmailBtn" class="btn btn-premium-teal mr-3 mb-2" onclick="copyEmailToClipboard()">
+                    <i class="fa fa-envelope mr-1"></i> <span id="copyBtnText">Copy Email</span>
+                </button>
+                <a target="_blank" href="https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%E2%80%8D%EC%A7%84-34594b1b7/" class="btn btn-premium-linkedin mr-3 mb-2">
+                    <i class="fa fa-linkedin mr-1"></i> LinkedIn DM
+                </a>
+                <a href="/contact" class="btn btn-premium-outline mb-2">
+                    <i class="fa fa-paper-plane mr-1"></i> Contact Form
+                </a>
+            </div>
+            <!-- Alert message hidden by default -->
+            <div id="copyAlert" class="copy-alert-toast" style="display: none;">
+                Email address copied to clipboard!
+            </div>
+        </div>
+
+    </div> <!-- Left Column 끝 -->
+
+    <!-- Right Column (Sidebar Widgets) -->
+    <div class="col-md-4">
+        
+        <!-- Social Media / CV Quick Links -->
+        <div class="card border shadow-sm p-4 mb-4 bg-white">
+            <h5 class="font-weight-bold text-dark border-bottom pb-2 mb-3">Links & Docs</h5>
+            <p class="text-secondary" style="font-size: 0.88rem;">Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
+            <div class="d-flex flex-column">
+                <a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary btn-block mb-2 text-left px-3 py-2"><i class="fa fa-linkedin mr-2"></i> LinkedIn Profile</a>
+                <a target="_blank" href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" class="btn btn-info btn-block mb-2 text-left px-3 py-2"><i class="fa fa-graduation-cap mr-2"></i> Google Scholar</a>
+                <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark btn-block mb-2 text-left px-3 py-2"><i class="fa fa-file-pdf-o mr-2"></i> CV PDF Document</a>
+            </div>
+        </div>
+
+        <!-- Google Scholar Metrics -->
+        <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white">
+            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                <i class="fa fa-graduation-cap text-info"></i> Google Scholar Metrics
+            </h6>
+            <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
+                <thead>
+                    <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
+                        <th>Metric</th>
+                        <th class="text-right">All</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-dark py-1">Citations</td>
+                        <td class="text-right font-weight-bold py-1">94</td>
+                    </tr>
+                    <tr>
+                        <td class="text-dark py-1">h-index</td>
+                        <td class="text-right font-weight-bold py-1">5</td>
+                    </tr>
+                    <tr>
+                        <td class="text-dark py-1">i10-index</td>
+                        <td class="text-right font-weight-bold py-1">4</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="scholar-graph-container mt-2">
+                <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">Citations per year</div>
+                <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 220px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 3%;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">21</span>
+                    </div>
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 11%;" data-tooltip="2022: 4 citations" title="2022: 4 citations"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">22</span>
+                    </div>
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 100%;" data-tooltip="2023: 36 citations" title="2023: 36 citations"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">23</span>
+                    </div>
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 50%;" data-tooltip="2024: 18 citations" title="2024: 18 citations"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">24</span>
+                    </div>
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 69%;" data-tooltip="2025: 25 citations" title="2025: 25 citations"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">25</span>
+                    </div>
+                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
+                        <div class="scholar-bar" style="height: 28%;" data-tooltip="2026: 10 citations" title="2026: 10 citations"></div>
+                        <span class="scholar-year d-block mt-1 text-muted">26</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub Contribution Graph -->
+        <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white">
+            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                <i class="fa fa-github text-dark"></i> GitHub Activity
+            </h6>
+            <div class="text-center">
+                <a target="_blank" href="https://github.com/KyungMinJin">
+                    <img src="https://ghchart.rshah.org/4a777a/KyungMinJin" alt="Kyung-Min Jin's Github Chart" style="max-width: 100%; height: auto; border-radius: 4px;" />
+                </a>
+                <p class="text-muted mt-2 mb-0" style="font-size: 0.72rem;">Kyung-Min Jin's Github Contributions</p>
+            </div>
+        </div>
+
+        <!-- Visitor Analytics Widget (Stable 2D ClustrMaps Image) -->
+        <div class="card border shadow-sm p-3 pt-2 pb-2 bg-white text-center">
+            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                <i class="fa fa-globe text-secondary"></i> Visitor Map
+            </h6>
+            <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank">
+                    <img src="https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" alt="Visitor Map" style="max-width: 100%; height: auto; border-radius: 8px;" onerror="this.onerror=null; this.src='https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+                </a>
+            </div>
+            <div class="mt-2">
+                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
+            </div>
+        </div>
+
+    </div> <!-- Right Column 끝 -->
+</div>
 
 {% endif %}
 
-<!-- Posts Index
-================================================== -->
-<section class="recent-posts">
-
-    <div class="section-title">
-        <h2><span>All Stories</span></h2>
-    </div>
-
-    <!-- Category Filter Chips -->
-    <div class="category-filter-chips mb-4">
-        <button class="chip active" data-filter="all">All</button>
-        <button class="chip" data-filter="introduce">Introduce</button>
-        <button class="chip" data-filter="robotics">Robotics</button>
-        <button class="chip" data-filter="machine-learning">Machine Learning</button>
-        <button class="chip" data-filter="computer-vision">Computer Vision</button>
-    </div>
-
-    <div class="row listrecent">
-        {% for post in paginator.posts %}
-        {% include postbox.html %}
-        {% endfor %}
-    </div>
-
-</section>
-
-<!-- Pagination
-================================================== -->
-<div class="bottompagination">
-<div class="pointerup"><i class="fa fa-caret-up"></i></div>
-<span class="navigation" role="navigation">
-    {% include pagination.html %}
-</span>
-</div>
-
+<!-- Style & Script -->
 <style>
 .category-filter-chips {
   display: flex;
@@ -120,39 +558,62 @@ title: Home
 </style>
 
 <script>
+// Category Filtering Script
 document.addEventListener("DOMContentLoaded", function() {
   const chips = document.querySelectorAll(".category-filter-chips .chip");
   const postItems = document.querySelectorAll(".post-card-item");
 
   chips.forEach(chip => {
     chip.addEventListener("click", function() {
-      // Toggle active state
       chips.forEach(c => c.classList.remove("active"));
       this.classList.add("active");
 
       const filterValue = this.getAttribute("data-filter").toLowerCase();
 
       postItems.forEach(item => {
-        const categories = item.getAttribute("data-categories").split(",");
+        const rawCategories = item.getAttribute("data-categories") || "";
+        const categories = rawCategories.split(",").map(c => c.trim().toLowerCase().replace(/\s+/g, '-'));
         
-        if (filterValue === "all" || categories.includes(filterValue)) {
-          item.style.display = "flex";
-          // Force layout reflow before opacity change to trigger transition
-          void item.offsetHeight;
-          item.style.opacity = "1";
-          item.style.transform = "scale(1)";
+        const matches = filterValue === "all" || 
+                        categories.includes(filterValue) || 
+                        categories.some(cat => cat.replace(/-/g, '') === filterValue.replace(/-/g, ''));
+        
+        if (matches) {
+          item.style.display = ""; 
+          setTimeout(() => {
+            item.style.opacity = "1";
+            item.style.transform = "scale(1)";
+          }, 10);
         } else {
           item.style.opacity = "0";
           item.style.transform = "scale(0.95)";
-          // Set display none after opacity animation finishes
-          setTimeout(() => {
-            if (item.style.opacity === "0") {
-              item.style.display = "none";
-            }
-          }, 300);
+          item.style.display = "none";
         }
       });
     });
   });
 });
+
+// Email Copy to Clipboard Script
+function copyEmailToClipboard() {
+    const email = "km.jin0507@gmail.com";
+    navigator.clipboard.writeText(email).then(() => {
+        const btnText = document.getElementById("copyBtnText");
+        const origText = btnText.innerHTML;
+        btnText.innerHTML = "Copied!";
+        
+        const toast = document.getElementById("copyAlert");
+        toast.style.display = "block";
+        
+        setTimeout(() => {
+            btnText.innerHTML = origText;
+        }, 1500);
+        
+        setTimeout(() => {
+            toast.style.display = "none";
+        }, 2500);
+    }).catch(err => {
+        console.error("Failed to copy text: ", err);
+    });
+}
 </script>

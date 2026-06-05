@@ -1160,3 +1160,292 @@ details pre {
   border-radius: 6px;
   max-height: 160px;
 }
+
+/* Research Interest Cards Style */
+.research-card {
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #f1f3f5 !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.research-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    border-color: #dee2e6 !important;
+}
+.research-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+.research-emoji {
+    font-size: 1.5rem;
+}
+.bg-purple-light { background-color: #f3f0ff; }
+.bg-blue-light { background-color: #e7f5ff; }
+.bg-green-light { background-color: #ebfbee; }
+
+/* News Card Style */
+.news-card {
+    border-radius: 12px;
+    background: #fafafa;
+    border: 1px solid #e9ecef !important;
+}
+.badge-teal {
+    background-color: #4a777a;
+    color: white;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.news-item {
+    border-bottom-color: #f1f3f5 !important;
+}
+
+/* Skills Tag Cloud Style */
+.skills-container {
+    border-radius: 12px;
+    border: 1px solid #f1f3f5 !important;
+}
+.tech-tag {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #495057;
+    background: #f1f3f5;
+    border-radius: 20px;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #e9ecef;
+}
+.tech-tag:hover {
+    background: #4a777a;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(74, 119, 122, 0.2);
+    border-color: #4a777a;
+}
+
+/* LinkedIn Style Timeline CSS */
+.linkedin-timeline {
+    margin-top: 20px;
+    position: relative;
+}
+.timeline-org-group {
+    position: relative;
+    margin-bottom: 40px;
+}
+.timeline-org-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 2;
+}
+.timeline-org-logo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #e0e0e0;
+    margin-right: 15px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.timeline-org-logo-fallback {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #f1f3f5;
+    color: #4a777a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e0e0e0;
+    margin-right: 15px;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.timeline-org-info {
+    display: flex;
+    flex-direction: column;
+}
+.timeline-org-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1b1b1b;
+    margin: 0;
+}
+.timeline-org-duration {
+    font-size: 0.85rem;
+    color: #666;
+    margin: 2px 0 0 0;
+}
+.timeline-roles-container {
+    position: relative;
+    padding-left: 24px;
+    margin-left: 0px;
+}
+.timeline-role-connector {
+    position: absolute;
+    left: 23px;
+    top: -10px;
+    bottom: 25px;
+    width: 2px;
+    background-color: #cbd5e1;
+    z-index: 1;
+}
+.timeline-role-card {
+    position: relative;
+    padding-bottom: 25px;
+    padding-left: 25px;
+}
+.timeline-role-card:last-child {
+    padding-bottom: 5px;
+}
+.timeline-role-node {
+    position: absolute;
+    left: -6px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #cbd5e1;
+    border: 2px solid white;
+    z-index: 2;
+    transition: background-color 0.2s;
+}
+.timeline-role-card:hover .timeline-role-node {
+    background-color: #4a777a;
+}
+.timeline-role-details {
+    display: flex;
+    flex-direction: column;
+}
+.timeline-role-title {
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+.timeline-role-subtitle {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #555;
+    margin: 4px 0 2px 0;
+}
+.timeline-role-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 8px;
+}
+.timeline-role-desc {
+    font-size: 0.88rem;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Awards Cards Style */
+.award-card {
+    border-radius: 12px;
+    border: 1px solid #f1f3f5 !important;
+    transition: all 0.2s ease-in-out;
+}
+.award-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05) !important;
+    border-color: #dee2e6 !important;
+}
+.award-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.bg-gold { background-color: #fff9db; }
+.text-gold-dark { color: #f59f00; }
+.bg-medal { background-color: #e6f7ff; }
+.text-medal-dark { color: #1890ff; }
+.bg-bronze { background-color: #fff0f6; }
+.text-bronze-dark { color: #eb2f96; }
+.bg-blue { background-color: #f6ffed; }
+.text-blue-dark { color: #52c41a; }
+
+/* Collaboration Card Style */
+.collab-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 1px solid #dee2e6 !important;
+}
+.btn-premium-teal {
+    background-color: #4a777a;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: all 0.2s;
+    border: none;
+}
+.btn-premium-teal:hover {
+    background-color: #3b5f62;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(74, 119, 122, 0.25);
+}
+.btn-premium-linkedin {
+    background-color: #0077b5;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 8px 18px;
+    transition: all 0.2s;
+    border: none;
+}
+.btn-premium-linkedin:hover {
+    background-color: #005987;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 119, 181, 0.25);
+}
+.btn-premium-outline {
+    background-color: transparent;
+    color: #4a777a;
+    font-weight: 600;
+    border: 2px solid #4a777a;
+    border-radius: 8px;
+    padding: 6px 16px;
+    transition: all 0.2s;
+}
+.btn-premium-outline:hover {
+    background-color: #4a777a;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(74, 119, 122, 0.15);
+}
+.copy-alert-toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 9999;
+    font-size: 0.9rem;
+    animation: fadeInOut 2.5s ease-in-out forwards;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
