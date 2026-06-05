@@ -5,67 +5,67 @@ title: Home
 
 {% if page.url == "/" or page.url == "/index.html" %}
 
-<!-- Hero Research Highlight Banner -->
-<div class="card border-0 text-white rounded overflow-hidden shadow-lg mb-5" style="background: linear-gradient(135deg, #1e1e1e 0%, #111 100%);">
-    <div class="row no-gutters align-items-center">
-        <div class="col-md-7 p-4 p-md-5">
-            <span class="badge badge-warning mb-3 px-3 py-2 text-uppercase font-weight-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Research Highlight (WACV 2023 Oral)</span>
-            <h2 class="font-weight-bold text-white mb-3" style="font-size: 1.8rem; line-height: 1.3;">Kinematic-aware Hierarchical Attention Network</h2>
-            <p class="text-light mb-4" style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85;">
-                Solving temporal jitter and joint occlusions in video-based human pose estimation by integrating physical laws of motion (velocity & acceleration) into hierarchical spatio-temporal transformer architectures.
-            </p>
-            <a href="{{ site.baseurl }}/posts/hanet/" class="btn btn-outline-light font-weight-bold px-4 py-2" style="border-radius: 30px; border-width: 2px;"><i class="fa fa-play-circle mr-1"></i> Read Paper & Code</a>
-        </div>
-        <div class="col-md-5 d-flex align-items-center justify-content-center" style="min-height: 250px; background: #000;">
-            <img class="img-fluid w-100 h-100" src="{{ site.baseurl }}/assets/images/pw3d_smpl.gif" alt="HANet SMPL Mesh Recovery" style="object-fit: cover; height: 320px !important; opacity: 0.9;">
-        </div>
-    </div>
-</div>
-
-<!-- 1. Research Interests (Full Width) -->
-<div class="row mb-5">
-    <div class="col-md-12">
-        <h3 class="font-weight-bold mb-4"><i class="fa fa-lightbulb-o text-warning"></i> Research Interests</h3>
-    </div>
-    <div class="col-lg-4 col-md-6 mb-3">
-        <div class="card research-card border-0 shadow-sm p-4 h-100">
-            <div class="research-icon-wrapper bg-purple-light mb-3">
-                <span class="research-emoji">🧠</span>
-            </div>
-            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Multimodal Intelligence</h5>
-            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
-                Aligning vision-language-audio modalities, cross-modal continual learning, and RL policy alignment (GRPO/DPO).
-            </p>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 mb-3">
-        <div class="card research-card border-0 shadow-sm p-4 h-100">
-            <div class="research-icon-wrapper bg-blue-light mb-3">
-                <span class="research-emoji">👁️</span>
-            </div>
-            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Computer Vision / Pose</h5>
-            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
-                2D/3D human and hand pose estimation, spatial-temporal attention transformers, and quantized-aware training.
-            </p>
-        </div>
-    </div>
-    <div class="col-lg-4 col-md-6 mb-3">
-        <div class="card research-card border-0 shadow-sm p-4 h-100">
-            <div class="research-icon-wrapper bg-green-light mb-3">
-                <span class="research-emoji">🤖</span>
-            </div>
-            <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Embodied AI / Robotics</h5>
-            <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
-                Robotic perception, natural language-based object understanding, and bridging VLA models to physical robotic actions.
-            </p>
-        </div>
-    </div>
-</div>
-
 <!-- 2-Column Content Layout -->
 <div class="row justify-content-between">
     <!-- Left Column (Main Portfolio Content) -->
     <div class="col-md-8 pr-md-5">
+        
+        <!-- Hero Research Highlight Banner -->
+        <div class="card border-0 text-white rounded overflow-hidden shadow-lg mb-5" style="background: linear-gradient(135deg, #1e1e1e 0%, #111 100%);">
+            <div class="row no-gutters align-items-center">
+                <div class="col-md-7 p-4 p-md-5">
+                    <span class="badge badge-warning mb-3 px-3 py-2 text-uppercase font-weight-bold" style="font-size: 0.75rem; letter-spacing: 1px;">Research Highlight (WACV 2023 Oral)</span>
+                    <h2 class="font-weight-bold text-white mb-3" style="font-size: 1.8rem; line-height: 1.3;">Kinematic-aware Hierarchical Attention Network</h2>
+                    <p class="text-light mb-4" style="font-size: 0.95rem; line-height: 1.6; opacity: 0.85;">
+                        Solving temporal jitter and joint occlusions in video-based human pose estimation by integrating physical laws of motion (velocity & acceleration) into hierarchical spatio-temporal transformer architectures.
+                    </p>
+                    <a href="{{ site.baseurl }}/posts/hanet/" class="btn btn-outline-light font-weight-bold px-4 py-2" style="border-radius: 30px; border-width: 2px;"><i class="fa fa-play-circle mr-1"></i> Read Paper & Code</a>
+                </div>
+                <div class="col-md-5 d-flex align-items-center justify-content-center" style="min-height: 250px; background: #000;">
+                    <img class="img-fluid w-100 h-100" src="{{ site.baseurl }}/assets/images/pw3d_smpl.gif" alt="HANet SMPL Mesh Recovery" style="object-fit: cover; height: 320px !important; opacity: 0.9;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. Research Interests -->
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h3 class="font-weight-bold mb-4"><i class="fa fa-lightbulb-o text-warning"></i> Research Interests</h3>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card research-card border-0 shadow-sm p-4 h-100">
+                    <div class="research-icon-wrapper bg-purple-light mb-3">
+                        <span class="research-emoji">🧠</span>
+                    </div>
+                    <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Multimodal Intelligence</h5>
+                    <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                        Aligning vision-language-audio modalities, cross-modal continual learning, and RL policy alignment (GRPO/DPO).
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card research-card border-0 shadow-sm p-4 h-100">
+                    <div class="research-icon-wrapper bg-blue-light mb-3">
+                        <span class="research-emoji">👁️</span>
+                    </div>
+                    <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Computer Vision / Pose</h5>
+                    <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                        2D/3D human and hand pose estimation, spatial-temporal attention transformers, and quantized-aware training.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-3">
+                <div class="card research-card border-0 shadow-sm p-4 h-100">
+                    <div class="research-icon-wrapper bg-green-light mb-3">
+                        <span class="research-emoji">🤖</span>
+                    </div>
+                    <h5 class="font-weight-bold text-dark mb-2" style="font-size: 0.95rem;">Embodied AI / Robotics</h5>
+                    <p class="text-muted mb-0" style="font-size: 0.82rem; line-height: 1.5;">
+                        Robotic perception, natural language-based object understanding, and bridging VLA models to physical robotic actions.
+                    </p>
+                </div>
+            </div>
+        </div>
         
         <!-- Latest News -->
         <div class="card news-card border-0 shadow-sm p-4 mb-5">
@@ -404,17 +404,6 @@ title: Home
 
     <!-- Right Column (Sidebar Widgets) -->
     <div class="col-md-4 sticky-sidebar">
-        
-        <!-- Social Media / CV Quick Links -->
-        <div class="card border shadow-sm p-4 mb-4 bg-white">
-            <h5 class="font-weight-bold text-dark border-bottom pb-2 mb-3">Links & Docs</h5>
-            <p class="text-secondary" style="font-size: 0.88rem;">Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
-            <div class="d-flex flex-column">
-                <a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary btn-block mb-2 text-left px-3 py-2"><i class="fa fa-linkedin mr-2"></i> LinkedIn Profile</a>
-                <a target="_blank" href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" class="btn btn-info btn-block mb-2 text-left px-3 py-2"><i class="fa fa-graduation-cap mr-2"></i> Google Scholar</a>
-                <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark btn-block mb-2 text-left px-3 py-2"><i class="fa fa-file-pdf-o mr-2"></i> CV PDF Document</a>
-            </div>
-        </div>
 
         <!-- Google Scholar Metrics -->
         <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white">
@@ -497,7 +486,7 @@ title: Home
                 <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
             </div>
             <div class="mt-2">
-                <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
+                <img src="https://hitscounter.dev/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
             </div>
         </div>
 

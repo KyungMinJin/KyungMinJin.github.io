@@ -25,16 +25,9 @@ comments: true
 </div> <!-- col-md-8 끝 -->
 
 <div class="col-md-4 sticky-sidebar">
-<h5>Social Media and CV</h5>
-
-<p>Thank you! Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
-
-<a target="_blank" href="https://www.linkedin.com/in/경민-%E2%80%8D진-34594b1b7/" class="btn btn-primary mr-2 mb-2">Linkedin <i class="fa fa-linkedin-square"></i></a> 
-<a target="_blank" href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" class="btn btn-info mr-2 mb-2">Google Scholar <i class="fa fa-graduation-cap"></i></a> 
-<a target="_blank" href="https://kyungminjin.github.io/CV.pdf" class="btn btn-dark mb-2">Documentation CV <i class="fa fa-file-pdf-o"></i></a>
 
 <!-- Google Scholar Metrics & Citation Graph -->
-<div class="card border shadow-sm p-3 pt-2 pb-2 mt-3 bg-white">
+<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white">
     <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
         <i class="fa fa-graduation-cap text-info"></i> Google Scholar Metrics
     </h6>
@@ -101,7 +94,7 @@ comments: true
         <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
     </div>
     <div class="mt-2">
-        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
+        <img src="https://hitscounter.dev/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
     </div>
 </div>
 
