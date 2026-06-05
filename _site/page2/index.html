@@ -202,9 +202,10 @@
 
 <script>
 // Category Filtering Script
-document.addEventListener("DOMContentLoaded", function() {
+function initCategoryFilter() {
   const chips = document.querySelectorAll(".category-filter-chips .chip");
   const postItems = document.querySelectorAll(".post-card-item");
+  if (!chips.length) return;
 
   chips.forEach(chip => {
     chip.addEventListener("click", function() {
@@ -235,7 +236,13 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   });
-});
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCategoryFilter);
+} else {
+  initCategoryFilter();
+}
 
 // Email Copy to Clipboard Script
 function copyEmailToClipboard() {

@@ -1449,3 +1449,61 @@ details pre {
     100% { opacity: 0; transform: translateY(-10px); }
 }
 
+@media (min-width: 768px) {
+  .sticky-sidebar {
+    position: sticky;
+    top: 80px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding-bottom: 20px;
+  }
+  .sticky-sidebar::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+}
+
+/* Compact Tweaks */
+.research-card {
+    padding: 1.15rem !important;
+}
+.news-card {
+    padding: 1.15rem !important;
+}
+.skills-container {
+    padding: 1.15rem !important;
+}
+.award-card {
+    padding: 0.85rem !important;
+}
+.collab-card {
+    padding: 1.15rem !important;
+}
+.tech-tag {
+    padding: 4px 10px;
+    margin: 3px 4px;
+    font-size: 0.78rem;
+}
+.timeline-org-group {
+    margin-bottom: 28px;
+}
+.timeline-role-card {
+    padding-bottom: 16px;
+}
+
+/* Scholar Bar Graph Styles */
+.scholar-bar {
+    width: 70%;
+    margin: 0 auto;
+    background: linear-gradient(to top, #4a777a, #68999c);
+    border-radius: 3px 3px 0 0;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+.scholar-bar:hover {
+    background: linear-gradient(to top, #3b5f62, #4a777a);
+    box-shadow: 0 0 8px rgba(74, 119, 122, 0.4);
+    transform: translateY(-2px);
+}
+
+
