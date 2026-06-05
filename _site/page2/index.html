@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var savedLang = localStorage.getItem("pref-lang");
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith("ko") ? "ko" : "en";
+        }
+        document.documentElement.className += " lang-mode-" + savedLang;
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -117,6 +127,16 @@
 
             <li class="nav-item">
               <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown" style="border-radius: 8px;">
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
+              </div>
             </li>
 
             <script src="/assets/js/lunr.js"></script>
@@ -400,5 +420,25 @@ function copyEmailToClipboard() {
     <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     
+
+    <script>
+      function changeLanguage(lang) {
+        document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
+        document.documentElement.classList.add('lang-mode-' + lang);
+        localStorage.setItem('pref-lang', lang);
+        var labels = document.querySelectorAll('#currentLangLabel');
+        labels.forEach(function(label) {
+          label.textContent = lang === 'ko' ? '한국어' : 'English';
+        });
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        var savedLang = localStorage.getItem('pref-lang');
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+        }
+        changeLanguage(savedLang);
+      });
+    </script>
   </body>
 </html>

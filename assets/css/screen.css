@@ -1506,4 +1506,8 @@ details pre {
     transform: translateY(-2px);
 }
 
+/* Site-wide Multilingual Toggle Rules */
+html.lang-mode-en .lang-ko { display: none !important; }
+html.lang-mode-ko .lang-en { display: none !important; }
+
 

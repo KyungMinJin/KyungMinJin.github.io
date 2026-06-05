@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        var savedLang = localStorage.getItem("pref-lang");
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith("ko") ? "ko" : "en";
+        }
+        document.documentElement.className += " lang-mode-" + savedLang;
+      })();
+    </script>
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -118,6 +128,16 @@
               <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
             </li>
 
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                <i class="fa fa-language"></i> <span id="currentLangLabel">English</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow-sm border-0" aria-labelledby="langDropdown" style="border-radius: 8px;">
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
+                <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
+              </div>
+            </li>
+
             <script src="/assets/js/lunr.js"></script>
 
 
@@ -173,21 +193,33 @@
     <div class="row no-gutters align-items-center">
       <div class="col-8 col-md-9 p-3 p-md-4">
          <div class="d-flex align-items-center mb-1">
-             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-en" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-ko" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                 
+                 
+                 기계학습
+             </span>
              <span class="text-muted" style="font-size: 0.75rem;">18 Feb 2026</span>
          </div>
          <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
-             <a class="text-dark hover-underline text-decoration-none" href="/posts/grpo/">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</a>
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/grpo/">
+                 <span class="lang-en">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</span>
+                 <span class="lang-ko">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</span>
+             </a>
          </h3>
          <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
-             Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
-
+             <span class="lang-en">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
+</span>
+             <span class="lang-ko">Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs
+</span>
          </p>
          
          <div class="d-flex align-items-center mt-2">
              <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
              <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
-                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+                 <span class="lang-en">By</span>
+                 <span class="lang-ko">작성자:</span>
+                 <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
              </span>
          </div>
          
@@ -214,21 +246,33 @@
     <div class="row no-gutters align-items-center">
       <div class="col-8 col-md-9 p-3 p-md-4">
          <div class="d-flex align-items-center mb-1">
-             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-en" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Machine-Learning</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-ko" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                 
+                 
+                 기계학습
+             </span>
              <span class="text-muted" style="font-size: 0.75rem;">15 Nov 2025</span>
          </div>
          <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
-             <a class="text-dark hover-underline text-decoration-none" href="/posts/samif/">Cross-Modality Shared & Unique Information Factorization (SAMIF)</a>
+             <a class="text-dark hover-underline text-decoration-none" href="/posts/samif/">
+                 <span class="lang-en">Cross-Modality Shared & Unique Information Factorization (SAMIF)</span>
+                 <span class="lang-ko">Cross-Modality Shared & Unique Information Factorization (SAMIF)</span>
+             </a>
          </h3>
          <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
-             Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)
-
+             <span class="lang-en">Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)
+</span>
+             <span class="lang-ko">Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)
+</span>
          </p>
          
          <div class="d-flex align-items-center mt-2">
              <img class="author-thumb mr-2" src="/assets/images/gravatar.png" alt="Kyung-Min Jin" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
              <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
-                 By <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
+                 <span class="lang-en">By</span>
+                 <span class="lang-ko">작성자:</span>
+                 <a target="_blank" class="text-dark font-weight-bold" href="https://www.github.com/KyungMinJin">Kyung-Min Jin</a>
              </span>
          </div>
          
@@ -383,5 +427,25 @@
     <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     
+
+    <script>
+      function changeLanguage(lang) {
+        document.documentElement.classList.remove('lang-mode-en', 'lang-mode-ko');
+        document.documentElement.classList.add('lang-mode-' + lang);
+        localStorage.setItem('pref-lang', lang);
+        var labels = document.querySelectorAll('#currentLangLabel');
+        labels.forEach(function(label) {
+          label.textContent = lang === 'ko' ? '한국어' : 'English';
+        });
+      }
+      document.addEventListener("DOMContentLoaded", function() {
+        var savedLang = localStorage.getItem('pref-lang');
+        if (!savedLang) {
+          var userLang = navigator.language || navigator.userLanguage;
+          savedLang = userLang.startsWith('ko') ? 'ko' : 'en';
+        }
+        changeLanguage(savedLang);
+      });
+    </script>
   </body>
 </html>

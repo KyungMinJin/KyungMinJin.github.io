@@ -5,8 +5,8 @@
     <description>Hi, I&apos;m Kyung-Min Jin. See &lt;a href=&apos;/about&apos;&gt;about page (CV)&lt;/a&gt;!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Jun 2026 02:44:12 -0500</pubDate>
-    <lastBuildDate>Fri, 05 Jun 2026 02:44:12 -0500</lastBuildDate>
+    <pubDate>Fri, 05 Jun 2026 02:56:19 -0500</pubDate>
+    <lastBuildDate>Fri, 05 Jun 2026 02:56:19 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
@@ -536,56 +536,111 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>Quantization-Aware Training (QAT) for Edge Pose Estimation</title>
-        <description>&lt;h1 id=&quot;quantization-aware-training-qat-for-edge-pose-estimation&quot;&gt;Quantization-Aware Training (QAT) for Edge Pose Estimation&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;quantization-aware-training-qat&quot;&gt;엣지 포즈 추정을 위한 양자화 인지 훈련 (Quantization-Aware Training, QAT)&lt;/h1&gt;
 
-&lt;p&gt;Deploying deep learning models to consumer edge devices (such as smart TVs, mobile chipsets, and IoT gateways) requires converting 32-bit floating-point (FP32) weights to 8-bit integers (INT8). While Post-Training Quantization (PTQ) is straightforward, it often leads to unacceptable accuracy drops in regression tasks like &lt;strong&gt;2D/3D human pose estimation&lt;/strong&gt;.&lt;/p&gt;
+  &lt;p&gt;스마트 TV, 모바일 칩셋, IoT 게이트웨이와 같은 소비자용 엣지 디바이스에 딥러닝 모델을 배포하기 위해서는 기존의 32비트 부동소수점(FP32) 가중치를 8비트 정수(INT8)로 변환해야 합니다. 훈련 후 양자화(Post-Training Quantization, PTQ)는 간단하게 적용할 수 있지만, &lt;strong&gt;2D/3D 인체 포즈 추정&lt;/strong&gt;과 같은 회귀(Regression) 기반 태스크에서는 심각한 정확도 하락을 초래하는 경우가 많습니다.&lt;/p&gt;
 
-&lt;p&gt;In this post, we discuss how &lt;strong&gt;Quantization-Aware Training (QAT)&lt;/strong&gt; models the quantization noise during training, preserving precision on low-power edge NPUs.&lt;/p&gt;
+  &lt;p&gt;본 포스트에서는 저전력 엣지 NPU 상에서 정확도를 유지할 수 있도록, 훈련 과정 중에 양자화 노이즈를 명시적으로 모델링하는 &lt;strong&gt;양자화 인지 훈련(Quantization-Aware Training, QAT)&lt;/strong&gt; 기법에 대해 설명합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-why-post-training-quantization-fails-on-pose-estimation&quot;&gt;1. Why Post-Training Quantization Fails on Pose Estimation&lt;/h2&gt;
+  &lt;h2 id=&quot;ptq----&quot;&gt;1. 훈련 후 양자화(PTQ)가 포즈 추정에서 실패하는 이유&lt;/h2&gt;
 
-&lt;p&gt;Pose estimation networks (such as HRNet or transformer-based keypoint regression models) are highly sensitive to small coordinate shifts.&lt;/p&gt;
+  &lt;p&gt;HRNet이나 트랜스포머 기반의 키포인트 회귀 모델과 같은 포즈 추정 네트워크는 미세한 좌표 값 변동에 매우 민감합니다.&lt;/p&gt;
 
-&lt;p&gt;PTQ simply calculates scale and zero-point parameters using calibration data after training. This causes:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Outlier clipping:&lt;/strong&gt; Highly active keypoint attention maps get clipped, leading to jittery joint predictions.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Accumulated rounding errors:&lt;/strong&gt; Small precision losses compile across deep layers, degrading keypoint localization by several pixels.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;PTQ는 학습이 완료된 후 검증 데이터를 바탕으로 스케일(Scale)과 제로포인트(Zero-point) 변수를 계산합니다. 이로 인해 다음과 같은 현상이 발생합니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;이상치 클리핑(Outlier clipping):&lt;/strong&gt; 활성화 값이 큰 키포인트 어텐션 맵 정보가 잘려나가면서 관절 예측이 심하게 떨리게(jittering) 됩니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;누적 반올림 오차(Accumulated rounding errors):&lt;/strong&gt; 깊은 레이어를 거치며 미세한 정밀도 손실이 누적되어 결과적으로 키포인트 검출 위치가 수 픽셀 이상 벗어나게 됩니다.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-modeling-quantization-noise-during-training&quot;&gt;2. Modeling Quantization Noise during Training&lt;/h2&gt;
+  &lt;h2 id=&quot;section&quot;&gt;2. 훈련 중 양자화 노이즈 모델링&lt;/h2&gt;
 
-&lt;p&gt;QAT solves this by inserting &lt;strong&gt;fake-quantization nodes&lt;/strong&gt; into the computation graph during the training forward pass.&lt;/p&gt;
+  &lt;p&gt;QAT는 훈련 시 순방향 패스(Forward Pass) 과정에 &lt;strong&gt;의사 양자화 노드(Fake-quantization nodes)&lt;/strong&gt;를 연산 그래프에 삽입함으로써 이 문제를 해결합니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[FP32 가중치] ---&amp;gt; [의사 양자화 (Float-INT8-Float)] ---&amp;gt; [양자화된 순방향 패스]
+                                                                    |
+[FP32 그래디언트] &amp;lt;--- [Straight-Through Estimator (STE)] &amp;lt;----------/
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;순방향 패스 (Forward Pass):&lt;/strong&gt; 가중치와 활성화 함수 값을 INT8로 양자화한 다음 다시 FP32로 복원(De-quantize)하여 가상으로 정밀도 반올림 오차를 발생시킵니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;역방향 패스 (Backward Pass):&lt;/strong&gt; 양자화 단계 함수는 미분이 불가능하므로(거의 모든 구간에서 도함수가 0), &lt;strong&gt;STE(Straight-Through Estimator)&lt;/strong&gt;를 사용하여 그래디언트가 의사 양자화 노드를 그대로 통과하도록 우회시킵니다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;이를 통해 모델 파라미터가 훈련 과정 중에 저정밀도 환경에 맞게 적응하므로 배포 시의 정확도 손실을 최소화할 수 있습니다.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;onnx--qualcomm-sdk---&quot;&gt;3. ONNX 및 Qualcomm SDK를 활용한 디바이스 배포&lt;/h2&gt;
+
+  &lt;p&gt;최적화된 모델을 배포하는 단계는 다음과 같습니다:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;QAT 노드가 적용된 PyTorch 모델을 &lt;strong&gt;ONNX&lt;/strong&gt; 형식으로 내보냅니다 (QuantizeLinear/DequantizeLinear 연산자를 지원하는 ONNX opset 13 이상 필요).&lt;/li&gt;
+    &lt;li&gt;Qualcomm Neural Processing SDK 또는 TensorRT 변환기와 같은 배포 도구를 사용하여 ONNX 양자화 연산자를 타겟 칩셋의 하드웨어 전용 INT8 명령어로 변환합니다.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;이러한 QAT 방식을 적용하여 LG 스마트 TV의 저전력 프로세서 상에 실시간 손 포즈 추정 모델을 성공적으로 배포했으며, &lt;strong&gt;3배의 지연 시간 단축(3x latency reduction)&lt;/strong&gt;과 함께 &lt;strong&gt;FP32 키포인트 정확도 대비 99% 이상&lt;/strong&gt; 수준을 유지할 수 있었습니다.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;quantization-aware-training-qat-for-edge-pose-estimation&quot;&gt;Quantization-Aware Training (QAT) for Edge Pose Estimation&lt;/h1&gt;
+
+  &lt;p&gt;Deploying deep learning models to consumer edge devices (such as smart TVs, mobile chipsets, and IoT gateways) requires converting 32-bit floating-point (FP32) weights to 8-bit integers (INT8). While Post-Training Quantization (PTQ) is straightforward, it often leads to unacceptable accuracy drops in regression tasks like &lt;strong&gt;2D/3D human pose estimation&lt;/strong&gt;.&lt;/p&gt;
+
+  &lt;p&gt;In this post, we discuss how &lt;strong&gt;Quantization-Aware Training (QAT)&lt;/strong&gt; models the quantization noise during training, preserving precision on low-power edge NPUs.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;why-post-training-quantization-fails-on-pose-estimation&quot;&gt;1. Why Post-Training Quantization Fails on Pose Estimation&lt;/h2&gt;
+
+  &lt;p&gt;Pose estimation networks (such as HRNet or transformer-based keypoint regression models) are highly sensitive to small coordinate shifts.&lt;/p&gt;
+
+  &lt;p&gt;PTQ simply calculates scale and zero-point parameters using calibration data after training. This causes:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Outlier clipping:&lt;/strong&gt; Highly active keypoint attention maps get clipped, leading to jittery joint predictions.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Accumulated rounding errors:&lt;/strong&gt; Small precision losses compile across deep layers, degrading keypoint localization by several pixels.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;modeling-quantization-noise-during-training&quot;&gt;2. Modeling Quantization Noise during Training&lt;/h2&gt;
+
+  &lt;p&gt;QAT solves this by inserting &lt;strong&gt;fake-quantization nodes&lt;/strong&gt; into the computation graph during the training forward pass.&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[FP32 Weights] ---&amp;gt; [Fake Quantization (Float-INT8-Float)] ---&amp;gt; [Quantized Forward Pass]
                                                                      |
 [FP32 Gradients] &amp;lt;--- [Straight-Through Estimator (STE)] &amp;lt;-----------/
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Forward Pass:&lt;/strong&gt; The weights and activations are quantized to INT8 and then scaled back to FP32, introducing simulated rounding errors.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Backward Pass:&lt;/strong&gt; Since the quantization step function is non-differentiable (derivative is zero almost everywhere), we use the &lt;strong&gt;Straight-Through Estimator (STE)&lt;/strong&gt; to pass the gradients directly through the fake-quantization nodes unchanged.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Forward Pass:&lt;/strong&gt; The weights and activations are quantized to INT8 and then scaled back to FP32, introducing simulated rounding errors.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Backward Pass:&lt;/strong&gt; Since the quantization step function is non-differentiable (derivative is zero almost everywhere), we use the &lt;strong&gt;Straight-Through Estimator (STE)&lt;/strong&gt; to pass the gradients directly through the fake-quantization nodes unchanged.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;p&gt;This forces the model parameters to adapt to the lower precision limits, minimizing accuracy loss.&lt;/p&gt;
+  &lt;p&gt;This forces the model parameters to adapt to the lower precision limits, minimizing accuracy loss.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-deployment-via-onnx-and-qualcomm-sdk&quot;&gt;3. Deployment via ONNX and Qualcomm SDK&lt;/h2&gt;
+  &lt;h2 id=&quot;deployment-via-onnx-and-qualcomm-sdk&quot;&gt;3. Deployment via ONNX and Qualcomm SDK&lt;/h2&gt;
 
-&lt;p&gt;To deploy the optimized model:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Export the PyTorch model with QAT nodes to &lt;strong&gt;ONNX&lt;/strong&gt; (utilizing ONNX operator set 13+ which natively supports QuantizeLinear/DequantizeLinear ops).&lt;/li&gt;
-  &lt;li&gt;Use converter tools (like Qualcomm Neural Processing SDK or TensorRT converter) to map ONNX quantization operators directly to native INT8 hardware instructions on the target chip.&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;p&gt;To deploy the optimized model:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Export the PyTorch model with QAT nodes to &lt;strong&gt;ONNX&lt;/strong&gt; (utilizing ONNX operator set 13+ which natively supports QuantizeLinear/DequantizeLinear ops).&lt;/li&gt;
+    &lt;li&gt;Use converter tools (like Qualcomm Neural Processing SDK or TensorRT converter) to map ONNX quantization operators directly to native INT8 hardware instructions on the target chip.&lt;/li&gt;
+  &lt;/ol&gt;
 
-&lt;p&gt;With QAT, we successfully deployed a real-time hand pose estimation model to LG TVs, achieving &lt;strong&gt;3x latency reduction&lt;/strong&gt; while maintaining over &lt;strong&gt;99% of the FP32 keypoint accuracy&lt;/strong&gt;.&lt;/p&gt;
+  &lt;p&gt;With QAT, we successfully deployed a real-time hand pose estimation model to LG TVs, achieving &lt;strong&gt;3x latency reduction&lt;/strong&gt; while maintaining over &lt;strong&gt;99% of the FP32 keypoint accuracy&lt;/strong&gt;.&lt;/p&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sun, 12 May 2024 00:00:00 -0500</pubDate>
         <link>/posts/qat/</link>
@@ -604,84 +659,247 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation</title>
-        <description>&lt;h1 id=&quot;wacv-2023-oral-kinematic-aware-hierarchical-attention-network-for-video-pose-estimation&quot;&gt;[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;wacv-2023-oral---------&quot;&gt;[WACV 2023 Oral] 비디오 포즈 추정을 위한 운동학 인지 계층적 어텐션 네트워크&lt;/h1&gt;
 
-&lt;p&gt;In video-based human pose estimation, maintaining &lt;strong&gt;temporal and kinematic consistency&lt;/strong&gt; across frames is a major challenge. Standard frame-by-frame pose estimators often suffer from jittery predictions, joint swap errors, and failure under fast motion or occlusion because they do not model physical skeletal joints and anatomical limits.&lt;/p&gt;
+  &lt;p&gt;비디오 기반 3차원 인체 포즈 추정에서, 프레임 간 &lt;strong&gt;시간적 및 운동학적 일관성(temporal and kinematic consistency)&lt;/strong&gt;을 유지하는 것은 매우 까다로운 과제입니다. 기존의 프레임별 포즈 추정기들은 물리적인 골격 관절 구조나 해부학적 한계를 명시적으로 모델링하지 않기 때문에, 예측값의 미세한 흔들림(jittering), 관절 뒤바뀜 오류(joint swap errors), 급격한 움직임이나 가려짐(occlusion) 상태에서의 추정 실패 등을 빈번히 겪게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;Our paper, presented as an &lt;strong&gt;Oral presentation at WACV 2023&lt;/strong&gt;, proposes the &lt;strong&gt;Kinematic-aware Hierarchical Attention Network (KHAN / HANet)&lt;/strong&gt; to resolve these issues by explicitly encoding joint relations and temporal continuity based on physical laws of motion.&lt;/p&gt;
+  &lt;p&gt;본 논문(WACV 2023 구두 발표 선정작)에서는 물리적 운동 법칙을 바탕으로 관절 간의 관계와 시간적 연속성을 인코딩하여 이러한 한계를 극복하는 &lt;strong&gt;운동학 인지 계층적 어텐션 네트워크(Kinematic-aware Hierarchical Attention Network, KHAN / HANet)&lt;/strong&gt;를 제안합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-model-architecture-hanet&quot;&gt;1. Model Architecture (HANet)&lt;/h2&gt;
+  &lt;h2 id=&quot;hanet&quot;&gt;1. 모델 아키텍처 (HANet)&lt;/h2&gt;
 
-&lt;p&gt;Below is the overall architecture of the Kinematic-aware Hierarchical Attention Network. It extracts spatial keypoint features and propagates temporal context across skeletal structures.&lt;/p&gt;
+  &lt;p&gt;다음은 운동학 인지 계층적 어텐션 네트워크의 전체 아키텍처입니다. 입력 프레임들로부터 공간적 키포인트 특징을 추출한 뒤, 인체 골격 구조를 따라 시간적 문맥을 전파합니다.&lt;/p&gt;
 
-&lt;div class=&quot;text-center my-4&quot;&gt;
+  &lt;div class=&quot;text-center my-4&quot;&gt;
+    &lt;img src=&quot;/assets/images/HANet.png&quot; class=&quot;img-fluid rounded shadow-lg border&quot; alt=&quot;HANet 모델 아키텍처&quot; style=&quot;max-height: 500px; width: 100%; object-fit: contain;&quot; /&gt;
+    &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;그림 1: 계층적 어텐션 블록과 시공간 인코더를 포함하는 HANet의 전체 파이프라인.&lt;/p&gt;
+&lt;/div&gt;
+
+  &lt;p&gt;네트워크는 다음과 같은 두 가지 핵심 요소로 구성됩니다:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;계층적 어텐션 인코더 (Hierarchical Attention Encoder):&lt;/strong&gt; 서로 다른 해상도 레이어로부터 멀티스케일 시공간 어텐션을 계산합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;운동학 인지 특징 파이프라인 (Kinematic-aware Feature Pipeline):&lt;/strong&gt; 키포인트 예측을 유도하기 위해 속도(velocity)와 가속도(acceleration)를 명시적으로 모델링합니다.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;section&quot;&gt;2. 운동학적 특징 기반 동적 시공간 어텐션&lt;/h2&gt;
+
+  &lt;p&gt;트랜스포머 모델의 표준 셀프 어텐션 매커니즘은 인체 골격 구조를 고려하지 않고 모든 키포인트를 동등하게 취급합니다. 반면, HANet은 &lt;strong&gt;운동학적 관절 구조(kinematic joints)&lt;/strong&gt;에 따라 어텐션을 계층적으로 세분화하여 연산합니다.&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;국소 어텐션 (Local Attention):&lt;/strong&gt; 뼈대(bone)로 직접 연결된 인접 관절 사이(예: 손목과 팔꿈치, 팔꿈치와 어깨)에서 어텐션을 계산합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;전역 어텐션 (Global Attention):&lt;/strong&gt; 양손의 협동 동작과 같이 거리가 먼 관절 간의 장기 의존성(long-range dependencies)을 포착합니다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h3 id=&quot;kinematic-feature-formulation&quot;&gt;운동학적 특징 공식화 (Kinematic Feature Formulation)&lt;/h3&gt;
+  &lt;p&gt;물리적 운동 법칙을 신경망에 주입하기 위해, 시계열 좌표 정보를 바탕으로 키포인트의 동적 운동 특징을 계산합니다. $t$ 프레임에서 특정 관절의 $d$차원 좌표(2D 또는 3D)를 $p_t \in \mathbb{R}^d$라 정의할 때, 다음과 같이 속도와 가속도를 유도합니다:&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;속도 ($v_t$):&lt;/strong&gt;
+\(v_t = p_t - p_{t-1}\)&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;가속도 ($a_t$):&lt;/strong&gt;
+\(a_t = v_t - v_{t-1} = p_t - 2p_{t-1} + p_{t-2}\)&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;이러한 운동학적 특징들은 최초의 관절 임베딩과 결합(concatenation)되어, 급격한 움직임이나 심한 가려짐 상황에서도 물리적인 궤적을 외삽(extrapolate)함으로써 부드럽고 안정적인 추정을 가능하게 만듭니다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;section-1&quot;&gt;계층적 어텐션 스케일링&lt;/h3&gt;
+  &lt;p&gt;쿼리 $Q$, 키 $K$, 밸류 $V$가 주어졌을 때, 어텐션 맵은 아래 공식으로 계산됩니다:
+\(\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V\)&lt;/p&gt;
+
+  &lt;p&gt;희소한(sparse) 지도 신호 하에서 학습이 불안정해지는 것을 방지하기 위해, 계층적 인코더는 모든 레이어 $l \in {1, \dots, L}$의 멀티스케일 특징 맵을 결합합니다:
+\(F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}\)
+여기서 $F^{(l)}$는 레이어 $l$에서의 어텐션 특징을 의미하며, $w_l$은 학습 가능한 스케일링 가중치입니다.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;hanet---&quot;&gt;3. 시각적 데모 (HANet 실제 구동 예시)&lt;/h2&gt;
+
+  &lt;p&gt;다음은 JHMDB, AIST++, 3DPW 데이터셋에서 평가된 HANet의 정성적 추정 결과로, 일관되고 매끄러운 3차원 인체 관절 및 SMPL 메쉬 복원 성능을 확인할 수 있습니다.&lt;/p&gt;
+
+  &lt;h3 id=&quot;a-2d---jhmdb-&quot;&gt;A. 2D 포즈 트래킹 (JHMDB 데이터셋)&lt;/h3&gt;
+  &lt;p&gt;빠른 스윙 동작과 강한 모션 블러가 있는 상황에서도 키포인트가 안정적으로 유지되는 것을 확인할 수 있습니다.&lt;/p&gt;
+
+  &lt;div class=&quot;text-center my-4&quot;&gt;
+    &lt;img src=&quot;/assets/images/jhmdb.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;JHMDB 데이터셋에서의 HANet 2D 포즈 트래킹&quot; style=&quot;max-height: 350px;&quot; /&gt;
+    &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;데모 1: 역동적인 움직임 상황에서의 2D 골격 추정 (Sub-JHMDB).&lt;/p&gt;
+&lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;b-3d----smpl---aist-&quot;&gt;B. 3D 포즈 추정 및 SMPL 메쉬 복원 (AIST++ 데이터셋)&lt;/h3&gt;
+  &lt;p&gt;복잡한 댄스 동작 상황에서 3차원 관절 및 부드러운 SMPL 인체 메쉬 표면을 복원해 냅니다.&lt;/p&gt;
+
+  &lt;div class=&quot;row text-center my-4&quot;&gt;
+    &lt;div class=&quot;col-md-6 mb-3&quot;&gt;
+        &lt;img src=&quot;/assets/images/aist_3D.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;AIST++ 데이터셋에서의 HANet 3D 관절 추정&quot; style=&quot;max-height: 250px; width: 100%; object-fit: cover;&quot; /&gt;
+        &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;HANet: 3차원 관절 좌표 출력값.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-md-6 mb-3&quot;&gt;
+        &lt;img src=&quot;/assets/images/aist_smpl.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;AIST++ 데이터셋에서의 HANet SMPL 메쉬 복원&quot; style=&quot;max-height: 250px; width: 100%; object-fit: cover;&quot; /&gt;
+        &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;HANet: 복원된 SMPL 인체 메쉬.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;c---3d----3dpw-&quot;&gt;C. 야외 환경에서의 3D 바디 메쉬 복원 (3DPW 데이터셋)&lt;/h3&gt;
+  &lt;p&gt;도전적인 야외 환경 데이터셋인 3DPW 상의 평가 결과로, 가려짐과 빠른 동작 속에서도 강건한 포즈 복원 및 바디 형태 피팅을 보여줍니다.&lt;/p&gt;
+
+  &lt;div class=&quot;text-center my-4&quot;&gt;
+    &lt;img src=&quot;/assets/images/pw3d_smpl.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;3DPW 데이터셋에서의 HANet 3D 메쉬 복원&quot; style=&quot;max-height: 350px;&quot; /&gt;
+    &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;데모 2: 야외 가려짐 및 빠른 움직임 환경에서의 부드러운 3D 인체 메쉬 복원.&lt;/p&gt;
+&lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;online-cross-supervision---&quot;&gt;4. 온라인 상호 지도학습 (Online Cross-Supervision) 및 성능 지표&lt;/h2&gt;
+
+  &lt;p&gt;최초 입력 좌표 정보와 최종 정제된 출력값 간의 결합 최적화를 위해 &lt;strong&gt;온라인 상호 학습(online mutual learning)&lt;/strong&gt; 목적 함수를 사용합니다. 학습 손실값에 따라 네트워크는 동적으로 지도 대상을 선택합니다:&lt;/p&gt;
+
+\[\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{pose}} + \lambda_{\text{mutual}} \mathcal{L}_{\text{mutual}}(\pi_{\theta_{\text{in}}}, \pi_{\theta_{\text{out}}})\]
+
+  &lt;h3 id=&quot;section-2&quot;&gt;정량적 성능 비교&lt;/h3&gt;
+
+  &lt;p&gt;제안하는 방법론은 주요 벤치마크 데이터셋에서 최고 성능(SOTA)을 달성했습니다:&lt;/p&gt;
+
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;데이터셋&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;평가 지표&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;입력 베이스라인&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;HANet (본 연구)&lt;/strong&gt;&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;성능 향상폭&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Sub-JHMDB (2D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;PCK @ 0.05&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;57.3%&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;91.9%&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;+34.6%&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Human3.6M (3D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;54.6mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;52.8mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;AIST++ (3D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;107.7mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;69.2mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-38.5mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;3DPW (SMPL)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;78.9mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;77.1mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;section-3&quot;&gt;주요 링크 및 자료&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;논문:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html&quot;&gt;CVF Open Access Paper&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;코드:&lt;/strong&gt; &lt;a href=&quot;https://github.com/KyungMinJin/HANet&quot;&gt;GitHub Repository (KyungMinJin/HANet)&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;wacv-2023-oral-kinematic-aware-hierarchical-attention-network-for-video-pose-estimation&quot;&gt;[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation&lt;/h1&gt;
+
+  &lt;p&gt;In video-based human pose estimation, maintaining &lt;strong&gt;temporal and kinematic consistency&lt;/strong&gt; across frames is a major challenge. Standard frame-by-frame pose estimators often suffer from jittery predictions, joint swap errors, and failure under fast motion or occlusion because they do not model physical skeletal joints and anatomical limits.&lt;/p&gt;
+
+  &lt;p&gt;Our paper, presented as an &lt;strong&gt;Oral presentation at WACV 2023&lt;/strong&gt;, proposes the &lt;strong&gt;Kinematic-aware Hierarchical Attention Network (KHAN / HANet)&lt;/strong&gt; to resolve these issues by explicitly encoding joint relations and temporal continuity based on physical laws of motion.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;model-architecture-hanet&quot;&gt;1. Model Architecture (HANet)&lt;/h2&gt;
+
+  &lt;p&gt;Below is the overall architecture of the Kinematic-aware Hierarchical Attention Network. It extracts spatial keypoint features and propagates temporal context across skeletal structures.&lt;/p&gt;
+
+  &lt;div class=&quot;text-center my-4&quot;&gt;
     &lt;img src=&quot;/assets/images/HANet.png&quot; class=&quot;img-fluid rounded shadow-lg border&quot; alt=&quot;HANet Model Architecture&quot; style=&quot;max-height: 500px; width: 100%; object-fit: contain;&quot; /&gt;
     &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;Figure 1: Overall pipeline of HANet showcasing Hierarchical Attention blocks and Spatio-Temporal encoders.&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The network incorporates two main components:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;A &lt;strong&gt;Hierarchical Attention Encoder&lt;/strong&gt; that computes multi-scale spatio-temporal attention from different resolution layers.&lt;/li&gt;
-  &lt;li&gt;A &lt;strong&gt;Kinematic-aware Feature Pipeline&lt;/strong&gt; that explicitly models velocity and acceleration to guide keypoint predictions.&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;p&gt;The network incorporates two main components:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;A &lt;strong&gt;Hierarchical Attention Encoder&lt;/strong&gt; that computes multi-scale spatio-temporal attention from different resolution layers.&lt;/li&gt;
+    &lt;li&gt;A &lt;strong&gt;Kinematic-aware Feature Pipeline&lt;/strong&gt; that explicitly models velocity and acceleration to guide keypoint predictions.&lt;/li&gt;
+  &lt;/ol&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-dynamic-spatial--temporal-attention-with-kinematic-features&quot;&gt;2. Dynamic Spatial &amp;amp; Temporal Attention with Kinematic Features&lt;/h2&gt;
+  &lt;h2 id=&quot;dynamic-spatial--temporal-attention-with-kinematic-features&quot;&gt;2. Dynamic Spatial &amp;amp; Temporal Attention with Kinematic Features&lt;/h2&gt;
 
-&lt;p&gt;Standard self-attention mechanisms in transformers treat all keypoints in a human body equally, ignoring the physical structure of the skeleton. In contrast, HANet structures attention hierarchically based on &lt;strong&gt;kinematic joints&lt;/strong&gt;:&lt;/p&gt;
+  &lt;p&gt;Standard self-attention mechanisms in transformers treat all keypoints in a human body equally, ignoring the physical structure of the skeleton. In contrast, HANet structures attention hierarchically based on &lt;strong&gt;kinematic joints&lt;/strong&gt;:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Local Attention:&lt;/strong&gt; Computes attention within adjacent joints (e.g., connecting wrist to elbow, elbow to shoulder) representing physical bone links.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Global Attention:&lt;/strong&gt; Captures long-range dependencies (e.g., left hand to right hand coordinating during an action).&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Local Attention:&lt;/strong&gt; Computes attention within adjacent joints (e.g., connecting wrist to elbow, elbow to shoulder) representing physical bone links.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Global Attention:&lt;/strong&gt; Captures long-range dependencies (e.g., left hand to right hand coordinating during an action).&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;h3 id=&quot;kinematic-feature-formulation&quot;&gt;Kinematic Feature Formulation&lt;/h3&gt;
-&lt;p&gt;To enforce the physical laws of motion, we compute keypoint motion features based on sequential coordinates. Let $p_t \in \mathbb{R}^d$ be the $d$-dimensional coordinate (2D or 3D) of a body joint at frame $t$. We define the kinematic features as follows:&lt;/p&gt;
+  &lt;h3 id=&quot;kinematic-feature-formulation-1&quot;&gt;Kinematic Feature Formulation&lt;/h3&gt;
+  &lt;p&gt;To enforce the physical laws of motion, we compute keypoint motion features based on sequential coordinates. Let $p_t \in \mathbb{R}^d$ be the $d$-dimensional coordinate (2D or 3D) of a body joint at frame $t$. We define the kinematic features as follows:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Velocity ($v_t$):&lt;/strong&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Velocity ($v_t$):&lt;/strong&gt;
 \(v_t = p_t - p_{t-1}\)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Acceleration ($a_t$):&lt;/strong&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Acceleration ($a_t$):&lt;/strong&gt;
 \(a_t = v_t - v_{t-1} = p_t - 2p_{t-1} + p_{t-2}\)&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;p&gt;These features are concatenated with the initial joint embeddings, enabling the network to learn smooth trajectories and handle heavy occlusion by extrapolating physical motion paths.&lt;/p&gt;
+  &lt;p&gt;These features are concatenated with the initial joint embeddings, enabling the network to learn smooth trajectories and handle heavy occlusion by extrapolating physical motion paths.&lt;/p&gt;
 
-&lt;h3 id=&quot;hierarchical-attention-scaling&quot;&gt;Hierarchical Attention Scaling&lt;/h3&gt;
-&lt;p&gt;Given query $Q$, key $K$, and value $V$, the attention map is calculated as:
+  &lt;h3 id=&quot;hierarchical-attention-scaling&quot;&gt;Hierarchical Attention Scaling&lt;/h3&gt;
+  &lt;p&gt;Given query $Q$, key $K$, and value $V$, the attention map is calculated as:
 \(\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V\)&lt;/p&gt;
 
-&lt;p&gt;To prevent training instability under sparse supervision, our hierarchical encoder aggregates multi-scale feature maps from all layers $l \in {1, \dots, L}$:
+  &lt;p&gt;To prevent training instability under sparse supervision, our hierarchical encoder aggregates multi-scale feature maps from all layers $l \in {1, \dots, L}$:
 \(F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}\)
 where $F^{(l)}$ represents the attention features at layer $l$, and $w_l$ is a learnable scaling weight.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-visual-demonstrations-hanet-in-action&quot;&gt;3. Visual Demonstrations (HANet in Action)&lt;/h2&gt;
+  &lt;h2 id=&quot;visual-demonstrations-hanet-in-action&quot;&gt;3. Visual Demonstrations (HANet in Action)&lt;/h2&gt;
 
-&lt;p&gt;Below are the qualitative tracking results of HANet evaluated on JHMDB, AIST++, and 3DPW datasets, demonstrating its ability to reconstruct poses and 3D SMPL meshes with smooth continuity.&lt;/p&gt;
+  &lt;p&gt;Below are the qualitative tracking results of HANet evaluated on JHMDB, AIST++, and 3DPW datasets, demonstrating its ability to reconstruct poses and 3D SMPL meshes with smooth continuity.&lt;/p&gt;
 
-&lt;h3 id=&quot;a-2d-pose-tracking-jhmdb-dataset&quot;&gt;A. 2D Pose Tracking (JHMDB Dataset)&lt;/h3&gt;
-&lt;p&gt;Notice the stable keypoint tracking even during fast swinging motions and heavy motion blur.&lt;/p&gt;
+  &lt;h3 id=&quot;a-2d-pose-tracking-jhmdb-dataset&quot;&gt;A. 2D Pose Tracking (JHMDB Dataset)&lt;/h3&gt;
+  &lt;p&gt;Notice the stable keypoint tracking even during fast swinging motions and heavy motion blur.&lt;/p&gt;
 
-&lt;div class=&quot;text-center my-4&quot;&gt;
+  &lt;div class=&quot;text-center my-4&quot;&gt;
     &lt;img src=&quot;/assets/images/jhmdb.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;HANet 2D tracking on JHMDB&quot; style=&quot;max-height: 350px;&quot; /&gt;
     &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;Demo 1: 2D skeletal estimation under fast motion dynamics (Sub-JHMDB).&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;b-3d-pose-estimation--smpl-mesh-recovery-aist-dataset&quot;&gt;B. 3D Pose Estimation &amp;amp; SMPL Mesh Recovery (AIST++ Dataset)&lt;/h3&gt;
-&lt;p&gt;Reconstruction of 3D skeletal joints and smooth SMPL body mesh surfaces under complex dance movements.&lt;/p&gt;
+  &lt;h3 id=&quot;b-3d-pose-estimation--smpl-mesh-recovery-aist-dataset&quot;&gt;B. 3D Pose Estimation &amp;amp; SMPL Mesh Recovery (AIST++ Dataset)&lt;/h3&gt;
+  &lt;p&gt;Reconstruction of 3D skeletal joints and smooth SMPL body mesh surfaces under complex dance movements.&lt;/p&gt;
 
-&lt;div class=&quot;row text-center my-4&quot;&gt;
+  &lt;div class=&quot;row text-center my-4&quot;&gt;
     &lt;div class=&quot;col-md-6 mb-3&quot;&gt;
         &lt;img src=&quot;/assets/images/aist_3D.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;HANet 3D joints on AIST&quot; style=&quot;max-height: 250px; width: 100%; object-fit: cover;&quot; /&gt;
         &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;HANet: 3D joint coordinate outputs.&lt;/p&gt;
@@ -692,77 +910,78 @@ where $F^{(l)}$ represents the attention features at layer $l$, and $w_l$ is a l
     &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;c-3d-body-mesh-recovery-3dpw-dataset&quot;&gt;C. 3D Body Mesh Recovery (3DPW Dataset)&lt;/h3&gt;
-&lt;p&gt;Evaluation on the challenging in-the-wild 3DPW dataset, demonstrating robust pose restoration and shape fitting.&lt;/p&gt;
+  &lt;h3 id=&quot;c-3d-body-mesh-recovery-3dpw-dataset&quot;&gt;C. 3D Body Mesh Recovery (3DPW Dataset)&lt;/h3&gt;
+  &lt;p&gt;Evaluation on the challenging in-the-wild 3DPW dataset, demonstrating robust pose restoration and shape fitting.&lt;/p&gt;
 
-&lt;div class=&quot;text-center my-4&quot;&gt;
+  &lt;div class=&quot;text-center my-4&quot;&gt;
     &lt;img src=&quot;/assets/images/pw3d_smpl.gif&quot; class=&quot;img-fluid rounded shadow-sm border&quot; alt=&quot;HANet 3D body mesh on 3DPW&quot; style=&quot;max-height: 350px;&quot; /&gt;
     &lt;p class=&quot;text-muted mt-2&quot; style=&quot;font-size: 0.85rem;&quot;&gt;Demo 2: Smooth 3D body mesh recovery under physical occlusions and fast motion in the wild.&lt;/p&gt;
 &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;4-online-cross-supervision--results&quot;&gt;4. Online Cross-Supervision &amp;amp; Results&lt;/h2&gt;
+  &lt;h2 id=&quot;online-cross-supervision--results&quot;&gt;4. Online Cross-Supervision &amp;amp; Results&lt;/h2&gt;
 
-&lt;p&gt;To enable joint optimization between the initial input coordinates and the final refined outputs, we utilize an &lt;strong&gt;online mutual learning&lt;/strong&gt; objective. Given training losses, the network dynamically selects targets:&lt;/p&gt;
+  &lt;p&gt;To enable joint optimization between the initial input coordinates and the final refined outputs, we utilize an &lt;strong&gt;online mutual learning&lt;/strong&gt; objective. Given training losses, the network dynamically selects targets:&lt;/p&gt;
 
 \[\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{pose}} + \lambda_{\text{mutual}} \mathcal{L}_{\text{mutual}}(\pi_{\theta_{\text{in}}}, \pi_{\theta_{\text{out}}})\]
 
-&lt;h3 id=&quot;quantitative-performance-comparison&quot;&gt;Quantitative Performance Comparison&lt;/h3&gt;
+  &lt;h3 id=&quot;quantitative-performance-comparison&quot;&gt;Quantitative Performance Comparison&lt;/h3&gt;
 
-&lt;p&gt;Our method achieved state-of-the-art results on major benchmarks:&lt;/p&gt;
+  &lt;p&gt;Our method achieved state-of-the-art results on major benchmarks:&lt;/p&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Dataset&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Metric&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Input Baseline&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;HANet (Ours)&lt;/strong&gt;&lt;/th&gt;
-      &lt;th style=&quot;text-align: center&quot;&gt;Improvement&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Sub-JHMDB (2D)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PCK @ 0.05&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;57.3%&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;91.9%&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;+34.6%&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Human3.6M (3D)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;54.6mm&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;52.8mm&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;AIST++ (3D)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;107.7mm&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;69.2mm&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-38.5mm&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;3DPW (SMPL)&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;78.9mm&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;77.1mm&lt;/strong&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+  &lt;table&gt;
+    &lt;thead&gt;
+      &lt;tr&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Dataset&lt;/th&gt;
+        &lt;th style=&quot;text-align: left&quot;&gt;Metric&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Input Baseline&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;&lt;strong&gt;HANet (Ours)&lt;/strong&gt;&lt;/th&gt;
+        &lt;th style=&quot;text-align: center&quot;&gt;Improvement&lt;/th&gt;
+      &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Sub-JHMDB (2D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;PCK @ 0.05&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;57.3%&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;91.9%&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;+34.6%&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;Human3.6M (3D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;54.6mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;52.8mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;AIST++ (3D)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;107.7mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;69.2mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-38.5mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;&lt;strong&gt;3DPW (SMPL)&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: left&quot;&gt;MPJPE (mm)&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;78.9mm&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;77.1mm&lt;/strong&gt;&lt;/td&gt;
+        &lt;td style=&quot;text-align: center&quot;&gt;&lt;strong&gt;-1.8mm&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Paper:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html&quot;&gt;CVF Open Access Paper&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Code:&lt;/strong&gt; &lt;a href=&quot;https://github.com/KyungMinJin/HANet&quot;&gt;GitHub Repository (KyungMinJin/HANet)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;h3 id=&quot;resources&quot;&gt;Resources&lt;/h3&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Paper:&lt;/strong&gt; &lt;a href=&quot;https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html&quot;&gt;CVF Open Access Paper&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Code:&lt;/strong&gt; &lt;a href=&quot;https://github.com/KyungMinJin/HANet&quot;&gt;GitHub Repository (KyungMinJin/HANet)&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 
 </description>
         <pubDate>Thu, 05 Jan 2023 00:00:00 -0600</pubDate>
@@ -784,33 +1003,37 @@ where $F^{(l)}$ represents the attention features at layer $l$, and $w_l$ is a l
     
       <item>
         <title>About Me</title>
-        <description>&lt;h1 id=&quot;자기소개&quot;&gt;자기소개&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;section&quot;&gt;자기소개&lt;/h1&gt;
 
-&lt;p&gt;저는 고려대학교 인공지능대학원 &lt;a target=&quot;_blank&quot; href=&quot;http://pr.korea.ac.kr/&quot;&gt;PRML 연구실&lt;/a&gt;에서 이성환 교수님의 지도 아래 석사 과정을 마친 진경민입니다. 대학원 진학 이전에는 고려대학교에서 컴퓨터공학과와 인공지능을 전공하여 2021년에 학사 학위를 취득했습니다.&lt;/p&gt;
+  &lt;p&gt;저는 고려대학교 인공지능대학원 &lt;a target=&quot;_blank&quot; href=&quot;http://pr.korea.ac.kr/&quot;&gt;PRML 연구실&lt;/a&gt;에서 이성환 교수님의 지도 아래 석사 과정을 마친 진경민입니다. 대학원 진학 이전에는 고려대학교에서 컴퓨터공학과와 인공지능을 전공하여 2021년에 학사 학위를 취득했습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;시각 지각에서 시작해 체화된 추론으로 확장되는 멀티모달 지능을 연구합니다.&lt;/strong&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;시각 지각에서 시작해 체화된 추론으로 확장되는 멀티모달 지능을 연구합니다.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;저의 연구는 컴퓨터 비전 분야에서 시작되었으며, 트랜스포머 아키텍처와 합성곱 신경망을 결합한 새로운 포즈 추정 프레임워크를 제안해 다수의 벤치마크에서 최고 수준의 성능을 달성했습니다. 이러한 연구 성과를 바탕으로 WACV를 포함한 국제 학회 및 저널에 논문을 발표했습니다.&lt;/p&gt;
+  &lt;p&gt;저의 연구는 컴퓨터 비전 분야에서 시작되었으며, 트랜스포머 아키텍처와 합성곱 신경망을 결합한 새로운 포즈 추정 프레임워크를 제안해 다수의 벤치마크에서 최고 수준의 성능을 달성했습니다. 이러한 연구 성과를 바탕으로 WACV를 포함한 국제 학회 및 저널에 논문을 발표했습니다.&lt;/p&gt;
 
-&lt;p&gt;이후 LG전자에 합류하여 인체 및 손 포즈 추정 모델을 엣지 디바이스 환경에 적용하는 연구를 수행하며, 실제 환경에서의 효율성과 강건성을 중심으로 한 모델 개발에 참여했습니다. 연구 관심사는 점차 확장되어 Vision–Language–Audio 기반의 대규모 멀티모달 모델, cross-modal continual learning, 그리고 GRPO 및 DPO와 같은 강화학습 기반 정책 최적화 기법을 활용한 멀티모달 학습 연구를 진행했습니다.&lt;/p&gt;
+  &lt;p&gt;이후 LG전자에 합류하여 인체 및 손 포즈 추정 모델을 엣지 디바이스 환경에 적용하는 연구를 수행하며, 실제 환경에서의 효율성과 강건성을 중심으로 한 모델 개발에 참여했습니다. 연구 관심사는 점차 확장되어 Vision–Language–Audio 기반의 대규모 멀티모달 모델, cross-modal continual learning, 그리고 GRPO 및 DPO와 같은 강화학습 기반 정책 최적화 기법을 활용한 멀티모달 학습 연구를 진행했습니다.&lt;/p&gt;
 
-&lt;p&gt;최근에는 로봇 선행 연구 조직에서 로봇 인지 및 자연어 기반 객체 이해 기술을 연구하고 있으며, 멀티모달 파운데이션 모델과 체화된 인공지능을 연결해 로봇이 시각 정보를 언어적으로 이해하고 물리적 환경과 효과적으로 상호작용할 수 있도록 하는 것을 목표로 하고 있습니다.&lt;/p&gt;
+  &lt;p&gt;최근에는 로봇 선행 연구 조직에서 로봇 인지 및 자연어 기반 객체 이해 기술을 연구하고 있으며, 멀티모달 파운데이션 모델과 체화된 인공지능을 연결해 로봇이 시각 정보를 언어적으로 이해하고 물리적 환경과 효과적으로 상호작용할 수 있도록 하는 것을 목표로 하고 있습니다.&lt;/p&gt;
 
-&lt;p&gt;더 자세한 경력은 &lt;a target=&quot;_blank&quot; href=&quot;https://kyungminjin.github.io/CV.pdf&quot;&gt;CV&lt;/a&gt;를 참고해주세요.&lt;/p&gt;
+  &lt;p&gt;더 자세한 경력은 &lt;a target=&quot;_blank&quot; href=&quot;https://kyungminjin.github.io/CV.pdf&quot;&gt;CV&lt;/a&gt;를 참고해주세요.&lt;/p&gt;
+&lt;/div&gt;
 
-&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University &lt;a target=&quot;_blank&quot; href=&quot;http://pr.korea.ac.kr/&quot;&gt;(PRML Lab)&lt;/a&gt;, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.&lt;/p&gt;
+  &lt;p&gt;I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University &lt;a target=&quot;_blank&quot; href=&quot;http://pr.korea.ac.kr/&quot;&gt;(PRML Lab)&lt;/a&gt;, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor’s degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Building multimodal intelligence from visual perception to embodied reasoning.&lt;/strong&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;strong&gt;Building multimodal intelligence from visual perception to embodied reasoning.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;“My research began in the computer vision domain, where I designed novel pose estimation frameworks that combine transformer-based architectures with convolutional neural networks. This work achieved state-of-the-art performance across multiple benchmarks and led to publications in international conferences and peer-reviewed journals, including WACV.&lt;/p&gt;
+  &lt;p&gt;My research began in the computer vision domain, where I designed novel pose estimation frameworks that combine transformer-based architectures with convolutional neural networks. This work achieved state-of-the-art performance across multiple benchmarks and led to publications in international conferences and peer-reviewed journals, including WACV.&lt;/p&gt;
 
-&lt;p&gt;After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge devices, focusing on efficiency and robustness in real-world environments. As my research interests expanded, I transitioned toward multimodal learning, contributing to the development of large-scale Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement learning–based policy optimization methods such as GRPO and DPO.&lt;/p&gt;
+  &lt;p&gt;After joining LG Electronics, I worked on deploying body and hand pose estimation models to edge devices, focusing on efficiency and robustness in real-world environments. As my research interests expanded, I transitioned toward multimodal learning, contributing to the development of large-scale Vision–Language–Audio models, cross-modal continual learning strategies, and reinforcement learning–based policy optimization methods such as GRPO and DPO.&lt;/p&gt;
 
-&lt;p&gt;More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively.&lt;/p&gt;
+  &lt;p&gt;More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively.&lt;/p&gt;
 
-&lt;p&gt;For more detailed information about my background and experience, please refer to my &lt;a target=&quot;_blank&quot; href=&quot;https://kyungminjin.github.io/CV.pdf&quot;&gt;CV&lt;/a&gt;.&lt;/p&gt;
+  &lt;p&gt;For more detailed information about my background and experience, please refer to my &lt;a target=&quot;_blank&quot; href=&quot;https://kyungminjin.github.io/CV.pdf&quot;&gt;CV&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Fri, 13 May 2022 00:00:00 -0500</pubDate>
         <link>/posts/about-me/</link>

@@ -5,20 +5,38 @@
     <div class="row no-gutters align-items-center">
       <div class="col-8 col-md-9 p-3 p-md-4">
          <div class="d-flex align-items-center mb-1">
-             <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">{{ post.categories | join: ', ' }}</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-en" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">{{ post.categories | join: ', ' }}</span>
+             <span class="text-secondary font-weight-bold mr-2 lang-ko" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
+                 {% assign cat_ko_list = "" | split: "," %}
+                 {% for cat in post.categories %}
+                     {% if cat == "Introduce" or cat == "introduce" %}{% assign cat_ko_list = cat_ko_list | push: "자기소개" %}
+                     {% elsif cat == "Robotics" or cat == "robotics" %}{% assign cat_ko_list = cat_ko_list | push: "로봇공학" %}
+                     {% elsif cat == "Machine-Learning" or cat == "Machine Learning" or cat == "machine-learning" %}{% assign cat_ko_list = cat_ko_list | push: "기계학습" %}
+                     {% elsif cat == "Computer-Vision" or cat == "Computer Vision" or cat == "computer-vision" %}{% assign cat_ko_list = cat_ko_list | push: "컴퓨터 비전" %}
+                     {% else %}{% assign cat_ko_list = cat_ko_list | push: cat %}
+                     {% endif %}
+                 {% endfor %}
+                 {{ cat_ko_list | join: ', ' }}
+             </span>
              <span class="text-muted" style="font-size: 0.75rem;">{{ post.date | date_to_string }}</span>
          </div>
          <h3 class="font-weight-bold mb-2" style="font-size: 1.15rem; line-height: 1.3; margin-top: 5px;">
-             <a class="text-dark hover-underline text-decoration-none" href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+             <a class="text-dark hover-underline text-decoration-none" href="{{ site.baseurl }}{{ post.url }}">
+                 <span class="lang-en">{{ post.title }}</span>
+                 <span class="lang-ko">{% if post.title_ko %}{{ post.title_ko }}{% else %}{{ post.title }}{% endif %}</span>
+             </a>
          </h3>
          <p class="text-muted d-none d-md-block mb-3" style="font-size: 0.88rem; line-height: 1.5;">
-             {{ post.excerpt | strip_html | truncatewords:25 }}
+             <span class="lang-en">{{ post.excerpt | strip_html | truncatewords:25 }}</span>
+             <span class="lang-ko">{% if post.description_ko %}{{ post.description_ko }}{% else %}{{ post.excerpt | strip_html | truncatewords:25 }}{% endif %}</span>
          </p>
          {% if post.author %}
          <div class="d-flex align-items-center mt-2">
              <img class="author-thumb mr-2" src="{% if author.avatar %}{{site.baseurl}}/{{ author.avatar }}{% else %}/assets/images/gravatar.png{% endif %}" alt="{{ author.display_name }}" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
              <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
-                 By <a target="_blank" class="text-dark font-weight-bold" href="{{ author.web }}">{{ author.display_name }}</a>
+                 <span class="lang-en">By</span>
+                 <span class="lang-ko">작성자:</span>
+                 <a target="_blank" class="text-dark font-weight-bold" href="{{ author.web }}">{{ author.display_name }}</a>
              </span>
          </div>
          {% endif %}
