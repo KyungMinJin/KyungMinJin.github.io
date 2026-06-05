@@ -74,8 +74,8 @@
     >
       <div class="container pr-0">
         <!-- Begin Logo -->
-        <a class="navbar-brand" href="{{ site.baseurl }}/">
-          <img src="{{ site.baseurl }}/{{ site.logo }}" alt="{{ site.name }}" />
+        <a class="navbar-brand text-dark font-weight-bold" href="{{ site.baseurl }}/">
+          {{ site.name }}
         </a>
         <!-- End Logo -->
 
@@ -96,27 +96,27 @@
 
           <ul class="navbar-nav ml-auto">
             <li class="nav-item {% if page.url == '/' or page.url == '/index.html' %}active{% endif %}">
-              <a class="nav-link" href="{{ site.baseurl }}/"><i class="fa fa-home"></i> Home</a>
+              <a class="nav-link" href="{{ site.baseurl }}/">Home</a>
             </li>
 
             <li class="nav-item {% if page.url == '/about' or page.url == '/about.html' %}active{% endif %}">
-              <a class="nav-link" href="{{ site.baseurl }}/about"><i class="fa fa-user"></i> About (CV)</a>
+              <a class="nav-link" href="{{ site.baseurl }}/about">About (CV)</a>
             </li>
 
             <li class="nav-item {% if page.url == '/publications' or page.url == '/publications.html' %}active{% endif %}">
-              <a class="nav-link" href="{{ site.baseurl }}/publications"><i class="fa fa-graduation-cap"></i> Publications</a>
+              <a class="nav-link" href="{{ site.baseurl }}/publications">Publications</a>
             </li>
 
             <li class="nav-item {% if page.url == '/projects' or page.url == '/projects.html' %}active{% endif %}">
-              <a class="nav-link" href="{{ site.baseurl }}/projects"><i class="fa fa-briefcase"></i> Projects</a>
+              <a class="nav-link" href="{{ site.baseurl }}/projects">Projects</a>
             </li>
 
             <li class="nav-item {% if page.url == '/contact' or page.url == '/contact.html' %}active{% endif %}">
-              <a class="nav-link" href="{{ site.baseurl }}/contact"><i class="fa fa-envelope"></i> Contact</a>
+              <a class="nav-link" href="{{ site.baseurl }}/contact">Contact</a>
             </li>
 
             <li class="nav-item">
-              <a target="_blank" class="nav-link" href="https://donologue.tistory.com"><i class="fa fa-pencil-square-o"></i> Blog <i class="fa fa-external-link" style="font-size:11px;"></i></a>
+              <a target="_blank" class="nav-link" href="https://donologue.tistory.com">Blog</a>
             </li>
 
             {% include search-lunr.html %}

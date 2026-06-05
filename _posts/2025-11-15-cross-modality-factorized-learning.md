@@ -4,7 +4,7 @@ title: "Cross-Modality Shared & Unique Information Factorization (SAMIF)"
 author: Kyung-Min Jin
 categories: [Machine-Learning]
 tags: [Multimodal, Semantic-Segmentation, Cross-Attention]
-image: assets/images/3.jpg
+image: assets/images/multimodal_samif.png
 description: "A deep dive into Semantic-Aware Mutual Information Factorized Learning (SAMIF) for robust multimodal semantic segmentation."
 featured: false
 hidden: false

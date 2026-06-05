@@ -4,7 +4,7 @@ title: "Robotic Perception & Natural Language Object Grounding via Knowledge Gra
 author: Kyung-Min Jin
 categories: [Robotics]
 tags: [Embodied-AI, Knowledge-Graph, RAG]
-image: assets/images/2.jpg
+image: assets/images/robotics_perception_kg.png
 description: "Exploring how robots can bridge visual perception and language understanding using structured Knowledge Graphs and Retrieval-Augmented Generation."
 featured: true
 hidden: false
