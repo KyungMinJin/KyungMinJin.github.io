@@ -24,8 +24,7 @@ comments: true
 
 </div> <!-- col-md-8 끝 -->
 
-<div class="col-md-4">
-<div class="sticky-top sticky-top-80">
+<div class="col-md-4 sticky-sidebar">
 <h5>Social Media and CV</h5>
 
 <p>Thank you! Visit my Github Profile <a target="_blank" href="https://github.com/KyungMinJin">Kyung-Min Jin <i class="fa fa-github-square"></i></a>.</p>
@@ -66,27 +65,27 @@ comments: true
         <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">Citations per year</div>
         <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 220px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 3%;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
+                <div class="scholar-bar" style="height: 5px;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
                 <span class="scholar-year d-block mt-1 text-muted">21</span>
             </div>
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 11%;" data-tooltip="2022: 4 citations" title="2022: 4 citations"></div>
+                <div class="scholar-bar" style="height: 18px;" data-tooltip="2022: 4 citations" title="2022: 4 citations"></div>
                 <span class="scholar-year d-block mt-1 text-muted">22</span>
             </div>
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 100%;" data-tooltip="2023: 36 citations" title="2023: 36 citations"></div>
+                <div class="scholar-bar" style="height: 160px;" data-tooltip="2023: 36 citations" title="2023: 36 citations"></div>
                 <span class="scholar-year d-block mt-1 text-muted">23</span>
             </div>
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 50%;" data-tooltip="2024: 18 citations" title="2024: 18 citations"></div>
+                <div class="scholar-bar" style="height: 80px;" data-tooltip="2024: 18 citations" title="2024: 18 citations"></div>
                 <span class="scholar-year d-block mt-1 text-muted">24</span>
             </div>
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 69%;" data-tooltip="2025: 25 citations" title="2025: 25 citations"></div>
+                <div class="scholar-bar" style="height: 110px;" data-tooltip="2025: 25 citations" title="2025: 25 citations"></div>
                 <span class="scholar-year d-block mt-1 text-muted">25</span>
             </div>
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 28%;" data-tooltip="2026: 10 citations" title="2026: 10 citations"></div>
+                <div class="scholar-bar" style="height: 45px;" data-tooltip="2026: 10 citations" title="2026: 10 citations"></div>
                 <span class="scholar-year d-block mt-1 text-muted">26</span>
             </div>
         </div>
@@ -99,16 +98,13 @@ comments: true
         <i class="fa fa-globe text-secondary"></i> Visitor Map
     </h6>
     <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-        <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank">
-            <img src="https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" alt="Visitor Map" style="max-width: 100%; height: auto; border-radius: 8px;" onerror="this.onerror=null; this.src='https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
-        </a>
+        <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
     </div>
     <div class="mt-2">
         <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=false" alt="Total Visits" style="border-radius: 4px;"/>
     </div>
 </div>
 
-</div>
 </div>
 </div>
 
