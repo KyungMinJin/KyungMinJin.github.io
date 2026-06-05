@@ -977,3 +977,182 @@ details pre {
   border: 1px solid #eaeaea !important;
   font-size: 0.85rem;
 }
+
+/* Floating Post Share Sidebar */
+.post-share-sidebar {
+  position: absolute;
+  left: 20px;
+  top: 150px;
+  width: 60px;
+  z-index: 10;
+  text-align: center;
+}
+
+.post-share-sidebar .share {
+  position: sticky;
+  top: 100px;
+}
+
+@media (max-width: 1024px) {
+  .post-share-sidebar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  .post-share-sidebar .share ul {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .post-share-sidebar .share ul li {
+    display: inline-block !important;
+    margin: 0 10px;
+  }
+  .post-share-sidebar .share p {
+    display: none;
+  }
+  .post-share-sidebar .share .sep {
+    display: none;
+  }
+}
+
+/* LinkedIn-style Grouped Career Timeline */
+.timeline-container {
+  margin-top: 25px;
+}
+
+.timeline-group {
+  margin-bottom: 35px;
+}
+
+.timeline-logo-container {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  padding: 3px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.timeline-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.timeline-roles-list {
+  margin-left: 23px; /* Exact center of the 48px logo (23px + 1px border is 24px) */
+  border-left: 2px solid #e9ecef;
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.timeline-role-item {
+  position: relative;
+}
+
+.timeline-role-dot {
+  position: absolute;
+  left: -27px; /* Centers 12px dot on the 2px line at 20px padding + 6px offset */
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #dee2e6;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #dee2e6;
+  transition: all 0.2s ease;
+}
+
+.timeline-role-item:hover .timeline-role-dot {
+  background: #00ab6b; /* Accent highlight color */
+  box-shadow: 0 0 0 2px #00ab6b;
+}
+
+.timeline-role-item h5 {
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+/* Collapsible PDF CV Details */
+.cv-viewer-details {
+  background: #fff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.cv-viewer-details[open] {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.cv-viewer-details summary::-webkit-details-marker {
+  display: none;
+}
+
+.cv-viewer-details summary:hover {
+  background-color: #f1f3f5 !important;
+}
+
+.cv-viewer-details[open] summary .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Compact Projects Sizing */
+.project-card {
+  transition: transform 0.25s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.25s ease-in-out;
+}
+
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06) !important;
+}
+
+.project-card .card-body {
+  padding: 1.15rem !important;
+}
+
+.project-card h5.card-title {
+  font-size: 1.08rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.project-card p.card-text {
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.6rem !important;
+}
+
+.project-card ul {
+  margin-bottom: 0.6rem !important;
+  padding-left: 20px !important;
+}
+
+.project-card ul li {
+  font-size: 0.86rem !important;
+  line-height: 1.5 !important;
+  margin-bottom: 0.25rem;
+}
+
+.project-card .badge {
+  font-size: 0.72rem !important;
+  padding: 0.3em 0.55em !important;
+  margin-bottom: 4px;
+}
+
+.project-card .btn-sm {
+  font-size: 0.78rem !important;
+  padding: 0.3rem 0.65rem !important;
+}
+
+.project-card img {
+  border-radius: 6px;
+  max-height: 160px;
+}

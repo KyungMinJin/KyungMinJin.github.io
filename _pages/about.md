@@ -75,7 +75,7 @@ comments: true
     <!-- Annual Citation Trend (Scholar bar graph style) -->
     <div class="scholar-graph-container mt-2">
         <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">Citations per year</div>
-        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 80px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
+        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 130px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
             <!-- 2021 -->
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
                 <div class="scholar-bar" style="height: 3%;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
@@ -120,76 +120,87 @@ comments: true
 <div class="row">
     <div class="col-md-12">
         <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> Work & Education Timeline</h3>
-        <div class="timeline-container pl-3">
+        <div class="timeline-container pl-0">
             
-            <!-- Timeline Item 1 -->
-            <div class="timeline-item d-flex">
-                <div class="timeline-left">
-                    <div class="timeline-logo-circle lg-logo">LG</div>
-                    <div class="timeline-line"></div>
+            <!-- Company Group: LG Electronics -->
+            <div class="timeline-group mb-5">
+                <div class="timeline-header d-flex align-items-center mb-3">
+                    <div class="timeline-logo-container">
+                        <img src="{{ site.baseurl }}/assets/images/lg_logo_official.png" alt="LG Electronics" class="timeline-logo-img">
+                    </div>
+                    <div class="timeline-header-info ml-3">
+                        <h4 class="font-weight-bold text-dark mb-0" style="font-size: 1.15rem;">LG Electronics</h4>
+                        <span class="text-secondary" style="font-size: 0.85rem;">Full-time · 3 yrs 5 mos (2023.01 - Present)</span>
+                    </div>
                 </div>
-                <div class="timeline-right pl-4 pb-4">
-                    <h5 class="font-weight-bold text-dark mb-1">Advanced Robotics Lab</h5>
-                    <h6 class="text-secondary font-weight-normal mb-2">
-                        LG Electronics | Researcher (선임연구원) 
-                        <span class="badge badge-light border text-secondary ml-2">2026.01 - Present</span>
-                    </h6>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
-                        Focusing on robotic perception, natural language-based object understanding, and Embodied AI reasoning. Connecting Vision-Language-Action (VLA) foundation models with physical robotic actions.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Timeline Item 2 -->
-            <div class="timeline-item d-flex">
-                <div class="timeline-left">
-                    <div class="timeline-logo-circle lg-logo">LG</div>
-                    <div class="timeline-line"></div>
-                </div>
-                <div class="timeline-right pl-4 pb-4">
-                    <h5 class="font-weight-bold text-dark mb-1">AI Lab</h5>
-                    <h6 class="text-secondary font-weight-normal mb-2">
-                        LG Electronics | Researcher (연구원) 
-                        <span class="badge badge-light border text-secondary ml-2">2023.01 - 2025.12</span>
-                    </h6>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
-                        Researched multimodal representation factorization strategies (SAMIF) and reinforcement learning-based online policy optimization (GRPO/DPO) to align Large Multimodal Models. Successfully compiled and deployed body/hand tracking networks on consumer TV edge NPUs.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Timeline Item 3 -->
-            <div class="timeline-item d-flex">
-                <div class="timeline-left">
-                    <div class="timeline-logo-circle ku-logo">KU</div>
-                    <div class="timeline-line"></div>
-                </div>
-                <div class="timeline-right pl-4 pb-4">
-                    <h5 class="font-weight-bold text-dark mb-1">M.S. in Artificial Intelligence</h5>
-                    <h6 class="text-secondary font-weight-normal mb-2">
-                        Korea University | PRML Lab (Advised by Prof. Seong-Hwan Lee)
-                        <span class="badge badge-light border text-secondary ml-2">2021.03 - 2023.02</span>
-                    </h6>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
-                        Specialized in video-based human pose estimation, spatial-temporal attention transformers, and mutual learning. Published first-author papers at WACV (Oral) and Neural Networks.
-                    </p>
+                
+                <div class="timeline-roles-list">
+                    <!-- Role 1 -->
+                    <div class="timeline-role-item position-relative pl-4 pb-4">
+                        <div class="timeline-role-dot"></div>
+                        <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">Advanced Robotics Lab</h5>
+                        <h6 class="text-secondary font-weight-normal mb-2" style="font-size: 0.88rem;">
+                            Researcher (선임연구원) 
+                            <span class="badge badge-light border text-secondary ml-2">2026.01 - Present</span>
+                        </h6>
+                        <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+                            Focusing on robotic perception, natural language-based object understanding, and Embodied AI reasoning. Connecting Vision-Language-Action (VLA) foundation models with physical robotic actions.
+                        </p>
+                    </div>
+                    
+                    <!-- Role 2 -->
+                    <div class="timeline-role-item position-relative pl-4 pb-2">
+                        <div class="timeline-role-dot"></div>
+                        <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">AI Lab</h5>
+                        <h6 class="text-secondary font-weight-normal mb-2" style="font-size: 0.88rem;">
+                            Researcher (연구원) 
+                            <span class="badge badge-light border text-secondary ml-2">2023.01 - 2025.12</span>
+                        </h6>
+                        <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+                            Researched multimodal representation factorization strategies (SAMIF) and reinforcement learning-based online policy optimization (GRPO/DPO) to align Large Multimodal Models. Successfully compiled and deployed body/hand tracking networks on consumer TV edge NPUs.
+                        </p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Timeline Item 4 -->
-            <div class="timeline-item d-flex">
-                <div class="timeline-left">
-                    <div class="timeline-logo-circle ku-logo">KU</div>
+            <!-- University Group: Korea University -->
+            <div class="timeline-group mb-4">
+                <div class="timeline-header d-flex align-items-center mb-3">
+                    <div class="timeline-logo-container">
+                        <img src="{{ site.baseurl }}/assets/images/ku_logo_official.png" alt="Korea University" class="timeline-logo-img">
+                    </div>
+                    <div class="timeline-header-info ml-3">
+                        <h4 class="font-weight-bold text-dark mb-0" style="font-size: 1.15rem;">Korea University</h4>
+                        <span class="text-secondary" style="font-size: 0.85rem;">M.S. & B.S. · Computer Science & AI (2017.03 - 2023.02)</span>
+                    </div>
                 </div>
-                <div class="timeline-right pl-4 pb-2">
-                    <h5 class="font-weight-bold text-dark mb-1">B.S. in Computer Science & Engineering / Artificial Intelligence</h5>
-                    <h6 class="text-secondary font-weight-normal mb-2">
-                        Korea University
-                        <span class="badge badge-light border text-secondary ml-2">2017.03 - 2021.02</span>
-                    </h6>
-                    <p class="text-muted" style="font-size: 0.95rem; line-height: 1.6;">
-                        Earned dual bachelor degrees in CSE and AI. Graduated with honors.
-                    </p>
+                
+                <div class="timeline-roles-list">
+                    <!-- Role 1 -->
+                    <div class="timeline-role-item position-relative pl-4 pb-4">
+                        <div class="timeline-role-dot"></div>
+                        <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">M.S. in Artificial Intelligence</h5>
+                        <h6 class="text-secondary font-weight-normal mb-2" style="font-size: 0.88rem;">
+                            PRML Lab (Advised by Prof. Seong-Hwan Lee)
+                            <span class="badge badge-light border text-secondary ml-2">2021.03 - 2023.02</span>
+                        </h6>
+                        <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+                            Specialized in video-based human pose estimation, spatial-temporal attention transformers, and mutual learning. Published first-author papers at WACV (Oral) and Neural Networks.
+                        </p>
+                    </div>
+                    
+                    <!-- Role 2 -->
+                    <div class="timeline-role-item position-relative pl-4 pb-2">
+                        <div class="timeline-role-dot"></div>
+                        <h5 class="font-weight-bold text-dark mb-1" style="font-size: 1.05rem;">B.S. in Computer Science & Engineering / Artificial Intelligence</h5>
+                        <h6 class="text-secondary font-weight-normal mb-2" style="font-size: 0.88rem;">
+                            Dual Degrees
+                            <span class="badge badge-light border text-secondary ml-2">2017.03 - 2021.02</span>
+                        </h6>
+                        <p class="text-muted mb-0" style="font-size: 0.92rem; line-height: 1.6;">
+                            Earned dual bachelor degrees in CSE and AI. Graduated with honors.
+                        </p>
+                    </div>
                 </div>
             </div>
             
@@ -197,16 +208,23 @@ comments: true
     </div>
 </div>
 
-<!-- Interactive PDF CV Viewer -->
+<!-- Collapsible PDF CV Viewer -->
 <hr class="my-5">
 
 <div class="row">
     <div class="col-md-12">
-        <h4 class="font-weight-bold mb-3"><i class="fa fa-file-pdf-o text-danger"></i> Interactive Curriculum Vitae</h4>
-        <p class="text-muted mb-3">You can view and navigate the detailed Curriculum Vitae directly in the browser, or click <a href="{{ site.baseurl }}/CV.pdf" target="_blank">here</a> to open it in a new tab.</p>
-        <div class="embed-responsive shadow-sm border rounded" style="height: 650px; background: #f8f9fa;">
-            <iframe class="embed-responsive-item" src="{{ site.baseurl }}/CV.pdf" allowfullscreen></iframe>
-        </div>
+        <details class="cv-viewer-details border rounded shadow-sm">
+            <summary class="font-weight-bold p-3 text-dark bg-light" style="cursor: pointer; list-style: none; outline: none; display: flex; align-items: center; justify-content: space-between;">
+                <span><i class="fa fa-file-pdf-o text-danger mr-2"></i> Click to View Interactive PDF CV</span>
+                <i class="fa fa-chevron-down toggle-icon text-muted" style="transition: transform 0.2s ease;"></i>
+            </summary>
+            <div class="p-4 bg-white border-top">
+                <p class="text-muted mb-3" style="font-size: 0.9rem;">You can view and navigate the detailed Curriculum Vitae directly below, or click <a href="{{ site.baseurl }}/CV.pdf" target="_blank" class="font-weight-bold text-primary">here</a> to open it in a new tab.</p>
+                <div class="embed-responsive shadow-sm border rounded" style="height: 800px; background: #f8f9fa;">
+                    <iframe class="embed-responsive-item" src="{{ site.baseurl }}/CV.pdf" allowfullscreen></iframe>
+                </div>
+            </div>
+        </details>
     </div>
 </div>
 

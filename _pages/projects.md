@@ -14,8 +14,8 @@ comments: true
 
 <div class="row">
     <!-- Project 1 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -57,8 +57,8 @@ comments: true
     </div>
 
     <!-- Project 2 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -100,8 +100,8 @@ comments: true
     </div>
 
     <!-- Project 3 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -144,8 +144,8 @@ comments: true
     </div>
 
     <!-- Project 4 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -186,8 +186,8 @@ comments: true
     </div>
 
     <!-- Project 5 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
@@ -231,8 +231,8 @@ comments: true
     </div>
 
     <!-- Project 6 -->
-    <div class="col-md-12 mb-4">
-        <div class="card shadow-sm border overflow-hidden">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card">
             <div class="card-body">
                 <!-- Card Header (Full Width) -->
                 <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">

@@ -8,17 +8,17 @@ post_class: post-template
 <!-- Begin Article
 ================================================== -->
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center position-relative">
 
-        <!-- Post Share -->
-        <div class="col-md-2 pl-0">
+        <!-- Post Share (Floating on Left) -->
+        <div class="post-share-sidebar">
             {% include share.html %}
         </div>
 
         <!-- Post -->
         {% assign author = site.authors[page.author] %}
 
-        <div class="col-md-10 flex-first flex-md-unordered">
+        <div class="col-md-9 col-lg-8 flex-first flex-md-unordered">
             <div class="mainheading">
 
                 <!-- Author Box -->
@@ -121,26 +121,24 @@ post_class: post-template
             <!-- End Tags -->
 
             <!-- Prev/Next -->
-            <div class="row PageNavigation font-weight-bold mt-5">
-            {% if page.previous.url %}
-            <div class="col-12 mb-3">
-              <a class="prev d-block p-3 border rounded text-dark text-decoration-none shadow-sm" href="{{ site.baseurl }}{{page.previous.url}}">
-                <small class="d-block text-success text-uppercase mb-1">&laquo; Previous Story</small>
-                {{page.previous.title}}
-              </a>
+            <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
+                <div class="col-6 text-left">
+                    {% if page.previous.url %}
+                    <a class="prev text-dark text-decoration-none" href="{{ site.baseurl }}{{page.previous.url}}">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">&laquo; Previous</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">{{page.previous.title}}</span>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-6 text-right">
+                    {% if page.next.url %}
+                    <a class="next text-dark text-decoration-none" href="{{ site.baseurl }}{{page.next.url}}">
+                        <small class="d-block text-muted text-uppercase mb-1" style="font-size: 0.75rem;">Next &raquo;</small>
+                        <span class="font-weight-bold text-dark hover-underline" style="font-size: 0.95rem;">{{page.next.title}}</span>
+                    </a>
+                    {% endif %}
+                </div>
             </div>
-            {% endif %}
-            {% if page.next.url %}
-            <div class="col-12 mb-3">
-              <a class="next d-block p-3 border rounded text-dark text-decoration-none shadow-sm" href="{{ site.baseurl }}{{page.next.url}}">
-                <small class="d-block text-success text-uppercase mb-1">Next Story &raquo;</small>
-                {{page.next.title}}
-              </a>
-            </div>
-            {% endif %}
-            <div class="clearfix"></div>
-            </div>
-            <!-- End Categories -->
 
         </div>
         <!-- End Post -->
