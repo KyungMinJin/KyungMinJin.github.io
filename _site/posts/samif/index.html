@@ -277,71 +277,141 @@
                 <!-- Toc if any -->
                 
                 <!-- End Toc -->
-                <h1 id="cross-modality-shared--unique-information-factorization-samif">Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)</h1>
+                <div class="lang-ko">
+  <h1 id="samif">교차 모달리티 공유 및 고유 정보 분리 학습 (SAMIF)</h1>
 
-<p>In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs), the goal is to leverage complementary information from different sensors. However, simple fusion methods (like concatenation or addition) often fail because they ignore the fact that different modalities contain both <strong>shared</strong> (redundant) and <strong>unique</strong> (complementary) information.</p>
+  <p>멀티모달 학습(예: RGB 이미지와 깊이 맵, 열화상 이미지 또는 오디오 로그 결합)의 목적은 다양한 센서에서 제공되는 상호 보완적인 정보를 활용하는 것입니다. 그러나 단순한 융합 방식(예: 단순 연결(concatenation) 또는 더하기)은 서로 다른 모달리티가 <strong>공유 정보</strong>(중복)와 <strong>고유 정보</strong>(상호 보완)를 동시에 포함하고 있다는 사실을 무시하기 때문에 최적의 성능을 내지 못하는 경우가 많습니다.</p>
 
-<p>In this post, we introduce <strong>Semantic-Aware Mutual Information Factorized Learning (SAMIF)</strong>, a framework designed to factorize modality representations and improve multimodal semantic segmentation.</p>
+  <p>본 포스트에서는 이러한 모달리티 표현을 분리하여 멀티모달 시맨틱 세그멘테이션 성능을 높이도록 설계된 <strong>시맨틱 인지 상호 정보 분리 학습(Semantic-Aware Mutual Information Factorized Learning, SAMIF)</strong> 프레임워크를 소개합니다.</p>
 
-<hr />
+  <hr />
 
-<h2 id="1-modality-representation-factorization">1. Modality Representation Factorization</h2>
+  <h2 id="representation-factorization">1. 모달리티 표현의 인수분해 (Representation Factorization)</h2>
 
-<p>SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:</p>
-<ol>
-  <li><strong>Shared Representation ($S$):</strong> Features containing information that is common across all input modalities (e.g., object boundaries visible in both RGB and depth maps).</li>
-  <li><strong>Unique Representation ($U_i$):</strong> Features containing information exclusive to modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in RGB).</li>
-</ol>
+  <p>SAMIF는 각 모달리티 $M_i$의 표현을 두 개의 서로 다른 잠재 공간(latent spaces)으로 분해합니다:</p>
+  <ol>
+    <li><strong>공유 표현 ($S$):</strong> 모든 입력 모달리티에 공통적으로 포함된 정보 (예: RGB 이미지와 깊이 맵 모두에서 뚜렷이 드러나는 물체의 경계선).</li>
+    <li><strong>고유 표현 ($U_i$):</strong> 해당 모달리티 $M_i$에만 독립적으로 존재하는 정보 (예: 열화상 이미지의 온도 패턴, 또는 RGB 이미지의 고주파 텍스처 디테일).</li>
+  </ol>
 
 \[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
 
-<hr />
+  <hr />
 
-<h2 id="2-mutual-information-minimization--maximization">2. Mutual Information Minimization &amp; Maximization</h2>
+  <h2 id="mutual-information---">2. 상호 정보량(Mutual Information) 최소화 및 최대화</h2>
 
-<p>To enforce this factorization, we utilize <strong>Mutual Information (MI)</strong> constraints during PyTorch training:</p>
+  <p>이러한 분리를 유도하기 위해, PyTorch 학습 루프 내에 <strong>상호 정보량(Mutual Information, MI)</strong> 제약 조건을 설정합니다:</p>
 
-<ul>
-  <li>
-    <p><strong>Minimizing MI between Shared and Unique:</strong> We want the unique representations to contain no information about the shared features:</p>
+  <ul>
+    <li>
+      <p><strong>공유 표현과 고유 표현 간의 MI 최소화:</strong> 고유 표현이 공유 표현의 정보를 포함하지 않도록 강제합니다:</p>
 
 \[\min \mathcal{I}(S; U_i)\]
-  </li>
-  <li>
-    <p><strong>Maximizing MI between Shared Representations:</strong> We want the shared representations from different modalities to align:</p>
+    </li>
+    <li>
+      <p><strong>각 모달리티별 공유 표현 간의 MI 최대화:</strong> 서로 다른 모달리티에서 추출된 공유 표현들이 서로 정렬(align)되도록 유도합니다:</p>
 
 \[\max \mathcal{I}(S_1; S_2)\]
-  </li>
-</ul>
+    </li>
+  </ul>
 
-<p>We implement these constraints using neural mutual information estimators (like MINE) or contrastive losses (InfoNCE) on the intermediate feature maps.</p>
+  <p>이 제약 조건들은 중간 특징 맵 단계에서 MINE과 같은 신경망 기반 상호 정보량 추정기나 대비 학습 손실 함수(InfoNCE Contrastive Loss)를 사용해 구현됩니다.</p>
 
-<hr />
+  <hr />
 
-<h2 id="3-cross-attention-fusion">3. Cross-Attention Fusion</h2>
+  <h2 id="cross-attention---">3. 교차 어텐션(Cross-Attention) 기반 특징 융합</h2>
 
-<p>Once factorized, the features are fused using a multi-head <strong>cross-attention</strong> mechanism:</p>
+  <p>분리된 특징들은 멀티헤드 <strong>교차 어텐션(cross-attention)</strong> 매커니즘을 통해 최종 융합됩니다:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>[공유 특징 S] ----------------\
+                               +---&gt; [교차 어텐션 융합] ---&gt; [세그멘테이션 디코더]
+[모달리티별 고유 특징 U_i] ----/
+</pre></td></tr></tbody></table></code></pre></div>  </div>
+
+  <p>이를 통해 네트워크는 공유 정보가 부족할 때에만 고유 특징에 동적으로 집중할 수 있게 되며, 일부 센서가 오작동하는 상황(예: 카메라 화면이 어두워져 열화상 센서의 고유 특징이 우선적으로 사용되는 경우)에서도 강건한 세그멘테이션 결과를 도출해 냅니다.</p>
+
+  <hr />
+
+  <h3 id="section">실험적 결과</h3>
+
+  <p>표준 멀티모달 벤치마크 데이터셋에서 SAMIF 프레임워크는 다음 성과를 보여주었습니다:</p>
+  <ul>
+    <li>평균 Intersection over Union (mIoU)에서 <strong>2~3% 수준의 성능 향상</strong>.</li>
+    <li>센서 신호 유실을 모사한 실험 환경에서 매우 뛰어난 강건성 입증 (단순 융합 베이스라인 대비 최대 15% 높은 mIoU 기록).</li>
+    <li>최종적으로 ONNX 포맷으로 변환되어 엣지 디바이스 내 Qualcomm Neural Processing SDK 환경에 성공적으로 배포 완료.</li>
+  </ul>
+</div>
+
+<div class="lang-en">
+  <h1 id="cross-modality-shared--unique-information-factorization-samif">Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)</h1>
+
+  <p>In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs), the goal is to leverage complementary information from different sensors. However, simple fusion methods (like concatenation or addition) often fail because they ignore the fact that different modalities contain both <strong>shared</strong> (redundant) and <strong>unique</strong> (complementary) information.</p>
+
+  <p>In this post, we introduce <strong>Semantic-Aware Mutual Information Factorized Learning (SAMIF)</strong>, a framework designed to factorize modality representations and improve multimodal semantic segmentation.</p>
+
+  <hr />
+
+  <h2 id="modality-representation-factorization">1. Modality Representation Factorization</h2>
+
+  <p>SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:</p>
+  <ol>
+    <li><strong>Shared Representation ($S$):</strong> Features containing information that is common across all input modalities (e.g., object boundaries visible in both RGB and depth maps).</li>
+    <li><strong>Unique Representation ($U_i$):</strong> Features containing information exclusive to modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in RGB).</li>
+  </ol>
+
+\[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
+
+  <hr />
+
+  <h2 id="mutual-information-minimization--maximization">2. Mutual Information Minimization &amp; Maximization</h2>
+
+  <p>To enforce this factorization, we utilize <strong>Mutual Information (MI)</strong> constraints during PyTorch training:</p>
+
+  <ul>
+    <li>
+      <p><strong>Minimizing MI between Shared and Unique:</strong> We want the unique representations to contain no information about the shared features:</p>
+
+\[\min \mathcal{I}(S; U_i)\]
+    </li>
+    <li>
+      <p><strong>Maximizing MI between Shared Representations:</strong> We want the shared representations from different modalities to align:</p>
+
+\[\max \mathcal{I}(S_1; S_2)\]
+    </li>
+  </ul>
+
+  <p>We implement these constraints using neural mutual information estimators (like MINE) or contrastive losses (InfoNCE) on the intermediate feature maps.</p>
+
+  <hr />
+
+  <h2 id="cross-attention-fusion">3. Cross-Attention Fusion</h2>
+
+  <p>Once factorized, the features are fused using a multi-head <strong>cross-attention</strong> mechanism:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 </pre></td><td class="rouge-code"><pre>[Shared Features S] -------\
                             +---&gt; [Cross-Attention Fusion] ---&gt; [Segmentation Decoder]
 [Unique Features U_i] -----/
-</pre></td></tr></tbody></table></code></pre></div></div>
+</pre></td></tr></tbody></table></code></pre></div>  </div>
 
-<p>This ensures the network dynamically attends to unique features only when the shared features are insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera conditions where thermal unique features take precedence).</p>
+  <p>This ensures the network dynamically attends to unique features only when the shared features are insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera conditions where thermal unique features take precedence).</p>
 
-<hr />
+  <hr />
 
-<h3 id="experimental-results">Experimental Results</h3>
+  <h3 id="experimental-results">Experimental Results</h3>
 
-<p>On standard multimodal benchmarks, SAMIF achieved:</p>
-<ul>
-  <li><strong>2-3% improvement</strong> in mean Intersection over Union (mIoU).</li>
-  <li>Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to vanilla fusion baselines).</li>
-  <li>Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.</li>
-</ul>
+  <p>On standard multimodal benchmarks, SAMIF achieved:</p>
+  <ul>
+    <li><strong>2-3% improvement</strong> in mean Intersection over Union (mIoU).</li>
+    <li>Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to vanilla fusion baselines).</li>
+    <li>Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.</li>
+  </ul>
+</div>
 
             </div>
 

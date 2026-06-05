@@ -5,28 +5,29 @@
     <description>Hi, I&apos;m Kyung-Min Jin. See &lt;a href=&apos;/about&apos;&gt;about page (CV)&lt;/a&gt;!</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 05 Jun 2026 02:56:19 -0500</pubDate>
-    <lastBuildDate>Fri, 05 Jun 2026 02:56:19 -0500</lastBuildDate>
+    <pubDate>Fri, 05 Jun 2026 02:58:11 -0500</pubDate>
+    <lastBuildDate>Fri, 05 Jun 2026 02:58:11 -0500</lastBuildDate>
     <generator>Jekyll v4.2.2</generator>
     
       <item>
         <title>Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK</title>
-        <description>&lt;h1 id=&quot;practical-guide-compiling-and-deploying-dl-models-using-qualcomm-snpe-sdk&quot;&gt;Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;qualcomm-snpe-sdk-------&quot;&gt;Qualcomm SNPE SDK를 활용한 딥러닝 모델 컴파일 및 배포 가이드&lt;/h1&gt;
 
-&lt;p&gt;Deploying deep learning models to edge chipsets equipped with Qualcomm Snapdragon Neural Processing Units (NPUs) requires converting standard model graphs into a proprietary binary format called &lt;strong&gt;DLC (Deep Learning Container)&lt;/strong&gt;. The &lt;strong&gt;Qualcomm Neural Processing SDK&lt;/strong&gt; (formerly SNPE) provides the toolchains necessary to convert, quantize, and execute models on target NPUs.&lt;/p&gt;
+  &lt;p&gt;Qualcomm Snapdragon 신경망 처리 장치(NPU)가 탑재된 엣지 칩셋에 딥러닝 모델을 배포하기 위해서는 기존의 모델 그래프를 &lt;strong&gt;DLC(Deep Learning Container)&lt;/strong&gt;라는 전용 바이너리 포맷으로 변환해야 합니다. &lt;strong&gt;Qualcomm Neural Processing SDK&lt;/strong&gt;(구 SNPE)는 모델의 변환, 양자화 및 NPU 상에서의 실행을 지원하는 툴체인을 제공합니다.&lt;/p&gt;
 
-&lt;p&gt;In this practical guide, we walk through setting up the SNPE development environment, converting an ONNX model to DLC, performing INT8 quantization with calibration data, and executing inference using the SNPE C++ API.&lt;/p&gt;
+  &lt;p&gt;본 실무 가이드에서는 SNPE 개발 환경 설정부터 ONNX 모델의 DLC 변환, 캘리브레이션 데이터를 활용한 INT8 양자화, 그리고 SNPE C++ API를 활용한 모델 추정 구동까지의 전 과정을 차근차근 다룹니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-environment-setup--prerequisites&quot;&gt;1. Environment Setup &amp;amp; Prerequisites&lt;/h2&gt;
+  &lt;h2 id=&quot;section&quot;&gt;1. 개발 환경 구축 및 사전 요구사항&lt;/h2&gt;
 
-&lt;p&gt;To compile models, you need a Linux development server (Ubuntu 20.04/22.04 is recommended). Prepare the environment by installing Python dependencies and downloading the SDK and Android NDK.&lt;/p&gt;
+  &lt;p&gt;모델 컴파일러는 리눅스 서버(Ubuntu 20.04/22.04 권장) 환경에서 실행해야 합니다. Python 종속 라이브러리를 설치하고 SDK 및 Android NDK를 다운로드하여 준비합니다.&lt;/p&gt;
 
-&lt;h3 id=&quot;environment-variables&quot;&gt;Environment Variables&lt;/h3&gt;
-&lt;p&gt;Configure your shell startup script (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;) to register the SDK tools:&lt;/p&gt;
+  &lt;h3 id=&quot;section-1&quot;&gt;환경 변수 설정&lt;/h3&gt;
+  &lt;p&gt;SDK 도구들을 쉘 환경에 등록하기 위해 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt; 파일 등에 다음과 같은 환경 변수를 구성합니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -34,28 +35,28 @@
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SNPE_ROOT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/snpe-sdk
 &lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ANDROID_NDK_ROOT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/android-ndk-r25c
 
-&lt;span class=&quot;c&quot;&gt;# Setup Python environment&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# Python 환경 설정 스크립트 실행&lt;/span&gt;
 &lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SNPE_ROOT&lt;/span&gt;/bin/envsetup.sh &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ANDROID_NDK_ROOT&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;p&gt;Ensure Python dependencies (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;protobuf&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;numpy&lt;/code&gt;) are installed in your active virtual environment:&lt;/p&gt;
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;p&gt;활성화된 가상 환경에 필요한 Python 패키지(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;protobuf&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;numpy&lt;/code&gt;)들이 정상 설치되어 있는지 확인합니다:&lt;/p&gt;
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;onnx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.14.0 &lt;span class=&quot;nv&quot;&gt;protobuf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;3.20.3 &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.23.5
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-model-conversion-onnx-to-dlc&quot;&gt;2. Model Conversion: ONNX to DLC&lt;/h2&gt;
+  &lt;h2 id=&quot;onnx-dlc&quot;&gt;2. 모델 변환: ONNX에서 DLC로&lt;/h2&gt;
 
-&lt;p&gt;Before converting, simplify your ONNX graph to resolve unsupported operations or redundant nodes (such as unfused Batch Normalization layers):&lt;/p&gt;
+  &lt;p&gt;변환을 진행하기 전에, ONNX 그래프를 단순화(simplify)하여 지원되지 않는 연산자나 불필요한 노드(예: 융합되지 않은 Batch Normalization 레이어)를 미리 정리해 줍니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;onnxsim input_model.onnx simplified_model.onnx
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;p&gt;Next, use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-onnx-to-dlc&lt;/code&gt; compiler to convert the simplified graph to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dlc&lt;/code&gt; container. You must specify input shapes and names matching your PyTorch exporter variables:&lt;/p&gt;
+  &lt;p&gt;그 다음, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-onnx-to-dlc&lt;/code&gt; 컴파일러를 사용하여 단순화된 ONNX 파일을 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dlc&lt;/code&gt; 컨테이너 파일로 컴파일합니다. 이때 PyTorch 내보내기 시 설정했던 입력 텐서의 이름과 크기를 정확히 지정해주어야 합니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -63,24 +64,24 @@
   &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; simplified_model.onnx &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; input_name &lt;span class=&quot;s2&quot;&gt;&quot;1,3,256,256&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; model.dlc
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt;: Path to the input ONNX graph.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;: Sets the layer name and dimension bounds for model entry points.&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-o&lt;/code&gt;: The output path for the unquantized FP32 DLC binary.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt;: 입력할 ONNX 그래프 경로.&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;: 모델의 진입점 레이어 이름 및 텐서 차원 설정.&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-o&lt;/code&gt;: 출력될 비양자화 FP32 DLC 바이너리 경로.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-int8-quantization--calibration&quot;&gt;3. INT8 Quantization &amp;amp; Calibration&lt;/h2&gt;
+  &lt;h2 id=&quot;int8----calibration&quot;&gt;3. INT8 양자화 및 캘리브레이션 (Calibration)&lt;/h2&gt;
 
-&lt;p&gt;Running model execution at 8-bit integer precision (INT8) yields up to &lt;strong&gt;3-4x latency speedups&lt;/strong&gt; and reduces memory bandwidth overhead on edge NPUs. To preserve accuracy in sensitive tasks like pose estimation and keypoint regression, we run post-training calibration:&lt;/p&gt;
+  &lt;p&gt;모델을 8비트 정수 정밀도(INT8)로 실행하면 엣지 NPU 상에서 &lt;strong&gt;3~4배의 속도 향상&lt;/strong&gt;을 볼 수 있으며 메모리 대역폭 오버헤드도 크게 줄어듭니다. 포즈 추정 및 키포인트 회귀와 같이 미세한 수치 변화에 민감한 태스크의 정확도 하락을 예방하기 위해, 다음과 같이 훈련 후 캘리브레이션을 실행합니다:&lt;/p&gt;
 
-&lt;h3 id=&quot;prepare-calibration-dataset&quot;&gt;Prepare Calibration Dataset&lt;/h3&gt;
-&lt;p&gt;Create a folder containing 100-200 representative inputs saved as raw binary float files (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.raw&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bin&lt;/code&gt; files containing CHW tensor values). Then, create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raw_list.txt&lt;/code&gt; file listing their paths:&lt;/p&gt;
+  &lt;h3 id=&quot;section-2&quot;&gt;캘리브레이션 데이터셋 준비&lt;/h3&gt;
+  &lt;p&gt;CHW 텐서 값이 저장된 약 100~200개의 원시 바이너리 플로트 파일(예: 이미지 픽셀 정보가 담긴 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.raw&lt;/code&gt; 또는 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bin&lt;/code&gt; 파일)을 폴더에 모아 둔 후, 해당 파일들의 경로 목록이 적힌 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raw_list.txt&lt;/code&gt;를 생성합니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -88,12 +89,12 @@
 calibration_data/img_001.raw
 calibration_data/img_002.raw
 calibration_data/img_003.raw
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;h3 id=&quot;run-dlc-quantizer&quot;&gt;Run DLC Quantizer&lt;/h3&gt;
-&lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-dlc-quantize&lt;/code&gt; to bake the quantization scales directly into the container:&lt;/p&gt;
+  &lt;h3 id=&quot;dlc---&quot;&gt;DLC 양자화 툴 실행&lt;/h3&gt;
+  &lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-dlc-quantize&lt;/code&gt; 명령어를 사용하여 양자화 스케일 값을 DLC 컨테이너에 직접 삽입(bake)합니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -103,20 +104,219 @@ calibration_data/img_003.raw
   &lt;span class=&quot;nt&quot;&gt;--input_list&lt;/span&gt; raw_list.txt &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;--output_dlc&lt;/span&gt; model_quantized.dlc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;--use_enhanced_quantizer&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;[!TIP]
+  &lt;blockquote&gt;
+    &lt;p&gt;[!TIP]
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--use_enhanced_quantizer&lt;/code&gt; 플래그를 추가하면 부동소수점 값과 양자화 값 간의 평균 제곱 오차(MSE)를 최소화하도록 양자화 스텝 크기를 최적화하는 알고리즘이 적용됩니다. 이는 키포인트가 흔들리는 현상을 억제하는 데 큰 도움이 됩니다.&lt;/p&gt;
+  &lt;/blockquote&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;c---inference-integration&quot;&gt;4. C++ 추정 연동 (Inference Integration)&lt;/h2&gt;
+
+  &lt;p&gt;컴파일된 모델을 Android 혹은 임베디드 플랫폼 상에 통합하기 위해, SNPE API를 사용하여 DLC 컨테이너를 로드하고 추정을 수행하는 예제 코드입니다:&lt;/p&gt;
+
+  &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;cp&quot;&gt;#include&lt;/span&gt; &lt;span class=&quot;cpf&quot;&gt;&quot;SNPE/SNPE.hpp&quot;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt; &lt;span class=&quot;cpf&quot;&gt;&quot;SNPE/SNPEBuilder.hpp&quot;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+#include&lt;/span&gt; &lt;span class=&quot;cpf&quot;&gt;&quot;DlContainer/IDlContainer.hpp&quot;&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 1. 양자화된 DLC 컨테이너 파일 로드&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IDlContainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;container&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;IDlContainer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;model_quantized.dlc&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 2. 실행 대상 런타임 프로세서 선택 (NPU/DSP 선호, 차선책으로 CPU)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Runtime_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;runtime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Runtime_t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DSP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SNPEBuilder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isRuntimeAvailable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runtime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;runtime&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Runtime_t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CPU&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 3. SNPE 실행 엔진 구축&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SNPEBuilder&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;snpeBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;container&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SNPE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;snpe&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;snpeBuilder&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setOutputLayers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setRuntimeProcessor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;runtime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 4. 입력 텐서 바인딩&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TensorMap&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;std&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unique_ptr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ITensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputTensor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;snpeBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getTensorBuilder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;createTensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;256&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// float 타입의 이미지 데이터를 inputTensor 버퍼로 복사...&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// std::copy(image_data.begin(), image_data.end(), inputTensor-&amp;gt;begin());&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;inputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;input_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;inputTensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 5. 추론 실행&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TensorMap&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;success&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;snpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;execute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;inputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 6. 출력 텐서로부터 예측값 획득&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;zsnpe&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ITensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputTensor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;outputMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getTensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;output_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;reinterpret_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputTensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 이곳에서 키포인트 히트맵 혹은 좌표 후처리 작업을 진행합니다.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;section-3&quot;&gt;5. 실무 디버깅 팁&lt;/h2&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;텐서 차원 불일치 (Mismatched Dimensions):&lt;/strong&gt; 컴파일러에서 차원 오류가 발생하는 경우 ONNX 모델 내에 동적 크기(dynamic dimensions)가 남아있는지 체크하십시오. SNPE 컴파일러는 완전히 정적인(static) 입력 텐서 크기를 요구합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;정확도 급락 (Accuracy Drop):&lt;/strong&gt; 양자화 모델의 정확도가 급격히 하락하는 경우, 특정 레이어(예: 최종 좌표 회귀 레이어)는 FP16 정밀도로 예외 구동해야 할 수 있습니다. 양자화 시 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--override_params&lt;/code&gt; 옵션을 사용하여 특정 레이어를 양자화 대상에서 제외할 수 있습니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;QAT 모델 내보내기 (QAT Export):&lt;/strong&gt; PyTorch 환경에서 양자화 인지 훈련(QAT)을 완료했다면 ONNX opset 13 이상으로 모델을 내보내십시오. SNPE는 ONNX의 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;QuantizeLinear&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DequantizeLinear&lt;/code&gt; 연산자를 하드웨어 전용 가속 명령어로 자동 매핑하므로 캘리브레이션 오차 문제를 예방할 수 있습니다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;practical-guide-compiling-and-deploying-dl-models-using-qualcomm-snpe-sdk&quot;&gt;Practical Guide: Compiling and Deploying DL Models using Qualcomm SNPE SDK&lt;/h1&gt;
+
+  &lt;p&gt;Deploying deep learning models to edge chipsets equipped with Qualcomm Snapdragon Neural Processing Units (NPUs) requires converting standard model graphs into a proprietary binary format called &lt;strong&gt;DLC (Deep Learning Container)&lt;/strong&gt;. The &lt;strong&gt;Qualcomm Neural Processing SDK&lt;/strong&gt; (formerly SNPE) provides the toolchains necessary to convert, quantize, and execute models on target NPUs.&lt;/p&gt;
+
+  &lt;p&gt;In this practical guide, we walk through setting up the SNPE development environment, converting an ONNX model to DLC, performing INT8 quantization with calibration data, and executing inference using the SNPE C++ API.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;environment-setup--prerequisites&quot;&gt;1. Environment Setup &amp;amp; Prerequisites&lt;/h2&gt;
+
+  &lt;p&gt;To compile models, you need a Linux development server (Ubuntu 20.04/22.04 is recommended). Prepare the environment by installing Python dependencies and downloading the SDK and Android NDK.&lt;/p&gt;
+
+  &lt;h3 id=&quot;environment-variables&quot;&gt;Environment Variables&lt;/h3&gt;
+  &lt;p&gt;Configure your shell startup script (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;~/.bashrc&lt;/code&gt;) to register the SDK tools:&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;SNPE_ROOT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/snpe-sdk
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;ANDROID_NDK_ROOT&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/path/to/android-ndk-r25c
+
+&lt;span class=&quot;c&quot;&gt;# Setup Python environment&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;source&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SNPE_ROOT&lt;/span&gt;/bin/envsetup.sh &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$ANDROID_NDK_ROOT&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Ensure Python dependencies (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;protobuf&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;numpy&lt;/code&gt;) are installed in your active virtual environment:&lt;/p&gt;
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;pip &lt;span class=&quot;nb&quot;&gt;install &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;onnx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.14.0 &lt;span class=&quot;nv&quot;&gt;protobuf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;3.20.3 &lt;span class=&quot;nv&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;1.23.5
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;model-conversion-onnx-to-dlc&quot;&gt;2. Model Conversion: ONNX to DLC&lt;/h2&gt;
+
+  &lt;p&gt;Before converting, simplify your ONNX graph to resolve unsupported operations or redundant nodes (such as unfused Batch Normalization layers):&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;onnxsim input_model.onnx simplified_model.onnx
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;Next, use the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-onnx-to-dlc&lt;/code&gt; compiler to convert the simplified graph to a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.dlc&lt;/code&gt; container. You must specify input shapes and names matching your PyTorch exporter variables:&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;snpe-onnx-to-dlc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-i&lt;/span&gt; simplified_model.onnx &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-d&lt;/span&gt; input_name &lt;span class=&quot;s2&quot;&gt;&quot;1,3,256,256&quot;&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;-o&lt;/span&gt; model.dlc
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-i&lt;/code&gt;: Path to the input ONNX graph.&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-d&lt;/code&gt;: Sets the layer name and dimension bounds for model entry points.&lt;/li&gt;
+    &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-o&lt;/code&gt;: The output path for the unquantized FP32 DLC binary.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;int8-quantization--calibration&quot;&gt;3. INT8 Quantization &amp;amp; Calibration&lt;/h2&gt;
+
+  &lt;p&gt;Running model execution at 8-bit integer precision (INT8) yields up to &lt;strong&gt;3-4x latency speedups&lt;/strong&gt; and reduces memory bandwidth overhead on edge NPUs. To preserve accuracy in sensitive tasks like pose estimation and keypoint regression, we run post-training calibration:&lt;/p&gt;
+
+  &lt;h3 id=&quot;prepare-calibration-dataset&quot;&gt;Prepare Calibration Dataset&lt;/h3&gt;
+  &lt;p&gt;Create a folder containing 100-200 representative inputs saved as raw binary float files (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.raw&lt;/code&gt; or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.bin&lt;/code&gt; files containing CHW tensor values). Then, create a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;raw_list.txt&lt;/code&gt; file listing their paths:&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;# raw_list.txt
+calibration_data/img_001.raw
+calibration_data/img_002.raw
+calibration_data/img_003.raw
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;h3 id=&quot;run-dlc-quantizer&quot;&gt;Run DLC Quantizer&lt;/h3&gt;
+  &lt;p&gt;Run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;snpe-dlc-quantize&lt;/code&gt; to bake the quantization scales directly into the container:&lt;/p&gt;
+
+  &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;snpe-dlc-quantize &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--input_dlc&lt;/span&gt; model.dlc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--input_list&lt;/span&gt; raw_list.txt &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--output_dlc&lt;/span&gt; model_quantized.dlc &lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;--use_enhanced_quantizer&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;blockquote&gt;
+    &lt;p&gt;[!TIP]
 Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--use_enhanced_quantizer&lt;/code&gt; flag uses an algorithm that adjusts the quantization step size to minimize Mean Squared Error (MSE) between float and quantized activations, which helps prevent keypoint jittering.&lt;/p&gt;
-&lt;/blockquote&gt;
+  &lt;/blockquote&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;4-c-inference-integration&quot;&gt;4. C++ Inference Integration&lt;/h2&gt;
+  &lt;h2 id=&quot;c-inference-integration&quot;&gt;4. C++ Inference Integration&lt;/h2&gt;
 
-&lt;p&gt;To integrate the compiled model on Android or embedded platforms, load the container and execute it using SNPE APIs:&lt;/p&gt;
+  &lt;p&gt;To integrate the compiled model on Android or embedded platforms, load the container and execute it using SNPE APIs:&lt;/p&gt;
 
-&lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-cpp highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -196,17 +396,18 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     &lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;reinterpret_cast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputTensor&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getBuffer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
     &lt;span class=&quot;c1&quot;&gt;// Process keypoint heatmaps or coordinates here...&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;5-practical-debugging-tips&quot;&gt;5. Practical Debugging Tips&lt;/h2&gt;
+  &lt;h2 id=&quot;practical-debugging-tips&quot;&gt;5. Practical Debugging Tips&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Mismatched Dimensions:&lt;/strong&gt; If the compiler complains about shape errors, verify that ONNX dynamic dimensions are completely removed. SNPE compiler requires fully static input dimensions.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Accuracy Drop:&lt;/strong&gt; If the quantized model experiences severe accuracy degradation, evaluate if certain layers (e.g. final regression layers) need to run at FP16. You can exclude specific layers from quantization using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--override_params&lt;/code&gt; options during quantization.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;QAT Export:&lt;/strong&gt; If you trained the model using Quantization-Aware Training (QAT) in PyTorch, export it using ONNX opset 13. SNPE will automatically map the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;QuantizeLinear&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DequantizeLinear&lt;/code&gt; operators to native hardware instructions, avoiding calibration-based PTQ errors.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Mismatched Dimensions:&lt;/strong&gt; If the compiler complains about shape errors, verify that ONNX dynamic dimensions are completely removed. SNPE compiler requires fully static input dimensions.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Accuracy Drop:&lt;/strong&gt; If the quantized model experiences severe accuracy degradation, evaluate if certain layers (e.g. final regression layers) need to run at FP16. You can exclude specific layers from quantization using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;--override_params&lt;/code&gt; options during quantization.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;QAT Export:&lt;/strong&gt; If you trained the model using Quantization-Aware Training (QAT) in PyTorch, export it using ONNX opset 13. SNPE will automatically map the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;QuantizeLinear&lt;/code&gt;/&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;DequantizeLinear&lt;/code&gt; operators to native hardware instructions, avoiding calibration-based PTQ errors.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Fri, 05 Jun 2026 00:00:00 -0500</pubDate>
         <link>/posts/snpe-setup-guide/</link>
@@ -227,36 +428,99 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>Robotic Perception &amp; Natural Language Object Grounding via Knowledge Graphs</title>
-        <description>&lt;h1 id=&quot;robotic-perception--natural-language-object-grounding-via-knowledge-graphs&quot;&gt;Robotic Perception &amp;amp; Natural Language Object Grounding via Knowledge Graphs&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;language-grounding&quot;&gt;지식 그래프를 활용한 로봇 인지 및 자연어 객체 그라운딩(Language Grounding)&lt;/h1&gt;
 
-&lt;p&gt;For robots to operate effectively in human environments, they must understand natural language commands (e.g., &lt;em&gt;“Bring me the coffee mug next to the laptop”&lt;/em&gt;). This task, known as &lt;strong&gt;Language Grounding&lt;/strong&gt;, requires mapping words in a sentence to specific objects, spatial relationships, and actions in the physical world.&lt;/p&gt;
+  &lt;p&gt;로봇이 실제 인간의 주거 및 작업 환경에서 효과적으로 동작하기 위해서는 &lt;em&gt;“노트북 옆에 있는 커피 머그잔을 가져다줘”&lt;/em&gt;와 같은 자연어 명령을 올바르게 이해할 수 있어야 합니다. 이 태스크를 &lt;strong&gt;언어 그라운딩(Language Grounding)&lt;/strong&gt;이라고 하며, 문장 속 단어를 물리적 환경의 특정 객체, 공간적 관계 및 행동 양식과 매핑시키는 과정을 포함합니다.&lt;/p&gt;
 
-&lt;p&gt;In this post, we discuss how we can build a robust object-grounding pipeline using a combination of &lt;strong&gt;contextual Knowledge Graphs&lt;/strong&gt; and &lt;strong&gt;Vector Databases (Qdrant)&lt;/strong&gt;.&lt;/p&gt;
+  &lt;p&gt;본 포스트에서는 &lt;strong&gt;공간 컨텍스트 지식 그래프(Knowledge Graphs)&lt;/strong&gt;와 &lt;strong&gt;벡터 데이터베이스(Qdrant)&lt;/strong&gt;를 결합하여 강건한 객체 그라운딩 파이프라인을 구축하는 방법에 대해 논의합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-the-challenge-of-spatial-and-temporal-object-grounding&quot;&gt;1. The Challenge of Spatial and Temporal Object Grounding&lt;/h2&gt;
+  &lt;h2 id=&quot;section&quot;&gt;1. 공간적 및 시간적 객체 그라운딩의 한계&lt;/h2&gt;
 
-&lt;p&gt;Modern Open-Vocabulary Object Detectors (like OWL-ViT or Grounding DINO) can detect objects based on text queries. However, they lack:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Temporal Persistence:&lt;/strong&gt; Knowing if an object is still in the room when it is currently occluded or out of the robot’s field of view.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Contextual Association:&lt;/strong&gt; Understanding abstract concepts (e.g., &lt;em&gt;“my favorite mug”&lt;/em&gt;) which depend on historical interaction context.&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;p&gt;OWL-ViT나 Grounding DINO와 같은 최신 오픈 보카블러리(Open-Vocabulary) 객체 검출기들은 텍스트 입력을 바탕으로 실시간 객체를 잘 검출해 냅니다. 하지만 다음과 같은 한계가 존재합니다:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;시간적 지속성 부족 (Temporal Persistence):&lt;/strong&gt; 물체가 가려지거나 로봇의 현재 시야각(Field of View) 밖에 있는 경우, 여전히 방 안에 존재하는지를 기억하고 인지하는 능력이 결핍되어 있습니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;컨텍스트 연관성 결여 (Contextual Association):&lt;/strong&gt; &lt;em&gt;“내가 가장 아끼는 컵”&lt;/em&gt;과 같이 과거 상호작용 역사에 의존적인 추상적인 개념을 직관적으로 매핑하지 못합니다.&lt;/li&gt;
+  &lt;/ol&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-construction-of-a-contextual-knowledge-graph&quot;&gt;2. Construction of a Contextual Knowledge Graph&lt;/h2&gt;
+  &lt;h2 id=&quot;section-1&quot;&gt;2. 컨텍스트 지식 그래프의 구조 설계&lt;/h2&gt;
 
-&lt;p&gt;To address this, we represent the robot’s environment as a dynamic &lt;strong&gt;Knowledge Graph (KG)&lt;/strong&gt;:&lt;/p&gt;
+  &lt;p&gt;이 문제를 해결하기 위해 로봇이 수집한 공간 정보를 동적 &lt;strong&gt;지식 그래프 (Knowledge Graph, KG)&lt;/strong&gt; 형태로 표현합니다:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Nodes&lt;/strong&gt; represent physical entities (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mug&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Table&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;), spatial regions (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kitchen&lt;/code&gt;), or abstract properties (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Color: Blue&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Edges&lt;/strong&gt; represent spatial relations (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next_to&lt;/code&gt;), owner relations (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;owned_by&lt;/code&gt;), or status logs.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;노드 (Nodes):&lt;/strong&gt; 물리적 객체(예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mug&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Table&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;), 공간적 위치 구획(예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kitchen&lt;/code&gt;), 혹은 추상적 속성(예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;색상: 파랑색&lt;/code&gt;)을 나타냅니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;엣지 (Edges):&lt;/strong&gt; 공간 관계(예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;위(on)&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;옆(next_to)&lt;/code&gt;), 소유 관계(&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;소유주: 누구&lt;/code&gt;), 혹은 과거 상태 로그를 기록합니다.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;p&gt;As the robot navigates the room, it continuously updates the nodes and edges based on its visual observations.&lt;/p&gt;
+  &lt;p&gt;로봇은 환경을 이동하며 비주얼 센서로 취득한 시각 관측치를 기반으로 이 그래프 노드와 엣지를 실시간으로 업데이트합니다.&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+4
+5
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;       [Mug: #042] ---(위에 있음)---&amp;gt; [Table: #001]
+            |
+       (소유주)
+            v
+       [User: 경민]
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;rag----hybrid-querying&quot;&gt;3. RAG 기반 하이브리드 질의 (Hybrid Querying)&lt;/h2&gt;
+
+  &lt;p&gt;사용자가 음성/자연어 명령을 내리면, &lt;strong&gt;검색 증강 생성(Retrieval-Augmented Generation, RAG)&lt;/strong&gt; 파이프라인을 통해 공간 정보를 질의합니다:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;벡터 검색 (Qdrant):&lt;/strong&gt; 의미론적 설명에 따라 후보군을 1차 선별합니다 (예: 벡터 DB에서 &lt;em&gt;“머그잔”&lt;/em&gt;을 검색).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;그래프 탐색 (LlamaIndex):&lt;/strong&gt; 그래프 연결 관계를 활용하여 후보군을 최종 필터링합니다 (예: &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;소유주: 경민&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;위치: 테이블 위&lt;/code&gt; 조건을 만족하는 머그잔 필터링).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;LLM 추론 (LangChain):&lt;/strong&gt; LLM이 타겟 노드 정보를 취합하여 로봇 팔의 파지(manipulation) 정책에 넘겨줄 구체적인 물리 좌표를 생성해 냅니다.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;벡터 데이터베이스와 구조화된 지식 그래프를 상호 보완적으로 활용함으로써, 로봇은 지극히 모호하고 정황 중심적인(context-dependent) 인간의 명령을 높은 신뢰도로 완수할 수 있게 됩니다.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;section-2&quot;&gt;4. 핵심 요약&lt;/h2&gt;
+  &lt;p&gt;구조화된 지식 그래프와 비주얼-언어 모델(VLM)의 통합은 체화된 인공지능(Embodied AI) 에이전트가 현실 세계에 대한 인지 지도를 그릴 수 있게 해줍니다. 이 접근법은 기초적인 시각 인지 모델과 고차원 기호적 추론(Symbolic Reasoning) 모델 사이의 간극을 훌륭히 연결해 줍니다.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;robotic-perception--natural-language-object-grounding-via-knowledge-graphs&quot;&gt;Robotic Perception &amp;amp; Natural Language Object Grounding via Knowledge Graphs&lt;/h1&gt;
+
+  &lt;p&gt;For robots to operate effectively in human environments, they must understand natural language commands (e.g., &lt;em&gt;“Bring me the coffee mug next to the laptop”&lt;/em&gt;). This task, known as &lt;strong&gt;Language Grounding&lt;/strong&gt;, requires mapping words in a sentence to specific objects, spatial relationships, and actions in the physical world.&lt;/p&gt;
+
+  &lt;p&gt;In this post, we discuss how we can build a robust object-grounding pipeline using a combination of &lt;strong&gt;contextual Knowledge Graphs&lt;/strong&gt; and &lt;strong&gt;Vector Databases (Qdrant)&lt;/strong&gt;.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;the-challenge-of-spatial-and-temporal-object-grounding&quot;&gt;1. The Challenge of Spatial and Temporal Object Grounding&lt;/h2&gt;
+
+  &lt;p&gt;Modern Open-Vocabulary Object Detectors (like OWL-ViT or Grounding DINO) can detect objects based on text queries. However, they lack:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;Temporal Persistence:&lt;/strong&gt; Knowing if an object is still in the room when it is currently occluded or out of the robot’s field of view.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Contextual Association:&lt;/strong&gt; Understanding abstract concepts (e.g., &lt;em&gt;“my favorite mug”&lt;/em&gt;) which depend on historical interaction context.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;construction-of-a-contextual-knowledge-graph&quot;&gt;2. Construction of a Contextual Knowledge Graph&lt;/h2&gt;
+
+  &lt;p&gt;To address this, we represent the robot’s environment as a dynamic &lt;strong&gt;Knowledge Graph (KG)&lt;/strong&gt;:&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Nodes&lt;/strong&gt; represent physical entities (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Mug&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Table&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;User&lt;/code&gt;), spatial regions (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Kitchen&lt;/code&gt;), or abstract properties (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Color: Blue&lt;/code&gt;).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Edges&lt;/strong&gt; represent spatial relations (e.g., &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;next_to&lt;/code&gt;), owner relations (&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;owned_by&lt;/code&gt;), or status logs.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;As the robot navigates the room, it continuously updates the nodes and edges based on its visual observations.&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 4
@@ -266,26 +530,27 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
       (owned_by)
             v
        [User: Kyung-Min]
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-rag-based-hybrid-querying&quot;&gt;3. RAG-Based Hybrid Querying&lt;/h2&gt;
+  &lt;h2 id=&quot;rag-based-hybrid-querying&quot;&gt;3. RAG-Based Hybrid Querying&lt;/h2&gt;
 
-&lt;p&gt;When the user gives a command, we utilize a &lt;strong&gt;Retrieval-Augmented Generation (RAG)&lt;/strong&gt; pipeline to query the environment:&lt;/p&gt;
+  &lt;p&gt;When the user gives a command, we utilize a &lt;strong&gt;Retrieval-Augmented Generation (RAG)&lt;/strong&gt; pipeline to query the environment:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Vector Search (Qdrant):&lt;/strong&gt; We retrieve candidates based on semantic descriptions (e.g., search vector DB for &lt;em&gt;“mug”&lt;/em&gt;).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Graph Traversal (LlamaIndex):&lt;/strong&gt; We filter candidates using graph relationships (e.g., filter for the mug that has the relationship &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;owned_by: Kyung-Min&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on: Table&lt;/code&gt;).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;LLM Reasoning (LangChain):&lt;/strong&gt; An LLM synthesizes the target node information and outputs actionable coordinates for the robot’s manipulation policy.&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;Vector Search (Qdrant):&lt;/strong&gt; We retrieve candidates based on semantic descriptions (e.g., search vector DB for &lt;em&gt;“mug”&lt;/em&gt;).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Graph Traversal (LlamaIndex):&lt;/strong&gt; We filter candidates using graph relationships (e.g., filter for the mug that has the relationship &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;owned_by: Kyung-Min&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;on: Table&lt;/code&gt;).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;LLM Reasoning (LangChain):&lt;/strong&gt; An LLM synthesizes the target node information and outputs actionable coordinates for the robot’s manipulation policy.&lt;/li&gt;
+  &lt;/ol&gt;
 
-&lt;p&gt;By combining vector databases with structured graphs, robots can resolve highly ambiguous, context-dependent requests with superior reliability.&lt;/p&gt;
+  &lt;p&gt;By combining vector databases with structured graphs, robots can resolve highly ambiguous, context-dependent requests with superior reliability.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;key-takeaway&quot;&gt;Key Takeaway&lt;/h3&gt;
-&lt;p&gt;Integrating structured knowledge graphs with vision-language models allows embodied agents to build a cognitive map of the world. This approach bridges the gap between raw visual perception and high-level symbolic reasoning.&lt;/p&gt;
+  &lt;h3 id=&quot;key-takeaway&quot;&gt;Key Takeaway&lt;/h3&gt;
+  &lt;p&gt;Integrating structured knowledge graphs with vision-language models allows embodied agents to build a cognitive map of the world. This approach bridges the gap between raw visual perception and high-level symbolic reasoning.&lt;/p&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Fri, 10 Apr 2026 00:00:00 -0500</pubDate>
         <link>/posts/robotics-kg/</link>
@@ -304,65 +569,129 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs</title>
-        <description>&lt;h1 id=&quot;modality-aware-policy-optimization-grpo-in-multimodal-llms&quot;&gt;Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;llm-----grpo&quot;&gt;멀티모달 LLM에서의 모달리티 인지 정책 최적화 (GRPO)&lt;/h1&gt;
 
-&lt;p&gt;Aligning Vision-Language Models (VLMs) using Reinforcement Learning has traditionally relied on PPO (Proximal Policy Optimization). However, PPO requires a secondary &lt;strong&gt;critic (value) network&lt;/strong&gt; that is often as large as the actor network itself. This severely constrains the batch size and increases GPU memory requirements during training.&lt;/p&gt;
+  &lt;p&gt;강화학습을 통한 멀티모달 모델(VLM) 정렬(Alignment) 연구는 전통적으로 PPO(Proximal Policy Optimization) 알고리즘에 의존해 왔습니다. 하지만 PPO는 액터(Actor) 모델과 크기가 거의 동일한 &lt;strong&gt;크리틱(Critic, Value) 네트워크&lt;/strong&gt;를 동시에 유지해야 합니다. 이는 대형 모델 학습 시 그래픽 메모리 제한으로 인해 배치 사이즈(batch size)를 크게 제약하는 병목 현상을 초래합니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Group Relative Policy Optimization (GRPO)&lt;/strong&gt;, introduced by DeepSeek and popular in modern reasoning models, eliminates the critic network by using group-relative rewards. In this post, we explore its mathematical formulation, modality-aware online weighting, and deployment benefits for VLM alignment.&lt;/p&gt;
+  &lt;p&gt;DeepSeek에 의해 제안되고 최신 추론 모델 정렬에 널리 활용되고 있는 &lt;strong&gt;GRPO(Group Relative Policy Optimization)&lt;/strong&gt;는 그룹 상대적 보상(group-relative rewards)을 활용함으로써 크리틱 네트워크를 완전히 제거합니다. 본 포스트에서는 GRPO의 수학적 공식화, 멀티모달 환경에서의 모달리티 인지 동적 가중치 기법, 그리고 학습 효율성을 분석합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-how-grpo-eliminates-the-critic-network&quot;&gt;1. How GRPO Eliminates the Critic Network&lt;/h2&gt;
+  &lt;h2 id=&quot;advantage-&quot;&gt;1. 크리틱 네트워크 없이 Advantage 계산하기&lt;/h2&gt;
 
-&lt;p&gt;Instead of training a critic network to estimate the baseline value $V(s)$, GRPO samples a group of $N$ outputs ${o_1, o_2, \dots, o_N}$ for a single input prompt $q$ using the reference policy.&lt;/p&gt;
+  &lt;p&gt;GRPO는 상태 가치 $V(s)$를 예측하는 크리틱 네트워크를 학습시키는 대신, 단일 질문(Prompt) $q$에 대해 현재 정책 모델로부터 $N$개의 대답 ${o_1, o_2, \dots, o_N}$을 무작위 샘플링합니다.&lt;/p&gt;
 
-&lt;p&gt;The advantage $A_i$ of each output $o_i$ is computed by normalizing the rewards within the sampled group:&lt;/p&gt;
+  &lt;p&gt;이후 샘플링된 그룹 내 보상값들의 평균과 표준편차를 기준으로 개별 대답 $o_i$의 상대적 우위(Advantage) $A_i$를 도출합니다:&lt;/p&gt;
 
 \[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
 
-&lt;p&gt;Where $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$. This relative advantage replaces the absolute value baseline in the PPO objective:&lt;/p&gt;
+  &lt;p&gt;여기서 $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$ 입니다. 이렇게 계산된 상대적 Advantage는 PPO의 목적 함수(objective function) 내의 절대 가치 베이스라인을 직접 대체하게 됩니다:&lt;/p&gt;
 
 \[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
 
-&lt;p&gt;This relative comparison model simplifies training, reducing GPU memory footprint by roughly &lt;strong&gt;30-40%&lt;/strong&gt; and allowing for larger batch sizes.&lt;/p&gt;
+  &lt;p&gt;이 방식은 크리틱 모델을 완전히 제거하여 학습을 대폭 단순화하고, GPU 메모리 요구량을 약 &lt;strong&gt;30-40%&lt;/strong&gt; 감소시켜 동일 하드웨어 대비 배치 크기를 크게 늘릴 수 있습니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-modality-aware-online-weighting&quot;&gt;2. Modality-Aware Online Weighting&lt;/h2&gt;
+  &lt;h2 id=&quot;modality-aware-online-weighting&quot;&gt;2. 모달리티 인지 동적 가중치 (Modality-Aware Online Weighting)&lt;/h2&gt;
 
-&lt;p&gt;In multimodal environments (e.g., combining text, image, and audio inputs), a model might perform exceptionally well on textual reasoning but fail at grounding physical or visual details. Over-optimization in a single modality can lead to degradation in others.&lt;/p&gt;
+  &lt;p&gt;텍스트, 이미지, 오디오 등이 결합된 멀티모달 환경에서 모델은 텍스트 추론은 뛰어나지만 시각적 세부 사항 인식에는 약한 모습을 보이는 등 모달리티별로 불균성한 학습 결과를 낼 수 있습니다. 특정 모달리티에만 지나치게 최적화되는 경우 다른 모달리티 성능이 오히려 하락할 우려가 있습니다.&lt;/p&gt;
 
-&lt;p&gt;To resolve this, we apply &lt;strong&gt;modality-aware online weighting&lt;/strong&gt;. The reward function is decomposed into modal components:&lt;/p&gt;
+  &lt;p&gt;이를 방지하기 위해 &lt;strong&gt;모달리티 인지 동적 가중치(modality-aware online weighting)&lt;/strong&gt; 기법을 도입합니다. 최종 보상 함수를 모달리티별 구성 요소로 분해합니다:&lt;/p&gt;
 
 \[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} + w_{\text{audio}} R_{\text{audio}}\]
 
-&lt;p&gt;By dynamically updating the weights $w_m$ based on the moving average of group performance on each modality, we prevent the model from over-optimizing for one modality at the expense of others. The weight updates are formulated as:&lt;/p&gt;
+  &lt;p&gt;학습 루프 중 각 모달리티의 이동 평균 보상 실적에 따라 가중치 $w_m$을 동적으로 업데이트하여, 특정 도메인에 편향된 오버피팅을 방지합니다. 가중치 갱신 공식은 다음과 같습니다:&lt;/p&gt;
 
 \[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} - \mu_m\right)\]
 
-&lt;p&gt;where $\alpha$ is a momentum hyperparameter and $\mu_m$ is the baseline average performance for modality $m$.&lt;/p&gt;
+  &lt;p&gt;여기서 $\alpha$는 모멘텀 하이퍼파라미터이며, $\mu_m$은 모달리티 $m$의 베이스라인 평균 성능 수준입니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-fast-reasoning--hallucination-prevention&quot;&gt;3. Fast Reasoning &amp;amp; Hallucination Prevention&lt;/h2&gt;
+  &lt;h2 id=&quot;hallucination-&quot;&gt;3. 고속 추론 및 할루시네이션(Hallucination) 억제&lt;/h2&gt;
 
-&lt;p&gt;A common failure mode of MLLMs under RL alignment is &lt;strong&gt;hallucination in chain-of-thought (CoT)&lt;/strong&gt;. When the model is encouraged to think step-by-step, it sometimes hallucinates visual details that are not present in the input image.&lt;/p&gt;
+  &lt;p&gt;강화학습을 통한 정렬 과정에서 자주 관측되는 부작용 중 하나는 &lt;strong&gt;생각 과정(Chain-of-Thought, CoT)에서의 환각(Hallucination)&lt;/strong&gt; 현상입니다. 단계적 추론을 하도록 유도했을 때, 입력 이미지에 없는 시각적 특징들을 임의로 지어내는 현상이 나타납니다.&lt;/p&gt;
 
-&lt;p&gt;To mitigate this, we train a auxiliary classifier that predicts missed or hallucinated cases in the reasoning path. The prediction score is fed back into the GRPO reward loop as a penalty factor:&lt;/p&gt;
+  &lt;p&gt;이 문제를 방지하기 위해 추론 경로상에서 환각 오류를 검출하는 보조 분류기(auxiliary classifier)를 활용하며, 이를 GRPO 보상 루프에 패널티 요인으로 차감 반영합니다:&lt;/p&gt;
 
 \[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
 
-&lt;p&gt;This penalty successfully boosts factual accuracy by up to &lt;strong&gt;20.7%&lt;/strong&gt;, suppressing incorrect logical paths during search.&lt;/p&gt;
+  &lt;p&gt;이러한 패널티 모델 적용을 통해 비합리적인 논리 전개를 차단함으로써 사실적 정확도(factual accuracy)를 최대 &lt;strong&gt;20.7%&lt;/strong&gt; 향상시킬 수 있었습니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;4-implementation-notes&quot;&gt;4. Implementation Notes&lt;/h2&gt;
+  &lt;h2 id=&quot;section&quot;&gt;4. 구현 가이드라인&lt;/h2&gt;
 
-&lt;p&gt;When deploying GRPO for VLM alignment on frameworks like &lt;strong&gt;veRL&lt;/strong&gt; or &lt;strong&gt;TRL&lt;/strong&gt;:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Group Size ($N$):&lt;/strong&gt; Keep group size $N$ between $4$ and $8$. A smaller group size degrades advantage estimation quality, while larger group sizes increase sampling overhead.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Reward Mixing:&lt;/strong&gt; Use a mix of rule-based reward functions (e.g., matching coordinates in a bounding box) and model-based reward functions (e.g., visual coherence score) to build a robust reward loop.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;&lt;strong&gt;veRL&lt;/strong&gt;이나 &lt;strong&gt;TRL&lt;/strong&gt; 등의 강화학습 프레임워크 상에 GRPO VLM 정렬 알고리즘을 구축할 때의 유의사항입니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;그룹 크기 ($N$):&lt;/strong&gt; 통상적으로 그룹 크기 $N$은 $4 \sim 8$ 사이를 유지합니다. $4$보다 작으면 Advantage 추정 오차가 지나치게 커지며, $8$보다 크면 매 스텝 샘플링 비용이 지나치게 증가합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;보상 설계 (Reward Mixing):&lt;/strong&gt; 바운딩 박스 내의 좌표 비교 등 규칙 기반(Rule-based) 보상과 시각적 일관성을 측정하는 모델 기반(Model-based) 보상을 함께 믹스하여 사용하는 것이 좋습니다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;modality-aware-policy-optimization-grpo-in-multimodal-llms&quot;&gt;Modality-Aware Policy Optimization (GRPO) in Multimodal LLMs&lt;/h1&gt;
+
+  &lt;p&gt;Aligning Vision-Language Models (VLMs) using Reinforcement Learning has traditionally relied on PPO (Proximal Policy Optimization). However, PPO requires a secondary &lt;strong&gt;critic (value) network&lt;/strong&gt; that is often as large as the actor network itself. This severely constrains the batch size and increases GPU memory requirements during training.&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;Group Relative Policy Optimization (GRPO)&lt;/strong&gt;, introduced by DeepSeek and popular in modern reasoning models, eliminates the critic network by using group-relative rewards. In this post, we explore its mathematical formulation, modality-aware online weighting, and deployment benefits for VLM alignment.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;how-grpo-eliminates-the-critic-network&quot;&gt;1. How GRPO Eliminates the Critic Network&lt;/h2&gt;
+
+  &lt;p&gt;Instead of training a critic network to estimate the baseline value $V(s)$, GRPO samples a group of $N$ outputs ${o_1, o_2, \dots, o_N}$ for a single input prompt $q$ using the reference policy.&lt;/p&gt;
+
+  &lt;p&gt;The advantage $A_i$ of each output $o_i$ is computed by normalizing the rewards within the sampled group:&lt;/p&gt;
+
+\[A_i = \frac{r(q, o_i) - \text{mean}(R)}{\text{std}(R)}\]
+
+  &lt;p&gt;Where $R = {r(q, o_1), r(q, o_2), \dots, r(q, o_N)}$. This relative advantage replaces the absolute value baseline in the PPO objective:&lt;/p&gt;
+
+\[\mathcal{L}_{\text{GRPO}}(\theta) = \frac{1}{N} \sum_{i=1}^N \min \left( \frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)} A_i, \text{clip}\left(\frac{\pi_\theta(o_i|q)}{\pi_{\theta_{\text{old}}}(o_i|q)}, 1-\epsilon, 1+\epsilon\right) A_i \right) - \beta \mathbb{D}_{\text{KL}}(\pi_\theta || \pi_{\text{ref}})\]
+
+  &lt;p&gt;This relative comparison model simplifies training, reducing GPU memory footprint by roughly &lt;strong&gt;30-40%&lt;/strong&gt; and allowing for larger batch sizes.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;modality-aware-online-weighting-1&quot;&gt;2. Modality-Aware Online Weighting&lt;/h2&gt;
+
+  &lt;p&gt;In multimodal environments (e.g., combining text, image, and audio inputs), a model might perform exceptionally well on textual reasoning but fail at grounding physical or visual details. Over-optimization in a single modality can lead to degradation in others.&lt;/p&gt;
+
+  &lt;p&gt;To resolve this, we apply &lt;strong&gt;modality-aware online weighting&lt;/strong&gt;. The reward function is decomposed into modal components:&lt;/p&gt;
+
+\[R_{\text{total}} = w_{\text{text}} R_{\text{text}} + w_{\text{vision}} R_{\text{vision}} + w_{\text{audio}} R_{\text{audio}}\]
+
+  &lt;p&gt;By dynamically updating the weights $w_m$ based on the moving average of group performance on each modality, we prevent the model from over-optimizing for one modality at the expense of others. The weight updates are formulated as:&lt;/p&gt;
+
+\[w_m^{(t+1)} = \alpha w_m^{(t)} + (1-\alpha) \cdot \text{sigmoid}\left(\bar{R}_m^{(t)} - \mu_m\right)\]
+
+  &lt;p&gt;where $\alpha$ is a momentum hyperparameter and $\mu_m$ is the baseline average performance for modality $m$.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;fast-reasoning--hallucination-prevention&quot;&gt;3. Fast Reasoning &amp;amp; Hallucination Prevention&lt;/h2&gt;
+
+  &lt;p&gt;A common failure mode of MLLMs under RL alignment is &lt;strong&gt;hallucination in chain-of-thought (CoT)&lt;/strong&gt;. When the model is encouraged to think step-by-step, it sometimes hallucinates visual details that are not present in the input image.&lt;/p&gt;
+
+  &lt;p&gt;To mitigate this, we train a auxiliary classifier that predicts missed or hallucinated cases in the reasoning path. The prediction score is fed back into the GRPO reward loop as a penalty factor:&lt;/p&gt;
+
+\[r(q, o_i) = r_{\text{task}}(q, o_i) - \lambda_{\text{hal}} \cdot P_{\text{hallucination}}(o_i|q)\]
+
+  &lt;p&gt;This penalty successfully boosts factual accuracy by up to &lt;strong&gt;20.7%&lt;/strong&gt;, suppressing incorrect logical paths during search.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;implementation-notes&quot;&gt;4. Implementation Notes&lt;/h2&gt;
+
+  &lt;p&gt;When deploying GRPO for VLM alignment on frameworks like &lt;strong&gt;veRL&lt;/strong&gt; or &lt;strong&gt;TRL&lt;/strong&gt;:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Group Size ($N$):&lt;/strong&gt; Keep group size $N$ between $4$ and $8$. A smaller group size degrades advantage estimation quality, while larger group sizes increase sampling overhead.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Reward Mixing:&lt;/strong&gt; Use a mix of rule-based reward functions (e.g., matching coordinates in a bounding box) and model-based reward functions (e.g., visual coherence score) to build a robust reward loop.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 
 </description>
         <pubDate>Wed, 18 Feb 2026 00:00:00 -0600</pubDate>
@@ -384,71 +713,141 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>Cross-Modality Shared &amp; Unique Information Factorization (SAMIF)</title>
-        <description>&lt;h1 id=&quot;cross-modality-shared--unique-information-factorization-samif&quot;&gt;Cross-Modality Shared &amp;amp; Unique Information Factorization (SAMIF)&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;samif&quot;&gt;교차 모달리티 공유 및 고유 정보 분리 학습 (SAMIF)&lt;/h1&gt;
 
-&lt;p&gt;In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs), the goal is to leverage complementary information from different sensors. However, simple fusion methods (like concatenation or addition) often fail because they ignore the fact that different modalities contain both &lt;strong&gt;shared&lt;/strong&gt; (redundant) and &lt;strong&gt;unique&lt;/strong&gt; (complementary) information.&lt;/p&gt;
+  &lt;p&gt;멀티모달 학습(예: RGB 이미지와 깊이 맵, 열화상 이미지 또는 오디오 로그 결합)의 목적은 다양한 센서에서 제공되는 상호 보완적인 정보를 활용하는 것입니다. 그러나 단순한 융합 방식(예: 단순 연결(concatenation) 또는 더하기)은 서로 다른 모달리티가 &lt;strong&gt;공유 정보&lt;/strong&gt;(중복)와 &lt;strong&gt;고유 정보&lt;/strong&gt;(상호 보완)를 동시에 포함하고 있다는 사실을 무시하기 때문에 최적의 성능을 내지 못하는 경우가 많습니다.&lt;/p&gt;
 
-&lt;p&gt;In this post, we introduce &lt;strong&gt;Semantic-Aware Mutual Information Factorized Learning (SAMIF)&lt;/strong&gt;, a framework designed to factorize modality representations and improve multimodal semantic segmentation.&lt;/p&gt;
+  &lt;p&gt;본 포스트에서는 이러한 모달리티 표현을 분리하여 멀티모달 시맨틱 세그멘테이션 성능을 높이도록 설계된 &lt;strong&gt;시맨틱 인지 상호 정보 분리 학습(Semantic-Aware Mutual Information Factorized Learning, SAMIF)&lt;/strong&gt; 프레임워크를 소개합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-modality-representation-factorization&quot;&gt;1. Modality Representation Factorization&lt;/h2&gt;
+  &lt;h2 id=&quot;representation-factorization&quot;&gt;1. 모달리티 표현의 인수분해 (Representation Factorization)&lt;/h2&gt;
 
-&lt;p&gt;SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Shared Representation ($S$):&lt;/strong&gt; Features containing information that is common across all input modalities (e.g., object boundaries visible in both RGB and depth maps).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Unique Representation ($U_i$):&lt;/strong&gt; Features containing information exclusive to modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in RGB).&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;p&gt;SAMIF는 각 모달리티 $M_i$의 표현을 두 개의 서로 다른 잠재 공간(latent spaces)으로 분해합니다:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;공유 표현 ($S$):&lt;/strong&gt; 모든 입력 모달리티에 공통적으로 포함된 정보 (예: RGB 이미지와 깊이 맵 모두에서 뚜렷이 드러나는 물체의 경계선).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;고유 표현 ($U_i$):&lt;/strong&gt; 해당 모달리티 $M_i$에만 독립적으로 존재하는 정보 (예: 열화상 이미지의 온도 패턴, 또는 RGB 이미지의 고주파 텍스처 디테일).&lt;/li&gt;
+  &lt;/ol&gt;
 
 \[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-mutual-information-minimization--maximization&quot;&gt;2. Mutual Information Minimization &amp;amp; Maximization&lt;/h2&gt;
+  &lt;h2 id=&quot;mutual-information---&quot;&gt;2. 상호 정보량(Mutual Information) 최소화 및 최대화&lt;/h2&gt;
 
-&lt;p&gt;To enforce this factorization, we utilize &lt;strong&gt;Mutual Information (MI)&lt;/strong&gt; constraints during PyTorch training:&lt;/p&gt;
+  &lt;p&gt;이러한 분리를 유도하기 위해, PyTorch 학습 루프 내에 &lt;strong&gt;상호 정보량(Mutual Information, MI)&lt;/strong&gt; 제약 조건을 설정합니다:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Minimizing MI between Shared and Unique:&lt;/strong&gt; We want the unique representations to contain no information about the shared features:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;공유 표현과 고유 표현 간의 MI 최소화:&lt;/strong&gt; 고유 표현이 공유 표현의 정보를 포함하지 않도록 강제합니다:&lt;/p&gt;
 
 \[\min \mathcal{I}(S; U_i)\]
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Maximizing MI between Shared Representations:&lt;/strong&gt; We want the shared representations from different modalities to align:&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;각 모달리티별 공유 표현 간의 MI 최대화:&lt;/strong&gt; 서로 다른 모달리티에서 추출된 공유 표현들이 서로 정렬(align)되도록 유도합니다:&lt;/p&gt;
 
 \[\max \mathcal{I}(S_1; S_2)\]
-  &lt;/li&gt;
-&lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;p&gt;We implement these constraints using neural mutual information estimators (like MINE) or contrastive losses (InfoNCE) on the intermediate feature maps.&lt;/p&gt;
+  &lt;p&gt;이 제약 조건들은 중간 특징 맵 단계에서 MINE과 같은 신경망 기반 상호 정보량 추정기나 대비 학습 손실 함수(InfoNCE Contrastive Loss)를 사용해 구현됩니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-cross-attention-fusion&quot;&gt;3. Cross-Attention Fusion&lt;/h2&gt;
+  &lt;h2 id=&quot;cross-attention---&quot;&gt;3. 교차 어텐션(Cross-Attention) 기반 특징 융합&lt;/h2&gt;
 
-&lt;p&gt;Once factorized, the features are fused using a multi-head &lt;strong&gt;cross-attention&lt;/strong&gt; mechanism:&lt;/p&gt;
+  &lt;p&gt;분리된 특징들은 멀티헤드 &lt;strong&gt;교차 어텐션(cross-attention)&lt;/strong&gt; 매커니즘을 통해 최종 융합됩니다:&lt;/p&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+2
+3
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[공유 특징 S] ----------------\
+                               +---&amp;gt; [교차 어텐션 융합] ---&amp;gt; [세그멘테이션 디코더]
+[모달리티별 고유 특징 U_i] ----/
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;p&gt;이를 통해 네트워크는 공유 정보가 부족할 때에만 고유 특징에 동적으로 집중할 수 있게 되며, 일부 센서가 오작동하는 상황(예: 카메라 화면이 어두워져 열화상 센서의 고유 특징이 우선적으로 사용되는 경우)에서도 강건한 세그멘테이션 결과를 도출해 냅니다.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;section&quot;&gt;실험적 결과&lt;/h3&gt;
+
+  &lt;p&gt;표준 멀티모달 벤치마크 데이터셋에서 SAMIF 프레임워크는 다음 성과를 보여주었습니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;평균 Intersection over Union (mIoU)에서 &lt;strong&gt;2~3% 수준의 성능 향상&lt;/strong&gt;.&lt;/li&gt;
+    &lt;li&gt;센서 신호 유실을 모사한 실험 환경에서 매우 뛰어난 강건성 입증 (단순 융합 베이스라인 대비 최대 15% 높은 mIoU 기록).&lt;/li&gt;
+    &lt;li&gt;최종적으로 ONNX 포맷으로 변환되어 엣지 디바이스 내 Qualcomm Neural Processing SDK 환경에 성공적으로 배포 완료.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;cross-modality-shared--unique-information-factorization-samif&quot;&gt;Cross-Modality Shared &amp;amp; Unique Information Factorization (SAMIF)&lt;/h1&gt;
+
+  &lt;p&gt;In multimodal learning (e.g., combining RGB images with depth maps, thermal images, or audio logs), the goal is to leverage complementary information from different sensors. However, simple fusion methods (like concatenation or addition) often fail because they ignore the fact that different modalities contain both &lt;strong&gt;shared&lt;/strong&gt; (redundant) and &lt;strong&gt;unique&lt;/strong&gt; (complementary) information.&lt;/p&gt;
+
+  &lt;p&gt;In this post, we introduce &lt;strong&gt;Semantic-Aware Mutual Information Factorized Learning (SAMIF)&lt;/strong&gt;, a framework designed to factorize modality representations and improve multimodal semantic segmentation.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;modality-representation-factorization&quot;&gt;1. Modality Representation Factorization&lt;/h2&gt;
+
+  &lt;p&gt;SAMIF decomposes the representation of each modality $M_i$ into two distinct latent spaces:&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;Shared Representation ($S$):&lt;/strong&gt; Features containing information that is common across all input modalities (e.g., object boundaries visible in both RGB and depth maps).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Unique Representation ($U_i$):&lt;/strong&gt; Features containing information exclusive to modality $M_i$ (e.g., temperature patterns in thermal logs, or high-frequency texture details in RGB).&lt;/li&gt;
+  &lt;/ol&gt;
+
+\[H_{M_i} = f_{\text{shared}}(M_i) \oplus f_{\text{unique}}(M_i)\]
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;mutual-information-minimization--maximization&quot;&gt;2. Mutual Information Minimization &amp;amp; Maximization&lt;/h2&gt;
+
+  &lt;p&gt;To enforce this factorization, we utilize &lt;strong&gt;Mutual Information (MI)&lt;/strong&gt; constraints during PyTorch training:&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Minimizing MI between Shared and Unique:&lt;/strong&gt; We want the unique representations to contain no information about the shared features:&lt;/p&gt;
+
+\[\min \mathcal{I}(S; U_i)\]
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Maximizing MI between Shared Representations:&lt;/strong&gt; We want the shared representations from different modalities to align:&lt;/p&gt;
+
+\[\max \mathcal{I}(S_1; S_2)\]
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;We implement these constraints using neural mutual information estimators (like MINE) or contrastive losses (InfoNCE) on the intermediate feature maps.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;cross-attention-fusion&quot;&gt;3. Cross-Attention Fusion&lt;/h2&gt;
+
+  &lt;p&gt;Once factorized, the features are fused using a multi-head &lt;strong&gt;cross-attention&lt;/strong&gt; mechanism:&lt;/p&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 2
 3
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[Shared Features S] -------\
                             +---&amp;gt; [Cross-Attention Fusion] ---&amp;gt; [Segmentation Decoder]
 [Unique Features U_i] -----/
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;p&gt;This ensures the network dynamically attends to unique features only when the shared features are insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera conditions where thermal unique features take precedence).&lt;/p&gt;
+  &lt;p&gt;This ensures the network dynamically attends to unique features only when the shared features are insufficient, yielding robust segmentation even under sensor failures (e.g., low-light camera conditions where thermal unique features take precedence).&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;experimental-results&quot;&gt;Experimental Results&lt;/h3&gt;
+  &lt;h3 id=&quot;experimental-results&quot;&gt;Experimental Results&lt;/h3&gt;
 
-&lt;p&gt;On standard multimodal benchmarks, SAMIF achieved:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;2-3% improvement&lt;/strong&gt; in mean Intersection over Union (mIoU).&lt;/li&gt;
-  &lt;li&gt;Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to vanilla fusion baselines).&lt;/li&gt;
-  &lt;li&gt;Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;On standard multimodal benchmarks, SAMIF achieved:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;2-3% improvement&lt;/strong&gt; in mean Intersection over Union (mIoU).&lt;/li&gt;
+    &lt;li&gt;Significant robustness under simulated sensor dropouts (up to 15% better mIoU compared to vanilla fusion baselines).&lt;/li&gt;
+    &lt;li&gt;Successfully compiled to ONNX and deployed to Qualcomm neural processing SDK on edge devices.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Sat, 15 Nov 2025 00:00:00 -0600</pubDate>
         <link>/posts/samif/</link>
@@ -467,57 +866,113 @@ Setting the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;-
     
       <item>
         <title>Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs</title>
-        <description>&lt;h1 id=&quot;deploying-pose-estimation-and-keypoint-regression-models-to-edge-npus&quot;&gt;Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs&lt;/h1&gt;
+        <description>&lt;div class=&quot;lang-ko&quot;&gt;
+  &lt;h1 id=&quot;npu-------&quot;&gt;엣지 NPU에 포즈 추정 및 키포인트 회귀 모델 배포하기&lt;/h1&gt;
 
-&lt;p&gt;While training state-of-the-art pose estimation networks on high-performance GPUs (like NVIDIA H100s) is standard in research, running these models in &lt;strong&gt;real-time on consumer edge NPUs (neural processing units)&lt;/strong&gt;—such as smart TV chipsets or mobile processors—introduces steep optimization challenges.&lt;/p&gt;
+  &lt;p&gt;연구 환경의 고성능 GPU(예: NVIDIA H100)에서 최첨단 포즈 추정 네트워크를 학습시키는 것은 일반적이지만, 스마트 TV 칩셋이나 모바일 프로세서 같은 &lt;strong&gt;저전력 소비자용 엣지 NPU(신경망 처리 장치)&lt;/strong&gt; 상에서 이러한 모델들을 실시간으로 구동하는 것은 매우 도전적인 최적화 과제입니다.&lt;/p&gt;
 
-&lt;p&gt;In this post, we discuss practical recipes for exporting, optimizing, and compiling pose estimation models for low-power edge targets.&lt;/p&gt;
+  &lt;p&gt;본 포스트에서는 저전력 엣지 타겟 디바이스를 위한 포즈 추정 모델의 내보내기(Export), 최적화, 그리고 컴파일 과정에서의 실무적인 해결책을 공유합니다.&lt;/p&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;1-latency-bottlenecks-in-keypoint-regression&quot;&gt;1. Latency Bottlenecks in Keypoint Regression&lt;/h2&gt;
+  &lt;h2 id=&quot;section&quot;&gt;1. 키포인트 회귀 태스크의 지연 시간 병목 현상&lt;/h2&gt;
 
-&lt;p&gt;Unlike classification networks that utilize simple feed-forward stacks, pose estimation models often use:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;High-Resolution Feature Maps:&lt;/strong&gt; HRNet or UNet-like architectures maintain high-resolution representations, which are memory-bandwidth heavy.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Spatio-Temporal Attention (Transformers):&lt;/strong&gt; Core components like self-attention have $O(T^2)$ complexity, leading to latency bottlenecks on hardware lacking specialized transformer cores.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;단순한 순방향 연산만 수행하는 이미지 분류 네트워크와 달리, 포즈 추정 모델은 다음과 같은 특징을 가집니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;고해상도 특징 맵(High-Resolution Feature Maps):&lt;/strong&gt; HRNet이나 UNet 계열의 아키텍처는 고해상도 표현을 유지하므로, 메모리 대역폭(Memory Bandwidth) 소모가 심합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;시공간 어텐션(Spatio-Temporal Attention):&lt;/strong&gt; 트랜스포머의 핵심인 셀프 어텐션은 $O(T^2)$의 시간 복잡도를 가져, 전용 트랜스포머 가속 코어가 부족한 모바일/TV 하드웨어에서 큰 성능 병목을 유발합니다.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;2-the-export-pipeline-pytorch-to-onnx-to-qualcomm-sdk&quot;&gt;2. The Export Pipeline: PyTorch to ONNX to Qualcomm SDK&lt;/h2&gt;
+  &lt;h2 id=&quot;pytorch-onnx--qualcomm-sdk&quot;&gt;2. 배포 파이프라인: PyTorch에서 ONNX, 그리고 Qualcomm SDK까지&lt;/h2&gt;
 
-&lt;p&gt;To successfully run a PyTorch model on edge hardware (e.g., LG webOS TV chipsets or Qualcomm Snapdragon platforms):&lt;/p&gt;
+  &lt;p&gt;PyTorch 모델을 실제 엣지 기기(예: LG webOS TV 칩셋 또는 Qualcomm Snapdragon 플랫폼)에서 성공적으로 구동하기 위한 프로세스는 다음과 같습니다:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Graph Simplification:&lt;/strong&gt; Convert raw PyTorch operations into a clean, static ONNX graph. Avoid dynamic loops or dynamic shapes, which are unsupported by edge compilers.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;ONNX Graph Optimization:&lt;/strong&gt; Run tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx-simplifier&lt;/code&gt; to fuse redundant nodes (such as Conv + BatchNorm + ReLU).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Hardware Compilation:&lt;/strong&gt; Compile the ONNX model to hardware-native runtimes, such as the &lt;strong&gt;Qualcomm Neural Processing SDK&lt;/strong&gt; (SNPE) or TensorRT.&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;그래프 단순화(Graph Simplification):&lt;/strong&gt; PyTorch 모델을 깔끔하고 정적인 ONNX 그래프로 변환합니다. 엣지 컴파일러가 지원하지 않는 동적 반복문(dynamic loops)이나 동적 텐서 크기(dynamic shapes)의 사용을 피해야 합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;ONNX 그래프 최적화:&lt;/strong&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx-simplifier&lt;/code&gt;와 같은 도구를 활용해 중복 노드들을 병합(예: Conv + BatchNorm + ReLU 퓨전)합니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;하드웨어 컴파일:&lt;/strong&gt; ONNX 모델을 타겟 칩셋에 최적화된 하드웨어 네이티브 런타임(예: &lt;strong&gt;Qualcomm Neural Processing SDK (SNPE)&lt;/strong&gt; 또는 TensorRT)으로 컴파일합니다.&lt;/li&gt;
+  &lt;/ol&gt;
 
-&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[PyTorch 모델] ---&amp;gt; [onnx-simplifier] ---&amp;gt; [Qualcomm SNPE 컴파일러] ---&amp;gt; [INT8 DLC 바이너리]
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;int8--&quot;&gt;3. 실무적인 INT8 양자화 전략&lt;/h2&gt;
+
+  &lt;p&gt;30ms 이하의 실시간 수준 지연 시간을 달성하려면 모델을 8비트 정수(INT8)로 양자화해야 합니다. 포즈 추정 모델의 양자화 전략은 다음과 같습니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;훈련 후 양자화(PTQ):&lt;/strong&gt; 키포인트 열지도(Heatmap)는 작은 반올림 오차에도 민감하여 관절 위치가 튀거나 흔들릴 수 있기 때문에 PTQ만으로는 충분하지 않은 경우가 많습니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;양자화 인지 훈련(QAT):&lt;/strong&gt; 훈련 루프 내에 모의 양자화 오차를 명시적으로 주입하는 QAT를 필수적으로 수행하여, 모델이 저정밀도 표현형 하에서도 정확성을 유지할 수 있도록 설계해야 합니다.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h3 id=&quot;section-1&quot;&gt;실제 상용 환경에서의 적용 성과&lt;/h3&gt;
+
+  &lt;p&gt;QAT, 필터 프루닝(Pruning), 그리고 하드웨어 그래프 컴파일을 결합하여 실시간 인체 포즈 추적 모델을 스마트 TV에 성공적으로 안착시켰습니다:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;지연 시간 (Latency):&lt;/strong&gt; ARM 기반 NPU 상에서 FP32 베이스라인 기준 &lt;strong&gt;84ms&lt;/strong&gt;에서 INT8 컴파일 후 &lt;strong&gt;18ms&lt;/strong&gt;로 단축되었습니다.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;정확도 (Accuracy):&lt;/strong&gt; 기존 키포인트 정확도(PCKh@0.5)의 &lt;strong&gt;99.2%&lt;/strong&gt; 수준을 안정적으로 보존했습니다.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;lang-en&quot;&gt;
+  &lt;h1 id=&quot;deploying-pose-estimation-and-keypoint-regression-models-to-edge-npus&quot;&gt;Deploying Pose Estimation and Keypoint Regression Models to Edge NPUs&lt;/h1&gt;
+
+  &lt;p&gt;While training state-of-the-art pose estimation networks on high-performance GPUs (like NVIDIA H100s) is standard in research, running these models in &lt;strong&gt;real-time on consumer edge NPUs (neural processing units)&lt;/strong&gt;—such as smart TV chipsets or mobile processors—introduces steep optimization challenges.&lt;/p&gt;
+
+  &lt;p&gt;In this post, we discuss practical recipes for exporting, optimizing, and compiling pose estimation models for low-power edge targets.&lt;/p&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;latency-bottlenecks-in-keypoint-regression&quot;&gt;1. Latency Bottlenecks in Keypoint Regression&lt;/h2&gt;
+
+  &lt;p&gt;Unlike classification networks that utilize simple feed-forward stacks, pose estimation models often use:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;High-Resolution Feature Maps:&lt;/strong&gt; HRNet or UNet-like architectures maintain high-resolution representations, which are memory-bandwidth heavy.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Spatio-Temporal Attention (Transformers):&lt;/strong&gt; Core components like self-attention have $O(T^2)$ complexity, leading to latency bottlenecks on hardware lacking specialized transformer cores.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;hr /&gt;
+
+  &lt;h2 id=&quot;the-export-pipeline-pytorch-to-onnx-to-qualcomm-sdk&quot;&gt;2. The Export Pipeline: PyTorch to ONNX to Qualcomm SDK&lt;/h2&gt;
+
+  &lt;p&gt;To successfully run a PyTorch model on edge hardware (e.g., LG webOS TV chipsets or Qualcomm Snapdragon platforms):&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;Graph Simplification:&lt;/strong&gt; Convert raw PyTorch operations into a clean, static ONNX graph. Avoid dynamic loops or dynamic shapes, which are unsupported by edge compilers.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;ONNX Graph Optimization:&lt;/strong&gt; Run tools like &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;onnx-simplifier&lt;/code&gt; to fuse redundant nodes (such as Conv + BatchNorm + ReLU).&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Hardware Compilation:&lt;/strong&gt; Compile the ONNX model to hardware-native runtimes, such as the &lt;strong&gt;Qualcomm Neural Processing SDK&lt;/strong&gt; (SNPE) or TensorRT.&lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;table class=&quot;rouge-table&quot;&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;rouge-gutter gl&quot;&gt;&lt;pre class=&quot;lineno&quot;&gt;1
 &lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;rouge-code&quot;&gt;&lt;pre&gt;[PyTorch Model] ---&amp;gt; [onnx-simplifier] ---&amp;gt; [Qualcomm SNPE Compiler] ---&amp;gt; [INT8 DLC Binary]
-&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;  &lt;/div&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h2 id=&quot;3-practical-int8-quantization-strategies&quot;&gt;3. Practical INT8 Quantization Strategies&lt;/h2&gt;
+  &lt;h2 id=&quot;practical-int8-quantization-strategies&quot;&gt;3. Practical INT8 Quantization Strategies&lt;/h2&gt;
 
-&lt;p&gt;To achieve sub-30ms latency, we must quantize the model to 8-bit integers (INT8). For pose estimation:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Post-Training Quantization (PTQ)&lt;/strong&gt; is often insufficient because keypoint heatmaps are highly sensitive to rounding errors, causing joint predictions to jitter or jump.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Quantization-Aware Training (QAT)&lt;/strong&gt; must be utilized to inject simulated quantization noise into the training loop, ensuring that the model learns to remain robust to lower precision representations.&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;To achieve sub-30ms latency, we must quantize the model to 8-bit integers (INT8). For pose estimation:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Post-Training Quantization (PTQ)&lt;/strong&gt; is often insufficient because keypoint heatmaps are highly sensitive to rounding errors, causing joint predictions to jitter or jump.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Quantization-Aware Training (QAT)&lt;/strong&gt; must be utilized to inject simulated quantization noise into the training loop, ensuring that the model learns to remain robust to lower precision representations.&lt;/li&gt;
+  &lt;/ul&gt;
 
-&lt;hr /&gt;
+  &lt;hr /&gt;
 
-&lt;h3 id=&quot;results-in-production&quot;&gt;Results in Production&lt;/h3&gt;
+  &lt;h3 id=&quot;results-in-production&quot;&gt;Results in Production&lt;/h3&gt;
 
-&lt;p&gt;By combining QAT, model pruning, and graph compilation, we successfully deployed real-time human body pose trackers to smart TVs:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Latency:&lt;/strong&gt; Reduced from &lt;strong&gt;84ms&lt;/strong&gt; (FP32 baseline) to &lt;strong&gt;18ms&lt;/strong&gt; (INT8 compiled) on ARM-based NPUs.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Accuracy:&lt;/strong&gt; Preserved &lt;strong&gt;99.2%&lt;/strong&gt; of the original keypoint accuracy (PCKh@0.5).&lt;/li&gt;
-&lt;/ul&gt;
+  &lt;p&gt;By combining QAT, model pruning, and graph compilation, we successfully deployed real-time human body pose trackers to smart TVs:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;Latency:&lt;/strong&gt; Reduced from &lt;strong&gt;84ms&lt;/strong&gt; (FP32 baseline) to &lt;strong&gt;18ms&lt;/strong&gt; (INT8 compiled) on ARM-based NPUs.&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;Accuracy:&lt;/strong&gt; Preserved &lt;strong&gt;99.2%&lt;/strong&gt; of the original keypoint accuracy (PCKh@0.5).&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
 </description>
         <pubDate>Wed, 20 Nov 2024 00:00:00 -0600</pubDate>
         <link>/posts/edge-deployment/</link>
