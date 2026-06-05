@@ -3,7 +3,7 @@ layout: default
 title: Home
 ---
 
-{% if page.url == "/" %}
+{% if page.url == "/" or page.url == "/index.html" %}
 
 <!-- Featured
 ================================================== -->
@@ -33,19 +33,22 @@ title: Home
 <section class="recent-posts">
 
     <div class="section-title">
-
         <h2><span>All Stories</span></h2>
+    </div>
 
+    <!-- Category Filter Chips -->
+    <div class="category-filter-chips mb-4">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="introduce">Introduce</button>
+        <button class="chip" data-filter="robotics">Robotics</button>
+        <button class="chip" data-filter="machine-learning">Machine Learning</button>
+        <button class="chip" data-filter="computer-vision">Computer Vision</button>
     </div>
 
     <div class="row listrecent">
-
         {% for post in paginator.posts %}
-
         {% include postbox.html %}
-
         {% endfor %}
-
     </div>
 
 </section>
@@ -59,3 +62,58 @@ title: Home
 </span>
 </div>
 
+<style>
+.category-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.category-filter-chips .chip {
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+.category-filter-chips .chip:hover {
+  background: #eaeaea;
+  color: #333;
+}
+.category-filter-chips .chip.active {
+  background: #00ab6b;
+  color: #fff;
+  border-color: #00ab6b;
+  box-shadow: 0 2px 4px rgba(0, 171, 107, 0.2);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const chips = document.querySelectorAll(".category-filter-chips .chip");
+  const postItems = document.querySelectorAll(".post-card-item");
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", function() {
+      // Toggle active state
+      chips.forEach(c => c.classList.remove("active"));
+      this.classList.add("active");
+
+      const filterValue = this.getAttribute("data-filter").toLowerCase();
+
+      postItems.forEach(item => {
+        const categories = item.getAttribute("data-categories").split(",");
+        if (filterValue === "all" || categories.includes(filterValue)) {
+          item.style.display = "flex";
+        } else {
+          item.style.display = "none";
+        }
+      });
+    });
+  });
+});
+</script>

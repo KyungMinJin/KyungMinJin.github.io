@@ -227,3 +227,71 @@ comments: true
 
     </div>
 </div>
+
+<style>
+.publication-item details pre {
+  position: relative;
+  padding-right: 80px !important;
+}
+.copy-bibtex-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  color: #666;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+.copy-bibtex-btn:hover {
+  background: #00ab6b;
+  color: #fff;
+  border-color: #00ab6b;
+}
+.copy-bibtex-btn.copied {
+  background: #28a745;
+  color: #fff;
+  border-color: #28a745;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const preBlocks = document.querySelectorAll(".publication-item details pre");
+  preBlocks.forEach((pre) => {
+    // Create copy button
+    const button = document.createElement("button");
+    button.className = "copy-bibtex-btn";
+    button.innerHTML = "<i class='fa fa-clipboard'></i> Copy";
+    
+    // Add click event
+    button.addEventListener("click", function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const code = pre.querySelector("code");
+      const text = code ? code.innerText : pre.innerText;
+      
+      // Filter out copy button text itself if it gets included
+      const cleanText = text.replace("Copy", "").trim();
+      
+      navigator.clipboard.writeText(cleanText).then(() => {
+        button.innerHTML = "<i class='fa fa-check'></i> Copied!";
+        button.classList.add("copied");
+        setTimeout(() => {
+          button.innerHTML = "<i class='fa fa-clipboard'></i> Copy";
+          button.classList.remove("copied");
+        }, 2000);
+      }).catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+    });
+    
+    pre.appendChild(button);
+  });
+});
+</script>

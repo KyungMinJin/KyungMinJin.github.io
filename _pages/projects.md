@@ -14,8 +14,8 @@ comments: true
 
 <div class="row">
     <!-- Project 1 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-primary">Robotics / Embodied AI</span>
@@ -43,8 +43,8 @@ comments: true
     </div>
 
     <!-- Project 2 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-success">Multimodal Learning</span>
@@ -72,8 +72,8 @@ comments: true
     </div>
 
     <!-- Project 3 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-danger">LLM / VLM</span>
@@ -102,8 +102,8 @@ comments: true
     </div>
 
     <!-- Project 4 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-info">Reinforcement Learning</span>
@@ -130,8 +130,8 @@ comments: true
     </div>
 
     <!-- Project 5 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-warning">Computer Vision</span>
@@ -159,8 +159,8 @@ comments: true
     </div>
 
     <!-- Project 6 -->
-    <div class="col-md-6 mb-4">
-        <div class="card h-100 shadow-sm border">
+    <div class="col-md-12 mb-4">
+        <div class="card shadow-sm border">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <span class="badge badge-secondary">Embedded AI</span>
