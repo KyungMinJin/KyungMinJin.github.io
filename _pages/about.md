@@ -75,7 +75,7 @@ comments: true
     <!-- Annual Citation Trend (Scholar bar graph style) -->
     <div class="scholar-graph-container mt-2">
         <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">Citations per year</div>
-        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 130px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
+        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 160px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
             <!-- 2021 -->
             <div class="scholar-bar-wrapper text-center" style="width: 13%;">
                 <div class="scholar-bar" style="height: 3%;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
