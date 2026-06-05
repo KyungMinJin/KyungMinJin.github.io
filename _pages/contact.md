@@ -58,7 +58,8 @@ comments: false
         <div class="card border p-4 shadow-sm">
             <h4 class="font-weight-bold mb-4 text-dark">Send a Message</h4>
             
-            <form action="https://formspree.io/f/your-form-id" method="POST" id="contact-form">
+            <!-- Note: Replace "your-form-id" with your actual Formspree form ID (from https://formspree.io/) to make the form functional. -->
+            <form action="https://formspree.io/f/mlgkdpnr" method="POST" id="contact-form">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="name" class="text-dark font-weight-bold">Name</label>
