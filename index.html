@@ -974,7 +974,7 @@ title: Home
                         {% endif %}
                     {% endfor %}
                     
-                    <div class="scholar-graph px-1">
+                    <div class="scholar-graph">
                         <!-- Y-axis Guidelines & Labels -->
                         <div class="scholar-y-line" style="bottom: 160px;"></div>
                         <span class="scholar-y-label" style="bottom: 160px;">{{ max_cites }}</span>
@@ -1035,7 +1035,7 @@ title: Home
                              alt="Visitor Map" 
                              referrerpolicy="no-referrer"
                              style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
-                             onerror="this.onerror=null; this.src='https://images.weserv.nl/?url=clustrmaps.com/map_v2.png%3Fd%3D2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+                             onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
                     </a>
                 </div>
                 <div class="mt-3">

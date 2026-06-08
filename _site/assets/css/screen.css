@@ -1499,8 +1499,8 @@ details pre {
     height: 180px;
     border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
     padding-bottom: 0px;
-    padding-left: 15px; /* Added left padding to balance spacing */
-    padding-right: 70px; /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
+    padding-left: 15px !important; /* Added left padding to balance spacing */
+    padding-right: 70px !important; /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
     position: relative;
     background: none; /* Removed gridlines to match Scholar */
     margin-top: 15px;
