@@ -1499,7 +1499,7 @@ details pre {
     height: 180px;
     border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
     padding-bottom: 0px;
-    padding-right: 40px; /* Space for Y-axis labels */
+    padding-right: 55px; /* Increased padding to prevent overlap with labels */
     position: relative;
     background: none; /* Removed gridlines to match Scholar */
     margin-top: 15px;
@@ -1510,7 +1510,7 @@ details pre {
 .scholar-y-line {
     position: absolute;
     left: 0;
-    right: 40px; /* Stops before the label starts */
+    right: 55px; /* Stops before the label starts */
     border-top: 1px dashed #e0e0e0;
     z-index: 1;
     pointer-events: none;
@@ -1518,8 +1518,8 @@ details pre {
 
 .scholar-y-label {
     position: absolute;
-    right: 0;
-    width: 35px;
+    right: 5px;
+    width: 45px;
     text-align: right;
     font-size: 0.68rem;
     font-weight: 500;
@@ -1536,6 +1536,7 @@ details pre {
     justify-content: flex-end;
     align-items: center;
     height: 100%;
+    position: relative; /* Anchor for absolute year placement */
     z-index: 2; /* Sits above gridlines */
 }
 
@@ -1555,6 +1556,7 @@ details pre {
     border-radius: 0; /* Perfectly flat tops */
     transition: background-color 0.2s ease, transform 0.2s ease;
     cursor: pointer;
+    flex-shrink: 0; /* Prevent browser from shrinking bar heights under flex layout */
 }
 
 .scholar-bar:hover {
@@ -1570,9 +1572,11 @@ details pre {
     font-size: 0.7rem;
     font-weight: 500;
     color: #70757a;
-    margin-top: 5px;
-    position: relative;
-    top: 22px; /* Pull text below the baseline border */
+    position: absolute;
+    bottom: -22px; /* Pull text below the baseline border without affecting layout flow */
+    left: 0;
+    width: 100%;
+    text-align: center;
 }
 
 /* Site-wide Multilingual Toggle Rules */
