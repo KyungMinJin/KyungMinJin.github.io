@@ -4,6 +4,16 @@
     "i10_index": 4,
     "graph": [
         {
+            "year": "20",
+            "full_year": "2020",
+            "citations": 0
+        },
+        {
+            "year": "21",
+            "full_year": "2021",
+            "citations": 1
+        },
+        {
             "year": "22",
             "full_year": "2022",
             "citations": 1

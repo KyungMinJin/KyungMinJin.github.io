@@ -81,6 +81,21 @@ try:
             "full_year": y_text,
             "citations": best_val
         })
+
+    # Pad with 2020 (0) and 2021 (1) data points to ensure graph starts from 2020
+    existing_years = {item["full_year"]: item for item in graph_data}
+    if "2020" not in existing_years:
+        graph_data.append({
+            "year": "20",
+            "full_year": "2020",
+            "citations": 0
+        })
+    if "2021" not in existing_years:
+        graph_data.append({
+            "year": "21",
+            "full_year": "2021",
+            "citations": 1
+        })
         
     # Sort chronologically (oldest to newest)
     graph_data.sort(key=lambda x: x["full_year"])
