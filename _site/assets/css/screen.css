@@ -1491,19 +1491,63 @@ details pre {
     padding-bottom: 16px;
 }
 
-/* Scholar Bar Graph Styles */
+/* Scholar Bar Graph Styles (Google Scholar Signature Look) */
+.scholar-graph {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 180px;
+    border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
+    padding-bottom: 0px;
+    position: relative;
+    background: none; /* Removed gridlines to match Scholar */
+    margin-top: 15px;
+    margin-bottom: 25px; /* Add margin below graph container to prevent overlap */
+}
+
+.scholar-bar-wrapper {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+}
+
+.scholar-value {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #70757a;
+    margin-bottom: 2px;
+    opacity: 0; /* Hidden by default, fades in on bar hover */
+    transition: opacity 0.15s ease-in-out;
+}
+
 .scholar-bar {
-    width: 70%;
+    width: 35%; /* Thinner bar widths matching Scholar's thin layout */
     margin: 0 auto;
-    background: linear-gradient(to top, #4a777a, #68999c);
-    border-radius: 3px 3px 0 0;
-    transition: all 0.2s ease-in-out;
+    background-color: #a0c0e0; /* Classic Scholar bar color */
+    border-radius: 0; /* Perfectly flat tops */
+    transition: background-color 0.2s ease, transform 0.2s ease;
     cursor: pointer;
 }
+
 .scholar-bar:hover {
-    background: linear-gradient(to top, #3b5f62, #4a777a);
-    box-shadow: 0 0 8px rgba(74, 119, 122, 0.4);
-    transform: translateY(-2px);
+    background-color: #1a73e8; /* Signature Google Blue on hover */
+    transform: scaleY(1.02);
+}
+
+.scholar-bar-wrapper:hover .scholar-value {
+    opacity: 1; /* Reveal citation count directly above the column on hover */
+}
+
+.scholar-year {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #70757a;
+    margin-top: 5px;
+    position: relative;
+    top: 22px; /* Pull text below the baseline border */
 }
 
 /* Site-wide Multilingual Toggle Rules */

@@ -124,10 +124,10 @@ comments: true
     </h6>
     <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
         <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
-            <img src="https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
+            <img src="https://clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
                  alt="Visitor Map" 
                  style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
-                 onerror="this.onerror=null; this.src='https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+                 onerror="this.onerror=null; this.src='https://clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
         </a>
     </div>
     <div class="mt-3">
