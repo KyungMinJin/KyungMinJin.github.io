@@ -1499,19 +1499,44 @@ details pre {
     height: 180px;
     border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
     padding-bottom: 0px;
+    padding-right: 40px; /* Space for Y-axis labels */
     position: relative;
     background: none; /* Removed gridlines to match Scholar */
     margin-top: 15px;
-    margin-bottom: 25px; /* Add margin below graph container to prevent overlap */
+    margin-bottom: 35px; /* Add margin below graph container to prevent overlap and year text clipping */
+}
+
+/* Y-axis helper elements */
+.scholar-y-line {
+    position: absolute;
+    left: 0;
+    right: 40px; /* Stops before the label starts */
+    border-top: 1px dashed #e0e0e0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.scholar-y-label {
+    position: absolute;
+    right: 0;
+    width: 35px;
+    text-align: right;
+    font-size: 0.68rem;
+    font-weight: 500;
+    color: #70757a;
+    transform: translateY(50%); /* Centers label vertically on its bottom anchor line */
+    z-index: 2;
+    pointer-events: none;
 }
 
 .scholar-bar-wrapper {
-    width: 15%;
+    width: 12%; /* Keep width tight so 7 columns fit nicely in the flex area */
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
     height: 100%;
+    z-index: 2; /* Sits above gridlines */
 }
 
 .scholar-value {

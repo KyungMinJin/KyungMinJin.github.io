@@ -96,15 +96,34 @@ comments: true
         {% endfor %}
         
         <div class="scholar-graph px-1">
+            <!-- Y-axis Guidelines & Labels -->
+            <div class="scholar-y-line" style="bottom: 160px;"></div>
+            <span class="scholar-y-label" style="bottom: 160px;">{{ max_cites }}</span>
+
+            {% assign mid_cites = max_cites | divided_by: 2 %}
+            <div class="scholar-y-line" style="bottom: 80px;"></div>
+            <span class="scholar-y-label" style="bottom: 80px;">{{ mid_cites }}</span>
+
+            <div class="scholar-y-line" style="bottom: 0px;"></div>
+            <span class="scholar-y-label" style="bottom: 0px;">0</span>
+
             {% for item in s_data.graph %}
                 {% assign bar_height = item.citations | times: 160 | divided_by: max_cites %}
-                {% if bar_height < 5 %}{% assign bar_height = 5 %}{% endif %}
+                {% if item.citations > 0 and bar_height < 5 %}
+                    {% assign bar_height = 5 %}
+                {% endif %}
                 <div class="scholar-bar-wrapper">
                     <span class="scholar-value">{{ item.citations }}</span>
                     <div class="scholar-bar" style="height: {{ bar_height }}px;" 
                          data-tooltip="{{ item.full_year }}: {{ item.citations }} citations" 
                          title="{{ item.full_year }}: {{ item.citations }} citations"></div>
-                    <span class="scholar-year">{{ item.year }}</span>
+                    <span class="scholar-year">
+                        {% if item.citations > 0 %}
+                            {{ item.year }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </span>
                 </div>
             {% endfor %}
         </div>
@@ -124,10 +143,11 @@ comments: true
     </h6>
     <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
         <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
-            <img src="https://clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
+            <img src="https://cdn.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
                  alt="Visitor Map" 
+                 referrerpolicy="no-referrer"
                  style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
-                 onerror="this.onerror=null; this.src='https://clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+                 onerror="this.onerror=null; this.src='https://cdn.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
         </a>
     </div>
     <div class="mt-3">

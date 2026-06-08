@@ -68,6 +68,8 @@ try:
     # Map each year to its nearest bar by finding the minimum coordinate difference
     graph_data = []
     for y_right, y_text in years_list:
+        if int(y_text) < 2020:
+            continue
         best_val = 0
         min_diff = 9999
         for v_right, v_val in values_list:
@@ -82,20 +84,18 @@ try:
             "citations": best_val
         })
 
-    # Pad with 2020 (0) and 2021 (1) data points to ensure graph starts from 2020
+    # Pad with all years from 2020 to current year with 0 citations if missing
+    import time
+    current_year = int(time.strftime("%Y"))
     existing_years = {item["full_year"]: item for item in graph_data}
-    if "2020" not in existing_years:
-        graph_data.append({
-            "year": "20",
-            "full_year": "2020",
-            "citations": 0
-        })
-    if "2021" not in existing_years:
-        graph_data.append({
-            "year": "21",
-            "full_year": "2021",
-            "citations": 1
-        })
+    for yr in range(2020, current_year + 1):
+        yr_str = str(yr)
+        if yr_str not in existing_years:
+            graph_data.append({
+                "year": yr_str[-2:],
+                "full_year": yr_str,
+                "citations": 0
+            })
         
     # Sort chronologically (oldest to newest)
     graph_data.sort(key=lambda x: x["full_year"])
