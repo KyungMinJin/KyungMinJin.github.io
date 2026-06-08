@@ -6,11 +6,14 @@ License: https://www.wowthemes.net/freebies-license/
 @media screen and (min-width: 1500px) {
   html {
     font-size: 18px;
-  } /* Increase the font size on higher resolutions */
+  }
+
+  /* Increase the font size on higher resolutions */
   .container {
     max-width: 80%;
   }
 }
+
 .mainheading {
   padding: 1rem 0rem;
 }
@@ -339,6 +342,7 @@ span.post-read-more a:hover {
   line-height: 1.65;
   color: #333;
 }
+
 .article-post h1 {
   font-size: 1.65rem;
   font-weight: 700;
@@ -346,6 +350,7 @@ span.post-read-more a:hover {
   margin-bottom: 1rem;
   color: #111;
 }
+
 .article-post h2 {
   font-size: 1.45rem;
   font-weight: 700;
@@ -353,6 +358,7 @@ span.post-read-more a:hover {
   margin-bottom: 0.9rem;
   color: #222;
 }
+
 .article-post h3 {
   font-size: 1.25rem;
   font-weight: 700;
@@ -360,6 +366,7 @@ span.post-read-more a:hover {
   margin-bottom: 0.8rem;
   color: #333;
 }
+
 .article-post h4 {
   font-size: 1.15rem;
   font-weight: 700;
@@ -367,6 +374,7 @@ span.post-read-more a:hover {
   margin-bottom: 0.7rem;
   color: #444;
 }
+
 .article-post h5 {
   font-size: 1.05rem;
   font-weight: 700;
@@ -374,6 +382,7 @@ span.post-read-more a:hover {
   margin-bottom: 0.6rem;
   color: #555;
 }
+
 .article-post h6 {
   font-size: 0.95rem;
   font-weight: 700;
@@ -383,11 +392,16 @@ span.post-read-more a:hover {
 }
 
 /* Make LaTeX equations responsive and scrollable on overflow */
-.mjx-container, .MathJax, .MathJax_Display, .MathJax_CHTML, math {
+.mjx-container,
+.MathJax,
+.MathJax_Display,
+.MathJax_CHTML,
+math {
   max-width: 100% !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
 }
+
 .MathJax_Display {
   padding: 12px 0;
 }
@@ -1002,18 +1016,22 @@ details pre {
     margin-bottom: 2rem;
     text-align: center;
   }
+
   .post-share-sidebar .share ul {
     display: flex;
     justify-content: center;
     margin-bottom: 0;
   }
+
   .post-share-sidebar .share ul li {
     display: inline-block !important;
     margin: 0 10px;
   }
+
   .post-share-sidebar .share p {
     display: none;
   }
+
   .post-share-sidebar .share .sep {
     display: none;
   }
@@ -1038,7 +1056,7 @@ details pre {
   border: 1px solid #e9ecef;
   border-radius: 8px;
   padding: 4px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
 }
 
 .timeline-logo-img {
@@ -1049,7 +1067,8 @@ details pre {
 }
 
 .timeline-roles-list {
-  margin-left: 23px; /* Exact center of the 48px logo (23px + 1px border is 24px) */
+  margin-left: 23px;
+  /* Exact center of the 48px logo (23px + 1px border is 24px) */
   border-left: 2px solid #e9ecef;
   padding-left: 20px;
   margin-top: 5px;
@@ -1061,7 +1080,8 @@ details pre {
 
 .timeline-role-dot {
   position: absolute;
-  left: -27px; /* Centers 12px dot on the 2px line at 20px padding + 6px offset */
+  left: -27px;
+  /* Centers 12px dot on the 2px line at 20px padding + 6px offset */
   top: 6px;
   width: 12px;
   height: 12px;
@@ -1073,7 +1093,8 @@ details pre {
 }
 
 .timeline-role-item:hover .timeline-role-dot {
-  background: #00ab6b; /* Accent highlight color */
+  background: #00ab6b;
+  /* Accent highlight color */
   box-shadow: 0 0 0 2px #00ab6b;
 }
 
@@ -1094,7 +1115,7 @@ details pre {
 }
 
 .cv-viewer-details[open] {
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
 .cv-viewer-details summary::-webkit-details-marker {
@@ -1163,290 +1184,373 @@ details pre {
 
 /* Research Interest Cards Style */
 .research-card {
-    border-radius: 12px;
-    background: #ffffff;
-    border: 1px solid #f1f3f5 !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #f1f3f5 !important;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
 .research-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
-    border-color: #dee2e6 !important;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+  border-color: #dee2e6 !important;
 }
+
 .research-icon-wrapper {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
 }
+
 .research-emoji {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
-.bg-purple-light { background-color: #f3f0ff; }
-.bg-blue-light { background-color: #e7f5ff; }
-.bg-green-light { background-color: #ebfbee; }
+
+.bg-purple-light {
+  background-color: #f3f0ff;
+}
+
+.bg-blue-light {
+  background-color: #e7f5ff;
+}
+
+.bg-green-light {
+  background-color: #ebfbee;
+}
 
 /* News Card Style */
 .news-card {
-    border-radius: 12px;
-    background: #fafafa;
-    border: 1px solid #e9ecef !important;
+  border-radius: 12px;
+  background: #fafafa;
+  border: 1px solid #e9ecef !important;
 }
+
 .badge-teal {
-    background-color: #4a777a;
-    color: white;
-    font-size: 0.75rem;
-    padding: 5px 10px;
-    border-radius: 20px;
+  background-color: #4a777a;
+  color: white;
+  font-size: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 20px;
 }
+
 .news-item {
-    border-bottom-color: #f1f3f5 !important;
+  border-bottom-color: #f1f3f5 !important;
 }
 
 /* Skills Tag Cloud Style */
 .skills-container {
-    border-radius: 12px;
-    border: 1px solid #f1f3f5 !important;
+  border-radius: 12px;
+  border: 1px solid #f1f3f5 !important;
 }
+
 .tech-tag {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 4px 6px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #495057;
-    background: #f1f3f5;
-    border-radius: 20px;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid #e9ecef;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 4px 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #495057;
+  background: #f1f3f5;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  border: 1px solid #e9ecef;
 }
+
 .tech-tag:hover {
-    background: #4a777a;
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(74, 119, 122, 0.2);
-    border-color: #4a777a;
+  background: #4a777a;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(74, 119, 122, 0.2);
+  border-color: #4a777a;
 }
 
 /* LinkedIn Style Timeline CSS */
 .linkedin-timeline {
-    margin-top: 20px;
-    position: relative;
+  margin-top: 20px;
+  position: relative;
 }
+
 .timeline-org-group {
-    position: relative;
-    margin-bottom: 40px;
+  position: relative;
+  margin-bottom: 40px;
 }
+
 .timeline-org-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    position: relative;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
 }
+
 .timeline-org-logo {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #e0e0e0;
-    margin-right: 15px;
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e0e0e0;
+  margin-right: 15px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
 .timeline-org-logo-fallback {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: #f1f3f5;
-    color: #4a777a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #e0e0e0;
-    margin-right: 15px;
-    font-size: 1.2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #f1f3f5;
+  color: #4a777a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e0e0e0;
+  margin-right: 15px;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
 .timeline-org-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
+
 .timeline-org-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #1b1b1b;
-    margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1b1b1b;
+  margin: 0;
 }
+
 .timeline-org-duration {
-    font-size: 0.85rem;
-    color: #666;
-    margin: 2px 0 0 0;
+  font-size: 0.85rem;
+  color: #666;
+  margin: 2px 0 0 0;
 }
+
 .timeline-roles-container {
-    position: relative;
-    padding-left: 24px;
-    margin-left: 0px;
+  position: relative;
+  padding-left: 24px;
+  margin-left: 0px;
 }
+
 .timeline-role-connector {
-    position: absolute;
-    left: 23px;
-    top: -10px;
-    bottom: 25px;
-    width: 2px;
-    background-color: #cbd5e1;
-    z-index: 1;
+  position: absolute;
+  left: 23px;
+  top: -10px;
+  bottom: 25px;
+  width: 2px;
+  background-color: #cbd5e1;
+  z-index: 1;
 }
+
 .timeline-role-card {
-    position: relative;
-    padding-bottom: 25px;
-    padding-left: 25px;
+  position: relative;
+  padding-bottom: 25px;
+  padding-left: 25px;
 }
+
 .timeline-role-card:last-child {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
+
 .timeline-role-node {
-    position: absolute;
-    left: -6px;
-    top: 6px;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: #cbd5e1;
-    border: 2px solid white;
-    z-index: 2;
-    transition: background-color 0.2s;
+  position: absolute;
+  left: -6px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #cbd5e1;
+  border: 2px solid white;
+  z-index: 2;
+  transition: background-color 0.2s;
 }
+
 .timeline-role-card:hover .timeline-role-node {
-    background-color: #4a777a;
+  background-color: #4a777a;
 }
+
 .timeline-role-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
+
 .timeline-role-title {
-    font-size: 0.98rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
 }
+
 .timeline-role-subtitle {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #555;
-    margin: 4px 0 2px 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #555;
+  margin: 4px 0 2px 0;
 }
+
 .timeline-role-date {
-    font-size: 0.8rem;
-    color: #888;
-    margin-bottom: 8px;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 8px;
 }
+
 .timeline-role-desc {
-    font-size: 0.88rem;
-    color: #666;
-    line-height: 1.6;
-    margin: 0;
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
 }
 
 /* Awards Cards Style */
 .award-card {
-    border-radius: 12px;
-    border: 1px solid #f1f3f5 !important;
-    transition: all 0.2s ease-in-out;
+  border-radius: 12px;
+  border: 1px solid #f1f3f5 !important;
+  transition: all 0.2s ease-in-out;
 }
+
 .award-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.05) !important;
-    border-color: #dee2e6 !important;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05) !important;
+  border-color: #dee2e6 !important;
 }
+
 .award-icon-box {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
-.bg-gold { background-color: #fff9db; }
-.text-gold-dark { color: #f59f00; }
-.bg-medal { background-color: #e6f7ff; }
-.text-medal-dark { color: #1890ff; }
-.bg-bronze { background-color: #fff0f6; }
-.text-bronze-dark { color: #eb2f96; }
-.bg-blue { background-color: #f6ffed; }
-.text-blue-dark { color: #52c41a; }
+
+.bg-gold {
+  background-color: #fff9db;
+}
+
+.text-gold-dark {
+  color: #f59f00;
+}
+
+.bg-medal {
+  background-color: #e6f7ff;
+}
+
+.text-medal-dark {
+  color: #1890ff;
+}
+
+.bg-bronze {
+  background-color: #fff0f6;
+}
+
+.text-bronze-dark {
+  color: #eb2f96;
+}
+
+.bg-blue {
+  background-color: #f6ffed;
+}
+
+.text-blue-dark {
+  color: #52c41a;
+}
 
 /* Collaboration Card Style */
 .collab-card {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border: 1px solid #dee2e6 !important;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6 !important;
 }
+
 .btn-premium-teal {
-    background-color: #4a777a;
-    color: white;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 8px 18px;
-    transition: all 0.2s;
-    border: none;
+  background-color: #4a777a;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 18px;
+  transition: all 0.2s;
+  border: none;
 }
+
 .btn-premium-teal:hover {
-    background-color: #3b5f62;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(74, 119, 122, 0.25);
+  background-color: #3b5f62;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(74, 119, 122, 0.25);
 }
+
 .btn-premium-linkedin {
-    background-color: #0077b5;
-    color: white;
-    font-weight: 600;
-    border-radius: 8px;
-    padding: 8px 18px;
-    transition: all 0.2s;
-    border: none;
+  background-color: #0077b5;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 18px;
+  transition: all 0.2s;
+  border: none;
 }
+
 .btn-premium-linkedin:hover {
-    background-color: #005987;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 119, 181, 0.25);
+  background-color: #005987;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 119, 181, 0.25);
 }
+
 .btn-premium-outline {
-    background-color: transparent;
-    color: #4a777a;
-    font-weight: 600;
-    border: 2px solid #4a777a;
-    border-radius: 8px;
-    padding: 6px 16px;
-    transition: all 0.2s;
+  background-color: transparent;
+  color: #4a777a;
+  font-weight: 600;
+  border: 2px solid #4a777a;
+  border-radius: 8px;
+  padding: 6px 16px;
+  transition: all 0.2s;
 }
+
 .btn-premium-outline:hover {
-    background-color: #4a777a;
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(74, 119, 122, 0.15);
+  background-color: #4a777a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(74, 119, 122, 0.15);
 }
+
 .copy-alert-toast {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #333;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 9999;
-    font-size: 0.9rem;
-    animation: fadeInOut 2.5s ease-in-out forwards;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  font-size: 0.9rem;
+  animation: fadeInOut 2.5s ease-in-out forwards;
 }
+
 @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
 }
 
 @media (min-width: 768px) {
@@ -1457,6 +1561,7 @@ details pre {
     overflow-y: auto;
     padding-bottom: 20px;
   }
+
   .sticky-sidebar::-webkit-scrollbar {
     width: 0px;
     background: transparent;
@@ -1465,123 +1570,157 @@ details pre {
 
 /* Compact Tweaks */
 .research-card {
-    padding: 1.15rem !important;
+  padding: 1.15rem !important;
 }
+
 .news-card {
-    padding: 1.15rem !important;
+  padding: 1.15rem !important;
 }
+
 .skills-container {
-    padding: 1.15rem !important;
+  padding: 1.15rem !important;
 }
+
 .award-card {
-    padding: 0.85rem !important;
+  padding: 0.85rem !important;
 }
+
 .collab-card {
-    padding: 1.15rem !important;
+  padding: 1.15rem !important;
 }
+
 .tech-tag {
-    padding: 4px 10px;
-    margin: 3px 4px;
-    font-size: 0.78rem;
+  padding: 4px 10px;
+  margin: 3px 4px;
+  font-size: 0.78rem;
 }
+
 .timeline-org-group {
-    margin-bottom: 28px;
+  margin-bottom: 28px;
 }
+
 .timeline-role-card {
-    padding-bottom: 16px;
+  padding-bottom: 16px;
 }
 
 /* Scholar Bar Graph Styles (Google Scholar Signature Look) */
 .scholar-graph {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    height: 180px;
-    border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
-    padding-bottom: 0px;
-    padding-left: 15px !important; /* Added left padding to balance spacing */
-    padding-right: 70px !important; /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
-    position: relative;
-    background: none; /* Removed gridlines to match Scholar */
-    margin-top: 15px;
-    margin-bottom: 35px; /* Add margin below graph container to prevent overlap and year text clipping */
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 180px;
+  padding-bottom: 0px;
+  padding-left: 15px !important;
+  /* Added left padding to balance spacing */
+  padding-right: 70px !important;
+  /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
+  position: relative;
+  background: none;
+  /* Removed gridlines to match Scholar */
+  margin-top: 15px;
+  margin-bottom: 35px;
+  /* Add margin below graph container to prevent overlap and year text clipping */
+}
+
+.scholar-graph-inner {
+  /* Google Scholar baseline color */
+  border-bottom: 2px solid #bdc1c6;
+
 }
 
 /* Y-axis helper elements */
 .scholar-y-line {
-    position: absolute;
-    left: 15px; /* Aligns with padding-left */
-    right: 70px; /* Stops before the label starts */
-    border-top: 1px dashed #e0e0e0;
-    z-index: 1;
-    pointer-events: none;
+  position: absolute;
+  left: 15px;
+  /* Aligns with padding-left */
+  right: 70px;
+  /* Stops before the label starts */
+  border-top: 1px dashed #e0e0e0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .scholar-y-label {
-    position: absolute;
-    right: 10px; /* Shifted slightly right to keep clear of the content area */
-    width: 45px;
-    text-align: right;
-    font-size: 0.68rem;
-    font-weight: 500;
-    color: #70757a;
-    transform: translateY(50%); /* Centers label vertically on its bottom anchor line */
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  right: 10px;
+  /* Shifted slightly right to keep clear of the content area */
+  width: 45px;
+  text-align: right;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #70757a;
+  transform: translateY(50%);
+  /* Centers label vertically on its bottom anchor line */
+  z-index: 2;
+  pointer-events: none;
 }
 
 .scholar-bar-wrapper {
-    width: 12%; /* Keep width tight so 7 columns fit nicely in the flex area */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    height: 100%;
-    position: relative; /* Anchor for absolute year placement */
-    z-index: 2; /* Sits above gridlines */
+  width: 12%;
+  /* Keep width tight so 7 columns fit nicely in the flex area */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  position: relative;
+  /* Anchor for absolute year placement */
+  z-index: 2;
+  /* Sits above gridlines */
 }
 
 .scholar-value {
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: #70757a;
-    margin-bottom: 2px;
-    opacity: 0; /* Hidden by default, fades in on bar hover */
-    transition: opacity 0.15s ease-in-out;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #70757a;
+  margin-bottom: 2px;
+  opacity: 0;
+  /* Hidden by default, fades in on bar hover */
+  transition: opacity 0.15s ease-in-out;
 }
 
 .scholar-bar {
-    width: 35%; /* Thinner bar widths matching Scholar's thin layout */
-    margin: 0 auto;
-    background-color: #a0c0e0; /* Classic Scholar bar color */
-    border-radius: 0; /* Perfectly flat tops */
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    cursor: pointer;
-    flex-shrink: 0; /* Prevent browser from shrinking bar heights under flex layout */
+  width: 35%;
+  /* Thinner bar widths matching Scholar's thin layout */
+  margin: 0 auto;
+  background-color: #a0c0e0;
+  /* Classic Scholar bar color */
+  border-radius: 0;
+  /* Perfectly flat tops */
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  flex-shrink: 0;
+  /* Prevent browser from shrinking bar heights under flex layout */
 }
 
 .scholar-bar:hover {
-    background-color: #1a73e8; /* Signature Google Blue on hover */
-    transform: scaleY(1.02);
+  background-color: #1a73e8;
+  /* Signature Google Blue on hover */
+  transform: scaleY(1.02);
 }
 
 .scholar-bar-wrapper:hover .scholar-value {
-    opacity: 1; /* Reveal citation count directly above the column on hover */
+  opacity: 1;
+  /* Reveal citation count directly above the column on hover */
 }
 
 .scholar-year {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #70757a;
-    position: absolute;
-    bottom: -22px; /* Pull text below the baseline border without affecting layout flow */
-    left: 0;
-    width: 100%;
-    text-align: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #70757a;
+  position: absolute;
+  bottom: -22px;
+  /* Pull text below the baseline border without affecting layout flow */
+  left: 0;
+  width: 100%;
+  text-align: center;
 }
 
 /* Site-wide Multilingual Toggle Rules */
-html.lang-mode-en .lang-ko { display: none !important; }
-html.lang-mode-ko .lang-en { display: none !important; }
+html.lang-mode-en .lang-ko {
+  display: none !important;
+}
 
-
+html.lang-mode-ko .lang-en {
+  display: none !important;
+}
