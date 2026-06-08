@@ -1605,17 +1605,12 @@ details pre {
 
 /* Scholar Bar Graph Styles (Google Scholar Signature Look) */
 .scholar-graph {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
   height: 180px;
   padding-bottom: 0px;
   padding-left: 15px !important;
   /* Added left padding to balance spacing */
   padding-right: 70px !important;
-  /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
-  position: relative;
-  background: none;
+
   /* Removed gridlines to match Scholar */
   margin-top: 15px;
   margin-bottom: 35px;
@@ -1623,8 +1618,14 @@ details pre {
 }
 
 .scholar-graph-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   /* Google Scholar baseline color */
   border-bottom: 2px solid #bdc1c6;
+  /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
+  position: relative;
+  background: none;
 
 }
 
