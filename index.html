@@ -6,9 +6,9 @@ title: Home
 {% if page.url == "/" or page.url == "/index.html" %}
 
 <!-- 2-Column Content Layout -->
-<div class="row justify-content-center">
+<div class="row">
     <!-- Left Column (Main Portfolio Content) -->
-    <div class="col-md-8">
+    <div class="col-md-8 col-lg-8 col-sm-12 pr-md-4">
 
         <!-- Site Title & Description (Self-Introduction) -->
         <div class="mainheading">
@@ -928,114 +928,106 @@ title: Home
             </div>
         </div>
     </div> <!-- Left Column 끝 -->
-</div> <!-- row 끝 (Main Content Row) -->
 
-<!-- Full Width Widgets Section at the Bottom -->
-<div class="row mt-5 pt-4 border-top">
-    <!-- Google Scholar Metrics -->
-    <div class="col-md-4 mb-4">
-        <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white h-100">
-            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
-                <i class="fa fa-graduation-cap text-info"></i> Google Scholar Metrics
-            </h6>
-            <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
-                <thead>
-                    <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
-                        <th>Metric</th>
-                        <th class="text-right">All</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-dark py-1">Citations</td>
-                        <td class="text-right font-weight-bold py-1">94</td>
-                    </tr>
-                    <tr>
-                        <td class="text-dark py-1">h-index</td>
-                        <td class="text-right font-weight-bold py-1">5</td>
-                    </tr>
-                    <tr>
-                        <td class="text-dark py-1">i10-index</td>
-                        <td class="text-right font-weight-bold py-1">4</td>
-                    </tr>
-                </tbody>
-            </table>
+    <!-- Right Column (Sidebar) -->
+    <div class="col-md-4 col-lg-4 col-sm-12 mt-4 mt-md-0">
+        <div class="sticky-sidebar">
+            
+            <!-- Google Scholar Metrics -->
+            <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white">
+                <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                    <i class="fa fa-graduation-cap text-info"></i> Google Scholar Metrics
+                </h6>
+                {% assign s_data = site.data.scholar %}
+                <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
+                    <thead>
+                        <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
+                            <th>Metric</th>
+                            <th class="text-right">All</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-dark py-1">Citations</td>
+                            <td class="text-right font-weight-bold py-1">{{ s_data.citations }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-dark py-1">h-index</td>
+                            <td class="text-right font-weight-bold py-1">{{ s_data.h_index }}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-dark py-1">i10-index</td>
+                            <td class="text-right font-weight-bold py-1">{{ s_data.i10_index }}</td>
+                        </tr>
+                    </tbody>
+                </table>
 
-            <div class="scholar-graph-container mt-2">
-                <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">
-                    Citations per year</div>
-                <div class="scholar-graph d-flex align-items-end justify-content-between px-1"
-                    style="height: 220px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 5px;" data-tooltip="2021: 1 citation"
-                            title="2021: 1 citation"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">21</span>
-                    </div>
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 18px;" data-tooltip="2022: 4 citations"
-                            title="2022: 4 citations"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">22</span>
-                    </div>
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 160px;" data-tooltip="2023: 36 citations"
-                            title="2023: 36 citations"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">23</span>
-                    </div>
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 80px;" data-tooltip="2024: 18 citations"
-                            title="2024: 18 citations"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">24</span>
-                    </div>
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 110px;" data-tooltip="2025: 25 citations"
-                            title="2025: 25 citations"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">25</span>
-                    </div>
-                    <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                        <div class="scholar-bar" style="height: 45px;" data-tooltip="2026: 10 citations"
-                            title="2026: 10 citations"></div>
-                        <span class="scholar-year d-block mt-1 text-muted">26</span>
+                <div class="scholar-graph-container mt-2">
+                    <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">
+                        Citations per year</div>
+                    
+                    {% comment %} Find maximum citation count to calculate relative height {% endcomment %}
+                    {% assign max_cites = 1 %}
+                    {% for item in s_data.graph %}
+                        {% if item.citations > max_cites %}
+                            {% assign max_cites = item.citations %}
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <div class="scholar-graph px-1">
+                        {% for item in s_data.graph %}
+                            {% comment %} Scale height relative to 160px maximum {% endcomment %}
+                            {% assign bar_height = item.citations | times: 160 | divided_by: max_cites %}
+                            {% if bar_height < 5 %}{% assign bar_height = 5 %}{% endif %}
+                            <div class="scholar-bar-wrapper">
+                                <span class="scholar-value">{{ item.citations }}</span>
+                                <div class="scholar-bar" style="height: {{ bar_height }}px;" 
+                                     data-tooltip="{{ item.full_year }}: {{ item.citations }} citations" 
+                                     title="{{ item.full_year }}: {{ item.citations }} citations"></div>
+                                <span class="scholar-year">{{ item.year }}</span>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- GitHub Contribution Graph -->
-    <div class="col-md-4 mb-4">
-        <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white h-100">
-            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
-                <i class="fa fa-github text-dark"></i> GitHub Activity
-            </h6>
-            <div class="text-center">
-                <a target="_blank" href="https://github.com/KyungMinJin">
-                    <img src="https://ghchart.rshah.org/4a777a/KyungMinJin" alt="Kyung-Min Jin's Github Chart"
-                        style="max-width: 100%; height: auto; border-radius: 4px;" />
-                </a>
-                <p class="text-muted mt-2 mb-0" style="font-size: 0.72rem;">Kyung-Min Jin's Github Contributions</p>
+            <!-- GitHub Contribution Graph -->
+            <div class="card border shadow-sm p-3 pt-2 pb-2 mb-4 bg-white">
+                <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
+                    <i class="fa fa-github text-dark"></i> GitHub Activity
+                </h6>
+                <div class="text-center">
+                    <a target="_blank" href="https://github.com/KyungMinJin">
+                        <img src="https://ghchart.rshah.org/4a777a/KyungMinJin" alt="Kyung-Min Jin's Github Chart"
+                            style="max-width: 100%; height: auto; border-radius: 4px;" />
+                    </a>
+                    <p class="text-muted mt-2 mb-0" style="font-size: 0.72rem;">Kyung-Min Jin's Github Contributions</p>
+                </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Visitor Analytics Widget (Stable 2D ClustrMaps Script) -->
-    <div class="col-md-4 mb-4">
-        <div class="card border shadow-sm p-3 pt-2 pb-2 bg-white text-center h-100 d-flex flex-column justify-content-between">
-            <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
-                <i class="fa fa-globe text-secondary"></i> Visitor Map
-            </h6>
-            <div class="visitor-map-container"
-                style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-                <script type="text/javascript" id="clustrmaps"
-                    src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
+            <!-- Visitor Map Card (Stable Image Version) -->
+            <div class="card border shadow-sm p-3 pt-2 pb-2 bg-white text-center">
+                <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
+                    <i class="fa fa-globe text-secondary"></i> Visitor Map
+                </h6>
+                <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
+                    <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
+                        <img src="https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
+                             alt="Visitor Map" 
+                             style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
+                             onerror="this.onerror=null; this.src='https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+                    </a>
+                </div>
+                <div class="mt-3">
+                    <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=true" 
+                         alt="Total Visits" 
+                         style="border-radius: 4px;" />
+                </div>
             </div>
-            <div class="mt-3">
-                <img src="https://komarev.com/ghpvc/?username=KyungMinJin&color=4a777a&style=flat-square&label=Total+Visits"
-                    alt="Total Visits" style="border-radius: 4px;" />
-            </div>
-        </div>
-    </div>
 
-</div>
+        </div>
+    </div> <!-- Right Column 끝 -->
+</div> <!-- row 끝 (Main Content Row) -->
 
 {% endif %}
 

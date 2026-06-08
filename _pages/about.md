@@ -49,6 +49,7 @@ comments: true
         <span class="lang-en">Google Scholar Metrics</span>
         <span class="lang-ko">구글 스콜라 지표</span>
     </h6>
+    {% assign s_data = site.data.scholar %}
     <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
         <thead>
             <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
@@ -68,15 +69,15 @@ comments: true
                     <span class="lang-en">Citations</span>
                     <span class="lang-ko">인용 횟수</span>
                 </td>
-                <td class="text-right font-weight-bold py-1">94</td>
+                <td class="text-right font-weight-bold py-1">{{ s_data.citations }}</td>
             </tr>
             <tr>
                 <td class="text-dark py-1">h-index</td>
-                <td class="text-right font-weight-bold py-1">5</td>
+                <td class="text-right font-weight-bold py-1">{{ s_data.h_index }}</td>
             </tr>
             <tr>
                 <td class="text-dark py-1">i10-index</td>
-                <td class="text-right font-weight-bold py-1">4</td>
+                <td class="text-right font-weight-bold py-1">{{ s_data.i10_index }}</td>
             </tr>
         </tbody>
     </table>
@@ -86,31 +87,26 @@ comments: true
             <span class="lang-en">Citations per year</span>
             <span class="lang-ko">연도별 인용 횟수</span>
         </div>
-        <div class="scholar-graph d-flex align-items-end justify-content-between px-1" style="height: 220px; border-bottom: 1px solid #ddd; padding-bottom: 2px;">
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 5px;" data-tooltip="2021: 1 citation" title="2021: 1 citation"></div>
-                <span class="scholar-year d-block mt-1 text-muted">21</span>
-            </div>
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 18px;" data-tooltip="2022: 4 citations" title="2022: 4 citations"></div>
-                <span class="scholar-year d-block mt-1 text-muted">22</span>
-            </div>
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 160px;" data-tooltip="2023: 36 citations" title="2023: 36 citations"></div>
-                <span class="scholar-year d-block mt-1 text-muted">23</span>
-            </div>
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 80px;" data-tooltip="2024: 18 citations" title="2024: 18 citations"></div>
-                <span class="scholar-year d-block mt-1 text-muted">24</span>
-            </div>
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 110px;" data-tooltip="2025: 25 citations" title="2025: 25 citations"></div>
-                <span class="scholar-year d-block mt-1 text-muted">25</span>
-            </div>
-            <div class="scholar-bar-wrapper text-center" style="width: 13%;">
-                <div class="scholar-bar" style="height: 45px;" data-tooltip="2026: 10 citations" title="2026: 10 citations"></div>
-                <span class="scholar-year d-block mt-1 text-muted">26</span>
-            </div>
+        
+        {% assign max_cites = 1 %}
+        {% for item in s_data.graph %}
+            {% if item.citations > max_cites %}
+                {% assign max_cites = item.citations %}
+            {% endif %}
+        {% endfor %}
+        
+        <div class="scholar-graph px-1">
+            {% for item in s_data.graph %}
+                {% assign bar_height = item.citations | times: 160 | divided_by: max_cites %}
+                {% if bar_height < 5 %}{% assign bar_height = 5 %}{% endif %}
+                <div class="scholar-bar-wrapper">
+                    <span class="scholar-value">{{ item.citations }}</span>
+                    <div class="scholar-bar" style="height: {{ bar_height }}px;" 
+                         data-tooltip="{{ item.full_year }}: {{ item.citations }} citations" 
+                         title="{{ item.full_year }}: {{ item.citations }} citations"></div>
+                    <span class="scholar-year">{{ item.year }}</span>
+                </div>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -127,10 +123,15 @@ comments: true
         <span class="lang-ko">방문자 분포 지도</span>
     </h6>
     <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-        <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff&w=a"></script>
+        <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
+            <img src="https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k&cl=ffffff" 
+                 alt="Visitor Map" 
+                 style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
+                 onerror="this.onerror=null; this.src='https://www.clustrmaps.com/map_v2.png?d=2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k';" />
+        </a>
     </div>
     <div class="mt-3">
-        <img src="https://komarev.com/ghpvc/?username=KyungMinJin&color=4a777a&style=flat-square&label=Total+Visits" alt="Total Visits" style="border-radius: 4px;"/>
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fkyungminjin.github.io&count_bg=%234A777A&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=Total+Visits&edge_flat=true" alt="Total Visits" style="border-radius: 4px;"/>
     </div>
 </div>
 

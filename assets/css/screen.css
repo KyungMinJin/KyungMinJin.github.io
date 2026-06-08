@@ -1492,18 +1492,68 @@ details pre {
 }
 
 /* Scholar Bar Graph Styles */
+.scholar-graph {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    height: 220px;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 5px;
+    position: relative;
+    background-image: linear-gradient(to bottom, #f8f9fa 1px, transparent 1px);
+    background-size: 100% 40px;
+}
+
+.scholar-bar-wrapper {
+    width: 14%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    z-index: 2;
+}
+
+.scholar-value {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #4a777a;
+    margin-bottom: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
 .scholar-bar {
-    width: 70%;
+    width: 80%;
     margin: 0 auto;
     background: linear-gradient(to top, #4a777a, #68999c);
-    border-radius: 3px 3px 0 0;
-    transition: all 0.2s ease-in-out;
+    border-radius: 4px 4px 0 0;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(74, 119, 122, 0.1);
 }
+
 .scholar-bar:hover {
     background: linear-gradient(to top, #3b5f62, #4a777a);
-    box-shadow: 0 0 8px rgba(74, 119, 122, 0.4);
+    box-shadow: 0 4px 12px rgba(74, 119, 122, 0.4);
+    transform: scale(1.05) translateY(-2px);
+}
+
+.scholar-bar-wrapper:hover .scholar-value {
+    color: #3b5f62;
     transform: translateY(-2px);
+}
+
+.scholar-bar:hover + .scholar-year {
+    color: #2b2b2b !important;
+    font-weight: 600;
+}
+
+.scholar-year {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: #868e96;
+    margin-top: 6px;
+    transition: color 0.2s ease-in-out;
 }
 
 /* Site-wide Multilingual Toggle Rules */
