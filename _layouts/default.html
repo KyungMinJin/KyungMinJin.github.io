@@ -9,6 +9,11 @@
           savedLang = userLang.startsWith("ko") ? "ko" : "en";
         }
         document.documentElement.className += " lang-mode-" + savedLang;
+
+        var savedTheme = localStorage.getItem("pref-theme");
+        if (savedTheme === "dark") {
+          document.documentElement.classList.add("dark-mode");
+        }
       })();
     </script>
     <meta charset="utf-8" />
@@ -75,6 +80,11 @@
   {% endif %} {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{%
   endif %}{% endcapture %}
   <body class="{{layout}}">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+      <div id="readingProgress" class="reading-progress-bar"></div>
+    </div>
+
     <!-- defer loading of font and font awesome -->
     <noscript id="deferred-styles">
       <link
@@ -148,6 +158,12 @@
                 <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('en'); return false;">English</a>
                 <a class="dropdown-item font-weight-bold" href="#" onclick="changeLanguage('ko'); return false;">한국어</a>
               </div>
+            </li>
+
+            <li class="nav-item d-flex align-items-center">
+              <button class="btn nav-link dark-mode-toggle-btn border-0 bg-transparent px-2" id="darkModeToggle" onclick="toggleDarkMode()" style="cursor: pointer;" title="Toggle Theme">
+                <i class="fa fa-moon-o" id="darkModeIcon" style="font-size: 1.15rem;"></i>
+              </button>
             </li>
 
             {% include search-lunr.html %}
@@ -314,6 +330,81 @@
         }
         changeLanguage(savedLang);
       });
+    </script>
+
+    <!-- Zoom Lightbox Modal -->
+    <div id="imageZoomModal" class="image-zoom-modal" onclick="closeZoomModal()">
+      <span class="close-zoom-modal" onclick="closeZoomModal()">&times;</span>
+      <img class="image-zoom-content" id="zoomedImage" alt="Zoomed View">
+      <div id="zoomCaption" class="image-zoom-caption"></div>
+    </div>
+
+    <script>
+      // Reading Progress Bar Script
+      window.addEventListener('scroll', function() {
+          const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+          const progressBar = document.getElementById('readingProgress');
+          if (progressBar) {
+              progressBar.style.width = scrolled + '%';
+          }
+      });
+
+      // Dark Mode Script
+      function updateThemeUI(isDark) {
+          const icon = document.getElementById("darkModeIcon");
+          if (icon) {
+              if (isDark) {
+                  icon.classList.remove("fa-moon-o");
+                  icon.classList.add("fa-sun-o");
+              } else {
+                  icon.classList.remove("fa-sun-o");
+                  icon.classList.add("fa-moon-o");
+              }
+          }
+      }
+
+      function toggleDarkMode() {
+          const isDark = document.documentElement.classList.toggle("dark-mode");
+          localStorage.setItem("pref-theme", isDark ? "dark" : "light");
+          updateThemeUI(isDark);
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+          const isDark = document.documentElement.classList.contains("dark-mode");
+          updateThemeUI(isDark);
+          
+          // Image Zoom Handler
+          document.body.addEventListener("click", function(e) {
+              if (e.target.classList.contains("publication-demo-img") || e.target.classList.contains("clickable-image")) {
+                  openZoomModal(e.target.src, e.target.alt || e.target.title);
+              }
+          });
+      });
+
+      function openZoomModal(imgSrc, altText) {
+          const modal = document.getElementById("imageZoomModal");
+          const modalImg = document.getElementById("zoomedImage");
+          const captionText = document.getElementById("zoomCaption");
+          
+          modal.style.display = "block";
+          setTimeout(() => {
+              modal.classList.add("show");
+          }, 10);
+          modalImg.src = imgSrc;
+          captionText.innerHTML = altText;
+      }
+
+      function closeZoomModal() {
+          const modal = document.getElementById("imageZoomModal");
+          if (modal) {
+              modal.classList.remove("show");
+              setTimeout(() => {
+                  modal.style.display = "none";
+              }, 300);
+          }
+      }
     </script>
   </body>
 </html>

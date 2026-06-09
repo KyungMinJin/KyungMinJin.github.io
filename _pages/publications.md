@@ -72,7 +72,7 @@ comments: true
             <p class="venue mb-2">
                 <em>Neural Networks</em>, Volume 169, Pages 282-292, 2024.
             </p>
-            <div class="links">
+            <div class="links mb-3">
                 <a class="btn btn-sm btn-outline-primary mr-2" href="https://doi.org/10.1016/j.neunet.2023.10.038" target="_blank"><i class="fa fa-external-link"></i> ScienceDirect</a>
                 <details class="d-inline">
                     <summary class="btn btn-sm btn-outline-secondary"><i class="fa fa-code"></i> BibTeX</summary>
@@ -88,6 +88,10 @@ comments: true
 }</code></pre>
                 </details>
             </div>
+            <!-- Visual Demo -->
+            <div class="publication-demo mb-3">
+                <img src="/assets/images/HANet.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Masked Kinematic Continuity-aware Hierarchical Attention Network Architecture Diagram" style="cursor: zoom-in; max-height: 250px; object-fit: contain;">
+            </div>
         </div>
 
         <!-- Publication 4 -->
@@ -101,7 +105,7 @@ comments: true
             <p class="venue mb-2">
                 <em>Pattern Recognition</em>, Volume 145, Article 109908, 2024.
             </p>
-            <div class="links">
+            <div class="links mb-3">
                 <a class="btn btn-sm btn-outline-primary mr-2" href="https://doi.org/10.1016/j.patcog.2023.109908" target="_blank"><i class="fa fa-external-link"></i> ScienceDirect</a>
                 <details class="d-inline">
                     <summary class="btn btn-sm btn-outline-secondary"><i class="fa fa-code"></i> BibTeX</summary>
@@ -117,6 +121,10 @@ comments: true
 }</code></pre>
                 </details>
             </div>
+            <!-- Visual Demo -->
+            <div class="publication-demo mb-3">
+                <img src="/assets/images/pw3d_smpl.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="MHCanonNet: Self-supervised 3D Human Pose Estimation Demo (PW3D dataset)" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
+            </div>
         </div>
 
         <!-- Publication 5 -->
@@ -130,7 +138,7 @@ comments: true
             <p class="venue mb-2">
                 <em>arXiv preprint arXiv:2310.12189</em>, 2023.
             </p>
-            <div class="links">
+            <div class="links mb-3">
                 <a class="btn btn-sm btn-outline-primary mr-2" href="https://arxiv.org/abs/2310.12189" target="_blank"><i class="fa fa-file-pdf-o"></i> arXiv</a>
                 <details class="d-inline">
                     <summary class="btn btn-sm btn-outline-secondary"><i class="fa fa-code"></i> BibTeX</summary>
@@ -143,6 +151,10 @@ comments: true
   primaryClass={cs.CV}
 }</code></pre>
                 </details>
+            </div>
+            <!-- Visual Demo -->
+            <div class="publication-demo mb-3">
+                <img src="/assets/images/aist_smpl.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="Mesh Represented Recycle Learning: 3D Hand Pose and Mesh Estimation Demo" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
             </div>
         </div>
 
@@ -157,7 +169,7 @@ comments: true
             <p class="venue mb-2">
                 <em>Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em>, pages 5725-5734, 2023.
             </p>
-            <div class="links">
+            <div class="links mb-3">
                 <a class="btn btn-sm btn-outline-primary mr-2" href="https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html" target="_blank"><i class="fa fa-external-link"></i> CVF Open Access</a>
                 <details class="d-inline">
                     <summary class="btn btn-sm btn-outline-secondary"><i class="fa fa-code"></i> BibTeX</summary>
@@ -169,6 +181,15 @@ comments: true
   year={2023}
 }</code></pre>
                 </details>
+            </div>
+            <!-- Visual Demo -->
+            <div class="row publication-demo mb-3">
+                <div class="col-md-6 mb-2">
+                    <img src="/assets/images/aist_3D.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 3D Human Pose Estimation Demo (AIST Dataset)" style="cursor: zoom-in; max-height: 200px; object-fit: contain; width: 100%;">
+                </div>
+                <div class="col-md-6 mb-2">
+                    <img src="/assets/images/jhmdb.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 2D Human Pose Estimation Demo (JHMDB Dataset)" style="cursor: zoom-in; max-height: 200px; object-fit: contain; width: 100%;">
+                </div>
             </div>
         </div>
 
