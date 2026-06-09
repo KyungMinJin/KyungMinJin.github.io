@@ -9,10 +9,6 @@ License: https://www.wowthemes.net/freebies-license/
   } /* Increase the font size on higher resolutions */
   .container {
     max-width: 80%;
-  }
-}
-.mainheading {
-  padding: 1rem 0rem;
 }
 
 a {
@@ -1905,3 +1901,33 @@ html.dark-mode [class*="card"] {
     border-color: #2d2d2d !important;
 }
 
+/* Dark mode: link-dark, share icons, meta text, tags, rating */
+html.dark-mode .link-dark {
+    color: #cccccc !important;
+}
+html.dark-mode .share,
+html.dark-mode .share a {
+    color: #999999 !important;
+    fill: #999999 !important;
+}
+html.dark-mode .share ul li i.fa {
+    border-color: #444 !important;
+    color: #999999 !important;
+}
+html.dark-mode span.post-date,
+html.dark-mode span.post-read,
+html.dark-mode span.post-read-more a,
+html.dark-mode span.author-meta {
+    color: #999999 !important;
+}
+html.dark-mode ul.tags li a {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #cccccc !important;
+}
+html.dark-mode ul.tags li a:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    color: #ffffff !important;
+}
+html.dark-mode .rating-holder {
+    background-color: #1e1e1e !important;
+}
