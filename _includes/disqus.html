@@ -14,8 +14,6 @@
 </section> -->
 <script>
   function loadUtterances(theme) {
-    var existing = document.querySelector('.utterances');
-    if (existing) existing.remove();
     var script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', 'KyungMinJin/KyungMinJin.github.io');
@@ -25,6 +23,14 @@
     script.async = true;
     document.body.appendChild(script);
   }
+
+  function setUtterancesTheme(theme) {
+    var iframe = document.querySelector('.utterances iframe');
+    if (iframe) {
+      iframe.contentWindow.postMessage({type: 'set-theme', theme: theme}, 'https://utteranc.es');
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", function() {
     var isDark = document.documentElement.classList.contains("dark-mode");
     loadUtterances(isDark ? 'github-dark' : 'github-light');

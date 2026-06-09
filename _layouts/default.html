@@ -381,9 +381,9 @@
                   sun.style.display = "none";
               }
           }
-          // Reload utterances with correct theme
-          if (typeof loadUtterances === 'function') {
-              loadUtterances(isDark ? 'github-dark' : 'github-light');
+          // Sync utterances theme without reloading
+          if (typeof setUtterancesTheme === 'function') {
+              setUtterancesTheme(isDark ? 'github-dark' : 'github-light');
           }
       }
 
