@@ -57,10 +57,11 @@ adsense: "disabled"
 adsense-data-ad-client: "ca-pub-3412143450191416"
 adsense-data-ad-slot: "1363087678"
 
-# Visitor Map Configuration (uses Flag Counter Map proxied via wsrv.nl to prevent adblock/DNS blocks)
+# Visitor Map Configuration (uses MapMyVisitors Globe or Flag Counter Map)
 visitor_map:
   enabled: true
-  id: "xWZw"
+  provider: "mapmyvisitors" # Options: "mapmyvisitors", "flagcounter"
+  id: "liwY43ZMUgrOG8R0xFeFO43BglFWuDNQxTLilLlDmg8"
   link_url: "https://info.flagcounter.com/xWZw"
   image_url: "https://s01.flagcounter.com/map/xWZw/size_m/txt_000000/border_CCCCCC/pageviews_0/viewers_0/flags_0/"
 
