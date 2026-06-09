@@ -29,7 +29,44 @@ post_class: post-template
                         <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
                         {% else %}
                         <img class="author-thumb" src="/assets/images/gravatar.png" alt="{{ author.display_name }}">
-                        {% endif %}
+{% endif %}
+
+<!-- Schema.org BlogPosting Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.excerpt | default: page.description | strip_html | escape }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author.display_name | default: site.name }}"
+  },
+  "datePublished": "{{ page.date | date: "%Y-%m-%d" }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date: "%Y-%m-%d" }}",
+  "url": "{{ site.url }}{{ site.baseurl }}{{ page.url }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Kyung-Min Jin",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ site.url }}{{ site.baseurl }}/assets/images/logo.png"
+    }
+  }
+  {% if page.image %},
+  "image": {
+    "@type": "ImageObject",
+    "url": "{% if page.image contains '://' %}{{ page.image }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ page.image }}{% endif %}",
+    "width": 1200,
+    "height": 630
+  }
+  {% endif %}
+}
+</script>
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
                         <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
@@ -51,13 +88,29 @@ post_class: post-template
 
             <!-- Post Featured Image -->
             {% if page.image %}
-
-            {% if site.lazyimages == "enabled" %}
-            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
-            {% else %}
-            <img class="featured-image img-fluid" src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" alt="{{ page.title }}">
-            {% endif %}
-
+            <div class="featured-image-wrapper mb-4" style="position: relative; overflow: hidden; border-radius: 6px;">
+                <img 
+                    class="featured-image img-fluid blur-up" 
+                    src="{{ site.baseurl }}/assets/images/placeholder-blur.jpg" 
+                    data-src="{% if page.image contains "://" %}{{ page.image }}{% else %}{{ site.baseurl }}/{{ page.image }}{% endif %}" 
+                    alt="{{ page.title }}"
+                    style="width: 100%; transition: filter 0.4s ease, opacity 0.4s ease;"
+                >
+            </div>
+            <script>
+                (function() {
+                    var img = document.querySelector('.featured-image.blur-up');
+                    if (img) {
+                        var fullSrc = img.getAttribute('data-src');
+                        var tempImg = new Image();
+                        tempImg.onload = function() {
+                            img.src = fullSrc;
+                            img.classList.add('loaded');
+                        };
+                        tempImg.src = fullSrc;
+                    }
+                })();
+            </script>
             {% endif %}
             <!-- End Featured Image -->
 
@@ -119,6 +172,47 @@ post_class: post-template
                 </ul>
             </div>
             <!-- End Tags -->
+
+            <!-- Related Posts -->
+            {% assign related_posts = site.posts | where_exp: "post", "post.url != page.url" %}
+            {% assign max_related = 3 %}
+            {% assign related_count = 0 %}
+            
+            {% capture related_list %}
+              {% for post in related_posts %}
+                {% assign has_common = false %}
+                {% for tag in page.tags %}
+                  {% if post.tags contains tag %}
+                    {% assign has_common = true %}
+                  {% endif %}
+                {% endfor %}
+                {% for cat in page.categories %}
+                  {% if post.categories contains cat %}
+                    {% assign has_common = true %}
+                  {% endif %}
+                {% endfor %}
+                {% if has_common and related_count < max_related %}
+                  {% assign related_count = related_count | plus: 1 %}
+                  <a href="{{ site.baseurl }}{{ post.url }}" class="list-group-item list-group-item-action bg-transparent border-0 px-0 py-2" style="border-bottom: 1px solid #f0f0f0 !important;">
+                    <div class="d-flex w-100 justify-content-between align-items-center">
+                      <h6 class="mb-1 font-weight-bold text-dark" style="font-size: 0.9rem;">{{ post.title }}</h6>
+                      <small class="text-muted" style="font-size: 0.72rem; white-space: nowrap;">{{ post.date | date: "%b %Y" }}</small>
+                    </div>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            {% endcapture %}
+            
+            {% if related_count > 0 %}
+            <div class="related-posts mb-4">
+                <h5 class="font-weight-bold mb-3" style="font-size: 0.95rem; color: #666;">
+                    <i class="fa fa-thumbs-up text-primary mr-2"></i> Related Posts
+                </h5>
+                <div class="list-group">
+                    {{ related_list }}
+                </div>
+            </div>
+            {% endif %}
 
             <!-- Prev/Next -->
             <div class="row PageNavigation mt-5" style="border-top: 1px solid #eee; padding-top: 20px;">
