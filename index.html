@@ -863,62 +863,7 @@ title: Home
             </span>
         </div>
 
-        <!-- Call for Collaboration (Contact CTA) -->
-        <div class="lang-en">
-            <div class="card collab-card border-0 p-4 rounded shadow-sm">
-                <h4 class="font-weight-bold text-dark mb-2"><i class="fa fa-comments text-info"></i> Call for
-                    Collaboration</h4>
-                <p class="text-muted mb-4" style="line-height: 1.7; font-size: 0.95rem;">
-                    I am highly open to research collaborations, joint paper submissions, and discussions on
-                    <strong>Multimodal Large Language Models (VLMs)</strong>, <strong>Embodied AI / Robotics RAG-ROS2 QA systems</strong>, and <strong>RL policy optimization (GRPO/DPO)</strong>. If you are
-                    interested in working together, please contact me through my social channels!
-                </p>
-                <div class="d-flex flex-wrap">
-                    <button id="copyEmailBtn" class="btn btn-premium-teal mr-3 mb-2" onclick="copyEmailToClipboard()">
-                        <i class="fa fa-envelope mr-1"></i> <span id="copyBtnText">Copy Email</span>
-                    </button>
-                    <a target="_blank"
-                        href="https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%E2%80%8D%EC%A7%84-34594b1b7/"
-                        class="btn btn-premium-linkedin mr-3 mb-2">
-                        <i class="fa fa-linkedin mr-1"></i> LinkedIn DM
-                    </a>
-                    <a href="/contact" class="btn btn-premium-outline mb-2">
-                        <i class="fa fa-paper-plane mr-1"></i> Contact Form
-                    </a>
-                </div>
-                <!-- Alert message hidden by default -->
-                <div id="copyAlert" class="copy-alert-toast" style="display: none;">
-                    Email address copied to clipboard!
-                </div>
-            </div>
-        </div>
-        <div class="lang-ko">
-            <div class="card collab-card border-0 p-4 rounded shadow-sm">
-                <h4 class="font-weight-bold text-dark mb-2"><i class="fa fa-comments text-info"></i> 공동 연구 및 협업 제안</h4>
-                <p class="text-muted mb-4" style="line-height: 1.7; font-size: 0.95rem;">
-                    멀티모달 거대 모델(VLM), Embodied AI 및 로봇공학 RAG-ROS2 QA 시스템, 그리고 강화학습 기반 정책 최적화(GRPO/DPO) 분야의 연구 협업, 공동
-                    논문 투고
-                    및 교류를 적극 환영합니다. 함께 프로젝트를 논의하고 싶으시다면 언제든지 이메일이나 소셜 미디어로 편하게 연락 부탁드립니다!
-                </p>
-                <div class="d-flex flex-wrap">
-                    <button id="copyEmailBtn" class="btn btn-premium-teal mr-3 mb-2" onclick="copyEmailToClipboard()">
-                        <i class="fa fa-envelope mr-1"></i> <span id="copyBtnText">이메일 주소 복사</span>
-                    </button>
-                    <a target="_blank"
-                        href="https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%E2%80%8D%EC%A7%84-34594b1b7/"
-                        class="btn btn-premium-linkedin mr-3 mb-2">
-                        <i class="fa fa-linkedin mr-1"></i> LinkedIn DM 보내기
-                    </a>
-                    <a href="/contact" class="btn btn-premium-outline mb-2">
-                        <i class="fa fa-paper-plane mr-1"></i> 문의 폼 (Contact)
-                    </a>
-                </div>
-                <!-- Alert message hidden by default -->
-                <div id="copyAlert" class="copy-alert-toast" style="display: none;">
-                    이메일 주소가 클립보드에 복사되었습니다!
-                </div>
-            </div>
-        </div>
+
     </div> <!-- Left Column 끝 -->
 
     <!-- Right Column (Sidebar) -->
@@ -1135,26 +1080,5 @@ title: Home
         initCategoryFilter();
     }
 
-    // Email Copy to Clipboard Script
-    function copyEmailToClipboard() {
-        const email = "km.jin0507@gmail.com";
-        navigator.clipboard.writeText(email).then(() => {
-            const btnText = document.getElementById("copyBtnText");
-            const origText = btnText.innerHTML;
-            btnText.innerHTML = "Copied!";
 
-            const toast = document.getElementById("copyAlert");
-            toast.style.display = "block";
-
-            setTimeout(() => {
-                btnText.innerHTML = origText;
-            }, 1500);
-
-            setTimeout(() => {
-                toast.style.display = "none";
-            }, 2500);
-        }).catch(err => {
-            console.error("Failed to copy text: ", err);
-        });
-    }
 </script>
