@@ -36,7 +36,7 @@ comments: true
                 </details>
             </div>
             <div class="publication-demo mt-3 mb-3">
-                <img src="https://arxiv.org/html/2602.11596v1/figures/intro_manifolds.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="MAPLE: Modality-aware multimodal post-training concept figure" style="cursor: zoom-in; max-height: 240px; object-fit: contain;">
+                    <img src="https://arxiv.org/html/2602.11596v1/figures/intro_manifolds.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="MAPLE: Modality-aware multimodal post-training concept figure" style="cursor: zoom-in;">
             </div>
         </div>
 
@@ -61,6 +61,9 @@ comments: true
   year={2026}
 }</code></pre>
                 </details>
+            </div>
+            <div class="publication-demo mt-3 mb-3">
+                <img src="/assets/images/publications/action_aware_wacv2023_page1.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Calibrated Attention Masking Network: temporal action localization overview" style="cursor: zoom-in;">
             </div>
         </div>
 
@@ -93,7 +96,7 @@ comments: true
             </div>
             <!-- Visual Demo -->
             <div class="publication-demo mb-3">
-                <img src="/assets/images/HANet.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Masked Kinematic Continuity-aware Hierarchical Attention Network Architecture Diagram" style="cursor: zoom-in; max-height: 250px; object-fit: contain;">
+                <img src="/assets/images/HANet.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Masked Kinematic Continuity-aware Hierarchical Attention Network Architecture Diagram" style="cursor: zoom-in;">
             </div>
         </div>
 
@@ -126,7 +129,7 @@ comments: true
             </div>
             <!-- Visual Demo -->
             <div class="publication-demo mb-3">
-                <img src="/assets/images/pw3d_smpl.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="MHCanonNet: Self-supervised 3D Human Pose Estimation Demo (PW3D dataset)" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
+                <img src="/assets/images/publications/mhcanonnet_patternrecog_gr1.jpg" class="img-fluid rounded publication-demo-img shadow-sm" alt="MHCanonNet: Multi-hypothesis canonical lifting network overview" style="cursor: zoom-in;">
             </div>
         </div>
 
@@ -157,7 +160,7 @@ comments: true
             </div>
             <!-- Visual Demo -->
             <div class="publication-demo mb-3">
-                <img src="https://arxiv.org/html/2310.12189v1/extracted/5180259/images/recyclenet.jpg" class="img-fluid rounded publication-demo-img shadow-sm" alt="Mesh Represented Recycle Learning: architecture and recycle-learning pipeline" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
+                <img src="https://arxiv.org/html/2310.12189v1/extracted/5180259/images/recyclenet.jpg" class="img-fluid rounded publication-demo-img shadow-sm" alt="Mesh Represented Recycle Learning: architecture and recycle-learning pipeline" style="cursor: zoom-in;">
             </div>
         </div>
 
@@ -188,10 +191,10 @@ comments: true
             <!-- Visual Demo -->
             <div class="row publication-demo mb-3">
                 <div class="col-md-6 mb-2">
-                    <img src="/assets/images/aist_3D.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 3D Human Pose Estimation Demo (AIST Dataset)" style="cursor: zoom-in; max-height: 200px; object-fit: contain; width: 100%;">
+                    <img src="/assets/images/aist_3D.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 3D Human Pose Estimation Demo (AIST Dataset)" style="cursor: zoom-in;">
                 </div>
                 <div class="col-md-6 mb-2">
-                    <img src="/assets/images/jhmdb.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 2D Human Pose Estimation Demo (JHMDB Dataset)" style="cursor: zoom-in; max-height: 200px; object-fit: contain; width: 100%;">
+                    <img src="/assets/images/jhmdb.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="HANet: 2D Human Pose Estimation Demo (JHMDB Dataset)" style="cursor: zoom-in;">
                 </div>
             </div>
         </div>
@@ -220,6 +223,9 @@ comments: true
 }</code></pre>
                 </details>
             </div>
+            <div class="publication-demo mt-3 mb-3">
+                <img src="/assets/images/publications/action_aware_wacv2023_page1.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Action-Aware Masking Network: group-based attention for temporal action localization" style="cursor: zoom-in;">
+            </div>
         </div>
 
         <!-- Publication 8 -->
@@ -247,12 +253,25 @@ comments: true
 }</code></pre>
                 </details>
             </div>
+            <div class="publication-demo mt-3 mb-3">
+                <img src="/assets/images/publications/otpose_github_main.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="OTPose: official framework overview from project repository" style="cursor: zoom-in;">
+            </div>
         </div>
 
     </div>
 </div>
 
 <style>
+.publication-demo {
+    width: 100%;
+    overflow: hidden;
+}
+.publication-demo-img {
+    width: 100%;
+    max-width: 100%;
+    height: 220px;
+    object-fit: contain;
+}
 .publication-item details pre {
   position: relative;
   padding-right: 80px !important;
