@@ -1809,5 +1809,99 @@ html.dark-mode .text-medal-dark { color: #339af0 !important; }
 html.dark-mode .text-bronze-dark { color: #f783ac !important; }
 html.dark-mode .text-blue-dark { color: #51cf66 !important; }
 
+/* Dark mode: article-post headings and paragraphs override Bootstrap defaults */
+html.dark-mode .article-post h1,
+html.dark-mode .article-post h2,
+html.dark-mode .article-post h3,
+html.dark-mode .article-post h4,
+html.dark-mode .article-post h5,
+html.dark-mode .article-post h6 {
+    color: #f0f0f0 !important;
+}
+html.dark-mode .article-post p,
+html.dark-mode .article-post blockquote,
+html.dark-mode .article-post li {
+    color: #e0e0e0 !important;
+}
+html.dark-mode .article-post {
+    color: #e0e0e0 !important;
+}
 
+/* Dark mode: code blocks (pre, code, .highlight) */
+html.dark-mode pre,
+html.dark-mode code,
+html.dark-mode .highlight {
+    background-color: #1e1e1e !important;
+    color: #e0e0e0 !important;
+    border-color: #333 !important;
+}
+html.dark-mode pre {
+    border: 1px solid #333 !important;
+}
+html.dark-mode .highlight .c,
+html.dark-mode .highlight .cm,
+html.dark-mode .highlight .c1,
+html.dark-mode .highlight .cs { color: #7f9f7f !important; }
+html.dark-mode .highlight .k,
+html.dark-mode .highlight .kc,
+html.dark-mode .highlight .kd,
+html.dark-mode .highlight .kp,
+html.dark-mode .highlight .kr,
+html.dark-mode .highlight .kt { color: #cc7832 !important; }
+html.dark-mode .highlight .s,
+html.dark-mode .highlight .sb,
+html.dark-mode .highlight .sc,
+html.dark-mode .highlight .sd,
+html.dark-mode .highlight .s2,
+html.dark-mode .highlight .se,
+html.dark-mode .highlight .sh,
+html.dark-mode .highlight .si,
+html.dark-mode .highlight .sx,
+html.dark-mode .highlight .s1 { color: #6a8759 !important; }
+html.dark-mode .highlight .m,
+html.dark-mode .highlight .mf,
+html.dark-mode .highlight .mh,
+html.dark-mode .highlight .mi,
+html.dark-mode .highlight .mo,
+html.dark-mode .highlight .il { color: #6897bb !important; }
+html.dark-mode .highlight .na,
+html.dark-mode .highlight .nb,
+html.dark-mode .highlight .nc,
+html.dark-mode .highlight .no,
+html.dark-mode .highlight .ni,
+html.dark-mode .highlight .ne,
+html.dark-mode .highlight .nf,
+html.dark-mode .highlight .nn,
+html.dark-mode .highlight .nt,
+html.dark-mode .highlight .nv,
+html.dark-mode .highlight .vc,
+html.dark-mode .highlight .vg,
+html.dark-mode .highlight .vi { color: #ffc66d !important; }
+html.dark-mode .highlight .err { background-color: #4e1d1d !important; }
+html.dark-mode .highlight .gd { background-color: #4e1d1d !important; }
+html.dark-mode .highlight .gi { background-color: #1d4e1d !important; }
+
+/* Dark mode: GitHub contribution chart widget */
+html.dark-mode .github-chart-img,
+html.dark-mode img[src*="ghchart.rshah.org"] {
+    filter: invert(0.88) hue-rotate(180deg) contrast(1.1);
+    border-radius: 4px;
+}
+
+/* Dark mode: visitor distribution map */
+html.dark-mode .visitor-map-container,
+html.dark-mode .visitor-map-container img,
+html.dark-mode .visitor-map-container script {
+    filter: invert(0.88) hue-rotate(180deg) contrast(0.9);
+}
+/* 방문자 배지도 다크모드 대응 */
+html.dark-mode img[src*="visitor-badge.laobi.icu"] {
+    filter: invert(0.88) hue-rotate(180deg);
+}
+
+/* Dark mode: card border override (includes inline style borders) */
+html.dark-mode .card,
+html.dark-mode [class*="card"] {
+    border-color: #2d2d2d !important;
+}
 
