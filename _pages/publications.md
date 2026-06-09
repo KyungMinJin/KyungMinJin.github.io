@@ -35,6 +35,9 @@ comments: true
 }</code></pre>
                 </details>
             </div>
+            <div class="publication-demo mt-3 mb-3">
+                <img src="https://arxiv.org/html/2602.11596v1/figures/intro_manifolds.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="MAPLE: Modality-aware multimodal post-training concept figure" style="cursor: zoom-in; max-height: 240px; object-fit: contain;">
+            </div>
         </div>
 
         <!-- Publication 2 -->
@@ -154,7 +157,7 @@ comments: true
             </div>
             <!-- Visual Demo -->
             <div class="publication-demo mb-3">
-                <img src="/assets/images/aist_smpl.gif" class="img-fluid rounded publication-demo-img shadow-sm" alt="Mesh Represented Recycle Learning: 3D Hand Pose and Mesh Estimation Demo" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
+                <img src="https://arxiv.org/html/2310.12189v1/extracted/5180259/images/recyclenet.jpg" class="img-fluid rounded publication-demo-img shadow-sm" alt="Mesh Represented Recycle Learning: architecture and recycle-learning pipeline" style="cursor: zoom-in; max-height: 220px; object-fit: contain;">
             </div>
         </div>
 
