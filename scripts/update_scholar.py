@@ -13,29 +13,34 @@ headers = {
 }
 
 def get_free_proxies():
-    try:
-        req = urllib.request.Request("https://www.sslproxies.org/", headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as response:
-            soup = BeautifulSoup(response.read(), 'html.parser')
-            table = soup.find('table', id='proxylisttable') or soup.find('table')
-            if not table:
-                return []
-            proxies = []
-            tbody = table.find('tbody')
-            target_container = tbody if tbody else table
-            for row in target_container.find_all('tr'):
-                cols = row.find_all('td')
-                if len(cols) >= 2:
-                    ip = cols[0].text.strip()
-                    port = cols[1].text.strip()
-                    if re.match(r'^\d+\.\d+\.\d+\.\d+$', ip) and port.isdigit():
-                        proxies.append(f"{ip}:{port}")
-            return proxies
-    except Exception as e:
-        print(f"Failed to fetch proxy list: {e}", file=sys.stderr)
-        return []
+    urls = [
+        "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+        "https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt"
+    ]
+    proxies = []
+    for url in urls:
+        try:
+            print(f"Fetching proxy list from {url}...")
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=10) as response:
+                content = response.read().decode('utf-8')
+                for line in content.splitlines():
+                    line = line.strip()
+                    if line and re.match(r'^\d+\.\d+\.\d+\.\d+:\d+$', line):
+                        proxies.append(line)
+        except Exception as e:
+            print(f"Failed to fetch proxy list from {url}: {e}", file=sys.stderr)
+            
+    # Deduplicate while preserving order
+    seen = set()
+    deduped = []
+    for p in proxies:
+        if p not in seen:
+            seen.add(p)
+            deduped.append(p)
+    return deduped
 
-def fetch_profile_with_proxy(url, proxy, timeout=10):
+def fetch_profile_with_proxy(url, proxy, timeout=5):
     proxy_handler = urllib.request.ProxyHandler({'http': proxy, 'https': proxy})
     opener = urllib.request.build_opener(proxy_handler)
     opener.addheaders = list(headers.items())
@@ -66,7 +71,7 @@ def fetch_profile(url, max_retries=3):
                     print("Direct attempts exhausted. Falling back to free proxies...", file=sys.stderr)
 
     # Fallback to free proxies if direct failed
-    print("Fetching free proxy list from sslproxies.org...")
+    print("Fetching free proxy list from GitHub sources...")
     proxies = get_free_proxies()
     if not proxies:
         raise Exception("Failed to retrieve any free proxies for fallback.")
@@ -74,11 +79,12 @@ def fetch_profile(url, max_retries=3):
     print(f"Found {len(proxies)} public proxies. Trying to fetch Google Scholar profile...")
     
     tried_count = 0
-    for proxy in proxies[:15]:
+    # Try the first 25 proxies (increased to give more chance of success, but with 5s timeout each)
+    for proxy in proxies[:25]:
         tried_count += 1
         try:
-            print(f"Scraper attempt via proxy {proxy} ({tried_count}/15)...")
-            return fetch_profile_with_proxy(url, proxy)
+            print(f"Scraper attempt via proxy {proxy} ({tried_count}/25)...")
+            return fetch_profile_with_proxy(url, proxy, timeout=5)
         except Exception as e:
             print(f"Proxy {proxy} failed: {e}", file=sys.stderr)
             continue

@@ -990,10 +990,11 @@ title: Home
                             {% for item in s_data.graph %}
                             {% comment %} Scale height relative to 160px maximum {% endcomment %}
                             {% assign bar_height = item.citations | times: 160 | divided_by: max_cites %}
-                            {% if item.citations > 0 and bar_height < 5 %} {% assign bar_height=5 %} {% endif %} <div
-                                class="scholar-bar-wrapper">
+                            {% if item.citations > 0 and bar_height < 5 %} {% assign bar_height=5 %} {% endif %}
+                            {% capture style_attr %}style="height: {{ bar_height }}px;"{% endcapture %}
+                            <div class="scholar-bar-wrapper">
                                 <span class="scholar-value">{{ item.citations }}</span>
-                                <div class="scholar-bar" style="height: {{ bar_height }}px;"
+                                <div class="scholar-bar" {{ style_attr }}
                                     data-tooltip="{{ item.full_year }}: {{ item.citations }} citations"
                                     title="{{ item.full_year }}: {{ item.citations }} citations"></div>
                                 <span class="scholar-year">
@@ -1025,14 +1026,16 @@ title: Home
         </div>
 
         <!-- Visitor Map Card (Stable Image Version) -->
+        {% if site.visitor_map.enabled %}
         <div class="card border shadow-sm p-3 pt-2 pb-2 bg-white text-center">
             <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
                 <i class="fa fa-globe text-secondary"></i> Visitor Map
             </h6>
             <div class="visitor-map-container"
                 style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-                <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
-                    <img src="https://images.weserv.nl/?url=clustrmaps.com/map_v2.png%3Fd%3D2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k%26cl%3Dffffff"
+                <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" style="width: 100%;">
+                    {% assign proxied_map_url = site.visitor_map.image_url | url_encode %}
+                    <img src="https://wsrv.nl/?url={{ proxied_map_url }}"
                         alt="Visitor Map" referrerpolicy="no-referrer"
                         style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
                         onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
@@ -1043,6 +1046,7 @@ title: Home
                     alt="Total Visits" style="border-radius: 4px;" />
             </div>
         </div>
+        {% endif %}
 
     </div>
 </div> <!-- Right Column 끝 -->
