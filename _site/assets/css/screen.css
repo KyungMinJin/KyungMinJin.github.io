@@ -1610,8 +1610,7 @@ details pre {
   padding-left: 15px !important;
   /* Added left padding to balance spacing */
   padding-right: 70px !important;
-
-  /* Removed gridlines to match Scholar */
+  background: none;
   margin-top: 15px;
   margin-bottom: 35px;
   /* Add margin below graph container to prevent overlap and year text clipping */
@@ -1624,9 +1623,8 @@ details pre {
   /* Google Scholar baseline color */
   border-bottom: 2px solid #bdc1c6;
   /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
+  /* Removed gridlines to match Scholar */
   position: relative;
-  background: none;
-
 }
 
 /* Y-axis helper elements */
