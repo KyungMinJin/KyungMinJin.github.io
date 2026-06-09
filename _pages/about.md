@@ -141,14 +141,17 @@ comments: true
         <span class="lang-en">Visitor Map</span>
         <span class="lang-ko">방문자 분포 지도</span>
     </h6>
-    <div class="visitor-map-container" style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
-        <a href="https://clustrmaps.com/site/1bxe2" title="Visit tracker" target="_blank" style="width: 100%;">
-            <img src="https://images.weserv.nl/?url=clustrmaps.com/map_v2.png%3Fd%3D2c9zJ45T_lQh5Jc7f21n40x36-g6i1v7k%26cl%3Dffffff" 
-                 alt="Visitor Map" 
-                 referrerpolicy="no-referrer"
-                 style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
-                 onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
-        </a>
+    <div class="visitor-map-container"
+        style="min-height: 150px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+        {% if site.visitor_map.provider == 'mapmyvisitors' %}
+            <script type="text/javascript" id="mmvst_globe" src="//mapmyvisitors.com/globe.js?d={{ site.visitor_map.id }}"></script>
+        {% else %}
+            <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" style="width: 100%;">
+                <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
+                    style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
+                    onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
+            </a>
+        {% endif %}
     </div>
     <div class="mt-3">
         <img src="https://visitor-badge.laobi.icu/badge?page_id=kyungminjin.github.io&title=Total+Visits&color=4a777a" alt="Total Visits" style="border-radius: 4px;"/>
