@@ -51,20 +51,6 @@ comments: true
             <p class="venue mb-2">
                 <em>Under Review</em>, 2026.
             </p>
-            <div class="links">
-                <details class="d-inline">
-                    <summary class="btn btn-sm btn-outline-secondary"><i class="fa fa-code"></i> BibTeX</summary>
-                    <pre class="bg-light p-3 mt-2 rounded"><code>@article{kang2026calibrated,
-  title={Calibrated Attention Masking Network for Temporal Action Localization},
-  author={Kang, Tae-Kyung and Lee, Gun-Hee and Nam, Woo-Jeoung and Kim, Hyun-Woo and Jin, Kyung-Min and Lee, Seong-Whan},
-  journal={Under Review},
-  year={2026}
-}</code></pre>
-                </details>
-            </div>
-            <div class="publication-demo mt-3 mb-3">
-                <img src="/assets/images/publications/action_aware_wacv2023_page1.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Calibrated Attention Masking Network: temporal action localization overview" style="cursor: zoom-in;">
-            </div>
         </div>
 
         <!-- Publication 3 -->
@@ -224,7 +210,7 @@ comments: true
                 </details>
             </div>
             <div class="publication-demo mt-3 mb-3">
-                <img src="/assets/images/publications/action_aware_wacv2023_page1.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Action-Aware Masking Network: group-based attention for temporal action localization" style="cursor: zoom-in;">
+                <img src="/assets/images/publications/action_aware_wacv2023_cover.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Action-Aware Masking Network: first-page representative image from WACV 2023 paper" style="cursor: zoom-in;">
             </div>
         </div>
 
