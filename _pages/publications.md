@@ -210,7 +210,7 @@ comments: true
                 </details>
             </div>
             <div class="publication-demo mt-3 mb-3">
-                <img src="/assets/images/publications/action_aware_wacv2023_cover.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Action-Aware Masking Network: first-page representative image from WACV 2023 paper" style="cursor: zoom-in;">
+                <img src="/assets/images/publications/action_aware_wacv2023_fig2.png" class="img-fluid rounded publication-demo-img shadow-sm" alt="Action-Aware Masking Network: Figure 2 overview from WACV 2023 paper" style="cursor: zoom-in;">
             </div>
         </div>
 
