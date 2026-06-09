@@ -1497,7 +1497,6 @@ details pre {
     align-items: flex-end;
     justify-content: space-between;
     height: 180px;
-    border-bottom: 2px solid #bdc1c6; /* Google Scholar baseline color */
     padding-bottom: 0px;
     padding-left: 15px !important; /* Added left padding to balance spacing */
     padding-right: 70px !important; /* Increased right padding to prevent the 2026 column from sticking out or overlapping labels */
@@ -1515,6 +1514,10 @@ details pre {
     border-top: 1px dashed #e0e0e0;
     z-index: 1;
     pointer-events: none;
+}
+
+.scholar-y-line.scholar-baseline {
+    border-top: 2px solid #bdc1c6; /* Google Scholar solid baseline */
 }
 
 .scholar-y-label {
