@@ -2333,3 +2333,86 @@ html.dark-mode .related-posts .list-group-item {
     border-bottom-color: #2d2d2d !important;
     background: transparent !important;
 }
+
+/* ==========================================
+   Image Consistency Guidelines
+   ========================================== */
+
+/* Publication Demo Images */
+.publication-demo-img,
+.clickable-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.publication-demo-img:hover,
+.clickable-image:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  cursor: zoom-in;
+}
+
+/* Ensure consistent image sizing in publications */
+.publication-demo {
+  margin: 1.2rem 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: #f8f9fa;
+}
+
+html.dark-mode .publication-demo {
+  background: #252525;
+}
+
+/* Consistent image max-width in articles */
+.article-post img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 1.2rem auto;
+}
+
+.article-post img.shadow {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+html.dark-mode .article-post img.shadow {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Project card images */
+.project-card img,
+.research-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Mobile responsive image adjustments */
+@media (max-width: 768px) {
+  .publication-demo {
+    margin: 1rem 0;
+    padding: 6px;
+  }
+  
+  .article-post img {
+    margin: 1rem auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .publication-demo-img {
+    border-radius: 6px;
+  }
+  
+  .article-post img {
+    border-radius: 6px;
+    margin: 0.8rem auto;
+  }
+}

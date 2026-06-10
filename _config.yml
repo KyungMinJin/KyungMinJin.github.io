@@ -67,8 +67,8 @@ visitor_map:
 
 # ORCID
 orcid:
-  id: "0000-0000-0000-0000"
-  url: "https://orcid.org/0000-0000-0000-0000"
+  id: "0000-0002-0598-3216"
+  url: "https://orcid.org/my-orcid?orcid=0000-0002-0598-3216"
 
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "disabled"
