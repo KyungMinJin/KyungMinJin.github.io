@@ -43,7 +43,7 @@ comments: true
 <div class="col-md-6 mb-4">
 
 <!-- Google Scholar Metrics & Citation Graph -->
-<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white h-100">
+<div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100">
     <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
         <i class="fa fa-graduation-cap text-info"></i>
         <span class="lang-en">Google Scholar Metrics</span>
@@ -135,7 +135,7 @@ comments: true
 <div class="col-md-6 mb-4 text-center">
 
 <!-- Visitor Analytics Widget -->
-<div class="card border shadow-sm p-3 pt-2 pb-2 bg-white h-100 d-flex flex-column justify-content-between">
+<div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100 d-flex flex-column justify-content-between">
     <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
         <i class="fa fa-globe text-secondary"></i>
         <span class="lang-en">Visitor Map</span>

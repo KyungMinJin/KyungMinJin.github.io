@@ -65,6 +65,11 @@ visitor_map:
   link_url: "https://info.flagcounter.com/xWZw"
   image_url: "https://s01.flagcounter.com/map/xWZw/size_m/txt_000000/border_CCCCCC/pageviews_0/viewers_0/flags_0/"
 
+# ORCID
+orcid:
+  id: "0000-0000-0000-0000"
+  url: "https://orcid.org/0000-0000-0000-0000"
+
 # Lazy Images ("enabled" or "disabled")
 lazyimages: "disabled"
 

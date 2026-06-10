@@ -36,6 +36,12 @@ comments: false
                     <div>
                         <strong class="d-block text-dark">Academic Scholar</strong>
                         <a href="https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en&authuser=2" target="_blank" class="text-secondary">Google Scholar Profile</a>
+                        <div class="mt-2">
+                            <a href="{{ site.orcid.url | default: 'https://orcid.org/0000-0000-0000-0000' }}" target="_blank" class="orcid-badge" rel="noopener noreferrer" aria-label="ORCID profile">
+                                <img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" alt="ORCID">
+                                <span>ORCID</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

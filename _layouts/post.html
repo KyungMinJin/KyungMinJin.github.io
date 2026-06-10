@@ -15,6 +15,9 @@ post_class: post-template
             {% include share.html %}
         </div>
 
+        <!-- Floating Mini TOC (Right Sidebar) -->
+        <aside id="floatingMiniToc" class="floating-toc" aria-label="In this section"></aside>
+
         <!-- Post -->
         {% assign author = site.authors[page.author] %}
 
@@ -69,7 +72,14 @@ post_class: post-template
 </script>
                     </div>
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a><a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
+                        {% assign orcid_id = site.orcid.id | default: "0000-0000-0000-0000" %}
+                        {% assign orcid_url = site.orcid.url | default: "https://orcid.org/" | append: orcid_id %}
+                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a>
+                        <a target="_blank" class="orcid-badge" href="{{ orcid_url }}" rel="noopener noreferrer" aria-label="ORCID profile">
+                            <img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" alt="ORCID">
+                            <span>ORCID</span>
+                        </a>
+                        <a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
                         <span class="author-description">{{ author.description }}</span>
                     </div>
                 </div>

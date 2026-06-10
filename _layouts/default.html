@@ -128,6 +128,18 @@
       <div id="readingProgress" class="reading-progress-bar"></div>
     </div>
 
+    <!-- Progressive Page Loading Overlay -->
+    <div id="pageTransitionOverlay" class="page-transition-overlay is-hidden" aria-hidden="true">
+      <div class="page-transition-skeleton">
+        <div class="skeleton-line skeleton-line-title"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line skeleton-line-short"></div>
+        <div class="skeleton-block"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line skeleton-line-short"></div>
+      </div>
+    </div>
+
     <!-- defer loading of font and font awesome -->
     <noscript id="deferred-styles">
       <link
@@ -395,6 +407,117 @@
     </div>
 
     <script>
+      function showPageTransitionOverlay() {
+        const overlay = document.getElementById('pageTransitionOverlay');
+        if (!overlay) return;
+        overlay.style.display = 'flex';
+        requestAnimationFrame(() => {
+          overlay.classList.remove('is-hidden');
+        });
+      }
+
+      function hidePageTransitionOverlay() {
+        const overlay = document.getElementById('pageTransitionOverlay');
+        if (!overlay) return;
+        overlay.classList.add('is-hidden');
+        setTimeout(() => {
+          overlay.style.display = 'none';
+        }, 260);
+      }
+
+      function initFloatingMiniToc() {
+        const toc = document.getElementById('floatingMiniToc');
+        if (!toc || !document.body.classList.contains('layout-post')) return;
+
+        const headings = Array.from(document.querySelectorAll('.article-post h2, .article-post h3'))
+          .filter(h => h.textContent && h.textContent.trim().length > 0);
+
+        if (headings.length < 2) {
+          toc.style.display = 'none';
+          return;
+        }
+
+        const isKo = document.documentElement.classList.contains('lang-mode-ko');
+        toc.innerHTML = '';
+
+        const title = document.createElement('div');
+        title.className = 'floating-toc-title';
+        title.textContent = isKo ? '이 섹션에서' : 'In this section';
+
+        const list = document.createElement('ol');
+        list.className = 'floating-toc-list';
+
+        headings.forEach((heading, idx) => {
+          if (!heading.id) {
+            heading.id = 'section-' + (idx + 1);
+          }
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.href = '#' + heading.id;
+          a.textContent = heading.textContent.trim();
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        toc.appendChild(title);
+        toc.appendChild(list);
+
+        const links = Array.from(list.querySelectorAll('a'));
+        function syncActiveSection() {
+          let currentId = headings[0].id;
+          const y = window.scrollY + 180;
+          headings.forEach((heading) => {
+            if (heading.offsetTop <= y) {
+              currentId = heading.id;
+            }
+          });
+          links.forEach((link) => {
+            const isActive = link.getAttribute('href') === '#' + currentId;
+            link.classList.toggle('active', isActive);
+          });
+        }
+
+        window.addEventListener('scroll', syncActiveSection, { passive: true });
+        syncActiveSection();
+      }
+
+      function initMathCopyButtons() {
+        if (!window.MathJax || !MathJax.startup || !MathJax.startup.document) return;
+        const mathItems = MathJax.startup.document.math || [];
+
+        mathItems.forEach((item) => {
+          if (!item.display || !item.typesetRoot) return;
+          const container = item.typesetRoot.closest('mjx-container');
+          if (!container || !container.parentNode) return;
+          if (container.parentElement && container.parentElement.classList.contains('math-copy-wrap')) return;
+
+          const wrap = document.createElement('div');
+          wrap.className = 'math-copy-wrap';
+          container.parentNode.insertBefore(wrap, container);
+          wrap.appendChild(container);
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'math-copy-btn';
+          btn.setAttribute('aria-label', 'Copy LaTeX source');
+          btn.textContent = '📋';
+
+          btn.addEventListener('click', () => {
+            const latex = item.math || '';
+            navigator.clipboard.writeText(latex).then(() => {
+              btn.classList.add('copied');
+              btn.textContent = '✓';
+              setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.textContent = '📋';
+              }, 1200);
+            });
+          });
+
+          wrap.appendChild(btn);
+        });
+      }
+
       // Reading Progress Bar Script
       window.addEventListener('scroll', function() {
           const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -434,6 +557,16 @@
       document.addEventListener("DOMContentLoaded", function() {
           const isDark = document.documentElement.classList.contains("dark-mode");
           updateThemeUI(isDark);
+          hidePageTransitionOverlay();
+          initFloatingMiniToc();
+
+          if (window.MathJax && MathJax.startup && MathJax.startup.promise) {
+            MathJax.startup.promise.then(function() {
+              initMathCopyButtons();
+            });
+          } else {
+            setTimeout(initMathCopyButtons, 1200);
+          }
           
           // Image Zoom Handler
           document.body.addEventListener("click", function(e) {
@@ -441,7 +574,30 @@
                   openZoomModal(e.target.src, e.target.alt || e.target.title);
               }
           });
+
+          document.addEventListener('click', function(e) {
+            const link = e.target.closest('a[href]');
+            if (!link) return;
+            if (link.target === '_blank' || link.hasAttribute('download')) return;
+
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) return;
+
+            let destination;
+            try {
+              destination = new URL(link.href, window.location.href);
+            } catch (err) {
+              return;
+            }
+
+            if (destination.origin !== window.location.origin) return;
+            if (destination.pathname === window.location.pathname && destination.hash) return;
+
+            showPageTransitionOverlay();
+          });
       });
+
+        window.addEventListener('pageshow', hidePageTransitionOverlay);
 
       function openZoomModal(imgSrc, altText) {
           const modal = document.getElementById("imageZoomModal");
