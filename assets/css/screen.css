@@ -38,20 +38,20 @@ body {
   max-width: 100%;
   margin-left: 0 !important;
   margin-right: 0 !important;
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 
 .row {
-  margin-left: -12px !important;
-  margin-right: -12px !important;
-  width: calc(100% + 24px);
+  margin-left: -16px !important;
+  margin-right: -16px !important;
+  width: calc(100% + 32px);
   max-width: none;
 }
 
 [class*='col-'] {
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+  padding-left: 16px !important;
+  padding-right: 16px !important;
 }
 
 @media (max-width: 576px) {
@@ -61,19 +61,19 @@ body {
   .container-lg,
   .container-xl,
   .container-xxl {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
   .row {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
-    width: calc(100% + 16px);
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+    width: calc(100% + 32px);
   }
 
   [class*='col-'] {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 }
 
@@ -2504,6 +2504,40 @@ html.dark-mode .orcid-badge {
 
 html.dark-mode .orcid-badge span {
   color: #e6e6e6 !important;
+}
+
+/* Dark mode: Rating background */
+html.dark-mode .rating {
+  background-color: #1e1e1e !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 6px !important;
+  border: 1px solid #2d2d2d !important;
+}
+
+html.dark-mode .rating strong {
+  color: #e0e0e0 !important;
+}
+
+/* Dark mode: Search input styling */
+html.dark-mode .mediumnavigation .form-control {
+  background-color: #252525 !important;
+  border-color: #333 !important;
+  color: #e0e0e0 !important;
+}
+
+html.dark-mode .mediumnavigation .form-control::placeholder {
+  color: #888 !important;
+}
+
+html.dark-mode .mediumnavigation .form-control:focus {
+  background-color: #1e1e1e !important;
+  border-color: #4a777a !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(0, 171, 107, 0.15) !important;
+}
+
+html.dark-mode .mediumnavigation .search-icon {
+  color: #888 !important;
 }
 
 html.dark-mode .floating-toc {
