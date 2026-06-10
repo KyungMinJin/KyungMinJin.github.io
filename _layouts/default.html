@@ -475,9 +475,10 @@
         const links = Array.from(list.querySelectorAll('a'));
         function syncActiveSection() {
           let currentId = headings[0].id;
-          const y = window.scrollY + 180;
+          const scrollTop = window.scrollY + 180;
           headings.forEach((heading) => {
-            if (heading.offsetTop <= y) {
+            const headingTop = heading.getBoundingClientRect().top + window.scrollY;
+            if (headingTop <= scrollTop) {
               currentId = heading.id;
             }
           });
@@ -563,14 +564,8 @@
           const isDark = html.classList.toggle("dark-mode");
           localStorage.setItem("pref-theme", isDark ? "dark" : "light");
           updateThemeUI(isDark);
-          
-          // Force repaint on mobile
-          if (window.innerWidth <= 768) {
-              html.style.display = 'none';
-              setTimeout(() => {
-                  html.style.display = 'block';
-              }, 0);
-          }
+          // Force style recalculation for mobile browsers
+          void document.body.offsetWidth;
       }
 
       document.addEventListener("DOMContentLoaded", function() {

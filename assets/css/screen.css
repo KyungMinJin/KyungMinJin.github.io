@@ -9,6 +9,7 @@ License: https://www.wowthemes.net/freebies-license/
   } /* Increase the font size on higher resolutions */
   .container {
     max-width: 80%;
+  }
 }
 
 /* Critical Mobile Fix - Override all Bootstrap constraints */
@@ -523,6 +524,8 @@ section.recent-posts {
   height: 40px;
   margin-right: 13px;
   border-radius: 100%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .post-top-meta {
