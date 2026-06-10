@@ -61,19 +61,19 @@ body {
   .container-lg,
   .container-xl,
   .container-xxl {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 
   .row {
-    margin-left: -16px !important;
-    margin-right: -16px !important;
-    width: calc(100% + 32px);
+    margin-left: -12px !important;
+    margin-right: -12px !important;
+    width: calc(100% + 24px);
   }
 
   [class*='col-'] {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 }
 
@@ -370,16 +370,16 @@ section.recent-posts {
   
   .container,
   .container-fluid {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
     width: 100vw;
   }
-  
+
   .row {
-    margin-left: -8px !important;
-    margin-right: -8px !important;
+    margin-left: -12px !important;
+    margin-right: -12px !important;
   }
-  
+
   .col,
   .col-1,
   .col-2,
@@ -407,8 +407,8 @@ section.recent-posts {
   .col-md-11,
   .col-md-12,
   .col-md-auto {
-    padding-left: 8px !important;
-    padding-right: 8px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
   
   .card.glass-card {
@@ -706,26 +706,26 @@ span.post-read-more a:hover {
 /* Mobile: Reduce font sizes for better readability on small screens */
 @media (max-width: 768px) {
   .article-post {
-    font-size: 0.87rem;
+    font-size: 0.82rem;
     line-height: 1.6;
   }
   .article-post h1 {
-    font-size: 1.35rem;
+    font-size: 1.28rem;
   }
   .article-post h2 {
-    font-size: 1.18rem;
+    font-size: 1.12rem;
   }
   .article-post h3 {
-    font-size: 1.05rem;
+    font-size: 1.0rem;
   }
   .article-post h4 {
-    font-size: 0.98rem;
+    font-size: 0.93rem;
   }
   .article-post h5 {
-    font-size: 0.92rem;
+    font-size: 0.87rem;
   }
   .article-post h6 {
-    font-size: 0.87rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -2507,11 +2507,16 @@ html.dark-mode .orcid-badge span {
 }
 
 /* Dark mode: Rating background */
-html.dark-mode .rating {
-  background-color: #1e1e1e !important;
-  padding: 0.8rem 1rem !important;
-  border-radius: 6px !important;
-  border: 1px solid #2d2d2d !important;
+html.dark-mode .rating-holder {
+  background-color: #2a2a2a !important;
+}
+
+.c-rating {
+  --star-empty-color: #ddd;
+}
+
+html.dark-mode .c-rating {
+  --star-empty-color: #555;
 }
 
 html.dark-mode .rating strong {

@@ -45,6 +45,14 @@ $rating-icons-paths: (
   @return url('data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22' + $color + '%22%20d%3D%22' + map-get($rating-icons-paths, $icon) + '%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E') center / cover no-repeat;
 }
 
+@function get-icon-cc($icon) {
+  @if not index(quarter half three-quarters full, $icon) {
+    @error "Interaction type must be either `quarter`, `half`, `three-quarters` or `full`.";
+  }
+  
+  @return url('data:image/svg+xml;utf8,%3Csvg%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22512%22%20height%3D%22512%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cpath%20fill%3D%22currentColor%22%20d%3D%22' + map-get($rating-icons-paths, $icon) + '%22%3E%3C%2Fpath%3E%3C%2Fsvg%3E') center / cover no-repeat;
+}
+
 /// This is a CSS-only star rating component that shows the proper rating depending on a data-attribute value. JS logic behind this component should round up values per quarter.
 /// @param {number} $star-size [20px] - Provides width and height for each of the stars.
 /// @param {string} $rating-element [button] - Element to use for each of the stars.
@@ -74,7 +82,8 @@ $rating-icons-paths: (
     border: 0;
     text-indent: -9999px;
     outline: none;
-    background: get-icon(full, $rating-color-empty);
+    background: get-icon-cc(full);
+    color: var(--star-empty-color, #ddd);
 
   }
   
@@ -90,13 +99,13 @@ $rating-icons-paths: (
       #{$star-element}:nth-child(#{$rating-value-ceil}) {
         // Evaluate which fraction of a star this value is and add the proper background
         @if str-slice("#{$rating-value}", 2, 4) == '.25' {
-          background: get-icon(quarter, $rating-color-full), get-icon(full, $rating-color-empty)
+          background: get-icon(quarter, $rating-color-full), get-icon-cc(full)
         }
         @else if str-slice("#{$rating-value}", 2, 4) == '.5' {
-          background: get-icon(half, $rating-color-full), get-icon(full, $rating-color-empty)
+          background: get-icon(half, $rating-color-full), get-icon-cc(full)
         }
         @else if str-slice("#{$rating-value}", 2, 4) == '.75' {
-          background: get-icon(three-quarters, $rating-color-full), get-icon(full, $rating-color-empty)
+          background: get-icon(three-quarters, $rating-color-full), get-icon-cc(full)
         }
       }
     }
@@ -122,6 +131,7 @@ $rating-icons-paths: (
   background-color: #fff;
   border-radius: toem(25px);
   box-sizing: border-box;
+  color: var(--star-empty-color, #ddd);
 }
 
 .c-rating {

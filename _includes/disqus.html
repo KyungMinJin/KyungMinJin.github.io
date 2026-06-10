@@ -15,17 +15,13 @@
 <div class="utterances-container"></div>
 <script>
   function loadUtterances(theme) {
-    var currentScript = document.currentScript;
-    var container = currentScript && currentScript.previousElementSibling;
-
-    if (!container || !container.classList.contains('utterances-container')) {
+    var container = document.querySelector('.utterances-container');
+    if (!container) {
       return;
     }
-
     if (container.querySelector('.utterances')) {
       return;
     }
-
     var script = document.createElement('script');
     script.src = 'https://utteranc.es/client.js';
     script.setAttribute('repo', 'KyungMinJin/KyungMinJin.github.io');
