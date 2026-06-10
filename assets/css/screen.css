@@ -703,6 +703,32 @@ span.post-read-more a:hover {
   width: 100%;
 }
 
+/* Mobile: Reduce font sizes for better readability on small screens */
+@media (max-width: 768px) {
+  .article-post {
+    font-size: 0.87rem;
+    line-height: 1.6;
+  }
+  .article-post h1 {
+    font-size: 1.35rem;
+  }
+  .article-post h2 {
+    font-size: 1.18rem;
+  }
+  .article-post h3 {
+    font-size: 1.05rem;
+  }
+  .article-post h4 {
+    font-size: 0.98rem;
+  }
+  .article-post h5 {
+    font-size: 0.92rem;
+  }
+  .article-post h6 {
+    font-size: 0.87rem;
+  }
+}
+
 .article-post .row {
   margin-left: auto;
   margin-right: auto;
@@ -1459,6 +1485,16 @@ details pre {
   background: transparent !important;
 }
 
+/* PC: Prevent TOC overlap by adding right margin to post container */
+.col-md-10.col-lg-9.flex-first {
+  margin-right: 260px;
+}
+
+/* Inline TOC Styles (for mobile & small screens) */
+.toc {
+  display: none;
+}
+
 @media (max-width: 1400px) {
   .floating-toc {
     display: none;
@@ -1466,6 +1502,31 @@ details pre {
 }
 
 @media (max-width: 1024px) {
+  /* Mobile: Show inline TOC instead of floating */
+  .toc {
+    display: block !important;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+  }
+  .toc h3 {
+    margin-top: 0;
+    margin-bottom: 0.8rem;
+  }
+  .toc ul {
+    margin-bottom: 0;
+  }
+  /* Hide floating TOC explicitly on mobile */
+  #floatingMiniToc {
+    display: none !important;
+  }
+  /* Mobile: Reset post container margin since floating-toc is hidden */
+  .col-md-10.col-lg-9.flex-first {
+    margin-right: 0;
+  }
   .post-share-sidebar {
     position: relative;
     top: 0;
