@@ -2160,8 +2160,30 @@ details pre {
 }
 
 /* Site-wide Multilingual Toggle Rules */
-html.lang-mode-en .lang-ko { display: none !important; }
-html.lang-mode-ko .lang-en { display: none !important; }
+html.lang-mode-en .lang-ko { 
+  display: none !important; 
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+html.lang-mode-ko .lang-en { 
+  display: none !important; 
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure language blocks are shown when correct language is selected */
+html.lang-mode-en .lang-en {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+}
+html.lang-mode-ko .lang-ko {
+  display: block !important;
+  visibility: visible !important;
+  height: auto !important;
+}
 
 /* ==========================================
    Reading Progress Bar
@@ -2411,9 +2433,13 @@ html.dark-mode .article-post blockquote::before {
 }
 
 html.dark-mode .orcid-badge {
-  background: #1f1f1f;
-  border-color: #3a3a3a;
-  color: #e6e6e6;
+  background: #1f1f1f !important;
+  border-color: #3a3a3a !important;
+  color: #e6e6e6 !important;
+}
+
+html.dark-mode .orcid-badge span {
+  color: #e6e6e6 !important;
 }
 
 html.dark-mode .floating-toc {

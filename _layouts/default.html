@@ -559,9 +559,18 @@
       }
 
       function toggleDarkMode() {
-          const isDark = document.documentElement.classList.toggle("dark-mode");
+          const html = document.documentElement;
+          const isDark = html.classList.toggle("dark-mode");
           localStorage.setItem("pref-theme", isDark ? "dark" : "light");
           updateThemeUI(isDark);
+          
+          // Force repaint on mobile
+          if (window.innerWidth <= 768) {
+              html.style.display = 'none';
+              setTimeout(() => {
+                  html.style.display = 'block';
+              }, 0);
+          }
       }
 
       document.addEventListener("DOMContentLoaded", function() {
