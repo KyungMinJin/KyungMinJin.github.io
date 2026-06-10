@@ -44,6 +44,41 @@ pre {
   transition: top 0.2s ease-in-out;
 }
 
+html.dark-mode .mediumnavigation {
+  background: rgba(20, 20, 20, 0.98);
+  box-shadow: 0 2px 2px -2px rgba(255, 255, 255, 0.1);
+}
+
+html.dark-mode .mediumnavigation .nav-link {
+  color: #e0e0e0 !important;
+}
+
+html.dark-mode .mediumnavigation .navbar-brand {
+  color: #ffffff !important;
+}
+
+html.dark-mode .navbar-toggler {
+  border-color: #555 !important;
+}
+
+html.dark-mode .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23e0e0e0' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+html.dark-mode .dropdown-menu {
+  background: #1f1f1f !important;
+  border-color: #3a3a3a !important;
+}
+
+html.dark-mode .dropdown-item {
+  color: #e0e0e0 !important;
+}
+
+html.dark-mode .dropdown-item:hover {
+  background: #2a2a2a !important;
+  color: #ffffff !important;
+}
+
 .main-content {
   min-height: 300px;
 }
@@ -94,6 +129,88 @@ section.recent-posts {
     -webkit-column-count: 2;
     -moz-column-count: 2;
     column-count: 2;
+  }
+}
+
+/* Mobile responsive improvements for About page */
+@media (max-width: 768px) {
+  .row.justify-content-center > .col-md-8,
+  .row.justify-content-center > .col-md-6 {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  
+  .card.glass-card {
+    margin-bottom: 1.5rem;
+    padding: 1rem !important;
+  }
+  
+  .card.glass-card .table {
+    font-size: 0.85rem;
+  }
+  
+  .scholar-graph {
+    padding-left: 10px !important;
+    padding-right: 50px !important;
+  }
+  
+  .scholar-bar-wrapper {
+    width: 14%;
+  }
+  
+  .scholar-year {
+    font-size: 0.65rem;
+    bottom: -20px;
+  }
+  
+  .visitor-map-container {
+    min-height: 200px !important;
+  }
+  
+  .cv-viewer-details {
+    margin-left: -12px;
+    margin-right: -12px;
+    border-radius: 0;
+  }
+  
+  .cv-viewer-details + hr {
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+}
+
+@media (max-width: 576px) {
+  .page {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  
+  .card.glass-card {
+    padding: 0.8rem !important;
+  }
+  
+  .card.glass-card h6 {
+    font-size: 0.9rem;
+  }
+  
+  .scholar-graph {
+    height: 150px;
+    padding-left: 8px !important;
+    padding-right: 45px !important;
+    margin-bottom: 25px;
+  }
+  
+  .scholar-y-line {
+    left: 8px;
+    right: 45px;
+  }
+  
+  .scholar-bar-wrapper {
+    width: 13%;
+  }
+  
+  .table-borderless td {
+    padding: 0.35rem 0;
   }
 }
 
@@ -1058,6 +1175,7 @@ details pre {
   margin: 0;
   padding-left: 18px;
   font-size: 0.8rem;
+  list-style-type: none;
 }
 
 .floating-toc-list li {

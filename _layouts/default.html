@@ -444,7 +444,7 @@
         title.className = 'floating-toc-title';
         title.textContent = isKo ? '이 섹션에서' : 'In this section';
 
-        const list = document.createElement('ol');
+        const list = document.createElement('ul');
         list.className = 'floating-toc-list';
 
         headings.forEach((heading, idx) => {
@@ -454,7 +454,12 @@
           const li = document.createElement('li');
           const a = document.createElement('a');
           a.href = '#' + heading.id;
-          a.textContent = heading.textContent.trim();
+          
+          // Remove leading numbers/bullets from heading text
+          let text = heading.textContent.trim();
+          text = text.replace(/^[\d]+\.\s+/, '').replace(/^[•\-\*]\s+/, '');
+          
+          a.textContent = text;
           li.appendChild(a);
           list.appendChild(li);
         });
