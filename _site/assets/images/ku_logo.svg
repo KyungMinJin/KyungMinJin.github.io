@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-    <polygon points="50,4 92,25 92,75 50,96 8,75 8,25" fill="#8b0029" />
-    <polygon points="50,10 86,28 86,72 50,90 14,72 14,28" fill="none" stroke="#ffffff" stroke-width="4" />
-    <text x="50" y="58" font-family="'Righteous', 'Helvetica Neue', Arial, sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">KU</text>
-    <path d="M 32 68 L 50 78 L 68 68" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
-</svg>

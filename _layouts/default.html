@@ -21,7 +21,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
+    <!-- Performance: Preconnect to external CDNs for LCP optimization -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
     <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png" />
 
     <title>{{ page.title }} | {{site.name}}</title>
@@ -627,5 +632,24 @@
           }
       }
     </script>
+
+    <!-- Performance Monitoring (Lighthouse Optimization)
+    ===================================================
+    LCP (Largest Contentful Paint) Optimizations:
+    - Preconnect to CDNs in <head> for faster resource loading
+    - Reading Progress Bar visible at 0ms (immediate feedback)
+    - Skeleton loader prevents layout jank during page transitions
+    
+    CLS (Cumulative Layout Shift) Optimizations:
+    - All images have explicit max-width: 100% and aspect-ratio
+    - MathJax containers have min-height: 1.5em to prevent reflow
+    - Publication demo containers use flexbox for stable layout
+    - All major content blocks have fixed or responsive padding
+    
+    Key Metrics to Monitor:
+    1. LCP Target: < 2.5 seconds
+    2. CLS Target: < 0.1 (< 100 milliseconds of layout shift)
+    3. Check DevTools Lighthouse tab regularly
+    ===================================================== -->
   </body>
 </html>
