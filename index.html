@@ -786,8 +786,8 @@ title: Home
         <!-- Open Source & Tutorials -->
         <div class="lang-en">
             <h3 class="font-weight-bold mb-4"><i class="fa fa-code text-primary"></i> Open-Source & Tutorials</h3>
-            <div class="card border-0 shadow-sm p-4 bg-white mb-5"
-                style="border-radius: 12px; border: 1px solid #f1f3f5 !important;">
+            <div class="card shadow-sm p-4 bg-white mb-5 border-card"
+                style="border-radius: 12px;">
                 <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
                     <li class="mb-2"><strong>HANet (WACV 2023):</strong> PyTorch implementation of Kinematic-aware
                         Hierarchical Attention Network [<a href="https://github.com/KyungMinJin/HANet"
@@ -801,8 +801,8 @@ title: Home
         </div>
         <div class="lang-ko">
             <h3 class="font-weight-bold mb-4"><i class="fa fa-code text-primary"></i> 오픈소스 및 강의 활동</h3>
-            <div class="card border-0 shadow-sm p-4 bg-white mb-5"
-                style="border-radius: 12px; border: 1px solid #f1f3f5 !important;">
+            <div class="card shadow-sm p-4 bg-white mb-5 border-card"
+                style="border-radius: 12px;">
                 <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
                     <li class="mb-2"><strong>HANet (WACV 2023):</strong> 운동학 법칙을 반영한 계층적 어텐션 네트워크 PyTorch 공식 구현체 [<a
                             href="https://github.com/KyungMinJin/HANet" target="_blank">저장소 링크</a>]</li>
@@ -971,7 +971,8 @@ title: Home
                 {% else %}
                     <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" style="width: 100%;">
                         <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
-                            style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
+                            class="visitor-map-img"
+                            style="max-width: 100%; height: auto; border-radius: 8px;"
                             onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
                     </a>
                 {% endif %}

@@ -1,9 +1,9 @@
 <!-- begin post -->
 {% assign author = site.authors[post.author] %}
 <div class="col-12 mb-4 post-card-item">
-  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #e9ecef !important; background: linear-gradient(to right, #ffffff, #fcfcfc);">
+  <div class="card shadow-sm rounded post-card featured-card p-3 p-md-4">
     <div class="row no-gutters align-items-center">
-      <div class="col-8 col-md-9 p-3 p-md-4">
+      <div class="col-8 col-md-9 pr-3">
          <div class="d-flex align-items-center mb-1">
              <span class="badge badge-success mr-2 text-uppercase" style="font-size: 0.65rem; font-weight: 700; padding: 3px 6px;">Featured</span>
              <span class="text-secondary font-weight-bold mr-2" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">{{ post.categories | join: ', ' }}</span>
@@ -24,10 +24,10 @@
          </div>
          {% endif %}
       </div>
-      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+      <div class="col-4 col-md-3 text-right">
          {% if post.image %}
          <a href="{{ site.baseurl }}{{ post.url }}">
-             <img class="img-fluid rounded shadow-sm" src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}" style="width: 110px; height: 110px; object-fit: cover; border: 1px solid #e9ecef;">
+             <img class="img-fluid rounded shadow-sm post-thumb-img" src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}" style="width: 110px; height: 110px; object-fit: cover;">
          </a>
          {% endif %}
       </div>

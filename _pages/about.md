@@ -148,7 +148,8 @@ comments: true
         {% else %}
             <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" style="width: 100%;">
                 <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
-                    style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #f1f3f5;"
+                    class="visitor-map-img"
+                    style="max-width: 100%; height: auto; border-radius: 8px;"
                     onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
             </a>
         {% endif %}

@@ -1425,6 +1425,18 @@ iframe {
   border: 1px solid rgba(255, 255, 255, 0.08) !important;
 }
 
+.border-card {
+  border: 1px solid #f1f3f5 !important;
+}
+
+.visitor-map-img {
+  border: 1px solid #f1f3f5 !important;
+}
+
+.featured-card {
+  background: linear-gradient(to right, #ffffff, #fcfcfc) !important;
+}
+
 html.dark-mode .post-card {
   border-color: #2d2d2d !important;
 }
@@ -1434,6 +1446,19 @@ html.dark-mode .post-thumb-img {
 }
 
 html.dark-mode .highlight-card {
+  border-color: #2d2d2d !important;
+}
+
+html.dark-mode .border-card {
+  border-color: #2d2d2d !important;
+}
+
+html.dark-mode .visitor-map-img {
+  border-color: #2d2d2d !important;
+}
+
+html.dark-mode .featured-card {
+  background: #1e1e1e !important;
   border-color: #2d2d2d !important;
 }
 
