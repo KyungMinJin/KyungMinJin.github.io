@@ -54,8 +54,11 @@ jQuery(document).ready(function($){
         target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
 
         if (target.length) {
+          var navbar = $('nav');
+          var navbarHeight = navbar.length ? navbar.outerHeight() : 70;
+          var offset = navbarHeight + 20; // navbar + padding
           $('html,body').animate({
-            scrollTop: target.offset().top
+            scrollTop: target.offset().top - offset
           }, 1000);
         }
       }

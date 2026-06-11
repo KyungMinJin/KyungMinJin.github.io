@@ -393,6 +393,9 @@
         labels.forEach(function(label) {
           label.textContent = lang === 'ko' ? '한국어' : 'English';
         });
+        if (typeof initFloatingMiniToc === 'function') {
+          initFloatingMiniToc();
+        }
       }
       document.addEventListener("DOMContentLoaded", function() {
         var savedLang = localStorage.getItem('pref-lang');
@@ -434,12 +437,15 @@
         const toc = document.getElementById('floatingMiniToc');
         if (!toc || !document.body.classList.contains('layout-post')) return;
 
+        // Query headings and filter to only visible ones (to handle lang-en/lang-ko toggle)
         const headings = Array.from(document.querySelectorAll('.article-post h2, .article-post h3'))
-          .filter(h => h.textContent && h.textContent.trim().length > 0);
+          .filter(h => h.textContent && h.textContent.trim().length > 0 && h.offsetWidth > 0 && h.offsetHeight > 0);
 
         if (headings.length < 2) {
           toc.style.display = 'none';
           return;
+        } else {
+          toc.style.display = 'block';
         }
 
         const isKo = document.documentElement.classList.contains('lang-mode-ko');
@@ -465,6 +471,28 @@
           text = text.replace(/^[\d]+\.\s+/, '').replace(/^[•\-\*]\s+/, '');
           
           a.textContent = text;
+
+          // Smooth scroll click handler with offset
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetElement = document.getElementById(heading.id);
+            if (targetElement) {
+              const navbar = document.querySelector('nav');
+              const navbarHeight = navbar ? navbar.offsetHeight : 70;
+              const offset = navbarHeight + 20; // navbar + padding
+              const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+              const offsetPosition = elementPosition - offset;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+              });
+              
+              // Update URL hash without scrolling
+              history.pushState(null, null, '#' + heading.id);
+            }
+          });
+
           li.appendChild(a);
           list.appendChild(li);
         });
@@ -474,21 +502,34 @@
 
         const links = Array.from(list.querySelectorAll('a'));
         function syncActiveSection() {
+          if (headings.length === 0) return;
           let currentId = headings[0].id;
           const scrollTop = window.scrollY + 180;
-          headings.forEach((heading) => {
-            const headingTop = heading.getBoundingClientRect().top + window.scrollY;
-            if (headingTop <= scrollTop) {
-              currentId = heading.id;
-            }
-          });
+          
+          // Check if we are at the bottom of the page
+          if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 20) {
+            currentId = headings[headings.length - 1].id;
+          } else {
+            headings.forEach((heading) => {
+              const headingTop = heading.getBoundingClientRect().top + window.scrollY;
+              if (headingTop <= scrollTop) {
+                currentId = heading.id;
+              }
+            });
+          }
+
           links.forEach((link) => {
             const isActive = link.getAttribute('href') === '#' + currentId;
             link.classList.toggle('active', isActive);
           });
         }
 
-        window.addEventListener('scroll', syncActiveSection, { passive: true });
+        // Clean up previous event listener if any
+        if (window._syncActiveSectionListener) {
+          window.removeEventListener('scroll', window._syncActiveSectionListener);
+        }
+        window._syncActiveSectionListener = syncActiveSection;
+        window.addEventListener('scroll', window._syncActiveSectionListener, { passive: true });
         syncActiveSection();
       }
 
