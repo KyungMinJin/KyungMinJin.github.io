@@ -1,9 +1,9 @@
 <!-- begin post -->
 {% assign author = site.authors[post.author] %}
 <div class="col-12 mb-3 post-card-item" data-categories="{{ post.categories | join: ',' | downcase }}">
-  <div class="card border-0 shadow-sm rounded overflow-hidden" style="border: 1px solid #f1f5f9 !important;">
+  <div class="card shadow-sm rounded post-card p-3 p-md-4">
     <div class="row no-gutters align-items-center">
-      <div class="col-8 col-md-9 p-3 p-md-4">
+      <div class="col-8 col-md-9 pr-3">
          <div class="d-flex align-items-center mb-1">
              <span class="text-secondary font-weight-bold mr-2 lang-en" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">{{ post.categories | join: ', ' }}</span>
              <span class="text-secondary font-weight-bold mr-2 lang-ko" style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">
@@ -41,10 +41,10 @@
          </div>
          {% endif %}
       </div>
-      <div class="col-4 col-md-3 text-right p-3 p-md-4">
+      <div class="col-4 col-md-3 text-right">
          {% if post.image %}
          <a href="{{ site.baseurl }}{{ post.url }}">
-             <img class="img-fluid rounded" src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}" style="width: 95px; height: 95px; object-fit: cover; border: 1px solid #f1f5f9;">
+             <img class="img-fluid rounded post-thumb-img" src="{% if post.image contains '://' %}{{ post.image }}{% else %}{{ site.baseurl }}/{{ post.image }}{% endif %}" alt="{{ post.title }}" style="width: 95px; height: 95px; object-fit: cover;">
          </a>
          {% endif %}
       </div>

@@ -1413,6 +1413,30 @@ iframe {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1) !important;
 }
 
+.post-card {
+  border: 1px solid #f1f5f9 !important;
+}
+
+.post-thumb-img {
+  border: 1px solid #f1f5f9 !important;
+}
+
+.highlight-card {
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+html.dark-mode .post-card {
+  border-color: #2d2d2d !important;
+}
+
+html.dark-mode .post-thumb-img {
+  border-color: #2d2d2d !important;
+}
+
+html.dark-mode .highlight-card {
+  border-color: #2d2d2d !important;
+}
+
 /* Clean styling for BibTeX accordion toggle */
 details pre {
   margin-top: 10px;
