@@ -74,12 +74,12 @@ post_class: post-template
                     <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
                         {% assign orcid_id = site.orcid.id | default: "0000-0000-0000-0000" %}
                         {% assign orcid_url = site.orcid.url | default: "https://orcid.org/" | append: orcid_id %}
-                        <a target="_blank" class="link-dark" href="{{ author.web }}">{{ author.display_name }}</a>
+                        <a target="_blank" class="link-dark" href="{{ author.web }}" rel="noopener noreferrer">{{ author.display_name }}</a>
                         <a target="_blank" class="orcid-badge" href="{{ orcid_url }}" rel="noopener noreferrer" aria-label="ORCID profile">
                             <img src="https://info.orcid.org/wp-content/uploads/2019/11/orcid_16x16.png" alt="ORCID">
                             <span>ORCID</span>
                         </a>
-                        <a target="_blank" href="{{ author.twitter }}" class="btn follow">Follow</a>
+                        <a target="_blank" href="{{ author.twitter }}" class="btn follow" rel="noopener noreferrer">Follow</a>
                         <span class="author-description">{{ author.description }}</span>
                     </div>
                 </div>
@@ -151,7 +151,9 @@ post_class: post-template
             <p>
             <small>
                 <span class="post-date"><time class="post-date" datetime="{{ page.date | date:"%Y-%m-%d" }}">{{ page.date | date_to_string }}</time></span>           
-                {% if page.last_modified_at %}
+                {% assign last_mod = page.last_modified_at | date: "%Y-%m-%d" %}
+                {% assign pub_date = page.date | date: "%Y-%m-%d" %}
+                {% if last_mod and last_mod != pub_date %}
                 (Updated: <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">{{ page.last_modified_at | date: "%b %-d, %Y" }}</time>)
                 {% endif %}
                 </small>

@@ -19,7 +19,7 @@
          <div class="d-flex align-items-center mt-2">
              <img class="author-thumb mr-2" src="{% if author.avatar %}{{site.baseurl}}/{{ author.avatar }}{% else %}/assets/images/gravatar.png{% endif %}" alt="{{ author.display_name }}" style="width: 20px; height: 20px; border-radius: 50%; margin-right: 6px;">
              <span class="author-meta" style="font-size: 0.75rem; color: #6c757d;">
-                 By <a target="_blank" class="text-dark font-weight-bold" href="{{ author.web }}">{{ author.display_name }}</a>
+                 By <a target="_blank" class="text-dark font-weight-bold" href="{{ author.web }}" rel="noopener noreferrer">{{ author.display_name }}</a>
              </span>
          </div>
          {% endif %}

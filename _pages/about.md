@@ -9,7 +9,7 @@ comments: true
 <div class="col-md-8 pr-md-5">
 
 <div class="lang-en">
-    <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/">(PRML Lab)</a>, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
+    <p>I am Kyung-Min Jin, completed my master’s studies in the Graduate School of Artificial Intelligence at Korea University <a target="_blank" href="http://pr.korea.ac.kr/" rel="noopener noreferrer">(PRML Lab)</a>, where I was advised by Prof. Seong-Hwan Lee. Before studying at graduate school, I received Bachelor's degrees (Computer Science and Engineering) and (Artificial Intelligence) at Korea University in 2021.</p>
     
     <p><b>Building multimodal intelligence from visual perception to embodied reasoning.</b></p>
     
@@ -19,7 +19,7 @@ comments: true
     
     <p>More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively. </p>
     
-    <p>For more detailed information about my background and experience, please refer to my <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">CV</a>.</p>
+    <p>For more detailed information about my background and experience, please refer to my <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" rel="noopener noreferrer">CV</a>.</p>
 </div>
 
 <div class="lang-ko">
@@ -146,7 +146,7 @@ comments: true
         {% if site.visitor_map.provider == 'mapmyvisitors' %}
             <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353"></script>
         {% else %}
-            <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" style="width: 100%;">
+            <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" rel="noopener noreferrer" style="width: 100%;">
                 <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
                     class="visitor-map-img"
                     style="max-width: 100%; height: auto; border-radius: 8px;"
@@ -177,8 +177,8 @@ comments: true
                 <i class="fa fa-chevron-down toggle-icon text-muted" style="transition: transform 0.2s ease;"></i>
             </summary>
             <div class="p-4 bg-white border-top">
-                <p class="text-muted mb-3 lang-en" style="font-size: 0.9rem;">You can view and navigate the detailed Curriculum Vitae directly below, or click <a href="{{ site.baseurl }}/CV.pdf" target="_blank" class="font-weight-bold text-primary">here</a> to open it in a new tab.</p>
-                <p class="text-muted mb-3 lang-ko" style="font-size: 0.9rem;">아래에서 상세 이력서(CV)를 확인하고 탐색할 수 있으며, <a href="{{ site.baseurl }}/CV.pdf" target="_blank" class="font-weight-bold text-primary">여기</a>를 클릭하여 새 창에서 열어볼 수도 있습니다.</p>
+                <p class="text-muted mb-3 lang-en" style="font-size: 0.9rem;">You can view and navigate the detailed Curriculum Vitae directly below, or click <a href="{{ site.baseurl }}/CV.pdf" target="_blank" rel="noopener noreferrer" class="font-weight-bold text-primary">here</a> to open it in a new tab.</p>
+                <p class="text-muted mb-3 lang-ko" style="font-size: 0.9rem;">아래에서 상세 이력서(CV)를 확인하고 탐색할 수 있으며, <a href="{{ site.baseurl }}/CV.pdf" target="_blank" rel="noopener noreferrer" class="font-weight-bold text-primary">여기</a>를 클릭하여 새 창에서 열어볼 수도 있습니다.</p>
                 <div class="embed-responsive shadow-sm border rounded" style="height: 800px; background: #f8f9fa;">
                     <iframe class="embed-responsive-item" src="{{ site.baseurl }}/CV.pdf" allowfullscreen></iframe>
                 </div>
