@@ -272,4 +272,120 @@ comments: true
     </div>
 </div>
 
+<!-- Early Development Career Section -->
+<hr class="my-5">
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <h5 class="font-weight-bold text-dark mb-1">
+            <i class="fa fa-code text-muted"></i> Early Development Career
+        </h5>
+        <p class="text-muted" style="font-size:0.93rem;">
+            Frontend &amp; full-stack development projects built before transitioning to AI research.
+        </p>
+    </div>
+
+    <!-- Deer App -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-dark mr-2">Frontend</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> 디어코퍼레이션 (Deer Corporation)</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2020.07 – 2021.02</small>
+                </div>
+                <h6 class="card-title font-weight-bold text-dark mb-2">Deer — Electric Scooter Sharing App</h6>
+                <p class="card-text text-muted" style="font-size: 0.9rem; line-height: 1.6;">
+                    전동킥보드 공유 서비스 <strong>디어</strong> 모바일 앱 프론트엔드 개발 참여. 사용자 지도 뷰, 킥보드 실시간 조회 및 예약 기능 구현.
+                </p>
+                <div class="mt-2">
+                    <span class="badge badge-light border text-secondary">TypeScript</span>
+                    <span class="badge badge-light border text-secondary">React Native</span>
+                    <span class="badge badge-light border text-secondary">MobX</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- da Vinci -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-dark mr-2">Full-Stack</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-building-o"></i> 디어코퍼레이션 (사내 스타트업)</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2020.07 – 2021.02</small>
+                </div>
+                <h6 class="card-title font-weight-bold text-dark mb-2">da Vinci — Link Collection Service</h6>
+                <p class="card-text text-muted" style="font-size: 0.9rem; line-height: 1.6;">
+                    링크 수집 서비스 사내 스타트업 개발기획 팀. 크롬 확장 프로그램(링크 저장), 모바일 앱/웹 프론트엔드 담당, 백엔드 개발 참여.
+                </p>
+                <div class="mt-2">
+                    <span class="badge badge-light border text-secondary">TypeScript</span>
+                    <span class="badge badge-light border text-secondary">React Native</span>
+                    <span class="badge badge-light border text-secondary">Next.js</span>
+                    <span class="badge badge-light border text-secondary">Node.js / Express</span>
+                    <span class="badge badge-light border text-secondary">AWS</span>
+                    <span class="badge badge-light border text-secondary">MobX</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KLUE -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-dark mr-2">Frontend / Admin</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-graduation-cap"></i> Korea University</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2019.07 –</small>
+                </div>
+                <h6 class="card-title font-weight-bold text-dark mb-2">KLUE — Course Review Platform</h6>
+                <p class="card-text text-muted" style="font-size: 0.9rem; line-height: 1.6;">
+                    고려대학교 강의 평가 사이트. 기획 및 프론트엔드 리뉴얼, 어드민 페이지 개발 참여.
+                </p>
+                <div class="mt-2">
+                    <span class="badge badge-light border text-secondary">TypeScript</span>
+                    <span class="badge badge-light border text-secondary">React</span>
+                    <span class="badge badge-light border text-secondary">Redux</span>
+                    <span class="badge badge-light border text-secondary">MobX</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SubjectArea -->
+    <div class="col-md-6 mb-3">
+        <div class="card shadow-sm border overflow-hidden project-card h-100">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3">
+                    <div>
+                        <span class="badge badge-dark mr-2">Full-Stack</span>
+                        <span class="text-secondary font-weight-normal" style="font-size: 0.85rem;"><i class="fa fa-shopping-cart"></i> Freelance / Outsourcing</span>
+                    </div>
+                    <small class="text-muted font-weight-bold">2020</small>
+                </div>
+                <h6 class="card-title font-weight-bold text-dark mb-2">SubjectArea — Shopping &amp; News App</h6>
+                <p class="card-text text-muted" style="font-size: 0.9rem; line-height: 1.6;">
+                    쇼핑 및 뉴스 관련 앱. 어드민 페이지, 백엔드, 서버 개발 참여.
+                </p>
+                <div class="mt-2">
+                    <span class="badge badge-light border text-secondary">React</span>
+                    <span class="badge badge-light border text-secondary">React Native</span>
+                    <span class="badge badge-light border text-secondary">Redux</span>
+                    <span class="badge badge-light border text-secondary">Node.js</span>
+                    <span class="badge badge-light border text-secondary">MongoDB</span>
+                    <span class="badge badge-light border text-secondary">AWS</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 

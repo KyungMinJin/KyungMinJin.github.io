@@ -162,6 +162,61 @@ comments: true
 </div>
 </div>
 
+<!-- Awards & Activities Section -->
+<hr class="my-5">
+
+<div class="row">
+    <div class="col-md-12">
+        <h5 class="font-weight-bold text-dark mb-3">
+            <i class="fa fa-trophy text-warning"></i>
+            <span class="lang-en"> Awards &amp; Activities</span>
+            <span class="lang-ko"> 수상 및 활동</span>
+        </h5>
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <div class="card border shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-start">
+                        <span class="badge badge-warning mr-3 mt-1" style="font-size:0.8rem; white-space:nowrap;">대상 / Grand Prize</span>
+                        <div>
+                            <strong class="text-dark d-block">
+                                <span class="lang-en">2021 Miso AI Model Development Challenge</span>
+                                <span class="lang-ko">2021 미소 인공지능 모델 개발 챌린지</span>
+                            </strong>
+                            <span class="text-muted" style="font-size:0.88rem;">
+                                <span class="lang-en">Infant Behavior Video Data Track</span>
+                                <span class="lang-ko">영유아 행동 영상 데이터 부문</span>
+                            </span>
+                            <div class="text-secondary mt-1" style="font-size:0.8rem;">
+                                <span class="lang-en">Supported by Ministry of Science and ICT (MSIT), NIA, Miso Information Technology</span>
+                                <span class="lang-ko">과학기술정보통신부, 한국지능정보사회진흥원 지원 · ㈜미소정보기술 주최</span>
+                            </div>
+                            <div class="text-muted mt-1" style="font-size:0.8rem;">2021</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card border shadow-sm p-3 h-100">
+                    <div class="d-flex align-items-start">
+                        <span class="badge badge-secondary mr-3 mt-1" style="font-size:0.8rem; white-space:nowrap;">장려상 / Encouragement</span>
+                        <div>
+                            <strong class="text-dark d-block">
+                                <span class="lang-en">KU 2020 Smart Campus Datathon</span>
+                                <span class="lang-ko">KU 2020 스마트캠퍼스 데이터톤</span>
+                            </strong>
+                            <span class="text-muted" style="font-size:0.88rem;">Korea University</span>
+                            <div class="text-muted mt-1" style="font-size:0.8rem;">2020</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- Collapsible PDF CV Viewer -->
 <hr class="my-5">
 
