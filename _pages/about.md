@@ -44,8 +44,8 @@ comments: true
 
 <!-- Google Scholar Metrics & Citation Graph -->
 <div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100">
-    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3">
-        <i class="fa fa-graduation-cap text-info"></i>
+    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 d-flex align-items-center" style="white-space:nowrap; flex-wrap:nowrap;">
+        <i class="fa fa-graduation-cap text-info mr-1" style="flex-shrink:0;"></i>
         <span class="lang-en">Google Scholar Metrics</span>
         <span class="lang-ko">구글 스콜라 지표</span>
     </h6>
@@ -136,8 +136,8 @@ comments: true
 
 <!-- Visitor Analytics Widget -->
 <div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100 d-flex flex-column justify-content-between">
-    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left">
-        <i class="fa fa-globe text-secondary"></i>
+    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left d-flex align-items-center" style="white-space:nowrap; flex-wrap:nowrap;">
+        <i class="fa fa-globe text-secondary mr-1" style="flex-shrink:0;"></i>
         <span class="lang-en">Visitor Map</span>
         <span class="lang-ko">방문자 분포 지도</span>
     </h6>
@@ -155,7 +155,7 @@ comments: true
         {% endif %}
     </div>
     <div class="mt-3">
-        <img src="https://visitor-badge.laobi.icu/badge?page_id=kyungminjin.github.io&title=Total+Visits&color=4a777a" alt="Total Visits" style="border-radius: 4px;"/>
+        <img src="https://visitor-badge.laobi.icu/badge?page_id=kyungminjin.github.io&title=Total+Visits&color=4a777a" alt="Total Visits" style="border-radius: 4px; max-height: 22px; height: auto;"/>
     </div>
 </div>
 

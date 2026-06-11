@@ -865,7 +865,7 @@ title: Home
     </div> <!-- Left Column 끝 -->
 
     <!-- Right Column (Sidebar) -->
-    <div class="col-md-4 col-lg-4 col-sm-12 mt-4 mt-md-0">
+    <div class="col-md-4 col-lg-4 col-sm-12 mt-4 mt-md-0" style="overflow: visible;">
         <div class="sticky-sidebar">
 
             <!-- Google Scholar Metrics -->
@@ -965,7 +965,7 @@ title: Home
                 <i class="fa fa-globe text-secondary"></i> Visitor Map
             </h6>
             <div class="visitor-map-container"
-                style="min-height: 150px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
                 {% if site.visitor_map.provider == 'mapmyvisitors' %}
                     <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353"></script>
                 {% else %}
@@ -979,7 +979,7 @@ title: Home
             </div>
             <div class="mt-3">
                 <img src="https://visitor-badge.laobi.icu/badge?page_id=kyungminjin.github.io&title=Total+Visits&color=4a777a"
-                    alt="Total Visits" style="border-radius: 4px;" />
+                    alt="Total Visits" style="border-radius: 4px; max-height: 22px; height: auto;" />
             </div>
         </div>
         {% endif %}

@@ -81,6 +81,3 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-  - notion/
-  - scratchpad_k741qrhz.md
-

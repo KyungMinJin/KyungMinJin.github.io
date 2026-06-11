@@ -2161,11 +2161,23 @@ details pre {
     top: 80px;
     max-height: calc(100vh - 100px);
     overflow-y: auto;
+    overflow-x: visible;
     padding-bottom: 20px;
+    scroll-behavior: smooth;
+    /* Thin scrollbar for webkit */
+    scrollbar-width: thin;
+    scrollbar-color: #dee2e6 transparent;
   }
   .sticky-sidebar::-webkit-scrollbar {
-    width: 0px;
+    width: 4px;
     background: transparent;
+  }
+  .sticky-sidebar::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 2px;
+  }
+  .sticky-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #adb5bd;
   }
 }
 
