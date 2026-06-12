@@ -16,10 +16,8 @@ comments: true
     <!-- Skills Radar Chart Card (col-md-5) -->
     <div class="col-md-5 mb-4">
         <div class="card shadow-sm border-0 p-3 bg-white h-100" style="border-radius: 12px;">
-            <h5 class="font-weight-bold text-dark mb-3 text-center" style="font-size: 1rem;">
-                <span class="lang-en"><i class="fa fa-pie-chart text-info mr-1"></i> Expertise Radar</span>
-                <span class="lang-ko"><i class="fa fa-pie-chart text-info mr-1"></i> 직무 역량 레이더</span>
-            </h5>
+            <h5 class="font-weight-bold text-dark mb-3 text-center lang-en" style="font-size: 1rem;"><i class="fa fa-pie-chart text-info mr-1"></i> Expertise Radar</h5>
+            <h5 class="font-weight-bold text-dark mb-3 text-center lang-ko" style="font-size: 1rem;"><i class="fa fa-pie-chart text-info mr-1"></i> 직무 역량 레이더</h5>
             <div style="position: relative; height: 260px; width: 100%;">
                 <canvas id="skillsRadarChart"></canvas>
             </div>
@@ -33,10 +31,8 @@ comments: true
     <!-- Core Research Competency (col-md-7) -->
     <div class="col-md-7 mb-4">
         <div class="card shadow-sm border-0 p-4 bg-white h-100" style="border-radius: 12px;">
-            <h5 class="font-weight-bold text-dark mb-3"><i class="fa fa-star text-warning mr-2"></i> 
-                <span class="lang-en">Core Competencies</span>
-                <span class="lang-ko">핵심 연구 및 실무 역량</span>
-            </h5>
+            <h5 class="font-weight-bold text-dark mb-3 lang-en"><i class="fa fa-star text-warning mr-2"></i> Core Competencies</h5>
+            <h5 class="font-weight-bold text-dark mb-3 lang-ko"><i class="fa fa-star text-warning mr-2"></i> 핵심 연구 및 실무 역량</h5>
             <ul class="pl-3 text-muted mb-0" style="line-height: 1.75; font-size: 0.88rem;">
                 <li class="mb-2"><strong>AI Research & Multimodal:</strong> VLM/MLM (Examodal), Instruction Tuning, Cross-modal Alignment, GRPO/DPO policy optimization.</li>
                 <li class="mb-2"><strong>Computer Vision:</strong> 2D/3D human and hand pose estimation, transformer models, joint occlusion, tracking.</li>
@@ -88,7 +84,7 @@ comments: true
 
     <!-- Side Projects & Development Experience -->
     <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> Side Projects & Development Experience</h4>
-    <div class="card shadow-sm border-0 p-4 bg-white mb-5" style="border-radius: 12px;">
+    <div class="pl-2 mb-5">
         <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
             <li class="mb-3">
                 <strong>KLUE (Jul 2019 - Present):</strong> Course evaluation service for Korea University students. Participated in planning, Frontend renewal, and Admin page development.
@@ -158,7 +154,7 @@ comments: true
 
     <!-- Side Projects & Development Experience -->
     <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> 기타 프로젝트 및 개발 경험</h4>
-    <div class="card shadow-sm border-0 p-4 bg-white mb-5" style="border-radius: 12px;">
+    <div class="pl-2 mb-5">
         <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
             <li class="mb-3">
                 <strong>KLUE (2019.07 - 현재):</strong> 고려대학교 강의 평가 서비스. 기획 및 프론트엔드 리뉴얼, 관리자 대시보드 어드민 페이지 개발.
@@ -196,22 +192,18 @@ comments: true
 
 <div class="row justify-content-center text-center mb-5">
     <div class="col-md-8">
-        <div class="card shadow-sm border-0 p-4 bg-white" style="border-radius: 12px;">
-            <h5 class="font-weight-bold text-dark mb-3">
-                <span class="lang-en">Looking for the full Curriculum Vitae?</span>
-                <span class="lang-ko">상세 이력서가 필요하신가요?</span>
-            </h5>
-            <p class="text-muted mb-4" style="font-size: 0.9rem; line-height: 1.6;">
-                <span class="lang-en">Click below to download the latest PDF version of the CV, detailing all publications, coursework, and side-projects.</span>
-                <span class="lang-ko">출판 논문 목록, 상세 이수 과목, 사이드 프로젝트 기록이 포함된 최신 PDF 이력서를 아래에서 손쉽게 다운로드하실 수 있습니다.</span>
-            </p>
-            <div class="d-flex justify-content-center gap-3 flex-wrap">
-                <a href="{{ site.baseurl }}/CV.pdf" download="KyungMinJin_CV.pdf" class="btn btn-primary btn-lg font-weight-bold px-5 py-3 text-uppercase shadow-sm" style="border-radius: 50px; font-size: 0.92rem; letter-spacing: 1px;">
-                    <i class="fa fa-download mr-2"></i> 
-                    <span class="lang-en">Download CV (PDF)</span>
-                    <span class="lang-ko">이력서 다운로드 (PDF)</span>
-                </a>
-            </div>
+        <h5 class="font-weight-bold text-dark mb-3 lang-en">Looking for the full Curriculum Vitae?</h5>
+        <h5 class="font-weight-bold text-dark mb-3 lang-ko">상세 이력서가 필요하신가요?</h5>
+        <p class="text-muted mb-4" style="font-size: 0.9rem; line-height: 1.6;">
+            <span class="lang-en">Click below to download the latest PDF version of the CV, detailing all publications, coursework, and side-projects.</span>
+            <span class="lang-ko">출판 논문 목록, 상세 이수 과목, 사이드 프로젝트 기록이 포함된 최신 PDF 이력서를 아래에서 손쉽게 다운로드하실 수 있습니다.</span>
+        </p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="{{ site.baseurl }}/CV.pdf" download="KyungMinJin_CV.pdf" class="btn btn-outline-primary font-weight-bold px-4 py-2 text-uppercase shadow-sm" style="border-radius: 30px; font-size: 0.85rem; letter-spacing: 0.5px;">
+                <i class="fa fa-download mr-2"></i> 
+                <span class="lang-en">Download CV (PDF)</span>
+                <span class="lang-ko">이력서 다운로드 (PDF)</span>
+            </a>
         </div>
     </div>
 </div>
