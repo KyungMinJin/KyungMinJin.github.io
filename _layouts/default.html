@@ -29,8 +29,6 @@
     
     <link rel="icon" href="{{ site.baseurl }}/assets/images/logo.png" />
 
-    <title>{{ page.title }} | {{site.name}}</title>
-
     {% seo %}
 
     <!-- Schema.org Person Structured Data -->
@@ -595,6 +593,9 @@
           updateThemeUI(isDark);
           // Force style recalculation for mobile browsers
           void document.body.offsetWidth;
+
+          // Dispatch theme-changed event for dynamic components (like Chart.js)
+          window.dispatchEvent(new Event('theme-changed'));
       }
 
       document.addEventListener("DOMContentLoaded", function() {
