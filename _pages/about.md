@@ -144,7 +144,7 @@ comments: true
     <div class="visitor-map-container"
         style="min-height: 150px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
         {% if site.visitor_map.provider == 'mapmyvisitors' %}
-            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353"></script>
+            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353" async defer></script>
         {% else %}
             <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" rel="noopener noreferrer" style="width: 100%;">
                 <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"

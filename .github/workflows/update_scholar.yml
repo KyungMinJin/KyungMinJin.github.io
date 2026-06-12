@@ -29,7 +29,7 @@ jobs:
           pip install beautifulsoup4
 
       - name: Run scholar sync script
-        run: python scripts/update_scholar.py
+        run: python3 scripts/update_scholar.py
 
       - name: Commit and push if changed
         run: |

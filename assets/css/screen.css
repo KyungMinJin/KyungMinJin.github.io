@@ -2834,6 +2834,49 @@ html.dark-mode .mediumnavigation .form-control:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 171, 107, 0.15) !important;
 }
 
+/* Dark mode inputs in general */
+html.dark-mode .form-control {
+  background-color: #1e1e1e !important;
+  border-color: #2d2d2d !important;
+  color: #e0e0e0 !important;
+}
+
+html.dark-mode .form-control::placeholder {
+  color: #888 !important;
+}
+
+html.dark-mode .form-control:focus {
+  background-color: #1a1a1a !important;
+  border-color: #4a777a !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(74, 119, 122, 0.25) !important;
+}
+
+/* Dark mode bootstrap overrides */
+html.dark-mode .bg-light {
+  background-color: #1a1a1a !important;
+  color: #e0e0e0 !important;
+}
+
+html.dark-mode .btn-outline-dark {
+  color: #e0e0e0 !important;
+  border-color: #555555 !important;
+}
+
+html.dark-mode .btn-outline-dark:hover {
+  color: #ffffff !important;
+  background-color: #333333 !important;
+  border-color: #777777 !important;
+}
+
+/* Fix orcid badge image size stretching in article post */
+.article-post .orcid-badge img {
+  width: 16px !important;
+  height: 16px !important;
+  display: inline-block !important;
+  margin: 0 !important;
+}
+
 html.dark-mode .mediumnavigation .search-icon {
   color: #888 !important;
 }
@@ -3183,4 +3226,13 @@ html.dark-mode .article-post img.shadow {
     border-radius: 6px;
     margin: 0.8rem auto;
   }
+}
+
+/* Specific override for publication representative demo images to ensure height: 220px */
+.article-post img.publication-demo-img {
+  width: auto !important;
+  max-width: 100% !important;
+  height: 220px !important;
+  object-fit: contain !important;
+  margin: 0 auto !important;
 }

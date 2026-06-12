@@ -1,5 +1,5 @@
 {
-    "citations": 94,
+    "citations": 95,
     "h_index": 5,
     "i10_index": 4,
     "graph": [
@@ -16,27 +16,27 @@
         {
             "year": "22",
             "full_year": "2022",
-            "citations": 0
+            "citations": 1
         },
         {
             "year": "23",
             "full_year": "2023",
-            "citations": 0
+            "citations": 12
         },
         {
             "year": "24",
             "full_year": "2024",
-            "citations": 0
+            "citations": 30
         },
         {
             "year": "25",
             "full_year": "2025",
-            "citations": 0
+            "citations": 36
         },
         {
             "year": "26",
             "full_year": "2026",
-            "citations": 0
+            "citations": 16
         }
     ]
 }

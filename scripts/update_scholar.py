@@ -131,6 +131,10 @@ try:
 
     print(f"Raw coordinates parsed: Years={years_list}, Bars={values_list}")
 
+    # Validate that we successfully parsed the required elements to prevent overwriting with zeroes
+    if not stats or not years_list or not values_list:
+        raise Exception("Failed to parse Google Scholar metrics or graph data (empty results). The request might have been blocked or served a CAPTCHA page.")
+
     # Map each year to its nearest bar by finding the minimum coordinate difference
     graph_data = []
     for y_right, y_text in years_list:
