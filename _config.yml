@@ -62,10 +62,11 @@ adsense-data-ad-slot: "1363087678"
 # Visitor Map Configuration (uses MapMyVisitors Globe or Flag Counter Map)
 visitor_map:
   enabled: true
-  provider: "flagcounter" # Options: "mapmyvisitors", "flagcounter"
+  provider: "lookerstudio" # Options: "mapmyvisitors", "flagcounter", "lookerstudio"
   id: "9eb21ToeLcW-U0-8JHvw2mkrWsphlIjdIqa45yyfh-c"
   link_url: "https://info.flagcounter.com/xWZw"
   image_url: "https://s01.flagcounter.com/map/xWZw/size_m/txt_000000/border_CCCCCC/pageviews_0/viewers_0/flags_0/"
+  looker_studio_url: "https://datastudio.google.com/embed/reporting/b502e4ac-c604-4237-8b2b-e2c3f754a057/page/sD40F"
 
 # ORCID
 orcid:

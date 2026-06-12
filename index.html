@@ -966,6 +966,8 @@ title: Home
                 style="min-height: 150px; display: flex; align-items: center; justify-content: center;">
                 {% if site.visitor_map.provider == 'mapmyvisitors' %}
                     <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353" async defer></script>
+                {% elif site.visitor_map.provider == 'lookerstudio' %}
+                    <iframe width="100%" height="320" src="{{ site.visitor_map.looker_studio_url }}" frameborder="0" style="border:0; border-radius: 8px; min-height: 250px;" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
                 {% else %}
                     <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" rel="noopener noreferrer" style="width: 100%;">
                         <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
