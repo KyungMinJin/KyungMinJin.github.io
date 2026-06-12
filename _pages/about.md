@@ -20,6 +20,37 @@ comments: true
     <p>More recently, I have been working within an advanced robotics research team, where my focus is on robotic perception and natural language–based object understanding. My current research aims to bridge multimodal foundation models with embodied AI, enabling robots to ground language in visual perception and interact with the physical world more effectively. </p>
     
     <p>For more detailed information about my background and experience, please refer to my <a target="_blank" href="https://kyungminjin.github.io/CV.pdf" rel="noopener noreferrer">CV</a>.</p>
+
+    <!-- Side Projects & Development Experience -->
+    <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> Side Projects & Development Experience</h4>
+    <div class="card shadow-sm border-0 p-4 bg-white mb-4">
+        <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
+            <li class="mb-3">
+                <strong>KLUE (Jul 2019 - Present):</strong> Course evaluation service for Korea University students. Participated in planning, Frontend renewal, and Admin page development.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, MobX, TypeScript</div>
+            </li>
+            <li class="mb-3">
+                <strong>da Vinci (Jul 2020 - Feb 2021):</strong> In-house startup team developing link-saving helper utilities. Maintained mobile apps, Chrome extensions, and server endpoints.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, React Native, MobX, Node.js, Express, AWS</div>
+            </li>
+            <li class="mb-3">
+                <strong>Deer (Jul 2020 - Feb 2021):</strong> Shared electric kickboard service. Developed and maintained mobile app frontend elements.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, TypeScript, MobX</div>
+            </li>
+            <li class="mb-3">
+                <strong>SubjectArea:</strong> Shopping and news utility application. Built backend servers, admin portals, and mobile app clients.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, Node.js, MongoDB, AWS, Redux</div>
+            </li>
+            <li class="mb-3">
+                <strong>StayTuned:</strong> Frontend development for e-commerce helper utilities.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, Redux, AWS S3</div>
+            </li>
+            <li>
+                <strong>BodyApp (슬기로on):</strong> Tablet-based application for anatomical visualizations and physiological descriptions.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native</div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <div class="lang-ko">
@@ -34,188 +65,41 @@ comments: true
     <p>최근에는 로봇 선행 연구 조직에서 로봇 인지 및 자연어 기반 객체 이해 기술을 연구하고 있으며, 멀티모달 파운데이션 모델과 Embodied 인공지능(Embodied AI)을 연결해 로봇이 시각 정보를 언어적으로 이해하고 물리적 환경과 효과적으로 상호작용할 수 있도록 하는 것을 목표로 하고 있습니다.</p>
     
     <p>더 자세한 경력은 <a target="_blank" href="https://kyungminjin.github.io/CV.pdf">이력서(CV)</a>를 참고해주세요.</p>
+
+    <!-- Side Projects & Development Experience -->
+    <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> 기타 프로젝트 및 개발 경험</h4>
+    <div class="card shadow-sm border-0 p-4 bg-white mb-4">
+        <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
+            <li class="mb-3">
+                <strong>KLUE (2019.07 - 현재):</strong> 고려대학교 강의 평가 서비스. 기획, 프론트엔드 리뉴얼 및 관리자(어드민) 페이지 개발을 담당하고 있습니다.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, MobX, TypeScript</div>
+            </li>
+            <li class="mb-3">
+                <strong>da Vinci (2020.07 - 2021.02):</strong> 링크 수집 서비스 사내 스타트업. 크롬 확장 프로그램 및 모바일 앱 프론트엔드, API 백엔드 서버 개발에 참여했습니다.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, React Native, MobX, Node.js, Express, AWS</div>
+            </li>
+            <li class="mb-3">
+                <strong>Deer (2020.07 - 2021.02):</strong> 전동 킥보드 공유 서비스 디어(Deer) 모바일 앱 프론트엔드 파트너 개발에 참여했습니다.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, TypeScript, MobX</div>
+            </li>
+            <li class="mb-3">
+                <strong>SubjectArea:</strong> 쇼핑 및 뉴스 관련 애플리케이션 개발. 어드민 페이지, 백엔드 서버 및 모바일 클라이언트를 구축했습니다.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, Node.js, MongoDB, AWS, Redux</div>
+            </li>
+            <li class="mb-3">
+                <strong>StayTuned:</strong> 커머스 플랫폼 툴의 프론트엔드 웹 서비스 구축.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, Redux, AWS S3</div>
+            </li>
+            <li>
+                <strong>슬기로on:</strong> 태블릿 기반 신체 구조도 시각화 및 설명 교육용 앱.
+                <div class="text-secondary" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native</div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 </div> <!-- col-md-8 끝 -->
 </div> <!-- row 끝 (소개 Row) -->
-
-<div class="row mt-5 pt-4 border-top justify-content-center">
-<div class="col-md-6 mb-4">
-
-<!-- Google Scholar Metrics & Citation Graph -->
-<div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100">
-    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 d-flex align-items-center" style="white-space:nowrap; flex-wrap:nowrap;">
-        <i class="fa fa-graduation-cap text-info mr-1" style="flex-shrink:0;"></i>
-        <span class="lang-en">Google Scholar Metrics</span>
-        <span class="lang-ko">구글 스콜라 지표</span>
-    </h6>
-    {% assign s_data = site.data.scholar %}
-    <table class="table table-sm table-borderless mb-3" style="font-size: 0.9rem;">
-        <thead>
-            <tr class="text-secondary" style="font-size: 0.75rem; border-bottom: 1px solid #eee;">
-                <th>
-                    <span class="lang-en">Metric</span>
-                    <span class="lang-ko">지표</span>
-                </th>
-                <th class="text-right">
-                    <span class="lang-en">All</span>
-                    <span class="lang-ko">전체</span>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="text-dark py-1">
-                    <span class="lang-en">Citations</span>
-                    <span class="lang-ko">인용 횟수</span>
-                </td>
-                <td class="text-right font-weight-bold py-1">{{ s_data.citations }}</td>
-            </tr>
-            <tr>
-                <td class="text-dark py-1">h-index</td>
-                <td class="text-right font-weight-bold py-1">{{ s_data.h_index }}</td>
-            </tr>
-            <tr>
-                <td class="text-dark py-1">i10-index</td>
-                <td class="text-right font-weight-bold py-1">{{ s_data.i10_index }}</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <div class="scholar-graph-container mt-2">
-        <div class="scholar-graph-title text-secondary mb-2" style="font-size: 0.75rem; font-weight: 600;">
-            <span class="lang-en">Citations per year</span>
-            <span class="lang-ko">연도별 인용 횟수</span>
-        </div>
-        
-        {% assign max_cites = 1 %}
-        {% for item in s_data.graph %}
-            {% if item.citations > max_cites %}
-                {% assign max_cites = item.citations %}
-            {% endif %}
-        {% endfor %}
-        
-        <div class="scholar-graph">
-            <!-- Y-axis Guidelines & Labels -->
-            <div class="scholar-y-line" style="bottom: 160px;"></div>
-            <span class="scholar-y-label" style="bottom: 160px;">{{ max_cites }}</span>
-
-            {% assign mid_cites = max_cites | divided_by: 2 %}
-            <div class="scholar-y-line" style="bottom: 80px;"></div>
-            <span class="scholar-y-label" style="bottom: 80px;">{{ mid_cites }}</span>
-
-            <div class="scholar-y-line" style="bottom: 0px;"></div>
-            <span class="scholar-y-label" style="bottom: 0px;">0</span>
-
-            {% for item in s_data.graph %}
-                {% assign bar_height = item.citations | times: 160 | divided_by: max_cites %}
-                {% if item.citations > 0 and bar_height < 5 %}
-                    {% assign bar_height = 5 %}
-                {% endif %}
-                <div class="scholar-bar-wrapper">
-                    <span class="scholar-value">{{ item.citations }}</span>
-                    <div class="scholar-bar" style="height: {{ bar_height }}px;" 
-                         data-tooltip="{{ item.full_year }}: {{ item.citations }} citations" 
-                         title="{{ item.full_year }}: {{ item.citations }} citations"></div>
-                    <span class="scholar-year">
-                        {% if item.citations > 0 %}
-                            {{ item.year }}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                    </span>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</div>
-
-</div>
-
-<div class="col-md-6 mb-4 text-center">
-
-<!-- Visitor Analytics Widget -->
-<div class="card glass-card border shadow-sm p-3 pt-2 pb-2 bg-white h-100 d-flex flex-column justify-content-between">
-    <h6 class="font-weight-bold text-dark border-bottom pb-2 mb-3 text-left d-flex align-items-center" style="white-space:nowrap; flex-wrap:nowrap;">
-        <i class="fa fa-globe text-secondary mr-1" style="flex-shrink:0;"></i>
-        <span class="lang-en">Visitor Map</span>
-        <span class="lang-ko">방문자 분포 지도</span>
-    </h6>
-    <div class="visitor-map-container"
-        style="min-height: 150px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-        {% if site.visitor_map.provider == 'mapmyvisitors' %}
-            <script type="text/javascript" id="mapmyvisitors" src="https://mapmyvisitors.com/map.js?cl=080808&amp;w=a&amp;t=tt&amp;d={{ site.visitor_map.id }}&amp;co=ffffff&amp;ct=808080&amp;cmo=3acc3a&amp;cmn=ff5353" async defer></script>
-        {% else %}
-            <a href="{{ site.visitor_map.link_url }}" title="Visit tracker" target="_blank" rel="noopener noreferrer" style="width: 100%;">
-                <img src="{{ site.visitor_map.image_url }}" alt="Visitor Map" referrerpolicy="no-referrer"
-                    class="visitor-map-img"
-                    style="max-width: 100%; height: auto; border-radius: 8px;"
-                    onerror="this.onerror=null; this.closest('.visitor-map-container').style.display='none';" />
-            </a>
-        {% endif %}
-    </div>
-    <div class="mt-3">
-        <img src="https://visitor-badge.laobi.icu/badge?page_id=kyungminjin.github.io&title=Total+Visits&color=4a777a" alt="Total Visits" style="border-radius: 4px; max-height: 22px; height: auto;"/>
-    </div>
-</div>
-
-</div>
-</div>
-
-<!-- Awards & Activities Section -->
-<hr class="my-5">
-
-<div class="row">
-    <div class="col-md-12">
-        <h5 class="font-weight-bold text-dark mb-3">
-            <i class="fa fa-trophy text-warning"></i>
-            <span class="lang-en"> Awards &amp; Activities</span>
-            <span class="lang-ko"> 수상 및 활동</span>
-        </h5>
-        <div class="row">
-
-            <div class="col-md-6 mb-3">
-                <div class="card border shadow-sm p-3 h-100">
-                    <div class="d-flex align-items-start">
-                        <span class="badge badge-warning mr-3 mt-1" style="font-size:0.8rem; white-space:nowrap;">대상 / Grand Prize</span>
-                        <div>
-                            <strong class="text-dark d-block">
-                                <span class="lang-en">2021 Miso AI Model Development Challenge</span>
-                                <span class="lang-ko">2021 미소 인공지능 모델 개발 챌린지</span>
-                            </strong>
-                            <span class="text-muted" style="font-size:0.88rem;">
-                                <span class="lang-en">Infant Behavior Video Data Track</span>
-                                <span class="lang-ko">영유아 행동 영상 데이터 부문</span>
-                            </span>
-                            <div class="text-secondary mt-1" style="font-size:0.8rem;">
-                                <span class="lang-en">Supported by Ministry of Science and ICT (MSIT), NIA, Miso Information Technology</span>
-                                <span class="lang-ko">과학기술정보통신부, 한국지능정보사회진흥원 지원 · ㈜미소정보기술 주최</span>
-                            </div>
-                            <div class="text-muted mt-1" style="font-size:0.8rem;">2021</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <div class="card border shadow-sm p-3 h-100">
-                    <div class="d-flex align-items-start">
-                        <span class="badge badge-secondary mr-3 mt-1" style="font-size:0.8rem; white-space:nowrap;">장려상 / Encouragement</span>
-                        <div>
-                            <strong class="text-dark d-block">
-                                <span class="lang-en">KU 2020 Smart Campus Datathon</span>
-                                <span class="lang-ko">KU 2020 스마트캠퍼스 데이터톤</span>
-                            </strong>
-                            <span class="text-muted" style="font-size:0.88rem;">Korea University</span>
-                            <div class="text-muted mt-1" style="font-size:0.8rem;">2020</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 <!-- Collapsible PDF CV Viewer -->
 <hr class="my-5">
