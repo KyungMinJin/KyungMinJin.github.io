@@ -98,19 +98,21 @@
       };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+    
+    {% if site.google_analytics and jekyll.environment == 'production' %}
+    <!-- Google tag (gtag.js) - Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{site.google_analytics}}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', '{{site.google_analytics}}');
+    </script>
+    {% endif %}
   </head>
 
-  {% if site.google_analytics and jekyll.environment == 'production' %}
-  <!-- Google tag (gtag.js) - Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id={{site.google_analytics}}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', '{{site.google_analytics}}');
-  </script>
-  {% endif %} {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{%
+  {% capture layout %}{% if page.layout %}layout-{{ page.layout }}{%
   endif %}{% endcapture %}
   <body class="{{layout}}">
     <!-- Reading Progress Bar -->
