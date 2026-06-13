@@ -50,66 +50,21 @@ comments: true
     <!-- Professional Experience -->
     <h4 class="font-weight-bold text-dark mt-4 mb-3"><i class="fa fa-briefcase text-primary mr-2"></i> Professional Experience</h4>
     
-    <!-- Experience: LG Electronics -->
-    <div class="timeline-org-group mb-5">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-                <strong class="text-dark d-block" style="font-size: 1.05rem;">LG Electronics (Robotics & AI Labs)</strong>
-                <span class="text-muted" style="font-size: 0.88rem;">Senior Research Engineer (선임연구원) · Mar 2023 - Present</span>
-            </div>
-            <span class="badge badge-primary font-weight-bold px-3 py-2" style="font-size: 0.75rem;">Full-time</span>
-        </div>
-        <ul class="pl-3 text-muted" style="line-height: 1.75; font-size: 0.88rem;">
-            <li class="mb-2"><strong>Robotics Perception & Embodied AI (Advanced Robotics Lab):</strong> Developing language-grounded robotic query-response intelligence, building robust open-world spatial perception systems, and constructing RAG-ROS2 query datasets.</li>
-            <li class="mb-2"><strong>Multimodal Examodal Project (AI Lab):</strong> Co-designed large-scale Vision-Language-Audio models for appliance event detection; optimized cross-modal alignment and implemented appliance log integration.</li>
-            <li><strong>Edge Quantization:</strong> Integrated action recognition and hand mesh models into TV edge devices, utilizing Quantization-Aware Training (QAT) to Qualcomm Neural SDK frameworks.</li>
-        </ul>
-    </div>
-    
-    <!-- Experience: Academic Research -->
-    <div class="timeline-org-group mb-5">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-                <strong class="text-dark d-block" style="font-size: 1.05rem;">Korea University (PRML Lab)</strong>
-                <span class="text-muted" style="font-size: 0.88rem;">M.S. in Artificial Intelligence · Sep 2021 - Feb 2023</span>
-            </div>
-            <span class="badge badge-secondary font-weight-bold px-3 py-2" style="font-size: 0.75rem;">Research</span>
-        </div>
-        <ul class="pl-3 text-muted" style="line-height: 1.75; font-size: 0.88rem;">
-            <li class="mb-2"><strong>Video Pose Estimation:</strong> Designed physical law-guided hierarchical attention transformers (HANet) to tackle joint jitter. Published at top computer vision venue <strong>WACV 2023 (Oral)</strong>.</li>
-            <li class="mb-2"><strong>Occlusion-Aware Transformer (OTPose):</strong> Proposed self-supervised occluded-joint learning frameworks in sparse annotation videos (IEEE SMC 2022 Oral).</li>
-            <li><strong>3D Mesh Recovery:</strong> Co-developed self-supervised Multi-Hypothesis Canonical lifting networks for in-the-wild video pose recovery (Pattern Recognition 2024).</li>
-        </ul>
-    </div>
+    {% include timeline-about.html %}
 
     <!-- Side Projects & Development Experience -->
     <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> Side Projects & Development Experience</h4>
     <div class="pl-2 mb-5">
         <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
+            {% for project in site.data.projects.early_projects %}
             <li class="mb-3">
-                <strong>KLUE (Jul 2019 - Present):</strong> Course evaluation service for Korea University students. Participated in planning, Frontend renewal, and Admin page development.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, MobX, TypeScript</div>
+                <strong>{{ project.title }} ({{ project.duration }}):</strong> {{ project.desc }}
+                <div class="text-secondary mt-1" style="font-size: 0.82rem;">
+                    <i class="fa fa-wrench mr-1"></i> 
+                    {% for tag in project.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+                </div>
             </li>
-            <li class="mb-3">
-                <strong>da Vinci (Jul 2020 - Feb 2021):</strong> In-house startup team developing link-saving helper utilities. Maintained mobile apps, Chrome extensions, and server endpoints.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, React Native, MobX, Node.js, Express, AWS</div>
-            </li>
-            <li class="mb-3">
-                <strong>Deer (Jul 2020 - Feb 2021):</strong> Shared electric kickboard service. Developed and maintained mobile app frontend elements.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, TypeScript, MobX</div>
-            </li>
-            <li class="mb-3">
-                <strong>SubjectArea:</strong> Shopping and news utility application. Built backend servers, admin portals, and mobile app clients.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, Node.js, MongoDB, AWS, Redux</div>
-            </li>
-            <li class="mb-3">
-                <strong>StayTuned:</strong> Frontend development for e-commerce helper utilities.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, Redux, AWS S3</div>
-            </li>
-            <li>
-                <strong>BodyApp (슬기로on):</strong> Tablet-based application for anatomical visualizations and physiological descriptions.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native</div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>
@@ -120,66 +75,21 @@ comments: true
     <!-- 실무 및 학술 경력 -->
     <h4 class="font-weight-bold text-dark mt-4 mb-3"><i class="fa fa-briefcase text-primary mr-2"></i> 실무 및 학술 연구 경력</h4>
     
-    <!-- 경력: LG전자 -->
-    <div class="timeline-org-group mb-5">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-                <strong class="text-dark d-block" style="font-size: 1.05rem;">LG전자 (로봇선행연구소 / AI연구소)</strong>
-                <span class="text-muted" style="font-size: 0.88rem;">로봇 인지 태스크 선임연구원 · 2023.03 - 현재</span>
-            </div>
-            <span class="badge badge-primary font-weight-bold px-3 py-2" style="font-size: 0.75rem;">정직원</span>
-        </div>
-        <ul class="pl-3 text-muted" style="line-height: 1.75; font-size: 0.88rem;">
-            <li class="mb-2"><strong>로봇 인지 및 Embodied AI (로봇선행연구소):</strong> 로봇의 시각 인지 및 자연어 기반 환경 파악 연구, RAG와 ROS2를 결합한 질의응답 모델 고도화, 전용 데이터셋 구축.</li>
-            <li class="mb-2"><strong>멀티모달 가전 상황인지 (AI연구소):</strong> 대규모 영상-오디오-로그 융합 추론 모델(Examodal) 구조 설계 및 크로스모달 얼라인먼트 최적화.</li>
-            <li><strong>임베디드 최적화:</strong> ONNX 및 Qualcomm Neural SDK를 이용한 행동 검출 및 손 메쉬 모델 엣지(Edge/TV) 기기 탑재 및 QAT(양자화 인식 학습) 최적화.</li>
-        </ul>
-    </div>
-    
-    <!-- 경력: 대학원 -->
-    <div class="timeline-org-group mb-5">
-        <div class="d-flex justify-content-between align-items-start mb-2">
-            <div>
-                <strong class="text-dark d-block" style="font-size: 1.05rem;">고려대학교 대학원 (인공지능학과 PRML 연구실)</strong>
-                <span class="text-muted" style="font-size: 0.88rem;">인공지능학 석사 · 2021.09 - 2023.02</span>
-            </div>
-            <span class="badge badge-secondary font-weight-bold px-3 py-2" style="font-size: 0.75rem;">학술 연구</span>
-        </div>
-        <ul class="pl-3 text-muted" style="line-height: 1.75; font-size: 0.88rem;">
-            <li class="mb-2"><strong>비디오 인체 포즈 추정 (HANet):</strong> 물리 운동 법칙(속도/가속도)을 활용해 프레임 간 튀는 떨림을 해결하는 트랜스포머 아키텍처 제안 (<strong>WACV 2023 Oral</strong> 발표).</li>
-            <li class="mb-2"><strong>가림 현상 해결 (OTPose):</strong> 레이블링이 드문 비디오 환경에서 가려진 관절점을 가상 보정하는 Occlusion-Aware Transformer 설계 (IEEE SMC 2022 Oral).</li>
-            <li><strong>3D 구조 복원 (MHCanonNet):</strong> 와일드 비디오 시각 정보의 3D 리프팅 네트워크 설계 (Pattern Recognition 2024 게재).</li>
-        </ul>
-    </div>
+    {% include timeline-about.html %}
 
     <!-- Side Projects & Development Experience -->
     <h4 class="font-weight-bold text-dark mt-5 mb-3"><i class="fa fa-code-fork text-primary mr-2"></i> 기타 프로젝트 및 개발 경험</h4>
     <div class="pl-2 mb-5">
         <ul class="pl-3 text-muted mb-0" style="line-height: 1.8; font-size: 0.92rem;">
+            {% for project in site.data.projects.early_projects %}
             <li class="mb-3">
-                <strong>KLUE (2019.07 - 현재):</strong> 고려대학교 강의 평가 서비스. 기획 및 프론트엔드 리뉴얼, 관리자 대시보드 어드민 페이지 개발.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, MobX, TypeScript</div>
+                <strong>{{ project.title }} ({{ project.duration }}):</strong> {{ project.desc }}
+                <div class="text-secondary mt-1" style="font-size: 0.82rem;">
+                    <i class="fa fa-wrench mr-1"></i> 
+                    {% for tag in project.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}
+                </div>
             </li>
-            <li class="mb-3">
-                <strong>da Vinci (2020.07 - 2021.02):</strong> 링크 아카이빙 솔루션 사내 스타트업. 크롬 확장 프로그램 및 모바일 앱 화면 개발, 백엔드 API 배포.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, React Native, MobX, Node.js, Express, AWS</div>
-            </li>
-            <li class="mb-3">
-                <strong>Deer (2020.07 - 2021.02):</strong> 전동 킥보드 공유 플랫폼 디어. 하이브리드 앱 프론트엔드 모듈 개발 및 유지보수.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, TypeScript, MobX</div>
-            </li>
-            <li class="mb-3">
-                <strong>SubjectArea:</strong> 쇼핑 및 뉴스 통합 유틸리티 앱. DB 스키마 및 백엔드 서버 설계, 앱 클라이언트 개발.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native, Node.js, MongoDB, AWS, Redux</div>
-            </li>
-            <li class="mb-3">
-                <strong>StayTuned:</strong> 이커머스 어시스턴트 프론트엔드 웹 툴 구축.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React, Redux, AWS S3</div>
-            </li>
-            <li>
-                <strong>슬기로on:</strong> 해부학 및 신체 구조 교육 설명을 위한 태블릿 전용 앱 데모 빌드.
-                <div class="text-secondary mt-1" style="font-size: 0.82rem;"><i class="fa fa-wrench mr-1"></i> React Native</div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </div>

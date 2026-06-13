@@ -1,0 +1,180 @@
+- badge_text: "Preprint"
+  badge_class: "badge-secondary"
+  category_text: "Multimodal Learning"
+  category_class: "badge-info"
+  title: "MAPLE: Modality-Aware Post-training and Learning Ecosystem"
+  authors: "Nikhil Verma*, Minjung Kim*, JooYoung Yoo*, <strong>Kyung-Min Jin*</strong>, Manasa Bharadwaj, Kevin Ferreira, Ko Keun Kim, and Youngjoon Kim"
+  venue: "<em>arXiv preprint arXiv:2602.11596</em>, 2026. <span class=\"text-secondary font-italic\">(* Equal contribution)</span>"
+  links:
+    - text: "arXiv"
+      url: "https://arxiv.org/abs/2602.11596"
+      icon: "fa-file-pdf-o"
+      external: true
+  bibtex: |
+    @misc{verma2026maple,
+      title={MAPLE: Modality-Aware Post-training and Learning Ecosystem},
+      author={Verma, Nikhil and Kim, Minjung and Yoo, JooYoung and Jin, Kyung-Min and Bharadwaj, Manasa and Ferreira, Kevin and Kim, Ko Keun and Kim, Youngjoon},
+      year={2026},
+      eprint={2602.11596},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+    }
+  demo_img: "https://arxiv.org/html/2602.11596v1/figures/intro_manifolds.png"
+  demo_alt: "MAPLE: Modality-aware multimodal post-training concept figure"
+
+- badge_text: "Under Review"
+  badge_class: "badge-warning"
+  category_text: "Action Localization"
+  category_class: "badge-info"
+  title: "Calibrated Attention Masking Network for Temporal Action Localization"
+  authors: "Tae-Kyung Kang, Gun-Hee Lee, Woo-Jeoung Nam, Hyun-Woo Kim, <strong>Kyung-Min Jin</strong>, and Seong-Whan Lee"
+  venue: "<em>Under Review</em>, 2026."
+
+- badge_text: "Journal (Neural Networks)"
+  badge_class: "badge-success"
+  category_text: "Pose Estimation"
+  category_class: "badge-info"
+  title: "Masked Kinematic Continuity-aware Hierarchical Attention Network for pose estimation in videos"
+  authors: "<strong>Kyung-Min Jin</strong>, Gun-Hee Lee, Woo-Jeoung Nam, Tae-Kyung Kang, Hyun-Woo Kim, and Seong-Whan Lee"
+  venue: "<em>Neural Networks</em>, Volume 169, Pages 282-292, 2024."
+  links:
+    - text: "ScienceDirect"
+      url: "https://doi.org/10.1016/j.neunet.2023.10.038"
+      icon: "fa-external-link"
+      external: true
+  bibtex: |
+    @article{jin2024masked,
+      title={Masked Kinematic Continuity-aware Hierarchical Attention Network for pose estimation in videos},
+      author={Jin, Kyung-Min and Lee, Gun-Hee and Nam, Woo-Jeoung and Kang, Tae-Kyung and Kim, Hyun-Woo and Lee, Seong-Whan},
+      journal={Neural Networks},
+      volume={169},
+      pages={282--292},
+      year={2024},
+      publisher={Elsevier},
+      doi={10.1016/j.neunet.2023.10.038}
+    }
+  demo_img: "/assets/images/HANet.png"
+  demo_alt: "Masked Kinematic Continuity-aware Hierarchical Attention Network Architecture Diagram"
+
+- badge_text: "Journal (Pattern Recognition)"
+  badge_class: "badge-success"
+  category_text: "3D Pose Estimation"
+  category_class: "badge-info"
+  title: "MHCanonNet: Multi-Hypothesis Canonical lifting Network for self-supervised 3D human pose estimation in the wild video"
+  authors: "Hyun-Woo Kim, Gun-Hee Lee, Woo-Jeoung Nam, <strong>Kyung-Min Jin</strong>, Tae-Kyung Kang, Geon-Jun Yang, and Seong-Whan Lee"
+  venue: "<em>Pattern Recognition</em>, Volume 145, Article 109908, 2024."
+  links:
+    - text: "ScienceDirect"
+      url: "https://doi.org/10.1016/j.patcog.2023.109908"
+      icon: "fa-external-link"
+      external: true
+  bibtex: |
+    @article{kim2024mhcanonnet,
+      title={MHCanonNet: Multi-Hypothesis Canonical lifting Network for self-supervised 3D human pose estimation in the wild video},
+      author={Kim, Hyun-Woo and Lee, Gun-Hee and Nam, Woo-Jeoung and Jin, Kyung-Min and Kang, Tae-Kyung and Yang, Geon-Jun and Lee, Seong-Whan},
+      journal={Pattern Recognition},
+      volume={145},
+      pages={109908},
+      year={2024},
+      publisher={Elsevier},
+      doi={10.1016/j.patcog.2023.109908}
+    }
+  demo_img: "/assets/images/publications/mhcanonnet_patternrecog_gr1.jpg"
+  demo_alt: "MHCanonNet: Multi-hypothesis canonical lifting network overview"
+
+- badge_text: "Preprint"
+  badge_class: "badge-secondary"
+  category_text: "3D Hand Pose"
+  category_class: "badge-info"
+  title: "Mesh Represented Recycle Learning for 3D Hand Pose and Mesh Estimation"
+  authors: "Bo-sang Kim, Jong-hyun Kim, Hyo-tae Lee, Lan-ying Jin, Jeong-won Ha, Do-woo Kwon, Jung-pyo Kim, Won-hyeok Im, <strong>Kyung-Min Jin</strong>, and Jung-ho Lee"
+  venue: "<em>arXiv preprint arXiv:2310.12189</em>, 2023."
+  links:
+    - text: "arXiv"
+      url: "https://arxiv.org/abs/2310.12189"
+      icon: "fa-file-pdf-o"
+      external: true
+  bibtex: |
+    @misc{kim2023mesh,
+      title={Mesh Represented Recycle Learning for 3D Hand Pose and Mesh Estimation},
+      author={Kim, Bo-sang and Kim, Jong-hyun and Lee, Hyo-tae and Jin, Lan-ying and Ha, Jeong-won and Kwon, Do-woo and Kim, Jung-pyo and Im, Won-hyeok and Jin, Kyung-Min and Lee, Jung-ho},
+      year={2023},
+      eprint={2310.12189},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+    }
+  demo_img: "https://arxiv.org/html/2310.12189v1/extracted/5180259/images/recyclenet.jpg"
+  demo_alt: "Mesh Represented Recycle Learning: architecture and recycle-learning pipeline"
+
+- badge_text: "WACV 2023 (Oral)"
+  badge_class: "badge-danger"
+  category_text: "Human Pose Estimation"
+  category_class: "badge-info"
+  title: "Kinematic-aware Hierarchical Attention Network for Human Pose Estimation in Videos"
+  authors: "<strong>Kyung-Min Jin</strong>, Byoung-Sung Lim, Gun-Hee Lee, Tae-Kyung Kang, and Seong-Whan Lee"
+  venue: "<em>Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em>, pages 5725-5734, 2023."
+  links:
+    - text: "CVF Open Access"
+      url: "https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html"
+      icon: "fa-external-link"
+      external: true
+  bibtex: |
+    @inproceedings{jin2023kinematic,
+      title={Kinematic-aware Hierarchical Attention Network for Human Pose Estimation in Videos},
+      author={Jin, Kyung-Min and Lim, Byoung-Sung and Lee, Gun-Hee and Kang, Tae-Kyung and Lee, Seong-Whan},
+      booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+      pages={5725--5734},
+      year={2023}
+    }
+  demo_gifs:
+    - url: "/assets/images/aist_3D.gif"
+      alt: "HANet: 3D Human Pose Estimation Demo (AIST Dataset)"
+    - url: "/assets/images/jhmdb.gif"
+      alt: "HANet: 2D Human Pose Estimation Demo (JHMDB Dataset)"
+
+- badge_text: "WACV 2023 (Oral)"
+  badge_class: "badge-danger"
+  category_text: "Action Localization"
+  category_class: "badge-info"
+  title: "Action-Aware Masking Network With Group-Based Attention for Temporal Action Localization"
+  authors: "Tae-Kyung Kang, Gun-Hee Lee, <strong>Kyung-Min Jin</strong>, and Seong-Whan Lee"
+  venue: "<em>Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em>, pages 6058-6067, 2023."
+  links:
+    - text: "CVF Open Access"
+      url: "https://openaccess.thecvf.com/content/WACV2023/html/Kang_Action-Aware_Masking_Network_With_Group-Based_Attention_for_Temporal_Action_Localization_WACV_2023_paper.html"
+      icon: "fa-external-link"
+      external: true
+  bibtex: |
+    @inproceedings{kang2023action,
+      title={Action-Aware Masking Network With Group-Based Attention for Temporal Action Localization},
+      author={Kang, Tae-Kyung and Lee, Gun-Hee and Jin, Kyung-Min and Lee, Seong-Whan},
+      booktitle={Proceedings of the IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+      pages={6058--6067},
+      year={2023}
+    }
+  demo_img: "/assets/images/publications/action_aware_wacv2023_fig2.png"
+  demo_alt: "Action-Aware Masking Network: Figure 2 overview from WACV 2023 paper"
+
+- badge_text: "SMC 2022 (Oral)"
+  badge_class: "badge-danger"
+  category_text: "Pose Estimation"
+  category_class: "badge-info"
+  title: "OTPose: Occlusion-Aware Transformer for Pose Estimation in Sparsely-Labeled Videos"
+  authors: "<strong>Kyung-Min Jin</strong>, Gun-Hee Lee, and Seong-Whan Lee"
+  venue: "<em>Proceedings of the IEEE International Conference on Systems, Man, and Cybernetics (SMC)</em>, pages 3255-3260, 2022."
+  links:
+    - text: "IEEE Xplore"
+      url: "https://ieeexplore.ieee.org/document/9945377"
+      icon: "fa-external-link"
+      external: true
+  bibtex: |
+    @inproceedings{jin2022otpose,
+      title={OTPose: Occlusion-Aware Transformer for Pose Estimation in Sparsely-Labeled Videos},
+      author={Jin, Kyung-Min and Lee, Gun-Hee and Lee, Seong-Whan},
+      booktitle={2022 IEEE International Conference on Systems, Man, and Cybernetics (SMC)},
+      pages={3255--3260},
+      year={2022},
+      organization={IEEE}
+    }
+  demo_img: "/assets/images/publications/otpose_github_main.png"
+  demo_alt: "OTPose: official framework overview from project repository"

@@ -232,317 +232,75 @@ title: "ML Engineer & AI Researcher"
 
         <!-- Chronological Timeline -->
         <div class="lang-en">
-            <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> Work & Education Timeline
-            </h3>
+            <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> Work & Education Timeline</h3>
             <div class="linkedin-timeline mb-5">
-
-                <!-- 1. LG Electronics -->
+                {% for item in site.data.timeline %}
                 <div class="timeline-org-group">
                     <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/lg_electronics_logo.jpg" alt="LG Electronics"
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">LG Electronics</h4>
-                            <p class="timeline-org-duration">Full-time · 3 yrs 4 mos (Mar 2023 - Present)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-connector"></div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">Advanced Robotics Lab</h5>
-                                <p class="timeline-role-subtitle">Robot Cognition Solution Task Specialist (선임연구원)</p>
-                                <p class="timeline-role-date">Jan 2026 - Present</p>
-                                <p class="timeline-role-desc">Focusing on robotic perception, QA dataset construction,
-                                    and developing QA systems integrating RAG with ROS2. Developing robotic query
-                                    response capabilities.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">AI Lab</h5>
-                                <p class="timeline-role-subtitle">Multimodal Task Specialist (연구원)</p>
-                                <p class="timeline-role-date">Jul 2023 - Dec 2025</p>
-                                <p class="timeline-role-desc">Researched "Semantic-Aware Mutual Information Factorized
-                                    Learning (SAMIF)" for multimodal segmentation. Deployed action detection/control
-                                    models to Qualcomm Neural SDK via ONNX. Designed audio tower and LLM cross modal
-                                    continual learning pipeline. Researched GRPO/DPO online policy optimization for
-                                    MLLMs with Toronto AI Lab.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">Cognitive Vision TP</h5>
-                                <p class="timeline-role-subtitle">Cognitive Vision TP Researcher (연구원)</p>
-                                <p class="timeline-role-date">Mar 2023 - Jul 2023</p>
-                                <p class="timeline-role-desc">Optimized body pose estimation models using
-                                    quantized-aware training for LG TV edge device deployment. Designed RecycleNet for
-                                    hand mesh synthesis and proposed grouping attention mechanism per finger, achieving
-                                    state-of-the-art performance in PA-MPJPE.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Korea University -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/korea logo.jpg" alt="Korea University"
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">Korea University</h4>
-                            <p class="timeline-org-duration">7 yrs (Mar 2016 - Feb 2023)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-connector"></div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">Graduate School</h5>
-                                <p class="timeline-role-subtitle">M.S. in Artificial Intelligence (PRML Lab)</p>
-                                <p class="timeline-role-date">Sep 2021 - Feb 2023</p>
-                                <p class="timeline-role-desc">Advised by Prof. Seong-Hwan Lee. Specialized in
-                                    video-based human pose estimation, spatial-temporal attention transformers, and
-                                    mutual learning. Published first-author papers at WACV 2023 (Oral) and Neural
-                                    Networks. Graduated with a perfect GPA of 4.50/4.50.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">College of Informatics</h5>
-                                <p class="timeline-role-subtitle">B.S. in Computer Science & CSE / Artificial
-                                    Intelligence</p>
-                                <p class="timeline-role-date">Mar 2016 - Aug 2021</p>
-                                <p class="timeline-role-desc">Completed double majors in Computer Science and Artificial
-                                    Intelligence. Graduated with Honors. Cumulative GPA of 3.99/4.50 (AI major GPA:
-                                    4.17/4.50).</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Voice Caddie -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
+                        {% if item.logo %}
+                        <img src="{{ site.baseurl }}{{ item.logo }}" alt="{{ item.org_name_en }}" class="timeline-org-logo">
+                        {% else %}
                         <div class="timeline-org-logo-fallback">
-                            <i class="fa fa-cogs"></i>
+                            <i class="fa {{ item.logo_fallback }}"></i>
                         </div>
+                        {% endif %}
                         <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">Voice Caddie</h4>
-                            <p class="timeline-org-duration">AI Assistant Device Developer · 7 mos (May 2020 - Nov 2020)
-                            </p>
+                            <h4 class="timeline-org-title">{{ item.org_name_en }}</h4>
+                            <p class="timeline-org-duration">{{ item.duration_en }}</p>
                         </div>
                     </div>
                     <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        {% if item.roles.size > 1 %}<div class="timeline-role-connector"></div>{% endif %}
+                        {% for role in item.roles %}
+                        <div class="timeline-role-card" {% if item.roles.size == 1 %}style="padding-bottom: 5px;"{% endif %}>
+                            {% if item.roles.size > 1 %}<div class="timeline-role-node"></div>{% endif %}
                             <div class="timeline-role-details">
-                                <p class="timeline-role-desc">Developed and deployed golf swing pose estimation models,
-                                    action localization modules, and specialized video annotation tools. Utilized
-                                    Python, PyTorch, C++, and OpenCV.</p>
+                                {% if role.title_en %}<h5 class="timeline-role-title">{{ role.title_en }}</h5>{% endif %}
+                                {% if role.subtitle_en %}<p class="timeline-role-subtitle">{{ role.subtitle_en }}</p>{% endif %}
+                                {% if role.date_en %}<p class="timeline-role-date">{{ role.date_en }}</p>{% endif %}
+                                <p class="timeline-role-desc">{{ role.desc_en }}</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
-
-                <!-- 4. Da Vinci Co., Ltd. -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/davinci_dvnci_logo.jpg" alt="Da Vinci Co., Ltd."
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">Da Vinci Co., Ltd.</h4>
-                            <p class="timeline-org-duration">Frontend Developer · 8 mos (Jul 2020 - Feb 2021)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
-                            <div class="timeline-role-details">
-                                <p class="timeline-role-desc">Deployed and maintained interactive map-based
-                                    applications, link saving helper utilities, and browser extensions. Leveraged modern
-                                    React, TypeScript, Next.js, and React Native codebases.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Klue -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <div class="timeline-org-logo-fallback">
-                            <i class="fa fa-code"></i>
-                        </div>
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">Klue</h4>
-                            <p class="timeline-org-duration">Frontend Developer · 3 yrs 9 mos (Jul 2019 - Mar 2023)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
-                            <div class="timeline-role-details">
-                                <p class="timeline-role-desc">Designed, deployed, and maintained a course evaluation
-                                    service utilized by university students. Managed state architectures using Redux and
-                                    MobX, and implemented clean, responsive components in React and TypeScript.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
         <div class="lang-ko">
             <h3 class="font-weight-bold mb-4"><i class="fa fa-briefcase text-primary"></i> 경력 및 학력 사항</h3>
             <div class="linkedin-timeline mb-5">
-
-                <!-- 1. LG Electronics -->
+                {% for item in site.data.timeline %}
                 <div class="timeline-org-group">
                     <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/lg_electronics_logo.jpg" alt="LG Electronics"
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">LG전자</h4>
-                            <p class="timeline-org-duration">정직원 · 3년 4개월 (2023.03 - 현재)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-connector"></div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">로봇선행연구소 (Advanced Robotics Lab)</h5>
-                                <p class="timeline-role-subtitle">로봇 인지 솔루션 태스크 선임 연구원(선임연구원)</p>
-                                <p class="timeline-role-date">2026.01 - 현재</p>
-                                <p class="timeline-role-desc">로봇 인지 기술, 로봇 관련 QA 데이터셋 구축 및 RAG와 ROS2를 결합한 QA 시스템 개발 업무를
-                                    담당하고 있습니다.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">AI연구소 (AI Lab)</h5>
-                                <p class="timeline-role-subtitle">멀티모달 태스크 선임 연구원(연구원)</p>
-                                <p class="timeline-role-date">2023.07 - 2025.12</p>
-                                <p class="timeline-role-desc">멀티모달 세그멘테이션을 위한 "SAMIF" 모델 연구를 진행했습니다. 행동 검출 및 제어 모델을
-                                    ONNX를 통해 Qualcomm Neural SDK에 이식했습니다. 오디오 인코더 및 LLM의 교차 모달 지속 학습 파이프라인을 설계했습니다. 토론토
-                                    AI 연구소와 협력하여 MLLM을 위한 GRPO/DPO 온라인 정책 최적화 연구를 수행했습니다.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">영상인지 TP (Cognitive Vision TP)</h5>
-                                <p class="timeline-role-subtitle">영상인지 연구원 (연구원)</p>
-                                <p class="timeline-role-date">2023.03 - 2023.07</p>
-                                <p class="timeline-role-desc">LG TV 엣지 디바이스 배포용 인체 포즈 추정 모델을 양자화 인식 학습(QAT)을 사용하여
-                                    최적화했습니다. 핸드 메쉬 합성을 위한 RecycleNet을 설계하고 손가락별 그룹핑 어텐션 메커니즘을 제안하여 PA-MPJPE 기준 SOTA 성능을
-                                    달성했습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. Korea University -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/korea logo.jpg" alt="Korea University"
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">고려대학교</h4>
-                            <p class="timeline-org-duration">7년 (2016.03 - 2023.02)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-connector"></div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">대학원 (Graduate School)</h5>
-                                <p class="timeline-role-subtitle">인공지능학과 석사 학위 수여 (PRML 연구실)</p>
-                                <p class="timeline-role-date">2021.09 - 2023.02</p>
-                                <p class="timeline-role-desc">이성환 교수님의 지도하에 연구를 수행했습니다. 비디오 기반 인체 포즈 추정, 시공간 어텐션 트랜스포머 및
-                                    상호 학습 연구를 전문으로 하였습니다. WACV 2023 (Oral) 및 Neural Networks 저널에 제1저자 논문을 게재했습니다. 만점
-                                    평점(4.50/4.50)으로 졸업했습니다.</p>
-                            </div>
-                        </div>
-                        <div class="timeline-role-card">
-                            <div class="timeline-role-node"></div>
-                            <div class="timeline-role-details">
-                                <h5 class="timeline-role-title">정보대학 (College of Informatics)</h5>
-                                <p class="timeline-role-subtitle">컴퓨터학과 학사 졸업 / 인공지능학 복수전공</p>
-                                <p class="timeline-role-date">2016.03 - 2021.08</p>
-                                <p class="timeline-role-desc">컴퓨터학과와 인공지능학 복수전공을 이수했습니다. 우등 졸업(Graduated with Honors)을
-                                    하였으며, 전체 평점 3.99/4.50 (인공지능 전공 평점: 4.17/4.50)을 취득했습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Voice Caddie -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
+                        {% if item.logo %}
+                        <img src="{{ site.baseurl }}{{ item.logo }}" alt="{{ item.org_name_ko }}" class="timeline-org-logo">
+                        {% else %}
                         <div class="timeline-org-logo-fallback">
-                            <i class="fa fa-cogs"></i>
+                            <i class="fa {{ item.logo_fallback }}"></i>
                         </div>
+                        {% endif %}
                         <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">보이스캐디 (Voice Caddie)</h4>
-                            <p class="timeline-org-duration">AI 어시스턴트 디바이스 개발자 · 7개월 (2020.05 - 2020.11)</p>
+                            <h4 class="timeline-org-title">{{ item.org_name_ko }}</h4>
+                            <p class="timeline-org-duration">{{ item.duration_ko }}</p>
                         </div>
                     </div>
                     <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
+                        {% if item.roles.size > 1 %}<div class="timeline-role-connector"></div>{% endif %}
+                        {% for role in item.roles %}
+                        <div class="timeline-role-card" {% if item.roles.size == 1 %}style="padding-bottom: 5px;"{% endif %}>
+                            {% if item.roles.size > 1 %}<div class="timeline-role-node"></div>{% endif %}
                             <div class="timeline-role-details">
-                                <p class="timeline-role-desc">골프 스윙 포즈 추정 모델, 행동 국소화(action localization) 모듈 및 전용 비디오
-                                    어노테이션 툴을 개발하고 탑재했습니다. Python, PyTorch, C++ 및 OpenCV를 활용하였습니다.</p>
+                                {% if role.title_ko %}<h5 class="timeline-role-title">{{ role.title_ko }}</h5>{% endif %}
+                                {% if role.subtitle_ko %}<p class="timeline-role-subtitle">{{ role.subtitle_ko }}</p>{% endif %}
+                                {% if role.date_ko %}<p class="timeline-role-date">{{ role.date_ko }}</p>{% endif %}
+                                <p class="timeline-role-desc">{{ role.desc_ko }}</p>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
                 </div>
-
-                <!-- 4. Da Vinci Co., Ltd. -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <img src="{{ site.baseurl }}/assets/images/davinci_dvnci_logo.jpg" alt="Da Vinci Co., Ltd."
-                            class="timeline-org-logo">
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">다빈치 (Da Vinci Co., Ltd.)</h4>
-                            <p class="timeline-org-duration">프론트엔드 개발자 · 8개월 (2020.07 - 2021.02)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
-                            <div class="timeline-role-details">
-                                <p class="timeline-role-desc">인터랙티브 지도 기반 애플리케이션, 링크 저장 도우미 유틸리티 및 브라우저 확장 프로그램을 배포하고
-                                    관리했습니다. React, TypeScript, Next.js 및 React Native 기반의 최신 코드베이스를 활용했습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Klue -->
-                <div class="timeline-org-group">
-                    <div class="timeline-org-header">
-                        <div class="timeline-org-logo-fallback">
-                            <i class="fa fa-code"></i>
-                        </div>
-                        <div class="timeline-org-info">
-                            <h4 class="timeline-org-title">클루 (Klue)</h4>
-                            <p class="timeline-org-duration">프론트엔드 개발자 · 3년 9개월 (2019.07 - 2023.03)</p>
-                        </div>
-                    </div>
-                    <div class="timeline-roles-container">
-                        <div class="timeline-role-card" style="padding-bottom: 5px;">
-                            <div class="timeline-role-details">
-                                <p class="timeline-role-desc">대학생들이 사용하는 강의 평가 서비스(KLUE)를 설계, 배포 및 유지관리했습니다. Redux와
-                                    MobX를 사용해 전역 상태 구조를 관리하고, React와 TypeScript를 사용하여 직관적이고 반응형 컴포넌트들을 개발했습니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
 
@@ -550,113 +308,35 @@ title: "ML Engineer & AI Researcher"
         <div class="lang-en">
             <h4 class="font-weight-bold mb-3"><i class="fa fa-tags text-danger"></i> Tech Stack & Skills</h4>
             <div class="skills-container card border-0 shadow-sm p-4 bg-white mb-5">
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-code-fork text-primary mr-2"></i> Deep Learning & AI</h6>
+                {% for cat in site.data.skills %}
+                <div class="skill-category {% unless forloop.last %}mb-3{% else %}mb-0{% endunless %}">
+                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;">
+                        <i class="fa {{ cat.icon }} mr-2"></i> {{ cat.category_en }}
+                    </h6>
                     <div class="d-flex flex-wrap">
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">HuggingFace</span>
-                        <span class="tech-tag">veRL</span>
-                        <span class="tech-tag">TRL</span>
-                        <span class="tech-tag">Continual Learning</span>
-                        <span class="tech-tag">GRPO / DPO</span>
-                        <span class="tech-tag">Quantization (QAT)</span>
+                        {% for skill in cat.skills %}
+                        <span class="tech-tag">{{ skill }}</span>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-gears text-success mr-2"></i> Robotics & LLM / RAG</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">LangChain</span>
-                        <span class="tech-tag">LlamaIndex</span>
-                        <span class="tech-tag">Qdrant</span>
-                        <span class="tech-tag">ChromaDB</span>
-                        <span class="tech-tag">ONNX</span>
-                        <span class="tech-tag">Qualcomm Neural SDK</span>
-                        <span class="tech-tag">ROS</span>
-                    </div>
-                </div>
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-code text-info mr-2"></i> Programming Languages</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">C</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                </div>
-                <div class="skill-category mb-0">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-laptop text-warning mr-2"></i> Development Tools & Frontend</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">React Native</span>
-                        <span class="tech-tag">Next.js</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Gradio</span>
-                        <span class="tech-tag">Git</span>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
         <div class="lang-ko">
             <h4 class="font-weight-bold mb-3"><i class="fa fa-tags text-danger"></i> 기술 스택 및 기술 역량</h4>
             <div class="skills-container card border-0 shadow-sm p-4 bg-white mb-5">
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-code-fork text-primary mr-2"></i> 딥러닝 & 인공지능 (Deep Learning & AI)</h6>
+                {% for cat in site.data.skills %}
+                <div class="skill-category {% unless forloop.last %}mb-3{% else %}mb-0{% endunless %}">
+                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;">
+                        <i class="fa {{ cat.icon }} mr-2"></i> {{ cat.category_ko }}
+                    </h6>
                     <div class="d-flex flex-wrap">
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">TensorFlow</span>
-                        <span class="tech-tag">HuggingFace</span>
-                        <span class="tech-tag">veRL</span>
-                        <span class="tech-tag">TRL</span>
-                        <span class="tech-tag">Continual Learning</span>
-                        <span class="tech-tag">GRPO / DPO</span>
-                        <span class="tech-tag">Quantization (QAT)</span>
+                        {% for skill in cat.skills %}
+                        <span class="tech-tag">{{ skill }}</span>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-gears text-success mr-2"></i> 로봇 인지 및 LLM / RAG</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">LangChain</span>
-                        <span class="tech-tag">LlamaIndex</span>
-                        <span class="tech-tag">Qdrant</span>
-                        <span class="tech-tag">ChromaDB</span>
-                        <span class="tech-tag">ONNX</span>
-                        <span class="tech-tag">Qualcomm Neural SDK</span>
-                        <span class="tech-tag">ROS</span>
-                    </div>
-                </div>
-                <div class="skill-category mb-3">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-code text-info mr-2"></i> 프로그래밍 언어 (Languages)</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">C++</span>
-                        <span class="tech-tag">C</span>
-                        <span class="tech-tag">TypeScript</span>
-                        <span class="tech-tag">JavaScript</span>
-                    </div>
-                </div>
-                <div class="skill-category mb-0">
-                    <h6 class="font-weight-bold text-dark mb-2" style="font-size: 0.88rem;"><i
-                            class="fa fa-laptop text-warning mr-2"></i> 개발 도구 및 프론트엔드 (Tools & Frontend)</h6>
-                    <div class="d-flex flex-wrap">
-                        <span class="tech-tag">Docker</span>
-                        <span class="tech-tag">React</span>
-                        <span class="tech-tag">React Native</span>
-                        <span class="tech-tag">Next.js</span>
-                        <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Gradio</span>
-                        <span class="tech-tag">Git</span>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
 
