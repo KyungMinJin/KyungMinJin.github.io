@@ -48,7 +48,9 @@ comments: true
                         {% if project.links %}
                         <div class="mt-3">
                             {% for link in project.links %}
+                            {% unless link.url contains '/posts/' %}
                             <a href="{% if link.external %}{{ link.url }}{% else %}{{ site.baseurl }}{{ link.url }}{% endif %}" {% if link.external %}target="_blank"{% endif %} class="btn btn-sm {{ link.class }}"><i class="fa {{ link.icon }}"></i> {{ link.text }}</a>
+                            {% endunless %}
                             {% endfor %}
                         </div>
                         {% endif %}

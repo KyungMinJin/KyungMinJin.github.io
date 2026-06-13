@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "[WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation"
-title_ko: "[WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크"
+title: "Kinematic Continuity-Aware Hierarchical Attention (HANet & M-HANet) for Video Pose Estimation"
+title_ko: "비디오 포즈 추정을 위한 물리 법칙 기반 계층적 어텐션 네트워크 (HANet & M-HANet)"
 author: Kyung-Min Jin
 categories: [Computer-Vision]
-tags: [WACV, Pose-Estimation, Attention, Deep-Learning]
+tags: [WACV, Journal-Neural-Networks, Pose-Estimation, Attention, Deep-Learning]
 image: assets/images/HANet.png
-description: "A summary of our WACV 2023 Oral paper introducing a kinematic continuity-aware hierarchical attention network for video-based human pose estimation."
-description_ko: "비디오 기반 인체 포즈 추정을 위해 물리적 관절 구조 및 운동 법칙(속도, 가속도)을 활용하는 계층적 어텐션 네트워크를 제안한 WACV 2023 구두 발표 논문 요약입니다."
+description: "A summary of our research on kinematic continuity-aware hierarchical attention networks (HANet & M-HANet) for video-based human pose estimation."
+description_ko: "인체 관절의 물리적 운동 법칙(속도/가속도)을 활용해 비디오 포즈 떨림을 제어하는 계층적 어텐션 네트워크인 HANet(WACV 2023 Oral)과 M-HANet(Neural Networks 2024 저널) 연구의 핵심을 요약합니다."
 permalink: /posts/hanet/
 featured: true
 hidden: false
@@ -15,11 +15,13 @@ rating: 5.0
 ---
 
 <div class="lang-ko" markdown="1">
-# [WACV 2023 Oral] 비디오 포즈 추정을 위한 Kinematic-aware 계층적 어텐션 네트워크
+# 비디오 포즈 추정을 위한 물리 법칙 기반 계층적 어텐션 네트워크 (HANet & M-HANet)
 
-비디오 기반 3차원 인체 포즈 추정에서, 프레임 간 **시간적 및 Kinematic 일관성(temporal and kinematic consistency)**을 유지하는 것은 매우 까다로운 과제입니다. 기존의 프레임별 포즈 추정기들은 물리적인 골격 관절 구조나 해부학적 한계를 명시적으로 모델링하지 않기 때문에, 예측값의 미세한 흔들림(jittering), 관절 뒤바뀜 오류(joint swap errors), 급격한 움직임이나 가려짐(occlusion) 상태에서의 추정 실패 등을 빈번히 겪게 됩니다.
+비디오 기반 3차원 인체 포즈 추정(Human Pose Estimation)에서 단일 이미지 모델(Frame-by-frame detector)을 그대로 사용하면 가장 흔하게 마주하는 문제는 **프레임 간 예측값의 미세한 흔들림(Jittering/Trembling)**입니다. 
 
-본 논문(WACV 2023 구두 발표 선정작)에서는 물리적 운동 법칙을 바탕으로 관절 간의 관계와 시간적 연속성을 인코딩하여 이러한 한계를 극복하는 **Kinematic-aware 계층적 어텐션 네트워크(Kinematic-aware Hierarchical Attention Network, KHAN / HANet)**를 제안합니다.
+인간은 물리적으로 순간 이동을 하거나 관절이 비이상적인 속도로 꺾이지 않습니다. 즉, 인체의 관절 움직임은 일정한 **물리적 속도와 가속도의 연속성(Kinematic Continuity)**을 가집니다. 
+
+본 포스트에서는 이러한 물리적 제약 조건을 트랜스포머의 어텐션 메커니즘에 직접 주입하여 학습 시 흔들림을 원천 억제하는 **HANet (WACV 2023 Oral)**과, 이를 자가지도 마스킹 기법으로 고도화하여 국제 학술지 *Neural Networks (2024)*에 게재된 **M-HANet (Masked-HANet)**의 설계 개념을 분석합니다.
 
 ---
 
@@ -56,19 +58,22 @@ rating: 5.0
 
 이러한 Kinematic feature들은 최초의 관절 임베딩과 결합(concatenation)되어, 급격한 움직임이나 심한 가려짐 상황에서도 물리적인 궤적을 외삽(extrapolate)함으로써 부드럽고 안정적인 추정을 가능하게 만듭니다.
 
-### 계층적 어텐션 스케일링
-쿼리 $Q$, 키 $K$, 밸류 $V$가 주어졌을 때, 어텐션 맵은 아래 공식으로 계산됩니다:
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+---
 
-희소한(sparse) 지도 신호 하에서 학습이 불안정해지는 것을 방지하기 위해, 계층적 인코더는 모든 레이어 $l \in \{1, \dots, L\}$의 멀티스케일 feature 맵을 결합합니다:
-$$F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}$$
-여기서 $F^{(l)}$는 레이어 $l$에서의 어텐션 feature을 의미하며, $w_l$은 학습 가능한 스케일링 가중치입니다.
+## 3. M-HANet (Neural Networks 2024): 마스킹과 자가 지도 기법의 융합
+
+저널 버전으로 확장된 **M-HANet (Masked-HANet)**은 "물리 법칙을 더 가혹한 환경에서도 잘 학습하게 할 방법이 없을까?"라는 고민에서 탄생했습니다.
+
+### ① Masked Kinematic Continuity 학습
+* **핵심 메커니즘**: 입력 비디오 토큰 중 특정 프레임 구간의 속도/가속도 정보를 인위적으로 지우거나 노이즈를 섞어 입력합니다.
+* **학습 목표**: 모델은 가려지거나 왜곡된 물리 토큰 상태에서도, 이전 프레임들의 속도 진행 방향성과 가속도 벡터를 역산하여 빈 구간의 키포인트 궤적을 **물리 법칙에 부합하도록 원복(Reconstruct)**해내도록 자가지도 마스킹 손실함수(Masked Reconstruction Loss)를 통해 고도화 학습됩니다.
+* 이 학습 기법은 현업 임베디드(Smart TV 등) 환경에서 **일부 관절이 완전히 프레임 아웃되어 가려지더라도, 이전 관절 모션을 기반으로 물리 궤적을 완벽히 복원**해내는 뛰어난 내구성을 보장합니다.
 
 ---
 
-## 3. 시각적 데모 (HANet 실제 구동 예시)
+## 4. 시각적 데모 (실제 구동 예시)
 
-다음은 JHMDB, AIST++, 3DPW 데이터셋에서 평가된 HANet의 정성적 추정 결과로, 일관되고 매끄러운 3차원 인체 관절 및 SMPL 메쉬 복원 성능을 확인할 수 있습니다.
+다음은 JHMDB, AIST++, 3DPW 데이터셋에서 평가된 모델의 정성적 추정 결과로, 일관되고 매끄러운 3차원 인체 관절 및 SMPL 메쉬 복원 성능을 확인할 수 있습니다.
 
 ### A. 2D 포즈 트래킹 (JHMDB 데이터셋)
 빠른 스윙 동작과 강한 모션 블러가 있는 상황에서도 키포인트가 안정적으로 유지되는 것을 확인할 수 있습니다.
@@ -106,7 +111,7 @@ $$F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}$$
 
 ---
 
-## 4. 온라인 상호 지도학습 (Online Cross-Supervision) 및 성능 지표
+## 5. 온라인 상호 지도학습 (Online Cross-Supervision) 및 성능 지표
 
 최초 입력 좌표 정보와 최종 정제된 출력값 간의 결합 최적화를 위해 **온라인 상호 학습(online mutual learning)** 목적 함수를 사용합니다. 학습 손실값에 따라 네트워크는 동적으로 지도 대상을 선택합니다:
 
@@ -131,11 +136,11 @@ $$\mathcal{L}_{\text{total}} = \mathcal{L}_{\text{pose}} + \lambda_{\text{mutual
 </div>
 
 <div class="lang-en" markdown="1">
-# [WACV 2023 Oral] Kinematic-aware Hierarchical Attention Network for Video Pose Estimation
+# Kinematic Continuity-Aware Hierarchical Attention (HANet & M-HANet) for Video Pose Estimation
 
 In video-based human pose estimation, maintaining **temporal and kinematic consistency** across frames is a major challenge. Standard frame-by-frame pose estimators often suffer from jittery predictions, joint swap errors, and failure under fast motion or occlusion because they do not model physical skeletal joints and anatomical limits.
 
-Our paper, presented as an **Oral presentation at WACV 2023**, proposes the **Kinematic-aware Hierarchical Attention Network (KHAN / HANet)** to resolve these issues by explicitly encoding joint relations and temporal continuity based on physical laws of motion.
+This post summarizes our research on **Kinematic-aware Hierarchical Attention Network (KHAN / HANet)** (WACV 2023 Oral) and its journal extension **Masked-HANet (M-HANet)** (*Neural Networks* 2024) to resolve these issues by explicitly encoding joint relations and temporal continuity based on physical laws of motion.
 
 ---
 
@@ -172,19 +177,22 @@ To enforce the physical laws of motion, we compute keypoint motion features base
 
 These features are concatenated with the initial joint embeddings, enabling the network to learn smooth trajectories and handle heavy occlusion by extrapolating physical motion paths.
 
-### Hierarchical Attention Scaling
-Given query $Q$, key $K$, and value $V$, the attention map is calculated as:
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+---
 
-To prevent training instability under sparse supervision, our hierarchical encoder aggregates multi-scale feature maps from all layers $l \in \{1, \dots, L\}$:
-$$F_{\text{agg}} = \sum_{l=1}^L w_l \cdot F^{(l)}$$
-where $F^{(l)}$ represents the attention features at layer $l$, and $w_l$ is a learnable scaling weight.
+## 3. M-HANet (Neural Networks 2024): Integrating Self-Supervised Masking
+
+**M-HANet (Masked-HANet)**, the extended journal version, leverages self-supervised masking to further enhance physical constraint learning.
+
+### ① Masked Kinematic Continuity Learning
+* **Mechanism**: During training, we artificially mask or inject noise into the velocity and acceleration tokens of random frame intervals.
+* **Objective**: The model is optimized using a Masked Reconstruction Loss, forcing it to reconstruct the missing keypoint coordinates by extrapolating the trajectory vectors of preceding frames.
+* This strategy ensures excellent robustness in real-world deployment (e.g., Smart TVs), where **the model can seamlessly predict joint positions even if a limb temporarily exits the frame**.
 
 ---
 
-## 3. Visual Demonstrations (HANet in Action)
+## 4. Visual Demonstrations (Inference in Action)
 
-Below are the qualitative tracking results of HANet evaluated on JHMDB, AIST++, and 3DPW datasets, demonstrating its ability to reconstruct poses and 3D SMPL meshes with smooth continuity.
+Below are the qualitative tracking results evaluated on JHMDB, AIST++, and 3DPW datasets, demonstrating its ability to reconstruct poses and 3D SMPL meshes with smooth continuity.
 
 ### A. 2D Pose Tracking (JHMDB Dataset)
 Notice the stable keypoint tracking even during fast swinging motions and heavy motion blur.
@@ -222,7 +230,7 @@ Evaluation on the challenging in-the-wild 3DPW dataset, demonstrating robust pos
 
 ---
 
-## 4. Online Cross-Supervision & Results
+## 5. Online Cross-Supervision & Results
 
 To enable joint optimization between the initial input coordinates and the final refined outputs, we utilize an **online mutual learning** objective. Given training losses, the network dynamically selects targets:
 
@@ -245,4 +253,3 @@ Our method achieved state-of-the-art results on major benchmarks:
 * **Paper:** [CVF Open Access Paper](https://openaccess.thecvf.com/content/WACV2023/html/Jin_Kinematic-Aware_Hierarchical_Attention_Network_for_Human_Pose_Estimation_in_WACV_2023_paper.html)
 * **Code:** [GitHub Repository (KyungMinJin/HANet)](https://github.com/KyungMinJin/HANet)
 </div>
-

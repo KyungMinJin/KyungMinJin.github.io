@@ -12,6 +12,8 @@ permalink: /posts/robotics-kg/
 featured: true
 hidden: false
 rating: 5.0
+
+published: false
 ---
 
 <div class="lang-ko" markdown="1">

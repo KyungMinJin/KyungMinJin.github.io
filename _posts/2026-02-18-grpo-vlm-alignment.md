@@ -12,6 +12,8 @@ permalink: /posts/grpo/
 featured: true
 hidden: false
 rating: 4.9
+
+published: false
 ---
 
 <div class="lang-ko" markdown="1">

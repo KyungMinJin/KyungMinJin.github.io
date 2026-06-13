@@ -12,6 +12,8 @@ permalink: /posts/edge-deployment/
 featured: false
 hidden: false
 rating: 4.8
+
+published: false
 ---
 
 <div class="lang-ko" markdown="1">

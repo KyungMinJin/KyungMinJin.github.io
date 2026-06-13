@@ -12,6 +12,8 @@ permalink: /posts/qat/
 featured: false
 hidden: false
 rating: 4.7
+
+published: false
 ---
 
 <div class="lang-ko" markdown="1">
