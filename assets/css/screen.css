@@ -859,9 +859,30 @@ blockquote {
   margin: 0 0 1.5rem 0;
 }
 
+.featured-image-wrapper {
+  max-width: 85%;
+  margin: 0 auto 1.5rem auto !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-image-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
 .featured-image {
   display: block;
-  margin-bottom: 1.5rem;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .featured-image-wrapper {
+    max-width: 100%;
+  }
 }
 
 .share {
@@ -1248,6 +1269,28 @@ h6 {
 
 img {
   max-width: 100%;
+}
+
+.article-post img {
+  max-width: 80%;
+  height: auto;
+  display: block;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-post img:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 768px) {
+  .article-post img {
+    max-width: 100%;
+    margin: 1.5rem auto;
+  }
 }
 
 .bottompagination span.navigation {

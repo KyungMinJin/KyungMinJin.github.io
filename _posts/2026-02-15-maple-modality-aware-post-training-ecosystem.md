@@ -10,7 +10,8 @@ description: "A summary of MAPLE, a modality-aware post-training ecosystem desig
 description_ko: "대형 멀티모달 모델(Large Multimodal Models)의 다양한 입력 모달리티(시각, 오디오, 텍스트 등)를 피처 매니폴드 수준에서 정밀 정렬하고 최적화하는 포스트 트레이닝 에코시스템인 MAPLE의 핵심 기술을 소개합니다."
 permalink: /posts/maple-post-training/
 featured: false
-hidden: false
+hidden: true
+published: false
 rating: 4.8
 ---
 
