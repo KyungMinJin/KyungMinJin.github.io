@@ -3,7 +3,7 @@ main_projects:
     badge_class: "badge-primary"
     org_icon: "fa-building-o"
     org_name: "LG Electronics, Advanced Robotics Lab"
-    duration: "2026.01 - Present"
+    duration: "2026.01 - 2026.06"
     title: "Natural Language-Based Object Understanding for Robots"
     desc: "Building robot perception systems that ground natural language in visual environments to enable intuitive human-robot interaction and reasoning."
     highlights:

@@ -27,7 +27,7 @@ comments: false
                     <span class="mr-3 text-success"><i class="fa fa-map-marker fa-lg"></i></span>
                     <div>
                         <strong class="d-block text-dark">Affiliation</strong>
-                        <span class="text-secondary">Advanced Robotics Lab, LG Electronics<br>Seoul, Republic of Korea</span>
+                        <span class="text-secondary">Global CS Center, Samsung Electronics<br>Suwon, Republic of Korea</span>
                     </div>
                 </div>
 
