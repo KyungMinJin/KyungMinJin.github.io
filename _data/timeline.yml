@@ -6,8 +6,8 @@
   roles:
     - title_en: "Global CS Center"
       title_ko: "Global CS센터 (Global CS Center)"
-      subtitle_en: "Senior Research Engineer (선임연구원)"
-      subtitle_ko: "선임연구원 (Senior Research Engineer)"
+      subtitle_en: "Researcher"
+      subtitle_ko: "연구원"
       date_en: "Jul 2026 - Present"
       date_ko: "2026.07 - 현재"
       desc_en: "Developing AI-based verification solutions and S/W automation platforms at S/W Verification Group."

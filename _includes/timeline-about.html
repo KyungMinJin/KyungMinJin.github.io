@@ -10,10 +10,10 @@
                 </strong>
                 <span class="text-muted" style="font-size: 0.88rem;">
                     <span class="lang-en">
-                        {% if item.org_name_en == 'LG Electronics' or item.org_name_en == 'Samsung Electronics' %}Senior Research Engineer (선임연구원){% else %}{{ item.roles[0].subtitle_en }}{% endif %} · {{ item.duration_en }}
+                        {% if item.org_name_en == 'LG Electronics' %}Senior Research Engineer (선임연구원){% else %}{{ item.roles[0].subtitle_en }}{% endif %} · {{ item.duration_en }}
                     </span>
                     <span class="lang-ko">
-                        {% if item.org_name_ko == 'LG전자' %}로봇 인지 태스크 선임연구원{% elsif item.org_name_ko == '삼성전자' %}S/W검증그룹 선임연구원{% else %}{{ item.roles[0].subtitle_ko }}{% endif %} · {{ item.duration_ko }}
+                        {% if item.org_name_ko == 'LG전자' %}로봇 인지 태스크 선임연구원{% else %}{{ item.roles[0].subtitle_ko }}{% endif %} · {{ item.duration_ko }}
                     </span>
                 </span>
             </div>
