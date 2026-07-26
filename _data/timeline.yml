@@ -10,12 +10,12 @@
       subtitle_ko: "연구원"
       date_en: "Jul 2026 - Present"
       date_ko: "2026.07 - 현재"
-      desc_en: "Developing AI-based verification solutions and S/W automation platforms at S/W Verification Group."
-      desc_ko: "S/W검증그룹에서 AI 기반 검증 솔루션 및 S/W 자동화 플랫폼 개발 업무를 담당하고 있습니다."
+      desc_en: "Developing AI-based verification solutions at S/W Verification Group."
+      desc_ko: "S/W검증그룹에서 AI 기반 검증 솔루션 개발 업무를 담당하고 있습니다."
   cv_highlights_en:
-    - "<strong>AI-Based Verification & S/W Automation:</strong> Developing AI-based verification solutions and software automation platforms for Samsung Electronics Global CS Center."
+    - "<strong>AI-Based Verification:</strong> Developing AI-based verification solutions for Samsung Electronics Global CS Center."
   cv_highlights_ko:
-    - "<strong>AI 기반 검증 및 S/W 자동화:</strong> 삼성전자 Global CS센터에서 AI 기반 검증 솔루션 및 소프트웨어 자동화 플랫폼 개발."
+    - "<strong>AI 기반 검증:</strong> 삼성전자 Global CS센터에서 AI 기반 검증 솔루션 개발."
 
 - org_name_en: "LG Electronics"
   org_name_ko: "LG전자"
