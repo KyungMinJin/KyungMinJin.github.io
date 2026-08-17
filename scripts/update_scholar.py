@@ -3,6 +3,7 @@ import json
 import urllib.request
 import sys
 import time
+import random
 from bs4 import BeautifulSoup
 
 URL = "https://scholar.google.com/citations?user=-d9eXb4AAAAJ&hl=en"
@@ -31,13 +32,14 @@ def get_free_proxies():
         except Exception as e:
             print(f"Failed to fetch proxy list from {url}: {e}", file=sys.stderr)
             
-    # Deduplicate while preserving order
+    # Deduplicate and shuffle
     seen = set()
     deduped = []
     for p in proxies:
         if p not in seen:
             seen.add(p)
             deduped.append(p)
+    random.shuffle(deduped)
     return deduped
 
 def fetch_profile_with_proxy(url, proxy, timeout=5):
@@ -188,5 +190,5 @@ try:
         
     print("Google Scholar metrics updated successfully in _data/scholar.json.")
 except Exception as e:
-    print(f"Error executing scraper: {e}", file=sys.stderr)
-    sys.exit(1)
+    print(f"Warning: Google Scholar metrics update skipped. Error: {e}", file=sys.stderr)
+    sys.exit(0)
